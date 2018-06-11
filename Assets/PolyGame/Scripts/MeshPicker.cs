@@ -11,6 +11,7 @@ public class MeshPicker : MonoBehaviour
     public List<MeshRenderer> renderers = new List<MeshRenderer>();
 
     Material sharedMat;
+    Ray? ray;
 
     void Awake()
     {
@@ -35,6 +36,21 @@ public class MeshPicker : MonoBehaviour
         {
             renderers.Add(renderer);
             renderer.sharedMaterial = selectedMat;
+        }
+    }
+
+    public void RecordRay(Ray ray)
+    {
+        this.ray = ray;
+    }
+     
+    void OnDrawGizmos()
+    {
+        if (ray.HasValue)
+        {
+            Gizmos.color = Color.green;
+            Ray r = ray.Value;
+            Gizmos.DrawLine(r.origin, r.origin + r.direction * 10000);
         }
     }
 }

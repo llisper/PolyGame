@@ -121,9 +121,12 @@ class MeshModifier : EditorWindow
             }
             EditorGUILayout.EndHorizontal();
 
-            ShowInfo();
-            EditorGUILayout.LabelField(new String('-', 50));
-            EditObj();
+            if (IsEditing)
+            {
+                ShowInfo();
+                EditorGUILayout.LabelField(new String('-', 50));
+                EditObj();
+            }
         }
 
     }
