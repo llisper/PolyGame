@@ -113,9 +113,14 @@ class MeshModifier : EditorWindow
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("Save", GUILayout.Width(60f)))
             {
-
+                Save();
             }
             if (GUILayout.Button("Save&Finish", GUILayout.Width(80f)))
+            {
+                Save();
+                ClearCurrent();
+            }
+            if (GUILayout.Button("Close Without Saving", GUILayout.Width(140f)))
             {
                 ClearCurrent();
             }
@@ -184,7 +189,7 @@ class MeshModifier : EditorWindow
             {
                 foreach (var r in meshPicker.renderers)
                     GameObject.DestroyImmediate(r.gameObject);
-
+                meshPicker.renderers.Clear();
             }
 
             if (GUILayout.Button("Join Regions", GUILayout.Width(100f)))
@@ -192,5 +197,21 @@ class MeshModifier : EditorWindow
 
             }
         }
+    }
+
+    void Save()
+    {
+        if (!IsEditing)
+            return;
+
+        var copy = GameObject.Instantiate<GameObject>(editObj);
+        copy.name = editObj.name;
+        GameObject.DestroyImmediate(copy.GetComponent<MeshPicker>());
+
+        string path = string.Format("{0}/{1}/{1}.prefab", Paths.ResourceArtworks, copy.name);
+        UnityEngine.Object prefab = PrefabUtility.CreatePrefab(path, copy);
+        PrefabUtility.ReplacePrefab(copy, prefab, ReplacePrefabOptions.ConnectToPrefab);
+
+        GameObject.DestroyImmediate(copy);
     }
 }
