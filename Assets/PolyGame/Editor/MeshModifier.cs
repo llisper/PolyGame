@@ -187,14 +187,15 @@ class MeshModifier : EditorWindow
         {
             if (GUILayout.Button("Drop Regions", GUILayout.Width(100f)))
             {
-                foreach (var r in meshPicker.renderers)
-                    GameObject.DestroyImmediate(r.gameObject);
+                meshPicker.renderers.ForEach(v => v.gameObject.SetActive(false));
                 meshPicker.renderers.Clear();
             }
 
             if (GUILayout.Button("Join Regions", GUILayout.Width(100f)))
             {
-
+                RegionCombiner.Combine(meshPicker.renderers.ConvertAll(v => v.gameObject));
+                meshPicker.renderers.ForEach(v => v.gameObject.SetActive(false));
+                meshPicker.renderers.Clear();
             }
         }
     }
