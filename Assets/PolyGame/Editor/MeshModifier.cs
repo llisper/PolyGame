@@ -45,6 +45,7 @@ class MeshModifier : EditorWindow
     string[] names;
     List<string> filteredNames = new List<string>();
     GameObject editObj;
+    Material originalMat;
     Material selectedMat;
     Info info;
     bool unsavedModification;
@@ -73,6 +74,7 @@ class MeshModifier : EditorWindow
             ClearUnusedMeshes(editObj.name);
             GameObject.DestroyImmediate(editObj);
             editObj = null;
+            originalMat = null;
             info = null;
             if (null != selectedMat)
             {
@@ -99,6 +101,7 @@ class MeshModifier : EditorWindow
                     var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
                     editObj = GameObject.Instantiate<GameObject>(prefab);
                     editObj.name = name;
+                    originalMat = editObj.GetComponentInChildren<MeshRenderer>().sharedMaterial;
                     info = new Info(editObj);
                     unsavedModification = false;
                 }
@@ -192,7 +195,8 @@ class MeshModifier : EditorWindow
 
             if (GUILayout.Button("Join Regions", GUILayout.Width(100f)))
             {
-                RegionCombiner.Combine(editObj, meshPicker.renderers.ConvertAll(v => v.gameObject));
+                var newRegion = RegionCombiner.Combine(editObj, meshPicker.renderers.ConvertAll(v => v.gameObject));
+                newRegion.GetComponent<MeshRenderer>().sharedMaterial = originalMat;
                 meshPicker.renderers.ForEach(v => v.gameObject.SetActive(false));
                 meshPicker.renderers.Clear();
                 unsavedModification = true;

@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 static class RegionCombiner
 {
-    public static void Combine(GameObject root, List<GameObject> gameObjects)
+    public static GameObject Combine(GameObject root, List<GameObject> gameObjects)
     {
         int index = NextIndex(root);
         CombineInstance[] combine = new CombineInstance[gameObjects.Count];
@@ -37,7 +37,7 @@ static class RegionCombiner
         go.GetComponent<MeshFilter>().mesh = mesh;
         go.transform.position = centroid;
         go.GetComponent<MeshCollider>().sharedMesh = mesh;
-        go.GetComponent<MeshRenderer>().sharedMaterial = gameObjects[0].GetComponent<MeshRenderer>().sharedMaterial;
+        return go;
     }
 
     static int NextIndex(GameObject root)
