@@ -2,6 +2,7 @@
 using UnityEditor;
 using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 
 class MeshModifier : EditorWindow
@@ -67,9 +68,9 @@ class MeshModifier : EditorWindow
 
     void ClearCurrent()
     {
-
         if (null != editObj)
         {
+            ClearUnusedMeshes(editObj.name);
             GameObject.DestroyImmediate(editObj);
             editObj = null;
             info = null;
@@ -81,12 +82,8 @@ class MeshModifier : EditorWindow
         }
     }
 
-    float w;
-
     void OnGUI()
     {
-        // w = EditorGUILayout.FloatField("w", w);
-
         if (!IsEditing)
         {
             string[] options = Options();
@@ -120,7 +117,8 @@ class MeshModifier : EditorWindow
                 Save();
                 ClearCurrent();
             }
-            if (GUILayout.Button("Close Without Saving", GUILayout.Width(140f)))
+            if (GUILayout.Button("Close Without Saving", GUILayout.Width(140f)) &&
+                (!unsavedModification || EditorUtility.DisplayDialog("Close without saving ?", "All unsaved modifications will be discard!", "Do it!", "Think again...")))
             {
                 ClearCurrent();
             }
@@ -189,13 +187,15 @@ class MeshModifier : EditorWindow
             {
                 meshPicker.renderers.ForEach(v => v.gameObject.SetActive(false));
                 meshPicker.renderers.Clear();
+                unsavedModification = true;
             }
 
             if (GUILayout.Button("Join Regions", GUILayout.Width(100f)))
             {
-                RegionCombiner.Combine(meshPicker.renderers.ConvertAll(v => v.gameObject));
+                RegionCombiner.Combine(editObj, meshPicker.renderers.ConvertAll(v => v.gameObject));
                 meshPicker.renderers.ForEach(v => v.gameObject.SetActive(false));
                 meshPicker.renderers.Clear();
+                unsavedModification = true;
             }
         }
     }
@@ -207,12 +207,33 @@ class MeshModifier : EditorWindow
 
         var copy = GameObject.Instantiate<GameObject>(editObj);
         copy.name = editObj.name;
+
         GameObject.DestroyImmediate(copy.GetComponent<MeshPicker>());
+        var inactiveMeshes = copy.GetComponentsInChildren<MeshFilter>(true).Where(v => !v.gameObject.activeSelf);
+        foreach (var m in inactiveMeshes)
+            GameObject.DestroyImmediate(m.gameObject);
 
         string path = string.Format("{0}/{1}/{1}.prefab", Paths.ResourceArtworks, copy.name);
         UnityEngine.Object prefab = PrefabUtility.CreatePrefab(path, copy);
         PrefabUtility.ReplacePrefab(copy, prefab, ReplacePrefabOptions.ConnectToPrefab);
 
         GameObject.DestroyImmediate(copy);
+        unsavedModification = false;
+    }
+
+    void ClearUnusedMeshes(string name)
+    {
+        string prefabPath = string.Format("{0}/{1}/{1}.prefab", Paths.ResourceArtworks, name);
+        var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+        var meshFilters = prefab.GetComponentsInChildren<MeshFilter>();
+
+        string path = string.Format("Assets/{0}/{1}/Meshes", Paths.Artworks, name);
+        foreach (var guid in AssetDatabase.FindAssets("mesh", new string[] { path }))
+        {
+            string meshPath = AssetDatabase.GUIDToAssetPath(guid);
+            string meshName = Path.GetFileNameWithoutExtension(meshPath);
+            if (null == Array.Find(meshFilters, v => v.sharedMesh.name == meshName))
+                AssetDatabase.DeleteAsset(meshPath);
+        }
     }
 }
