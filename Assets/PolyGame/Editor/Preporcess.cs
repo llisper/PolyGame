@@ -136,10 +136,10 @@ public static class Preporcess
         mainObj = new GameObject(graph.name);
         for (int i = 0; i < graph.triangles.Count; ++i)
         {
-            GameObject triObj = new GameObject("tri_" + i, typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
+            GameObject triObj = new GameObject(i.ToString(), typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
             triObj.transform.SetParent(mainObj.transform);
             var mesh = new Mesh();
-            mesh.name = "tri_" + i + "_mesh";
+            mesh.name = "mesh_" + i;
 
             Vector2[] points = graph.triangles[i];
             Vector2 centroid = points[3];
@@ -163,7 +163,7 @@ public static class Preporcess
             triObj.GetComponent<MeshCollider>().sharedMesh = mesh;
 
             MeshUtility.Optimize(mesh);
-            string savePath = string.Format("Assets/{0}/{1}/Meshes/{2}.mat", Paths.Artworks, graph.name, mesh.name);
+            string savePath = string.Format("Assets/{0}/{1}/Meshes/{2}.prefab", Paths.Artworks, graph.name, mesh.name);
             AssetDatabase.CreateAsset(mesh, savePath);
             AssetDatabase.SaveAssets();
         }

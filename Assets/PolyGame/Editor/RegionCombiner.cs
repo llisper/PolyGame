@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 static class RegionCombiner
 {
@@ -17,19 +16,19 @@ static class RegionCombiner
         }
 
         var mesh = new Mesh();
-        mesh.name = "tri_" + index + "_mesh";
+        mesh.name = "mesh_" + index;
         mesh.CombineMeshes(combine);
         Vector3 centroid;
         mesh.vertices = Centralize(mesh.vertices, out centroid);
         mesh.RecalculateBounds();
 
         MeshUtility.Optimize(mesh);
-        string savePath = string.Format("Assets/{0}/{1}/Meshes/{2}.mat", Paths.Artworks, root.name, mesh.name);
+        string savePath = string.Format("Assets/{0}/{1}/Meshes/{2}.prefab", Paths.Artworks, root.name, mesh.name);
         AssetDatabase.CreateAsset(mesh, savePath);
         AssetDatabase.SaveAssets();
 
         var go = new GameObject(
-            "tri_" + index,
+            index.ToString(),
             typeof(MeshFilter),
             typeof(MeshRenderer), 
             typeof(MeshCollider));
@@ -45,7 +44,7 @@ static class RegionCombiner
         int max = 0;
         for (int i = 0; i < root.transform.childCount; ++i)
         {
-            int index = int.Parse(Regex.Match(root.transform.GetChild(i).name, @"tri_([0-9]+)").Groups[1].Value);
+            int index = int.Parse(root.transform.GetChild(i).name);
             if (index > max)
                 max = index;
         }
