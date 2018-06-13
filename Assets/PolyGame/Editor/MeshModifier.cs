@@ -9,34 +9,56 @@ class MeshModifier : EditorWindow
 {
     public static MeshModifier Instance { get; private set; }
 
-    [MenuItem("[Tools]/Mesh Modifier")]
+    [MenuItem("Tools/Mesh Modifier")]
     public static void ShowWindow()
     {
         GetWindow<MeshModifier>().Show();
     }
 
-    class Info
+    public static void DoRepaint()
     {
-        public string name;
+        if (null != Instance)
+            Instance.Repaint();
+    }
+
+    public class Info : IDisposable
+    {
+        public GameObject editObj;
+        public Material originalMat;
+        public Material selectedMat;
         public int vertices;
         public int triangles;
         public int regions;
 
-        public Info(GameObject obj)
+        public Info(string name)
         {
-            Update(obj);
+            string path = string.Format("{0}/{1}/{1}.prefab", Paths.ResourceArtworks, name);
+            var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+            editObj = GameObject.Instantiate<GameObject>(prefab);
+            editObj.name = name;
+
+            originalMat = editObj.GetComponentInChildren<MeshRenderer>().sharedMaterial;
+            selectedMat = UnityEngine.Object.Instantiate<Material>(originalMat);
+            selectedMat.name = originalMat.name + "_selected";
+            selectedMat.color = Color.green;
+            Update();
         }
 
-        public void Update(GameObject obj)
+        public void Update()
         {
-            name = obj.name;
-            regions = obj.transform.childCount;
+            regions = editObj.transform.childCount;
             vertices = triangles = 0;
-            foreach (var meshFilter in obj.GetComponentsInChildren<MeshFilter>())
+            foreach (var meshFilter in editObj.GetComponentsInChildren<MeshFilter>())
             {
                 vertices += meshFilter.sharedMesh.vertices.Length;
                 triangles += meshFilter.sharedMesh.triangles.Length / 3;
             }
+        }
+
+        public void Dispose()
+        {
+            GameObject.DestroyImmediate(editObj);
+            GameObject.DestroyImmediate(selectedMat);
         }
     }
 
@@ -44,14 +66,12 @@ class MeshModifier : EditorWindow
     string filter;
     string[] names;
     List<string> filteredNames = new List<string>();
-    GameObject editObj;
-    Material originalMat;
-    Material selectedMat;
     Info info;
     bool unsavedModification;
     GUIStyle labelStyle;
+    Stack<Command> undoStack = new Stack<Command>();
 
-    public bool IsEditing { get { return null != editObj; } }
+    public bool IsEditing { get { return null != info; } }
 
     void Awake()
     {
@@ -69,18 +89,12 @@ class MeshModifier : EditorWindow
 
     void ClearCurrent()
     {
-        if (null != editObj)
+        if (null != info)
         {
-            ClearUnusedMeshes(editObj.name);
-            GameObject.DestroyImmediate(editObj);
-            editObj = null;
-            originalMat = null;
+            ClearUnusedMeshes(info.editObj.name);
+            info.Dispose();
             info = null;
-            if (null != selectedMat)
-            {
-                UnityEngine.Object.DestroyImmediate(selectedMat);
-                selectedMat = null;
-            }
+            undoStack.Clear();
         }
     }
 
@@ -96,13 +110,7 @@ class MeshModifier : EditorWindow
             {
                 if (selected >= 0 && selected < options.Length)
                 {
-                    string name = options[selected];
-                    string path = string.Format("{0}/{1}/{1}.prefab", Paths.ResourceArtworks, name);
-                    var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-                    editObj = GameObject.Instantiate<GameObject>(prefab);
-                    editObj.name = name;
-                    originalMat = editObj.GetComponentInChildren<MeshRenderer>().sharedMaterial;
-                    info = new Info(editObj);
+                    info = new Info(options[selected]);
                     unsavedModification = false;
                 }
             }
@@ -158,7 +166,7 @@ class MeshModifier : EditorWindow
 
     void ShowInfo()
     {
-        EditorGUILayout.LabelField("name", info.name);
+        EditorGUILayout.LabelField("name", info.editObj.name);
         EditorGUILayout.LabelField("vertices", info.vertices.ToString());
         EditorGUILayout.LabelField("triangles", info.triangles.ToString());
         EditorGUILayout.LabelField("regions", info.regions.ToString());
@@ -168,37 +176,43 @@ class MeshModifier : EditorWindow
 
     void EditObj()
     {
-        var meshPicker = editObj.GetComponent<MeshPicker>();
+        var meshPicker = info.editObj.GetComponent<MeshPicker>();
         if (null == meshPicker)
-            meshPicker = editObj.AddComponent<MeshPicker>();
-
-        if (null == selectedMat)
         {
-            string path = string.Format("Assets/{0}/{1}/Materials/{1}.mat", Paths.Artworks, editObj.name);
-            var mat = AssetDatabase.LoadAssetAtPath<Material>(path);
-            selectedMat = UnityEngine.Object.Instantiate<Material>(mat);
-            selectedMat.color = Color.green;
-            meshPicker.selectedMat = selectedMat;
+            meshPicker = info.editObj.AddComponent<MeshPicker>();
+            meshPicker.selectedMat = info.selectedMat;
         }
 
         if (GUILayout.Button("Select Regions", GUILayout.Width(100f)))
-            Selection.activeGameObject = editObj;
+            Selection.activeGameObject = info.editObj;
 
         if (meshPicker.renderers.Count > 0)
         {
             if (GUILayout.Button("Drop Regions", GUILayout.Width(100f)))
             {
                 meshPicker.renderers.ForEach(v => v.gameObject.SetActive(false));
+                undoStack.Push(new DropCommand(info, meshPicker.renderers));
                 meshPicker.renderers.Clear();
                 unsavedModification = true;
             }
 
             if (GUILayout.Button("Join Regions", GUILayout.Width(100f)))
             {
-                var newRegion = RegionCombiner.Combine(editObj, meshPicker.renderers.ConvertAll(v => v.gameObject));
-                newRegion.GetComponent<MeshRenderer>().sharedMaterial = originalMat;
+                var newRegion = RegionCombiner.Combine(info.editObj, meshPicker.renderers.ConvertAll(v => v.gameObject));
+                newRegion.GetComponent<MeshRenderer>().sharedMaterial = info.originalMat;
                 meshPicker.renderers.ForEach(v => v.gameObject.SetActive(false));
+                undoStack.Push(new JoinCommand(info, newRegion, meshPicker.renderers));
                 meshPicker.renderers.Clear();
+                unsavedModification = true;
+            }
+        }
+
+        if (undoStack.Count > 0)
+        {
+            if (GUILayout.Button(string.Format("Undo({0})", undoStack.Count), GUILayout.Width(100f)))
+            {
+                var command = undoStack.Pop();
+                command.Undo();
                 unsavedModification = true;
             }
         }
@@ -209,8 +223,8 @@ class MeshModifier : EditorWindow
         if (!IsEditing)
             return;
 
-        var copy = GameObject.Instantiate<GameObject>(editObj);
-        copy.name = editObj.name;
+        var copy = GameObject.Instantiate<GameObject>(info.editObj);
+        copy.name = info.editObj.name;
 
         GameObject.DestroyImmediate(copy.GetComponent<MeshPicker>());
         var inactiveMeshes = copy.GetComponentsInChildren<MeshFilter>(true).Where(v => !v.gameObject.activeSelf);

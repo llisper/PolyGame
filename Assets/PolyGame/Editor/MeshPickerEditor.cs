@@ -18,7 +18,10 @@ class MeshPickerEditor : Editor
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
                 if (hit.transform.parent == script.transform)
+                {
                     script.Toggle(hit.transform.GetComponent<MeshRenderer>());
+                    MeshModifier.DoRepaint();
+                }
             }
             Event.current.Use();
         }

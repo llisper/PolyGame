@@ -10,14 +10,14 @@ public static class Preporcess
 {
     static GameObject mainObj;
 
-    [MenuItem("[Tools]/Preprocess/Test")]
+    [MenuItem("Tools/Preprocess/Test")]
     static void Test()
     {
         Process("DeadCells");
         // Process("Bill");
     }
 
-    [MenuItem("[Tools]/Preprocess/All")]
+    [MenuItem("Tools/Preprocess/All")]
     static void All()
     {
         try
