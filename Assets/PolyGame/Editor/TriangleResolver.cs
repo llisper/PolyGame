@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System;
+using System.Text;
+using System.Linq;
 using System.Collections.Generic;
 
 class TriangleResolver
@@ -27,6 +29,7 @@ class TriangleResolver
     public void Resolve()
     {
         FindTriangles();
+        CalculateTriangleAdjacents();
     }
 
     void AddPoint(Vector2 p0, Vector2 p1)
@@ -75,6 +78,44 @@ class TriangleResolver
                 }
             }
             finishedPoints.Add(hashCode);
+        }
+    }
+
+    void CalculateTriangleAdjacents()
+    {
+        for (int i = 0; i < graph.triangles.Count; ++i)
+        {
+            var triA = graph.triangles[i];
+            for (int j = i + 1; j < graph.triangles.Count && triA.adjacents.Count < 3; ++j)
+            {
+                var triB = graph.triangles[j];
+                if (triB.adjacents.Count >= 3)
+                    continue;
+
+                if (triA.hashes.Intersect(triB.hashes).Count() == 2)
+                {
+                    triA.adjacents.Add(j);
+                    triB.adjacents.Add(i);
+                }
+            }
+        }
+
+        for (int i = 0; i < graph.triangles.Count; ++i)
+        {
+            var tri = graph.triangles[i];
+            var log = new StringBuilder();
+            log.AppendFormat("{0}, adj:{1} => ", i, tri.adjacents.Count);
+            for (int j = 0; j < tri.adjacents.Count; ++j)
+            {
+                log.Append(tri.adjacents[j]);
+                if (j < tri.adjacents.Count - 1)
+                    log.Append(',');
+            }
+
+            if (tri.adjacents.Count <= 3)
+                Debug.Log(log);
+            else
+                Debug.LogError(log);
         }
     }
 }

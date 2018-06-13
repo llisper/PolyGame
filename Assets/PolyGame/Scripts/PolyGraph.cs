@@ -1,12 +1,21 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections.Generic;
+
+public class Triangle
+{
+    public Vector2 centroid;
+    public Vector2[] vertices;
+    public long[] hashes;
+    public List<int> adjacents = new List<int>();
+}
 
 public class PolyGraph
 {
     public string name;
     public Vector2Int size;
     public List<Vector2> points = new List<Vector2>();
-    public List<Vector2[]> triangles = new List<Vector2[]>();
+    public List<Triangle> triangles = new List<Triangle>();
 
     public Vector3[] vertices
     {
@@ -23,9 +32,9 @@ public class PolyGraph
             int[] ret = new int[triangles.Count * 3];
             for (int i = 0; i < triangles.Count; ++i)
             {
-                ret[i * 3] = points.IndexOf(triangles[i][0]);
-                ret[i * 3 + 1] = points.IndexOf(triangles[i][1]);
-                ret[i * 3 + 2] = points.IndexOf(triangles[i][2]);
+                ret[i * 3] = points.IndexOf(triangles[i].vertices[0]);
+                ret[i * 3 + 1] = points.IndexOf(triangles[i].vertices[1]);
+                ret[i * 3 + 2] = points.IndexOf(triangles[i].vertices[2]);
             }
             return ret;
         }
@@ -54,7 +63,12 @@ public class PolyGraph
 
     public void AddTriangle(Vector2 p0, Vector2 p1, Vector2 p2)
     {
-        // p0, p1, p2, centroid
-        triangles.Add(new Vector2[4] { p0, p1, p2, new Vector2((p0.x + p1.x + p2.x) / 3f, (p0.y + p1.y + p2.y) / 3f) });
+        var tri = new Triangle()
+        {
+            centroid = new Vector2((p0.x + p1.x + p2.x) / 3f, (p0.y + p1.y + p2.y) / 3f),
+            vertices = new Vector2[] { p0, p1, p2 },
+            hashes = new long[] { PointHash(p0), PointHash(p1), PointHash(p2) }
+        };
+        triangles.Add(tri);
     }
 }

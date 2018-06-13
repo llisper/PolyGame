@@ -141,8 +141,8 @@ public static class Preporcess
             var mesh = new Mesh();
             mesh.name = "mesh_" + i;
 
-            Vector2[] points = graph.triangles[i];
-            Vector2 centroid = points[3];
+            Vector2[] points = graph.triangles[i].vertices;
+            Vector2 centroid = graph.triangles[i].centroid;
             Vector2[] vertices = new Vector2[3];
             for (int j = 0; j < 3; ++j)
                 vertices[j] = points[j] - centroid;
