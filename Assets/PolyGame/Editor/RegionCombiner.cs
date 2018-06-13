@@ -32,6 +32,7 @@ static class RegionCombiner
             typeof(MeshFilter),
             typeof(MeshRenderer), 
             typeof(MeshCollider));
+        Preporcess.SetupMeshRenderer(go);
         go.transform.parent = root.transform;
         go.GetComponent<MeshFilter>().mesh = mesh;
         go.transform.position = centroid;
