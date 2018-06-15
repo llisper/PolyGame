@@ -17,6 +17,7 @@ public class PolyGraph
     public List<Vector2> points = new List<Vector2>();
     public List<Triangle> triangles = new List<Triangle>();
 
+    /*
     public Vector3[] vertices
     {
         get
@@ -53,6 +54,7 @@ public class PolyGraph
             return ret;
         }
     }
+    */
 
     public long PointHash(Vector2 p)
     {

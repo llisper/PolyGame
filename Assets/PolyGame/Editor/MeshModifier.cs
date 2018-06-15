@@ -193,7 +193,7 @@ class MeshModifier : EditorWindow
                 meshPicker.renderers.ForEach(v => v.gameObject.SetActive(false));
                 undoStack.Push(new DropCommand(info, meshPicker.renderers));
                 meshPicker.renderers.Clear();
-                unsavedModification = true;
+                MarkModified();
             }
 
             if (GUILayout.Button("Join Regions", GUILayout.Width(100f)))
@@ -203,7 +203,7 @@ class MeshModifier : EditorWindow
                 meshPicker.renderers.ForEach(v => v.gameObject.SetActive(false));
                 undoStack.Push(new JoinCommand(info, newRegion, meshPicker.renderers));
                 meshPicker.renderers.Clear();
-                unsavedModification = true;
+                MarkModified();
             }
         }
 
@@ -213,7 +213,7 @@ class MeshModifier : EditorWindow
             {
                 var command = undoStack.Pop();
                 command.Undo();
-                unsavedModification = true;
+                MarkModified();
             }
         }
     }
@@ -253,5 +253,12 @@ class MeshModifier : EditorWindow
             if (null == Array.Find(meshFilters, v => v.sharedMesh.name == meshName))
                 AssetDatabase.DeleteAsset(meshPath);
         }
+    }
+
+    void MarkModified()
+    {
+        unsavedModification = true;
+        if (null != info)
+            info.Update();
     }
 }
