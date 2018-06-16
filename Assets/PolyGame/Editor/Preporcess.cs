@@ -11,19 +11,6 @@ public static class Preporcess
 {
     static GameObject mainObj;
 
-    public static void SetupMeshRenderer(GameObject go)
-    {
-        var renderer = go.GetComponent<MeshRenderer>();
-        if (null != renderer)
-        {
-            renderer.lightProbeUsage = LightProbeUsage.Off;
-            renderer.reflectionProbeUsage = ReflectionProbeUsage.Off;
-            renderer.shadowCastingMode = ShadowCastingMode.Off;
-            renderer.receiveShadows = false;
-            renderer.allowOcclusionWhenDynamic = false;
-        }
-    }
-
     [MenuItem("Tools/Preprocess/Test")]
     static void Test()
     {
@@ -151,7 +138,7 @@ public static class Preporcess
         for (int i = 0; i < graph.triangles.Count; ++i)
         {
             GameObject triObj = new GameObject(i.ToString(), typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
-            SetupMeshRenderer(triObj);
+            Utils.SetupMeshRenderer(triObj);
             triObj.transform.SetParent(mainObj.transform);
             var mesh = new Mesh();
             mesh.name = "mesh_" + i;

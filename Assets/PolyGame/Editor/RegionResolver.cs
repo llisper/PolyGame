@@ -67,6 +67,7 @@ class RegionResolver
                 if (triB.adjacents.Count >= 3)
                     continue;
 
+                long[] intersection = triA.hashes.Intersect(triB.hashes).ToArray();
                 if (triA.hashes.Intersect(triB.hashes).Count() == 2)
                 {
                     triA.adjacents.Add(j);
@@ -83,7 +84,7 @@ class RegionResolver
             var regionA = graph.regions[i];
             for (int j = i + 1; j < graph.regions.Count; ++j)
             {
-                var regionB = graph.regions[i];
+                var regionB = graph.regions[j];
                 if (IsRegionAdjacent(regionA, regionB))
                 {
                     regionA.adjacents.Add(j);
