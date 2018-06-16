@@ -223,35 +223,64 @@ class MeshModifier : EditorWindow
         if (!IsEditing)
             return;
 
-        var copy = GameObject.Instantiate<GameObject>(info.editObj);
-        copy.name = info.editObj.name;
+        try
+        {
+            EditorUtility.DisplayProgressBar("Saving " + info.editObj.name, "Copying instance", 0f);
+            var copy = GameObject.Instantiate<GameObject>(info.editObj);
+            copy.name = info.editObj.name;
 
-        GameObject.DestroyImmediate(copy.GetComponent<MeshPicker>());
-        var inactiveMeshes = copy.GetComponentsInChildren<MeshFilter>(true).Where(v => !v.gameObject.activeSelf);
-        foreach (var m in inactiveMeshes)
-            GameObject.DestroyImmediate(m.gameObject);
+            EditorUtility.DisplayProgressBar("Saving " + info.editObj.name, "Destroying inactive meshes", 0.25f);
+            GameObject.DestroyImmediate(copy.GetComponent<MeshPicker>());
+            var inactiveMeshes = copy.GetComponentsInChildren<MeshFilter>(true).Where(v => !v.gameObject.activeSelf);
+            foreach (var m in inactiveMeshes)
+                GameObject.DestroyImmediate(m.gameObject);
 
-        string path = string.Format("{0}/{1}/{1}.prefab", Paths.ResourceArtworks, copy.name);
-        UnityEngine.Object prefab = PrefabUtility.CreatePrefab(path, copy);
-        PrefabUtility.ReplacePrefab(copy, prefab, ReplacePrefabOptions.ConnectToPrefab);
+            EditorUtility.DisplayProgressBar("Saving " + info.editObj.name, "Resolving regions", 0.5f);
+            RegionResolver.Resolve(copy.GetComponent<PolyGraphBehaviour>());
 
-        GameObject.DestroyImmediate(copy);
-        unsavedModification = false;
+            EditorUtility.DisplayProgressBar("Saving " + info.editObj.name, "Saving prefab", 0.75f);
+            string path = string.Format("{0}/{1}/{1}.prefab", Paths.ResourceArtworks, copy.name);
+            UnityEngine.Object prefab = PrefabUtility.CreatePrefab(path, copy);
+            PrefabUtility.ReplacePrefab(copy, prefab, ReplacePrefabOptions.ConnectToPrefab);
+
+            GameObject.DestroyImmediate(copy);
+            unsavedModification = false;
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
+        finally
+        {
+            EditorUtility.ClearProgressBar();
+        }
     }
 
     void ClearUnusedMeshes(string name)
     {
-        string prefabPath = string.Format("{0}/{1}/{1}.prefab", Paths.ResourceArtworks, name);
-        var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-        var meshFilters = prefab.GetComponentsInChildren<MeshFilter>();
-
-        string path = string.Format("Assets/{0}/{1}/Meshes", Paths.Artworks, name);
-        foreach (var guid in AssetDatabase.FindAssets("mesh", new string[] { path }))
+        EditorUtility.DisplayProgressBar("ClearUnusedMeshes", name, 0);
+        try
         {
-            string meshPath = AssetDatabase.GUIDToAssetPath(guid);
-            string meshName = Path.GetFileNameWithoutExtension(meshPath);
-            if (null == Array.Find(meshFilters, v => v.sharedMesh.name == meshName))
-                AssetDatabase.DeleteAsset(meshPath);
+            string prefabPath = string.Format("{0}/{1}/{1}.prefab", Paths.ResourceArtworks, name);
+            var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+            var meshFilters = prefab.GetComponentsInChildren<MeshFilter>();
+
+            string path = string.Format("Assets/{0}/{1}/Meshes", Paths.Artworks, name);
+            foreach (var guid in AssetDatabase.FindAssets("mesh", new string[] { path }))
+            {
+                string meshPath = AssetDatabase.GUIDToAssetPath(guid);
+                string meshName = Path.GetFileNameWithoutExtension(meshPath);
+                if (null == Array.Find(meshFilters, v => v.sharedMesh.name == meshName))
+                    AssetDatabase.DeleteAsset(meshPath);
+            }
+        } 
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
+        finally
+        {
+            EditorUtility.ClearProgressBar();
         }
     }
 

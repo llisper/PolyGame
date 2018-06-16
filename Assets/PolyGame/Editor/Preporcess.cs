@@ -156,8 +156,8 @@ public static class Preporcess
             var mesh = new Mesh();
             mesh.name = "mesh_" + i;
 
-            Vector2[] points = graph.triangles[i].vertices;
-            Vector2 centroid = graph.triangles[i].centroid;
+            Vector2[] points = graph.triangles[i];
+            Vector2 centroid = PolyGraph.GetCentroid(points);
             Vector2[] vertices = new Vector2[3];
             for (int j = 0; j < 3; ++j)
                 vertices[j] = points[j] - centroid;
@@ -204,6 +204,10 @@ public static class Preporcess
 
     static void SavePrefabs(PolyGraph graph)
     {
+        var polyGraphBehaviour = mainObj.AddComponent<PolyGraphBehaviour>();
+        polyGraphBehaviour.size = graph.size;
+        RegionResolver.Resolve(polyGraphBehaviour);
+
         SavePrefab(graph.name, ref mainObj);
     }
 

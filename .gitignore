@@ -36,3 +36,5 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
+Assets/PolyGame/Art/Shaders/Materials.meta
+Assets/PolyGame/Art/Shaders/Meshes.meta
