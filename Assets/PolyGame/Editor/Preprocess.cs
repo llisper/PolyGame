@@ -1,47 +1,16 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering;
 using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Delaunay;
 
-public static class Preporcess
+public static class Preprocess
 {
     static GameObject mainObj;
 
-    [MenuItem("Tools/Preprocess/Test")]
-    static void Test()
-    {
-        Process("DeadCells");
-        // Process("Bill");
-    }
-
-    [MenuItem("Tools/Preprocess/All")]
-    static void All()
-    {
-        try
-        {
-            string[] dirs = Directory.GetDirectories(Application.dataPath + '/' + Paths.Artworks);
-            for (int i = 0; i < dirs.Length; ++i)
-            {
-                string name = Path.GetFileName(dirs[i]);
-                EditorUtility.DisplayProgressBar("Preprocess", name, (float)(i + 1) / dirs.Length);
-                Process(name);
-            }
-        }
-        catch (Exception e)
-        {
-            Debug.LogException(e);
-        }
-        finally
-        {
-            EditorUtility.ClearProgressBar();
-        }
-    }
-
-    static void Process(string name)
+    public static void Process(string name)
     {
         var graph = new PolyGraph();
         graph.name = name;
