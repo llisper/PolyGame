@@ -23,7 +23,7 @@ static class RegionCombiner
         mesh.RecalculateBounds();
 
         MeshUtility.Optimize(mesh);
-        string savePath = string.Format("Assets/{0}/{1}/Meshes/{2}.prefab", Paths.Artworks, root.name, mesh.name);
+        string savePath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, root.name, mesh.name);
         AssetDatabase.CreateAsset(mesh, savePath);
         AssetDatabase.SaveAssets();
 

@@ -45,7 +45,7 @@ class JoinCommand : Command
     public override void Undo()
     {
         var mesh = newRegion.GetComponent<MeshFilter>().sharedMesh;
-        string meshPath = string.Format("Assets/{0}/{1}/Meshes/{2}.prefab", Paths.Artworks, info.editObj.name, mesh.name);
+        string meshPath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, info.editObj.name, mesh.name);
         GameObject.DestroyImmediate(newRegion);
         AssetDatabase.DeleteAsset(meshPath);
         deactivatedRenderers.ForEach(v => {

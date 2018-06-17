@@ -25,10 +25,10 @@ public static class Preprocess
 
     static void Clear(PolyGraph graph)
     {
-        string parent = string.Format("Assets/{0}/{1}/", Paths.Artworks, graph.name);
+        string parent = string.Format("{0}/{1}/", Paths.AssetArtworks, graph.name);
         DeleteFolder(parent + "Materials");
         DeleteFolder(parent + "Meshes");
-        DeleteFolder(Paths.ResourceArtworks + '/' + graph.name);
+        DeleteFolder(Paths.AssetResArtworks + '/' + graph.name);
         AssetDatabase.Refresh();
     }
 
@@ -40,16 +40,16 @@ public static class Preprocess
 
     static void CreateFolders(PolyGraph graph)
     {
-        string parent = string.Format("Assets/{0}/{1}", Paths.Artworks, graph.name);
+        string parent = string.Format("{0}/{1}", Paths.AssetArtworks, graph.name);
         AssetDatabase.CreateFolder(parent, "Materials");
         AssetDatabase.CreateFolder(parent, "Meshes");
-        AssetDatabase.CreateFolder(Paths.ResourceArtworks, graph.name);
+        AssetDatabase.CreateFolder(Paths.AssetResArtworks, graph.name);
     }
 
     static void ReadConfig(PolyGraph graph)
     {
         HashSet<long> hash = new HashSet<long>();
-        string path = string.Format("Assets/{0}/{1}/{1}.txt", Paths.Artworks, graph.name);
+        string path = string.Format("{0}/{1}/{1}.txt", Paths.AssetArtworks, graph.name);
         var asset = AssetDatabase.LoadAssetAtPath<TextAsset>(path);
         using (StringReader reader = new StringReader(asset.text))
         {
@@ -134,7 +134,7 @@ public static class Preprocess
             triObj.GetComponent<MeshCollider>().sharedMesh = mesh;
 
             MeshUtility.Optimize(mesh);
-            string savePath = string.Format("Assets/{0}/{1}/Meshes/{2}.prefab", Paths.Artworks, graph.name, mesh.name);
+            string savePath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, graph.name, mesh.name);
             AssetDatabase.CreateAsset(mesh, savePath);
             AssetDatabase.SaveAssets();
         }
@@ -144,13 +144,13 @@ public static class Preprocess
     {
         Material mat = new Material(Shader.Find("PolyGame/PolyS"));
         mat.name = graph.name;
-        string path = string.Format("Assets/{0}/{1}/{1}.png", Paths.Artworks, graph.name);
+        string path = string.Format("{0}/{1}/{1}.png", Paths.AssetArtworks, graph.name);
         Texture texture = AssetDatabase.LoadAssetAtPath<Texture>(path);
         if (null == texture)
             throw new Exception("Failed to load texture " + path);
         mat.SetTexture("_MainTex", texture);
 
-        string savePath = string.Format("Assets/{0}/{1}/Materials/{2}.mat", Paths.Artworks, graph.name, mat.name);
+        string savePath = string.Format("{0}/{1}/Materials/{2}.mat", Paths.AssetArtworks, graph.name, mat.name);
         AssetDatabase.CreateAsset(mat, savePath);
         AssetDatabase.SaveAssets();
 
@@ -169,7 +169,7 @@ public static class Preprocess
 
     static void SavePrefab(string folder, ref GameObject obj)
     {
-        string savePath = string.Format("{0}/{1}/{2}.prefab", Paths.ResourceArtworks, folder, obj.name);
+        string savePath = string.Format("{0}/{1}/{2}.prefab", Paths.AssetResArtworks, folder, obj.name);
         UnityEngine.Object prefab = PrefabUtility.CreatePrefab(savePath, obj);
         PrefabUtility.ReplacePrefab(obj, prefab, ReplacePrefabOptions.ConnectToPrefab);
 

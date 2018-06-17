@@ -22,10 +22,10 @@ class ImportPostProcessor : AssetPostprocessor
     {
         foreach (string path in importedAssets)
         {
-            var match = Regex.Match(path, Paths.Artworks + @"/(\w+)/\1\.txt");
+            var match = Regex.Match(path, Paths.AssetArtworksNoPrefix + @"/(\w+)/\1\.txt");
             if (match.Success)
             {
-                string flagPath = string.Format("{0}/{1}/{2}/(update)", Application.dataPath, Paths.Artworks, match.Groups[1].Value);
+                string flagPath = string.Format("{0}/{1}/{2}/(update)", Application.dataPath, Paths.AssetArtworksNoPrefix, match.Groups[1].Value);
                 File.WriteAllText(flagPath, "");
             }
         }

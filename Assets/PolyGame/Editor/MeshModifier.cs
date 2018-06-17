@@ -32,7 +32,7 @@ class MeshModifier : EditorWindow
 
         public Info(string name)
         {
-            string path = string.Format("{0}/{1}/{1}.prefab", Paths.ResourceArtworks, name);
+            string path = string.Format("{0}/{1}/{1}.prefab", Paths.AssetResArtworks, name);
             var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
             editObj = GameObject.Instantiate<GameObject>(prefab);
             editObj.name = name;
@@ -76,7 +76,7 @@ class MeshModifier : EditorWindow
     void Awake()
     {
         Instance = this;
-        string[] dirs = Directory.GetDirectories(Application.dataPath + Paths.ResourceArtworks.Remove(0, 6));
+        string[] dirs = Directory.GetDirectories(Application.dataPath + Paths.AssetResArtworksNoPrefix);
         names = Array.ConvertAll(dirs, v => Path.GetFileName(v));
         labelStyle = new GUIStyle(EditorStyles.boldLabel);
     }
@@ -239,7 +239,7 @@ class MeshModifier : EditorWindow
             RegionResolver.Resolve(copy.GetComponent<PolyGraphBehaviour>());
 
             EditorUtility.DisplayProgressBar("Saving " + info.editObj.name, "Saving prefab", 0.75f);
-            string path = string.Format("{0}/{1}/{1}.prefab", Paths.ResourceArtworks, copy.name);
+            string path = string.Format("{0}/{1}/{1}.prefab", Paths.AssetResArtworks, copy.name);
             UnityEngine.Object prefab = PrefabUtility.CreatePrefab(path, copy);
             PrefabUtility.ReplacePrefab(copy, prefab, ReplacePrefabOptions.ConnectToPrefab);
 
@@ -261,11 +261,11 @@ class MeshModifier : EditorWindow
         EditorUtility.DisplayProgressBar("ClearUnusedMeshes", name, 0);
         try
         {
-            string prefabPath = string.Format("{0}/{1}/{1}.prefab", Paths.ResourceArtworks, name);
+            string prefabPath = string.Format("{0}/{1}/{1}.prefab", Paths.AssetResArtworks, name);
             var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
             var meshFilters = prefab.GetComponentsInChildren<MeshFilter>();
 
-            string path = string.Format("Assets/{0}/{1}/Meshes", Paths.Artworks, name);
+            string path = string.Format("{0}/{1}/Meshes", Paths.AssetArtworks, name);
             foreach (var guid in AssetDatabase.FindAssets("mesh", new string[] { path }))
             {
                 string meshPath = AssetDatabase.GUIDToAssetPath(guid);

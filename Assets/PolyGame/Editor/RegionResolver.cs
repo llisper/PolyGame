@@ -35,7 +35,6 @@ class RegionResolver
             var child = graph.transform.GetChild(i);
             var region = new Region();
             region.name = child.name;
-            region.position = child.position;
             graph.regions.Add(region);
 
             var mesh = child.GetComponent<MeshFilter>().sharedMesh;
@@ -70,7 +69,6 @@ class RegionResolver
                 if (triB.adjacents.Count >= 3)
                     continue;
 
-                long[] intersection = triA.hashes.Intersect(triB.hashes).ToArray();
                 if (triA.hashes.Intersect(triB.hashes).Count() == 2)
                 {
                     triA.adjacents.Add(j);

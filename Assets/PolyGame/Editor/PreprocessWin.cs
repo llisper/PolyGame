@@ -20,7 +20,7 @@ class PreprocessWin : EditorWindow
 
     void Awake()
     {
-        path = Application.dataPath + '/' + Paths.Artworks + '/';
+        path = Application.dataPath + '/' + Paths.AssetArtworksNoPrefix + '/';
     }
 
     bool HasMark(string name, string mark)
@@ -75,7 +75,7 @@ class PreprocessWin : EditorWindow
         dirs = Directory.GetDirectories(path);
         names = Array.ConvertAll(dirs, v => Path.GetFileName(v));
 
-        EditorGUILayout.LabelField("Root", Paths.Artworks);
+        EditorGUILayout.LabelField("Root", Paths.AssetArtworks);
 
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.LabelField("Pre-process", GUILayout.Width(100));
