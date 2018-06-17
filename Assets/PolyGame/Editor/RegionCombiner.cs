@@ -33,9 +33,11 @@ static class RegionCombiner
             typeof(MeshRenderer), 
             typeof(MeshCollider));
         Utils.SetupMeshRenderer(go);
+        go.tag = Tags.Debris;
+        go.layer = Layers.Debris;
         go.transform.parent = root.transform;
         go.GetComponent<MeshFilter>().mesh = mesh;
-        go.transform.position = centroid;
+        go.transform.localPosition = centroid;
         go.GetComponent<MeshCollider>().sharedMesh = mesh;
         return go;
     }

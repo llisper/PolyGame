@@ -108,6 +108,8 @@ public static class Preprocess
         {
             GameObject triObj = new GameObject(i.ToString(), typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
             Utils.SetupMeshRenderer(triObj);
+            triObj.tag = Tags.Debris;
+            triObj.layer = Layers.Debris;
             triObj.transform.SetParent(mainObj.transform);
             var mesh = new Mesh();
             mesh.name = "mesh_" + i;
@@ -130,7 +132,7 @@ public static class Preprocess
             mesh.uv = uv;
 
             triObj.GetComponent<MeshFilter>().mesh = mesh;
-            triObj.transform.position = centroid;
+            triObj.transform.localPosition = centroid;
             triObj.GetComponent<MeshCollider>().sharedMesh = mesh;
 
             MeshUtility.Optimize(mesh);

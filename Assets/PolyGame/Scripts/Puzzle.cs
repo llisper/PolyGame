@@ -16,7 +16,7 @@ public class Puzzle : MonoBehaviour
     const float ScrambleRadius = 50f;
     
     string puzzleName;
-    GameObject puzzleObject;
+    PolyGraphBehaviour puzzleObject;
     Dictionary<GameObject, Vector3> positionMap = new Dictionary<GameObject, Vector3>();
     bool[] finished;
 
@@ -26,6 +26,7 @@ public class Puzzle : MonoBehaviour
         puzzleObject = Load();
         // TODO: if there is a save, load the save, or else start anew
         StartNew();
+        PuzzleCamera.Instance.Init(puzzleObject.size);
     }
 
     void StartNew()
@@ -35,7 +36,7 @@ public class Puzzle : MonoBehaviour
 
     }
 
-    GameObject Load()
+    PolyGraphBehaviour Load()
     {
         var prefab = Resources.Load(string.Format("{0}/{1}/{1}", Paths.Artworks, puzzleName));
         var go = (GameObject)Instantiate(prefab);
@@ -49,12 +50,12 @@ public class Puzzle : MonoBehaviour
             child.localPosition = ArrangeDepth(i, pos);
         }
         finished = new bool[go.transform.childCount];
-        return go;
+        return go.GetComponent<PolyGraphBehaviour>();
     }
 
     Vector3 ArrangeDepth(int i, Vector3 pos)
     {
-        pos.z = i * 0.1f;
+        pos.z = -i * 0.1f;
         return pos;
     }
 

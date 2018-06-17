@@ -3,6 +3,8 @@ using UnityEngine.Rendering;
 
 public class Utils
 {
+    public const float CameraDistance = 1001f;
+
     public static void SetupMeshRenderer(GameObject go)
     {
         var renderer = go.GetComponent<MeshRenderer>();
@@ -15,4 +17,14 @@ public class Utils
             renderer.allowOcclusionWhenDynamic = false;
         }
     }
+}
+
+public class Tags
+{
+    public const string Debris = "Debris";
+}
+
+public class Layers
+{
+    public const int Debris = 8;
 }
