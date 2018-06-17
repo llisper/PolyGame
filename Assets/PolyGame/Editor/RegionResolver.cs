@@ -32,9 +32,12 @@ class RegionResolver
     {
         for (int i = 0; i < graph.transform.childCount; ++i)
         {
-            var region = new Region();
-            graph.regions.Add(region);
             var child = graph.transform.GetChild(i);
+            var region = new Region();
+            region.name = child.name;
+            region.position = child.position;
+            graph.regions.Add(region);
+
             var mesh = child.GetComponent<MeshFilter>().sharedMesh;
             int[] tris = mesh.triangles;
             Vector3[] vertices = Array.ConvertAll(mesh.vertices, v => v + child.localPosition);

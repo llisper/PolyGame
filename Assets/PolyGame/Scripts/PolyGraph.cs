@@ -16,6 +16,8 @@ public class Triangle
 [Serializable]
 public class Region
 {
+    public string name;
+    public Vector2 position;
     public List<int> triangles = new List<int>();
     public List<int> adjacents = new List<int>();
 }

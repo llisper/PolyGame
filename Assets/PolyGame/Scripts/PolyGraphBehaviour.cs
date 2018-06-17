@@ -23,8 +23,8 @@ public class PolyGraphBehaviour : MonoBehaviour
 
     void Awake()
     {
-        CalculateSubRegions();
-        GenerateSubRegionMeshes();
+        // CalculateSubRegions();
+        // GenerateSubRegionMeshes();
     }
 
     void CalculateSubRegions()
