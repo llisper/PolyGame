@@ -122374,6 +122374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 700, y: 912}
+  subRegionCount: 14
   triangles:
   - region: 0
     vertices:
@@ -132218,2815 +132219,4221 @@ MonoBehaviour:
     hashes: 0fba090000000000c0bd0900000000007cc0090000000000
     adjacents: 770500007c050000
   regions:
-  - triangles: 00000000
+  - name: 0
+    triangles: 00000000
     adjacents: 
-  - triangles: 01000000
+  - name: 1
+    triangles: 01000000
     adjacents: 
-  - triangles: 02000000
+  - name: 2
+    triangles: 02000000
     adjacents: 
-  - triangles: 03000000
+  - name: 3
+    triangles: 03000000
     adjacents: 
-  - triangles: 04000000
+  - name: 4
+    triangles: 04000000
     adjacents: 
-  - triangles: 05000000
+  - name: 5
+    triangles: 05000000
     adjacents: 
-  - triangles: 06000000
+  - name: 6
+    triangles: 06000000
     adjacents: 
-  - triangles: 07000000
+  - name: 7
+    triangles: 07000000
     adjacents: 
-  - triangles: 08000000
+  - name: 8
+    triangles: 08000000
     adjacents: 
-  - triangles: 09000000
+  - name: 9
+    triangles: 09000000
     adjacents: 
-  - triangles: 0a000000
+  - name: 10
+    triangles: 0a000000
     adjacents: 
-  - triangles: 0b000000
+  - name: 11
+    triangles: 0b000000
     adjacents: 
-  - triangles: 0c000000
+  - name: 12
+    triangles: 0c000000
     adjacents: 
-  - triangles: 0d000000
+  - name: 13
+    triangles: 0d000000
     adjacents: 
-  - triangles: 0e000000
+  - name: 14
+    triangles: 0e000000
     adjacents: 
-  - triangles: 0f000000
+  - name: 15
+    triangles: 0f000000
     adjacents: 
-  - triangles: 10000000
+  - name: 16
+    triangles: 10000000
     adjacents: 
-  - triangles: 11000000
+  - name: 17
+    triangles: 11000000
     adjacents: 
-  - triangles: 12000000
+  - name: 18
+    triangles: 12000000
     adjacents: 
-  - triangles: 13000000
+  - name: 19
+    triangles: 13000000
     adjacents: 
-  - triangles: 14000000
+  - name: 20
+    triangles: 14000000
     adjacents: 
-  - triangles: 15000000
+  - name: 21
+    triangles: 15000000
     adjacents: 
-  - triangles: 16000000
+  - name: 22
+    triangles: 16000000
     adjacents: 
-  - triangles: 17000000
+  - name: 23
+    triangles: 17000000
     adjacents: 
-  - triangles: 18000000
+  - name: 24
+    triangles: 18000000
     adjacents: 
-  - triangles: 19000000
+  - name: 25
+    triangles: 19000000
     adjacents: 
-  - triangles: 1a000000
+  - name: 26
+    triangles: 1a000000
     adjacents: 
-  - triangles: 1b000000
+  - name: 27
+    triangles: 1b000000
     adjacents: 
-  - triangles: 1c000000
+  - name: 28
+    triangles: 1c000000
     adjacents: 
-  - triangles: 1d000000
+  - name: 29
+    triangles: 1d000000
     adjacents: 
-  - triangles: 1e000000
+  - name: 30
+    triangles: 1e000000
     adjacents: 
-  - triangles: 1f000000
+  - name: 31
+    triangles: 1f000000
     adjacents: 
-  - triangles: 20000000
+  - name: 32
+    triangles: 20000000
     adjacents: 
-  - triangles: 21000000
+  - name: 33
+    triangles: 21000000
     adjacents: 
-  - triangles: 22000000
+  - name: 34
+    triangles: 22000000
     adjacents: 
-  - triangles: 23000000
+  - name: 35
+    triangles: 23000000
     adjacents: 
-  - triangles: 24000000
+  - name: 36
+    triangles: 24000000
     adjacents: 
-  - triangles: 25000000
+  - name: 37
+    triangles: 25000000
     adjacents: 
-  - triangles: 26000000
+  - name: 38
+    triangles: 26000000
     adjacents: 
-  - triangles: 27000000
+  - name: 39
+    triangles: 27000000
     adjacents: 
-  - triangles: 28000000
+  - name: 40
+    triangles: 28000000
     adjacents: 
-  - triangles: 29000000
+  - name: 41
+    triangles: 29000000
     adjacents: 
-  - triangles: 2a000000
+  - name: 42
+    triangles: 2a000000
     adjacents: 
-  - triangles: 2b000000
+  - name: 43
+    triangles: 2b000000
     adjacents: 
-  - triangles: 2c000000
+  - name: 44
+    triangles: 2c000000
     adjacents: 
-  - triangles: 2d000000
+  - name: 45
+    triangles: 2d000000
     adjacents: 
-  - triangles: 2e000000
+  - name: 46
+    triangles: 2e000000
     adjacents: 
-  - triangles: 2f000000
+  - name: 47
+    triangles: 2f000000
     adjacents: 
-  - triangles: 30000000
+  - name: 48
+    triangles: 30000000
     adjacents: 
-  - triangles: 31000000
+  - name: 49
+    triangles: 31000000
     adjacents: 
-  - triangles: 32000000
+  - name: 50
+    triangles: 32000000
     adjacents: 
-  - triangles: 33000000
+  - name: 51
+    triangles: 33000000
     adjacents: 
-  - triangles: 34000000
+  - name: 52
+    triangles: 34000000
     adjacents: 
-  - triangles: 35000000
+  - name: 53
+    triangles: 35000000
     adjacents: 
-  - triangles: 36000000
+  - name: 54
+    triangles: 36000000
     adjacents: 
-  - triangles: 37000000
+  - name: 55
+    triangles: 37000000
     adjacents: 
-  - triangles: 38000000
+  - name: 56
+    triangles: 38000000
     adjacents: 
-  - triangles: 39000000
+  - name: 57
+    triangles: 39000000
     adjacents: 
-  - triangles: 3a000000
+  - name: 58
+    triangles: 3a000000
     adjacents: 
-  - triangles: 3b000000
+  - name: 59
+    triangles: 3b000000
     adjacents: 
-  - triangles: 3c000000
+  - name: 60
+    triangles: 3c000000
     adjacents: 
-  - triangles: 3d000000
+  - name: 61
+    triangles: 3d000000
     adjacents: 
-  - triangles: 3e000000
+  - name: 62
+    triangles: 3e000000
     adjacents: 
-  - triangles: 3f000000
+  - name: 63
+    triangles: 3f000000
     adjacents: 
-  - triangles: 40000000
+  - name: 64
+    triangles: 40000000
     adjacents: 
-  - triangles: 41000000
+  - name: 65
+    triangles: 41000000
     adjacents: 
-  - triangles: 42000000
+  - name: 66
+    triangles: 42000000
     adjacents: 
-  - triangles: 43000000
+  - name: 67
+    triangles: 43000000
     adjacents: 
-  - triangles: 44000000
+  - name: 68
+    triangles: 44000000
     adjacents: 
-  - triangles: 45000000
+  - name: 69
+    triangles: 45000000
     adjacents: 
-  - triangles: 46000000
+  - name: 70
+    triangles: 46000000
     adjacents: 
-  - triangles: 47000000
+  - name: 71
+    triangles: 47000000
     adjacents: 
-  - triangles: 48000000
+  - name: 72
+    triangles: 48000000
     adjacents: 
-  - triangles: 49000000
+  - name: 73
+    triangles: 49000000
     adjacents: 
-  - triangles: 4a000000
+  - name: 74
+    triangles: 4a000000
     adjacents: 
-  - triangles: 4b000000
+  - name: 75
+    triangles: 4b000000
     adjacents: 
-  - triangles: 4c000000
+  - name: 76
+    triangles: 4c000000
     adjacents: 
-  - triangles: 4d000000
+  - name: 77
+    triangles: 4d000000
     adjacents: 
-  - triangles: 4e000000
+  - name: 78
+    triangles: 4e000000
     adjacents: 
-  - triangles: 4f000000
+  - name: 79
+    triangles: 4f000000
     adjacents: 
-  - triangles: 50000000
+  - name: 80
+    triangles: 50000000
     adjacents: 
-  - triangles: 51000000
+  - name: 81
+    triangles: 51000000
     adjacents: 
-  - triangles: 52000000
+  - name: 82
+    triangles: 52000000
     adjacents: 
-  - triangles: 53000000
+  - name: 83
+    triangles: 53000000
     adjacents: 
-  - triangles: 54000000
+  - name: 84
+    triangles: 54000000
     adjacents: 
-  - triangles: 55000000
+  - name: 85
+    triangles: 55000000
     adjacents: 
-  - triangles: 56000000
+  - name: 86
+    triangles: 56000000
     adjacents: 
-  - triangles: 57000000
+  - name: 87
+    triangles: 57000000
     adjacents: 
-  - triangles: 58000000
+  - name: 88
+    triangles: 58000000
     adjacents: 
-  - triangles: 59000000
+  - name: 89
+    triangles: 59000000
     adjacents: 
-  - triangles: 5a000000
+  - name: 90
+    triangles: 5a000000
     adjacents: 
-  - triangles: 5b000000
+  - name: 91
+    triangles: 5b000000
     adjacents: 
-  - triangles: 5c000000
+  - name: 92
+    triangles: 5c000000
     adjacents: 
-  - triangles: 5d000000
+  - name: 93
+    triangles: 5d000000
     adjacents: 
-  - triangles: 5e000000
+  - name: 94
+    triangles: 5e000000
     adjacents: 
-  - triangles: 5f000000
+  - name: 95
+    triangles: 5f000000
     adjacents: 
-  - triangles: 60000000
+  - name: 96
+    triangles: 60000000
     adjacents: 
-  - triangles: 61000000
+  - name: 97
+    triangles: 61000000
     adjacents: 
-  - triangles: 62000000
+  - name: 98
+    triangles: 62000000
     adjacents: 
-  - triangles: 63000000
+  - name: 99
+    triangles: 63000000
     adjacents: 
-  - triangles: 64000000
+  - name: 100
+    triangles: 64000000
     adjacents: 
-  - triangles: 65000000
+  - name: 101
+    triangles: 65000000
     adjacents: 
-  - triangles: 66000000
+  - name: 102
+    triangles: 66000000
     adjacents: 
-  - triangles: 67000000
+  - name: 103
+    triangles: 67000000
     adjacents: 
-  - triangles: 68000000
+  - name: 104
+    triangles: 68000000
     adjacents: 
-  - triangles: 69000000
+  - name: 105
+    triangles: 69000000
     adjacents: 
-  - triangles: 6a000000
+  - name: 106
+    triangles: 6a000000
     adjacents: 
-  - triangles: 6b000000
+  - name: 107
+    triangles: 6b000000
     adjacents: 
-  - triangles: 6c000000
+  - name: 108
+    triangles: 6c000000
     adjacents: 
-  - triangles: 6d000000
+  - name: 109
+    triangles: 6d000000
     adjacents: 
-  - triangles: 6e000000
+  - name: 110
+    triangles: 6e000000
     adjacents: 
-  - triangles: 6f000000
+  - name: 111
+    triangles: 6f000000
     adjacents: 
-  - triangles: 70000000
+  - name: 112
+    triangles: 70000000
     adjacents: 
-  - triangles: 71000000
+  - name: 113
+    triangles: 71000000
     adjacents: 
-  - triangles: 72000000
+  - name: 114
+    triangles: 72000000
     adjacents: 
-  - triangles: 73000000
+  - name: 115
+    triangles: 73000000
     adjacents: 
-  - triangles: 74000000
+  - name: 116
+    triangles: 74000000
     adjacents: 
-  - triangles: 75000000
+  - name: 117
+    triangles: 75000000
     adjacents: 
-  - triangles: 76000000
+  - name: 118
+    triangles: 76000000
     adjacents: 
-  - triangles: 77000000
+  - name: 119
+    triangles: 77000000
     adjacents: 
-  - triangles: 78000000
+  - name: 120
+    triangles: 78000000
     adjacents: 
-  - triangles: 79000000
+  - name: 121
+    triangles: 79000000
     adjacents: 
-  - triangles: 7a000000
+  - name: 122
+    triangles: 7a000000
     adjacents: 
-  - triangles: 7b000000
+  - name: 123
+    triangles: 7b000000
     adjacents: 
-  - triangles: 7c000000
+  - name: 124
+    triangles: 7c000000
     adjacents: 
-  - triangles: 7d000000
+  - name: 125
+    triangles: 7d000000
     adjacents: 
-  - triangles: 7e000000
+  - name: 126
+    triangles: 7e000000
     adjacents: 
-  - triangles: 7f000000
+  - name: 127
+    triangles: 7f000000
     adjacents: 
-  - triangles: 80000000
+  - name: 128
+    triangles: 80000000
     adjacents: 
-  - triangles: 81000000
+  - name: 129
+    triangles: 81000000
     adjacents: 
-  - triangles: 82000000
+  - name: 130
+    triangles: 82000000
     adjacents: 
-  - triangles: 83000000
+  - name: 131
+    triangles: 83000000
     adjacents: 
-  - triangles: 84000000
+  - name: 132
+    triangles: 84000000
     adjacents: 
-  - triangles: 85000000
+  - name: 133
+    triangles: 85000000
     adjacents: 
-  - triangles: 86000000
+  - name: 134
+    triangles: 86000000
     adjacents: 
-  - triangles: 87000000
+  - name: 135
+    triangles: 87000000
     adjacents: 
-  - triangles: 88000000
+  - name: 136
+    triangles: 88000000
     adjacents: 
-  - triangles: 89000000
+  - name: 137
+    triangles: 89000000
     adjacents: 
-  - triangles: 8a000000
+  - name: 138
+    triangles: 8a000000
     adjacents: 
-  - triangles: 8b000000
+  - name: 139
+    triangles: 8b000000
     adjacents: 
-  - triangles: 8c000000
+  - name: 140
+    triangles: 8c000000
     adjacents: 
-  - triangles: 8d000000
+  - name: 141
+    triangles: 8d000000
     adjacents: 
-  - triangles: 8e000000
+  - name: 142
+    triangles: 8e000000
     adjacents: 
-  - triangles: 8f000000
+  - name: 143
+    triangles: 8f000000
     adjacents: 
-  - triangles: 90000000
+  - name: 144
+    triangles: 90000000
     adjacents: 
-  - triangles: 91000000
+  - name: 145
+    triangles: 91000000
     adjacents: 
-  - triangles: 92000000
+  - name: 146
+    triangles: 92000000
     adjacents: 
-  - triangles: 93000000
+  - name: 147
+    triangles: 93000000
     adjacents: 
-  - triangles: 94000000
+  - name: 148
+    triangles: 94000000
     adjacents: 
-  - triangles: 95000000
+  - name: 149
+    triangles: 95000000
     adjacents: 
-  - triangles: 96000000
+  - name: 150
+    triangles: 96000000
     adjacents: 
-  - triangles: 97000000
+  - name: 151
+    triangles: 97000000
     adjacents: 
-  - triangles: 98000000
+  - name: 152
+    triangles: 98000000
     adjacents: 
-  - triangles: 99000000
+  - name: 153
+    triangles: 99000000
     adjacents: 
-  - triangles: 9a000000
+  - name: 154
+    triangles: 9a000000
     adjacents: 
-  - triangles: 9b000000
+  - name: 155
+    triangles: 9b000000
     adjacents: 
-  - triangles: 9c000000
+  - name: 156
+    triangles: 9c000000
     adjacents: 
-  - triangles: 9d000000
+  - name: 157
+    triangles: 9d000000
     adjacents: 
-  - triangles: 9e000000
+  - name: 158
+    triangles: 9e000000
     adjacents: 
-  - triangles: 9f000000
+  - name: 159
+    triangles: 9f000000
     adjacents: 
-  - triangles: a0000000
+  - name: 160
+    triangles: a0000000
     adjacents: 
-  - triangles: a1000000
+  - name: 161
+    triangles: a1000000
     adjacents: 
-  - triangles: a2000000
+  - name: 162
+    triangles: a2000000
     adjacents: 
-  - triangles: a3000000
+  - name: 163
+    triangles: a3000000
     adjacents: 
-  - triangles: a4000000
+  - name: 164
+    triangles: a4000000
     adjacents: 
-  - triangles: a5000000
+  - name: 165
+    triangles: a5000000
     adjacents: 
-  - triangles: a6000000
+  - name: 166
+    triangles: a6000000
     adjacents: 
-  - triangles: a7000000
+  - name: 167
+    triangles: a7000000
     adjacents: 
-  - triangles: a8000000
+  - name: 168
+    triangles: a8000000
     adjacents: 
-  - triangles: a9000000
+  - name: 169
+    triangles: a9000000
     adjacents: 
-  - triangles: aa000000
+  - name: 170
+    triangles: aa000000
     adjacents: 
-  - triangles: ab000000
+  - name: 171
+    triangles: ab000000
     adjacents: 
-  - triangles: ac000000
+  - name: 172
+    triangles: ac000000
     adjacents: 
-  - triangles: ad000000
+  - name: 173
+    triangles: ad000000
     adjacents: 
-  - triangles: ae000000
+  - name: 174
+    triangles: ae000000
     adjacents: 
-  - triangles: af000000
+  - name: 175
+    triangles: af000000
     adjacents: 
-  - triangles: b0000000
+  - name: 176
+    triangles: b0000000
     adjacents: 
-  - triangles: b1000000
+  - name: 177
+    triangles: b1000000
     adjacents: 
-  - triangles: b2000000
+  - name: 178
+    triangles: b2000000
     adjacents: 
-  - triangles: b3000000
+  - name: 179
+    triangles: b3000000
     adjacents: 
-  - triangles: b4000000
+  - name: 180
+    triangles: b4000000
     adjacents: 
-  - triangles: b5000000
+  - name: 181
+    triangles: b5000000
     adjacents: 
-  - triangles: b6000000
+  - name: 182
+    triangles: b6000000
     adjacents: 
-  - triangles: b7000000
+  - name: 183
+    triangles: b7000000
     adjacents: 
-  - triangles: b8000000
+  - name: 184
+    triangles: b8000000
     adjacents: 
-  - triangles: b9000000
+  - name: 185
+    triangles: b9000000
     adjacents: 
-  - triangles: ba000000
+  - name: 186
+    triangles: ba000000
     adjacents: 
-  - triangles: bb000000
+  - name: 187
+    triangles: bb000000
     adjacents: 
-  - triangles: bc000000
+  - name: 188
+    triangles: bc000000
     adjacents: 
-  - triangles: bd000000
+  - name: 189
+    triangles: bd000000
     adjacents: 
-  - triangles: be000000
+  - name: 190
+    triangles: be000000
     adjacents: 
-  - triangles: bf000000
+  - name: 191
+    triangles: bf000000
     adjacents: 
-  - triangles: c0000000
+  - name: 192
+    triangles: c0000000
     adjacents: 
-  - triangles: c1000000
+  - name: 193
+    triangles: c1000000
     adjacents: 
-  - triangles: c2000000
+  - name: 194
+    triangles: c2000000
     adjacents: 
-  - triangles: c3000000
+  - name: 195
+    triangles: c3000000
     adjacents: 
-  - triangles: c4000000
+  - name: 196
+    triangles: c4000000
     adjacents: 
-  - triangles: c5000000
+  - name: 197
+    triangles: c5000000
     adjacents: 
-  - triangles: c6000000
+  - name: 198
+    triangles: c6000000
     adjacents: 
-  - triangles: c7000000
+  - name: 199
+    triangles: c7000000
     adjacents: 
-  - triangles: c8000000
+  - name: 200
+    triangles: c8000000
     adjacents: 
-  - triangles: c9000000
+  - name: 201
+    triangles: c9000000
     adjacents: 
-  - triangles: ca000000
+  - name: 202
+    triangles: ca000000
     adjacents: 
-  - triangles: cb000000
+  - name: 203
+    triangles: cb000000
     adjacents: 
-  - triangles: cc000000
+  - name: 204
+    triangles: cc000000
     adjacents: 
-  - triangles: cd000000
+  - name: 205
+    triangles: cd000000
     adjacents: 
-  - triangles: ce000000
+  - name: 206
+    triangles: ce000000
     adjacents: 
-  - triangles: cf000000
+  - name: 207
+    triangles: cf000000
     adjacents: 
-  - triangles: d0000000
+  - name: 208
+    triangles: d0000000
     adjacents: 
-  - triangles: d1000000
+  - name: 209
+    triangles: d1000000
     adjacents: 
-  - triangles: d2000000
+  - name: 210
+    triangles: d2000000
     adjacents: 
-  - triangles: d3000000
+  - name: 211
+    triangles: d3000000
     adjacents: 
-  - triangles: d4000000
+  - name: 212
+    triangles: d4000000
     adjacents: 
-  - triangles: d5000000
+  - name: 213
+    triangles: d5000000
     adjacents: 
-  - triangles: d6000000
+  - name: 214
+    triangles: d6000000
     adjacents: 
-  - triangles: d7000000
+  - name: 215
+    triangles: d7000000
     adjacents: 
-  - triangles: d8000000
+  - name: 216
+    triangles: d8000000
     adjacents: 
-  - triangles: d9000000
+  - name: 217
+    triangles: d9000000
     adjacents: 
-  - triangles: da000000
+  - name: 218
+    triangles: da000000
     adjacents: 
-  - triangles: db000000
+  - name: 219
+    triangles: db000000
     adjacents: 
-  - triangles: dc000000
+  - name: 220
+    triangles: dc000000
     adjacents: 
-  - triangles: dd000000
+  - name: 221
+    triangles: dd000000
     adjacents: 
-  - triangles: de000000
+  - name: 222
+    triangles: de000000
     adjacents: 
-  - triangles: df000000
+  - name: 223
+    triangles: df000000
     adjacents: 
-  - triangles: e0000000
+  - name: 224
+    triangles: e0000000
     adjacents: 
-  - triangles: e1000000
+  - name: 225
+    triangles: e1000000
     adjacents: 
-  - triangles: e2000000
+  - name: 226
+    triangles: e2000000
     adjacents: 
-  - triangles: e3000000
+  - name: 227
+    triangles: e3000000
     adjacents: 
-  - triangles: e4000000
+  - name: 228
+    triangles: e4000000
     adjacents: 
-  - triangles: e5000000
+  - name: 229
+    triangles: e5000000
     adjacents: 
-  - triangles: e6000000
+  - name: 230
+    triangles: e6000000
     adjacents: 
-  - triangles: e7000000
+  - name: 231
+    triangles: e7000000
     adjacents: 
-  - triangles: e8000000
+  - name: 232
+    triangles: e8000000
     adjacents: 
-  - triangles: e9000000
+  - name: 233
+    triangles: e9000000
     adjacents: 
-  - triangles: ea000000
+  - name: 234
+    triangles: ea000000
     adjacents: 
-  - triangles: eb000000
+  - name: 235
+    triangles: eb000000
     adjacents: 
-  - triangles: ec000000
+  - name: 236
+    triangles: ec000000
     adjacents: 
-  - triangles: ed000000
+  - name: 237
+    triangles: ed000000
     adjacents: 
-  - triangles: ee000000
+  - name: 238
+    triangles: ee000000
     adjacents: 
-  - triangles: ef000000
+  - name: 239
+    triangles: ef000000
     adjacents: 
-  - triangles: f0000000
+  - name: 240
+    triangles: f0000000
     adjacents: 
-  - triangles: f1000000
+  - name: 241
+    triangles: f1000000
     adjacents: 
-  - triangles: f2000000
+  - name: 242
+    triangles: f2000000
     adjacents: 
-  - triangles: f3000000
+  - name: 243
+    triangles: f3000000
     adjacents: 
-  - triangles: f4000000
+  - name: 244
+    triangles: f4000000
     adjacents: 
-  - triangles: f5000000
+  - name: 245
+    triangles: f5000000
     adjacents: 
-  - triangles: f6000000
+  - name: 246
+    triangles: f6000000
     adjacents: 
-  - triangles: f7000000
+  - name: 247
+    triangles: f7000000
     adjacents: 
-  - triangles: f8000000
+  - name: 248
+    triangles: f8000000
     adjacents: 
-  - triangles: f9000000
+  - name: 249
+    triangles: f9000000
     adjacents: 
-  - triangles: fa000000
+  - name: 250
+    triangles: fa000000
     adjacents: 
-  - triangles: fb000000
+  - name: 251
+    triangles: fb000000
     adjacents: 
-  - triangles: fc000000
+  - name: 252
+    triangles: fc000000
     adjacents: 
-  - triangles: fd000000
+  - name: 253
+    triangles: fd000000
     adjacents: 
-  - triangles: fe000000
+  - name: 254
+    triangles: fe000000
     adjacents: 
-  - triangles: ff000000
+  - name: 255
+    triangles: ff000000
     adjacents: 
-  - triangles: 00010000
+  - name: 256
+    triangles: 00010000
     adjacents: 
-  - triangles: 01010000
+  - name: 257
+    triangles: 01010000
     adjacents: 
-  - triangles: 02010000
+  - name: 258
+    triangles: 02010000
     adjacents: 
-  - triangles: 03010000
+  - name: 259
+    triangles: 03010000
     adjacents: 
-  - triangles: 04010000
+  - name: 260
+    triangles: 04010000
     adjacents: 
-  - triangles: 05010000
+  - name: 261
+    triangles: 05010000
     adjacents: 
-  - triangles: 06010000
+  - name: 262
+    triangles: 06010000
     adjacents: 
-  - triangles: 07010000
+  - name: 263
+    triangles: 07010000
     adjacents: 
-  - triangles: 08010000
+  - name: 264
+    triangles: 08010000
     adjacents: 
-  - triangles: 09010000
+  - name: 265
+    triangles: 09010000
     adjacents: 
-  - triangles: 0a010000
+  - name: 266
+    triangles: 0a010000
     adjacents: 
-  - triangles: 0b010000
+  - name: 267
+    triangles: 0b010000
     adjacents: 
-  - triangles: 0c010000
+  - name: 268
+    triangles: 0c010000
     adjacents: 
-  - triangles: 0d010000
+  - name: 269
+    triangles: 0d010000
     adjacents: 
-  - triangles: 0e010000
+  - name: 270
+    triangles: 0e010000
     adjacents: 
-  - triangles: 0f010000
+  - name: 271
+    triangles: 0f010000
     adjacents: 
-  - triangles: 10010000
+  - name: 272
+    triangles: 10010000
     adjacents: 
-  - triangles: 11010000
+  - name: 273
+    triangles: 11010000
     adjacents: 
-  - triangles: 12010000
+  - name: 274
+    triangles: 12010000
     adjacents: 
-  - triangles: 13010000
+  - name: 275
+    triangles: 13010000
     adjacents: 
-  - triangles: 14010000
+  - name: 276
+    triangles: 14010000
     adjacents: 
-  - triangles: 15010000
+  - name: 277
+    triangles: 15010000
     adjacents: 
-  - triangles: 16010000
+  - name: 278
+    triangles: 16010000
     adjacents: 
-  - triangles: 17010000
+  - name: 279
+    triangles: 17010000
     adjacents: 
-  - triangles: 18010000
+  - name: 280
+    triangles: 18010000
     adjacents: 
-  - triangles: 19010000
+  - name: 281
+    triangles: 19010000
     adjacents: 
-  - triangles: 1a010000
+  - name: 282
+    triangles: 1a010000
     adjacents: 
-  - triangles: 1b010000
+  - name: 283
+    triangles: 1b010000
     adjacents: 
-  - triangles: 1c010000
+  - name: 284
+    triangles: 1c010000
     adjacents: 
-  - triangles: 1d010000
+  - name: 285
+    triangles: 1d010000
     adjacents: 
-  - triangles: 1e010000
+  - name: 286
+    triangles: 1e010000
     adjacents: 
-  - triangles: 1f010000
+  - name: 287
+    triangles: 1f010000
     adjacents: 
-  - triangles: 20010000
+  - name: 288
+    triangles: 20010000
     adjacents: 
-  - triangles: 21010000
+  - name: 289
+    triangles: 21010000
     adjacents: 
-  - triangles: 22010000
+  - name: 290
+    triangles: 22010000
     adjacents: 
-  - triangles: 23010000
+  - name: 291
+    triangles: 23010000
     adjacents: 
-  - triangles: 24010000
+  - name: 292
+    triangles: 24010000
     adjacents: 
-  - triangles: 25010000
+  - name: 293
+    triangles: 25010000
     adjacents: 
-  - triangles: 26010000
+  - name: 294
+    triangles: 26010000
     adjacents: 
-  - triangles: 27010000
+  - name: 295
+    triangles: 27010000
     adjacents: 
-  - triangles: 28010000
+  - name: 296
+    triangles: 28010000
     adjacents: 
-  - triangles: 29010000
+  - name: 297
+    triangles: 29010000
     adjacents: 
-  - triangles: 2a010000
+  - name: 298
+    triangles: 2a010000
     adjacents: 
-  - triangles: 2b010000
+  - name: 299
+    triangles: 2b010000
     adjacents: 
-  - triangles: 2c010000
+  - name: 300
+    triangles: 2c010000
     adjacents: 
-  - triangles: 2d010000
+  - name: 301
+    triangles: 2d010000
     adjacents: 
-  - triangles: 2e010000
+  - name: 302
+    triangles: 2e010000
     adjacents: 
-  - triangles: 2f010000
+  - name: 303
+    triangles: 2f010000
     adjacents: 
-  - triangles: 30010000
+  - name: 304
+    triangles: 30010000
     adjacents: 
-  - triangles: 31010000
+  - name: 305
+    triangles: 31010000
     adjacents: 
-  - triangles: 32010000
+  - name: 306
+    triangles: 32010000
     adjacents: 
-  - triangles: 33010000
+  - name: 307
+    triangles: 33010000
     adjacents: 
-  - triangles: 34010000
+  - name: 308
+    triangles: 34010000
     adjacents: 
-  - triangles: 35010000
+  - name: 309
+    triangles: 35010000
     adjacents: 
-  - triangles: 36010000
+  - name: 310
+    triangles: 36010000
     adjacents: 
-  - triangles: 37010000
+  - name: 311
+    triangles: 37010000
     adjacents: 
-  - triangles: 38010000
+  - name: 312
+    triangles: 38010000
     adjacents: 
-  - triangles: 39010000
+  - name: 313
+    triangles: 39010000
     adjacents: 
-  - triangles: 3a010000
+  - name: 314
+    triangles: 3a010000
     adjacents: 
-  - triangles: 3b010000
+  - name: 315
+    triangles: 3b010000
     adjacents: 
-  - triangles: 3c010000
+  - name: 316
+    triangles: 3c010000
     adjacents: 
-  - triangles: 3d010000
+  - name: 317
+    triangles: 3d010000
     adjacents: 
-  - triangles: 3e010000
+  - name: 318
+    triangles: 3e010000
     adjacents: 
-  - triangles: 3f010000
+  - name: 319
+    triangles: 3f010000
     adjacents: 
-  - triangles: 40010000
+  - name: 320
+    triangles: 40010000
     adjacents: 
-  - triangles: 41010000
+  - name: 321
+    triangles: 41010000
     adjacents: 
-  - triangles: 42010000
+  - name: 322
+    triangles: 42010000
     adjacents: 
-  - triangles: 43010000
+  - name: 323
+    triangles: 43010000
     adjacents: 
-  - triangles: 44010000
+  - name: 324
+    triangles: 44010000
     adjacents: 
-  - triangles: 45010000
+  - name: 325
+    triangles: 45010000
     adjacents: 
-  - triangles: 46010000
+  - name: 326
+    triangles: 46010000
     adjacents: 
-  - triangles: 47010000
+  - name: 327
+    triangles: 47010000
     adjacents: 
-  - triangles: 48010000
+  - name: 328
+    triangles: 48010000
     adjacents: 
-  - triangles: 49010000
+  - name: 329
+    triangles: 49010000
     adjacents: 
-  - triangles: 4a010000
+  - name: 330
+    triangles: 4a010000
     adjacents: 
-  - triangles: 4b010000
+  - name: 331
+    triangles: 4b010000
     adjacents: 
-  - triangles: 4c010000
+  - name: 332
+    triangles: 4c010000
     adjacents: 
-  - triangles: 4d010000
+  - name: 333
+    triangles: 4d010000
     adjacents: 
-  - triangles: 4e010000
+  - name: 334
+    triangles: 4e010000
     adjacents: 
-  - triangles: 4f010000
+  - name: 335
+    triangles: 4f010000
     adjacents: 
-  - triangles: 50010000
+  - name: 336
+    triangles: 50010000
     adjacents: 
-  - triangles: 51010000
+  - name: 337
+    triangles: 51010000
     adjacents: 
-  - triangles: 52010000
+  - name: 338
+    triangles: 52010000
     adjacents: 
-  - triangles: 53010000
+  - name: 339
+    triangles: 53010000
     adjacents: 
-  - triangles: 54010000
+  - name: 340
+    triangles: 54010000
     adjacents: 
-  - triangles: 55010000
+  - name: 341
+    triangles: 55010000
     adjacents: 
-  - triangles: 56010000
+  - name: 342
+    triangles: 56010000
     adjacents: 
-  - triangles: 57010000
+  - name: 343
+    triangles: 57010000
     adjacents: 
-  - triangles: 58010000
+  - name: 344
+    triangles: 58010000
     adjacents: 
-  - triangles: 59010000
+  - name: 345
+    triangles: 59010000
     adjacents: 
-  - triangles: 5a010000
+  - name: 346
+    triangles: 5a010000
     adjacents: 
-  - triangles: 5b010000
+  - name: 347
+    triangles: 5b010000
     adjacents: 
-  - triangles: 5c010000
+  - name: 348
+    triangles: 5c010000
     adjacents: 
-  - triangles: 5d010000
+  - name: 349
+    triangles: 5d010000
     adjacents: 
-  - triangles: 5e010000
+  - name: 350
+    triangles: 5e010000
     adjacents: 
-  - triangles: 5f010000
+  - name: 351
+    triangles: 5f010000
     adjacents: 
-  - triangles: 60010000
+  - name: 352
+    triangles: 60010000
     adjacents: 
-  - triangles: 61010000
+  - name: 353
+    triangles: 61010000
     adjacents: 
-  - triangles: 62010000
+  - name: 354
+    triangles: 62010000
     adjacents: 
-  - triangles: 63010000
+  - name: 355
+    triangles: 63010000
     adjacents: 
-  - triangles: 64010000
+  - name: 356
+    triangles: 64010000
     adjacents: 
-  - triangles: 65010000
+  - name: 357
+    triangles: 65010000
     adjacents: 
-  - triangles: 66010000
+  - name: 358
+    triangles: 66010000
     adjacents: 
-  - triangles: 67010000
+  - name: 359
+    triangles: 67010000
     adjacents: 
-  - triangles: 68010000
+  - name: 360
+    triangles: 68010000
     adjacents: 
-  - triangles: 69010000
+  - name: 361
+    triangles: 69010000
     adjacents: 
-  - triangles: 6a010000
+  - name: 362
+    triangles: 6a010000
     adjacents: 
-  - triangles: 6b010000
+  - name: 363
+    triangles: 6b010000
     adjacents: 
-  - triangles: 6c010000
+  - name: 364
+    triangles: 6c010000
     adjacents: 
-  - triangles: 6d010000
+  - name: 365
+    triangles: 6d010000
     adjacents: 
-  - triangles: 6e010000
+  - name: 366
+    triangles: 6e010000
     adjacents: 
-  - triangles: 6f010000
+  - name: 367
+    triangles: 6f010000
     adjacents: 
-  - triangles: 70010000
+  - name: 368
+    triangles: 70010000
     adjacents: 
-  - triangles: 71010000
+  - name: 369
+    triangles: 71010000
     adjacents: 
-  - triangles: 72010000
+  - name: 370
+    triangles: 72010000
     adjacents: 
-  - triangles: 73010000
+  - name: 371
+    triangles: 73010000
     adjacents: 
-  - triangles: 74010000
+  - name: 372
+    triangles: 74010000
     adjacents: 
-  - triangles: 75010000
+  - name: 373
+    triangles: 75010000
     adjacents: 
-  - triangles: 76010000
+  - name: 374
+    triangles: 76010000
     adjacents: 
-  - triangles: 77010000
+  - name: 375
+    triangles: 77010000
     adjacents: 
-  - triangles: 78010000
+  - name: 376
+    triangles: 78010000
     adjacents: 
-  - triangles: 79010000
+  - name: 377
+    triangles: 79010000
     adjacents: 
-  - triangles: 7a010000
+  - name: 378
+    triangles: 7a010000
     adjacents: 
-  - triangles: 7b010000
+  - name: 379
+    triangles: 7b010000
     adjacents: 
-  - triangles: 7c010000
+  - name: 380
+    triangles: 7c010000
     adjacents: 
-  - triangles: 7d010000
+  - name: 381
+    triangles: 7d010000
     adjacents: 
-  - triangles: 7e010000
+  - name: 382
+    triangles: 7e010000
     adjacents: 
-  - triangles: 7f010000
+  - name: 383
+    triangles: 7f010000
     adjacents: 
-  - triangles: 80010000
+  - name: 384
+    triangles: 80010000
     adjacents: 
-  - triangles: 81010000
+  - name: 385
+    triangles: 81010000
     adjacents: 
-  - triangles: 82010000
+  - name: 386
+    triangles: 82010000
     adjacents: 
-  - triangles: 83010000
+  - name: 387
+    triangles: 83010000
     adjacents: 
-  - triangles: 84010000
+  - name: 388
+    triangles: 84010000
     adjacents: 
-  - triangles: 85010000
+  - name: 389
+    triangles: 85010000
     adjacents: 
-  - triangles: 86010000
+  - name: 390
+    triangles: 86010000
     adjacents: 
-  - triangles: 87010000
+  - name: 391
+    triangles: 87010000
     adjacents: 
-  - triangles: 88010000
+  - name: 392
+    triangles: 88010000
     adjacents: 
-  - triangles: 89010000
+  - name: 393
+    triangles: 89010000
     adjacents: 
-  - triangles: 8a010000
+  - name: 394
+    triangles: 8a010000
     adjacents: 
-  - triangles: 8b010000
+  - name: 395
+    triangles: 8b010000
     adjacents: 
-  - triangles: 8c010000
+  - name: 396
+    triangles: 8c010000
     adjacents: 
-  - triangles: 8d010000
+  - name: 397
+    triangles: 8d010000
     adjacents: 
-  - triangles: 8e010000
+  - name: 398
+    triangles: 8e010000
     adjacents: 
-  - triangles: 8f010000
+  - name: 399
+    triangles: 8f010000
     adjacents: 
-  - triangles: 90010000
+  - name: 400
+    triangles: 90010000
     adjacents: 
-  - triangles: 91010000
+  - name: 401
+    triangles: 91010000
     adjacents: 
-  - triangles: 92010000
+  - name: 402
+    triangles: 92010000
     adjacents: 
-  - triangles: 93010000
+  - name: 403
+    triangles: 93010000
     adjacents: 
-  - triangles: 94010000
+  - name: 404
+    triangles: 94010000
     adjacents: 
-  - triangles: 95010000
+  - name: 405
+    triangles: 95010000
     adjacents: 
-  - triangles: 96010000
+  - name: 406
+    triangles: 96010000
     adjacents: 
-  - triangles: 97010000
+  - name: 407
+    triangles: 97010000
     adjacents: 
-  - triangles: 98010000
+  - name: 408
+    triangles: 98010000
     adjacents: 
-  - triangles: 99010000
+  - name: 409
+    triangles: 99010000
     adjacents: 
-  - triangles: 9a010000
+  - name: 410
+    triangles: 9a010000
     adjacents: 
-  - triangles: 9b010000
+  - name: 411
+    triangles: 9b010000
     adjacents: 
-  - triangles: 9c010000
+  - name: 412
+    triangles: 9c010000
     adjacents: 
-  - triangles: 9d010000
+  - name: 413
+    triangles: 9d010000
     adjacents: 
-  - triangles: 9e010000
+  - name: 414
+    triangles: 9e010000
     adjacents: 
-  - triangles: 9f010000
+  - name: 415
+    triangles: 9f010000
     adjacents: 
-  - triangles: a0010000
+  - name: 416
+    triangles: a0010000
     adjacents: 
-  - triangles: a1010000
+  - name: 417
+    triangles: a1010000
     adjacents: 
-  - triangles: a2010000
+  - name: 418
+    triangles: a2010000
     adjacents: 
-  - triangles: a3010000
+  - name: 419
+    triangles: a3010000
     adjacents: 
-  - triangles: a4010000
+  - name: 420
+    triangles: a4010000
     adjacents: 
-  - triangles: a5010000
+  - name: 421
+    triangles: a5010000
     adjacents: 
-  - triangles: a6010000
+  - name: 422
+    triangles: a6010000
     adjacents: 
-  - triangles: a7010000
+  - name: 423
+    triangles: a7010000
     adjacents: 
-  - triangles: a8010000
+  - name: 424
+    triangles: a8010000
     adjacents: 
-  - triangles: a9010000
+  - name: 425
+    triangles: a9010000
     adjacents: 
-  - triangles: aa010000
+  - name: 426
+    triangles: aa010000
     adjacents: 
-  - triangles: ab010000
+  - name: 427
+    triangles: ab010000
     adjacents: 
-  - triangles: ac010000
+  - name: 428
+    triangles: ac010000
     adjacents: 
-  - triangles: ad010000
+  - name: 429
+    triangles: ad010000
     adjacents: 
-  - triangles: ae010000
+  - name: 430
+    triangles: ae010000
     adjacents: 
-  - triangles: af010000
+  - name: 431
+    triangles: af010000
     adjacents: 
-  - triangles: b0010000
+  - name: 432
+    triangles: b0010000
     adjacents: 
-  - triangles: b1010000
+  - name: 433
+    triangles: b1010000
     adjacents: 
-  - triangles: b2010000
+  - name: 434
+    triangles: b2010000
     adjacents: 
-  - triangles: b3010000
+  - name: 435
+    triangles: b3010000
     adjacents: 
-  - triangles: b4010000
+  - name: 436
+    triangles: b4010000
     adjacents: 
-  - triangles: b5010000
+  - name: 437
+    triangles: b5010000
     adjacents: 
-  - triangles: b6010000
+  - name: 438
+    triangles: b6010000
     adjacents: 
-  - triangles: b7010000
+  - name: 439
+    triangles: b7010000
     adjacents: 
-  - triangles: b8010000
+  - name: 440
+    triangles: b8010000
     adjacents: 
-  - triangles: b9010000
+  - name: 441
+    triangles: b9010000
     adjacents: 
-  - triangles: ba010000
+  - name: 442
+    triangles: ba010000
     adjacents: 
-  - triangles: bb010000
+  - name: 443
+    triangles: bb010000
     adjacents: 
-  - triangles: bc010000
+  - name: 444
+    triangles: bc010000
     adjacents: 
-  - triangles: bd010000
+  - name: 445
+    triangles: bd010000
     adjacents: 
-  - triangles: be010000
+  - name: 446
+    triangles: be010000
     adjacents: 
-  - triangles: bf010000
+  - name: 447
+    triangles: bf010000
     adjacents: 
-  - triangles: c0010000
+  - name: 448
+    triangles: c0010000
     adjacents: 
-  - triangles: c1010000
+  - name: 449
+    triangles: c1010000
     adjacents: 
-  - triangles: c2010000
+  - name: 450
+    triangles: c2010000
     adjacents: 
-  - triangles: c3010000
+  - name: 451
+    triangles: c3010000
     adjacents: 
-  - triangles: c4010000
+  - name: 452
+    triangles: c4010000
     adjacents: 
-  - triangles: c5010000
+  - name: 453
+    triangles: c5010000
     adjacents: 
-  - triangles: c6010000
+  - name: 454
+    triangles: c6010000
     adjacents: 
-  - triangles: c7010000
+  - name: 455
+    triangles: c7010000
     adjacents: 
-  - triangles: c8010000
+  - name: 456
+    triangles: c8010000
     adjacents: 
-  - triangles: c9010000
+  - name: 457
+    triangles: c9010000
     adjacents: 
-  - triangles: ca010000
+  - name: 458
+    triangles: ca010000
     adjacents: 
-  - triangles: cb010000
+  - name: 459
+    triangles: cb010000
     adjacents: 
-  - triangles: cc010000
+  - name: 460
+    triangles: cc010000
     adjacents: 
-  - triangles: cd010000
+  - name: 461
+    triangles: cd010000
     adjacents: 
-  - triangles: ce010000
+  - name: 462
+    triangles: ce010000
     adjacents: 
-  - triangles: cf010000
+  - name: 463
+    triangles: cf010000
     adjacents: 
-  - triangles: d0010000
+  - name: 464
+    triangles: d0010000
     adjacents: 
-  - triangles: d1010000
+  - name: 465
+    triangles: d1010000
     adjacents: 
-  - triangles: d2010000
+  - name: 466
+    triangles: d2010000
     adjacents: 
-  - triangles: d3010000
+  - name: 467
+    triangles: d3010000
     adjacents: 
-  - triangles: d4010000
+  - name: 468
+    triangles: d4010000
     adjacents: 
-  - triangles: d5010000
+  - name: 469
+    triangles: d5010000
     adjacents: 
-  - triangles: d6010000
+  - name: 470
+    triangles: d6010000
     adjacents: 
-  - triangles: d7010000
+  - name: 471
+    triangles: d7010000
     adjacents: 
-  - triangles: d8010000
+  - name: 472
+    triangles: d8010000
     adjacents: 
-  - triangles: d9010000
+  - name: 473
+    triangles: d9010000
     adjacents: 
-  - triangles: da010000
+  - name: 474
+    triangles: da010000
     adjacents: 
-  - triangles: db010000
+  - name: 475
+    triangles: db010000
     adjacents: 
-  - triangles: dc010000
+  - name: 476
+    triangles: dc010000
     adjacents: 
-  - triangles: dd010000
+  - name: 477
+    triangles: dd010000
     adjacents: 
-  - triangles: de010000
+  - name: 478
+    triangles: de010000
     adjacents: 
-  - triangles: df010000
+  - name: 479
+    triangles: df010000
     adjacents: 
-  - triangles: e0010000
+  - name: 480
+    triangles: e0010000
     adjacents: 
-  - triangles: e1010000
+  - name: 481
+    triangles: e1010000
     adjacents: 
-  - triangles: e2010000
+  - name: 482
+    triangles: e2010000
     adjacents: 
-  - triangles: e3010000
+  - name: 483
+    triangles: e3010000
     adjacents: 
-  - triangles: e4010000
+  - name: 484
+    triangles: e4010000
     adjacents: 
-  - triangles: e5010000
+  - name: 485
+    triangles: e5010000
     adjacents: 
-  - triangles: e6010000
+  - name: 486
+    triangles: e6010000
     adjacents: 
-  - triangles: e7010000
+  - name: 487
+    triangles: e7010000
     adjacents: 
-  - triangles: e8010000
+  - name: 488
+    triangles: e8010000
     adjacents: 
-  - triangles: e9010000
+  - name: 489
+    triangles: e9010000
     adjacents: 
-  - triangles: ea010000
+  - name: 490
+    triangles: ea010000
     adjacents: 
-  - triangles: eb010000
+  - name: 491
+    triangles: eb010000
     adjacents: 
-  - triangles: ec010000
+  - name: 492
+    triangles: ec010000
     adjacents: 
-  - triangles: ed010000
+  - name: 493
+    triangles: ed010000
     adjacents: 
-  - triangles: ee010000
+  - name: 494
+    triangles: ee010000
     adjacents: 
-  - triangles: ef010000
+  - name: 495
+    triangles: ef010000
     adjacents: 
-  - triangles: f0010000
+  - name: 496
+    triangles: f0010000
     adjacents: 
-  - triangles: f1010000
+  - name: 497
+    triangles: f1010000
     adjacents: 
-  - triangles: f2010000
+  - name: 498
+    triangles: f2010000
     adjacents: 
-  - triangles: f3010000
+  - name: 499
+    triangles: f3010000
     adjacents: 
-  - triangles: f4010000
+  - name: 500
+    triangles: f4010000
     adjacents: 
-  - triangles: f5010000
+  - name: 501
+    triangles: f5010000
     adjacents: 
-  - triangles: f6010000
+  - name: 502
+    triangles: f6010000
     adjacents: 
-  - triangles: f7010000
+  - name: 503
+    triangles: f7010000
     adjacents: 
-  - triangles: f8010000
+  - name: 504
+    triangles: f8010000
     adjacents: 
-  - triangles: f9010000
+  - name: 505
+    triangles: f9010000
     adjacents: 
-  - triangles: fa010000
+  - name: 506
+    triangles: fa010000
     adjacents: 
-  - triangles: fb010000
+  - name: 507
+    triangles: fb010000
     adjacents: 
-  - triangles: fc010000
+  - name: 508
+    triangles: fc010000
     adjacents: 
-  - triangles: fd010000
+  - name: 509
+    triangles: fd010000
     adjacents: 
-  - triangles: fe010000
+  - name: 510
+    triangles: fe010000
     adjacents: 
-  - triangles: ff010000
+  - name: 511
+    triangles: ff010000
     adjacents: 
-  - triangles: 00020000
+  - name: 512
+    triangles: 00020000
     adjacents: 
-  - triangles: 01020000
+  - name: 513
+    triangles: 01020000
     adjacents: 
-  - triangles: 02020000
+  - name: 514
+    triangles: 02020000
     adjacents: 
-  - triangles: 03020000
+  - name: 515
+    triangles: 03020000
     adjacents: 
-  - triangles: 04020000
+  - name: 516
+    triangles: 04020000
     adjacents: 
-  - triangles: 05020000
+  - name: 517
+    triangles: 05020000
     adjacents: 
-  - triangles: 06020000
+  - name: 518
+    triangles: 06020000
     adjacents: 
-  - triangles: 07020000
+  - name: 519
+    triangles: 07020000
     adjacents: 
-  - triangles: 08020000
+  - name: 520
+    triangles: 08020000
     adjacents: 
-  - triangles: 09020000
+  - name: 521
+    triangles: 09020000
     adjacents: 
-  - triangles: 0a020000
+  - name: 522
+    triangles: 0a020000
     adjacents: 
-  - triangles: 0b020000
+  - name: 523
+    triangles: 0b020000
     adjacents: 
-  - triangles: 0c020000
+  - name: 524
+    triangles: 0c020000
     adjacents: 
-  - triangles: 0d020000
+  - name: 525
+    triangles: 0d020000
     adjacents: 
-  - triangles: 0e020000
+  - name: 526
+    triangles: 0e020000
     adjacents: 
-  - triangles: 0f020000
+  - name: 527
+    triangles: 0f020000
     adjacents: 
-  - triangles: 10020000
+  - name: 528
+    triangles: 10020000
     adjacents: 
-  - triangles: 11020000
+  - name: 529
+    triangles: 11020000
     adjacents: 
-  - triangles: 12020000
+  - name: 530
+    triangles: 12020000
     adjacents: 
-  - triangles: 13020000
+  - name: 531
+    triangles: 13020000
     adjacents: 
-  - triangles: 14020000
+  - name: 532
+    triangles: 14020000
     adjacents: 
-  - triangles: 15020000
+  - name: 533
+    triangles: 15020000
     adjacents: 
-  - triangles: 16020000
+  - name: 534
+    triangles: 16020000
     adjacents: 
-  - triangles: 17020000
+  - name: 535
+    triangles: 17020000
     adjacents: 
-  - triangles: 18020000
+  - name: 536
+    triangles: 18020000
     adjacents: 
-  - triangles: 19020000
+  - name: 537
+    triangles: 19020000
     adjacents: 
-  - triangles: 1a020000
+  - name: 538
+    triangles: 1a020000
     adjacents: 
-  - triangles: 1b020000
+  - name: 539
+    triangles: 1b020000
     adjacents: 
-  - triangles: 1c020000
+  - name: 540
+    triangles: 1c020000
     adjacents: 
-  - triangles: 1d020000
+  - name: 541
+    triangles: 1d020000
     adjacents: 
-  - triangles: 1e020000
+  - name: 542
+    triangles: 1e020000
     adjacents: 
-  - triangles: 1f020000
+  - name: 543
+    triangles: 1f020000
     adjacents: 
-  - triangles: 20020000
+  - name: 544
+    triangles: 20020000
     adjacents: 
-  - triangles: 21020000
+  - name: 545
+    triangles: 21020000
     adjacents: 
-  - triangles: 22020000
+  - name: 546
+    triangles: 22020000
     adjacents: 
-  - triangles: 23020000
+  - name: 547
+    triangles: 23020000
     adjacents: 
-  - triangles: 24020000
+  - name: 548
+    triangles: 24020000
     adjacents: 
-  - triangles: 25020000
+  - name: 549
+    triangles: 25020000
     adjacents: 
-  - triangles: 26020000
+  - name: 550
+    triangles: 26020000
     adjacents: 
-  - triangles: 27020000
+  - name: 551
+    triangles: 27020000
     adjacents: 
-  - triangles: 28020000
+  - name: 552
+    triangles: 28020000
     adjacents: 
-  - triangles: 29020000
+  - name: 553
+    triangles: 29020000
     adjacents: 
-  - triangles: 2a020000
+  - name: 554
+    triangles: 2a020000
     adjacents: 
-  - triangles: 2b020000
+  - name: 555
+    triangles: 2b020000
     adjacents: 
-  - triangles: 2c020000
+  - name: 556
+    triangles: 2c020000
     adjacents: 
-  - triangles: 2d020000
+  - name: 557
+    triangles: 2d020000
     adjacents: 
-  - triangles: 2e020000
+  - name: 558
+    triangles: 2e020000
     adjacents: 
-  - triangles: 2f020000
+  - name: 559
+    triangles: 2f020000
     adjacents: 
-  - triangles: 30020000
+  - name: 560
+    triangles: 30020000
     adjacents: 
-  - triangles: 31020000
+  - name: 561
+    triangles: 31020000
     adjacents: 
-  - triangles: 32020000
+  - name: 562
+    triangles: 32020000
     adjacents: 
-  - triangles: 33020000
+  - name: 563
+    triangles: 33020000
     adjacents: 
-  - triangles: 34020000
+  - name: 564
+    triangles: 34020000
     adjacents: 
-  - triangles: 35020000
+  - name: 565
+    triangles: 35020000
     adjacents: 
-  - triangles: 36020000
+  - name: 566
+    triangles: 36020000
     adjacents: 
-  - triangles: 37020000
+  - name: 567
+    triangles: 37020000
     adjacents: 
-  - triangles: 38020000
+  - name: 568
+    triangles: 38020000
     adjacents: 
-  - triangles: 39020000
+  - name: 569
+    triangles: 39020000
     adjacents: 
-  - triangles: 3a020000
+  - name: 570
+    triangles: 3a020000
     adjacents: 
-  - triangles: 3b020000
+  - name: 571
+    triangles: 3b020000
     adjacents: 
-  - triangles: 3c020000
+  - name: 572
+    triangles: 3c020000
     adjacents: 
-  - triangles: 3d020000
+  - name: 573
+    triangles: 3d020000
     adjacents: 
-  - triangles: 3e020000
+  - name: 574
+    triangles: 3e020000
     adjacents: 
-  - triangles: 3f020000
+  - name: 575
+    triangles: 3f020000
     adjacents: 
-  - triangles: 40020000
+  - name: 576
+    triangles: 40020000
     adjacents: 
-  - triangles: 41020000
+  - name: 577
+    triangles: 41020000
     adjacents: 
-  - triangles: 42020000
+  - name: 578
+    triangles: 42020000
     adjacents: 
-  - triangles: 43020000
+  - name: 579
+    triangles: 43020000
     adjacents: 
-  - triangles: 44020000
+  - name: 580
+    triangles: 44020000
     adjacents: 
-  - triangles: 45020000
+  - name: 581
+    triangles: 45020000
     adjacents: 
-  - triangles: 46020000
+  - name: 582
+    triangles: 46020000
     adjacents: 
-  - triangles: 47020000
+  - name: 583
+    triangles: 47020000
     adjacents: 
-  - triangles: 48020000
+  - name: 584
+    triangles: 48020000
     adjacents: 
-  - triangles: 49020000
+  - name: 585
+    triangles: 49020000
     adjacents: 
-  - triangles: 4a020000
+  - name: 586
+    triangles: 4a020000
     adjacents: 
-  - triangles: 4b020000
+  - name: 587
+    triangles: 4b020000
     adjacents: 
-  - triangles: 4c020000
+  - name: 588
+    triangles: 4c020000
     adjacents: 
-  - triangles: 4d020000
+  - name: 589
+    triangles: 4d020000
     adjacents: 
-  - triangles: 4e020000
+  - name: 590
+    triangles: 4e020000
     adjacents: 
-  - triangles: 4f020000
+  - name: 591
+    triangles: 4f020000
     adjacents: 
-  - triangles: 50020000
+  - name: 592
+    triangles: 50020000
     adjacents: 
-  - triangles: 51020000
+  - name: 593
+    triangles: 51020000
     adjacents: 
-  - triangles: 52020000
+  - name: 594
+    triangles: 52020000
     adjacents: 
-  - triangles: 53020000
+  - name: 595
+    triangles: 53020000
     adjacents: 
-  - triangles: 54020000
+  - name: 596
+    triangles: 54020000
     adjacents: 
-  - triangles: 55020000
+  - name: 597
+    triangles: 55020000
     adjacents: 
-  - triangles: 56020000
+  - name: 598
+    triangles: 56020000
     adjacents: 
-  - triangles: 57020000
+  - name: 599
+    triangles: 57020000
     adjacents: 
-  - triangles: 58020000
+  - name: 600
+    triangles: 58020000
     adjacents: 
-  - triangles: 59020000
+  - name: 601
+    triangles: 59020000
     adjacents: 
-  - triangles: 5a020000
+  - name: 602
+    triangles: 5a020000
     adjacents: 
-  - triangles: 5b020000
+  - name: 603
+    triangles: 5b020000
     adjacents: 
-  - triangles: 5c020000
+  - name: 604
+    triangles: 5c020000
     adjacents: 
-  - triangles: 5d020000
+  - name: 605
+    triangles: 5d020000
     adjacents: 
-  - triangles: 5e020000
+  - name: 606
+    triangles: 5e020000
     adjacents: 
-  - triangles: 5f020000
+  - name: 607
+    triangles: 5f020000
     adjacents: 
-  - triangles: 60020000
+  - name: 608
+    triangles: 60020000
     adjacents: 
-  - triangles: 61020000
+  - name: 609
+    triangles: 61020000
     adjacents: 
-  - triangles: 62020000
+  - name: 610
+    triangles: 62020000
     adjacents: 
-  - triangles: 63020000
+  - name: 611
+    triangles: 63020000
     adjacents: 
-  - triangles: 64020000
+  - name: 612
+    triangles: 64020000
     adjacents: 
-  - triangles: 65020000
+  - name: 613
+    triangles: 65020000
     adjacents: 
-  - triangles: 66020000
+  - name: 614
+    triangles: 66020000
     adjacents: 
-  - triangles: 67020000
+  - name: 615
+    triangles: 67020000
     adjacents: 
-  - triangles: 68020000
+  - name: 616
+    triangles: 68020000
     adjacents: 
-  - triangles: 69020000
+  - name: 617
+    triangles: 69020000
     adjacents: 
-  - triangles: 6a020000
+  - name: 618
+    triangles: 6a020000
     adjacents: 
-  - triangles: 6b020000
+  - name: 619
+    triangles: 6b020000
     adjacents: 
-  - triangles: 6c020000
+  - name: 620
+    triangles: 6c020000
     adjacents: 
-  - triangles: 6d020000
+  - name: 621
+    triangles: 6d020000
     adjacents: 
-  - triangles: 6e020000
+  - name: 622
+    triangles: 6e020000
     adjacents: 
-  - triangles: 6f020000
+  - name: 623
+    triangles: 6f020000
     adjacents: 
-  - triangles: 70020000
+  - name: 624
+    triangles: 70020000
     adjacents: 
-  - triangles: 71020000
+  - name: 625
+    triangles: 71020000
     adjacents: 
-  - triangles: 72020000
+  - name: 626
+    triangles: 72020000
     adjacents: 
-  - triangles: 73020000
+  - name: 627
+    triangles: 73020000
     adjacents: 
-  - triangles: 74020000
+  - name: 628
+    triangles: 74020000
     adjacents: 
-  - triangles: 75020000
+  - name: 629
+    triangles: 75020000
     adjacents: 
-  - triangles: 76020000
+  - name: 630
+    triangles: 76020000
     adjacents: 
-  - triangles: 77020000
+  - name: 631
+    triangles: 77020000
     adjacents: 
-  - triangles: 78020000
+  - name: 632
+    triangles: 78020000
     adjacents: 
-  - triangles: 79020000
+  - name: 633
+    triangles: 79020000
     adjacents: 
-  - triangles: 7a020000
+  - name: 634
+    triangles: 7a020000
     adjacents: 
-  - triangles: 7b020000
+  - name: 635
+    triangles: 7b020000
     adjacents: 
-  - triangles: 7c020000
+  - name: 636
+    triangles: 7c020000
     adjacents: 
-  - triangles: 7d020000
+  - name: 637
+    triangles: 7d020000
     adjacents: 
-  - triangles: 7e020000
+  - name: 638
+    triangles: 7e020000
     adjacents: 
-  - triangles: 7f020000
+  - name: 639
+    triangles: 7f020000
     adjacents: 
-  - triangles: 80020000
+  - name: 640
+    triangles: 80020000
     adjacents: 
-  - triangles: 81020000
+  - name: 641
+    triangles: 81020000
     adjacents: 
-  - triangles: 82020000
+  - name: 642
+    triangles: 82020000
     adjacents: 
-  - triangles: 83020000
+  - name: 643
+    triangles: 83020000
     adjacents: 
-  - triangles: 84020000
+  - name: 644
+    triangles: 84020000
     adjacents: 
-  - triangles: 85020000
+  - name: 645
+    triangles: 85020000
     adjacents: 
-  - triangles: 86020000
+  - name: 646
+    triangles: 86020000
     adjacents: 
-  - triangles: 87020000
+  - name: 647
+    triangles: 87020000
     adjacents: 
-  - triangles: 88020000
+  - name: 648
+    triangles: 88020000
     adjacents: 
-  - triangles: 89020000
+  - name: 649
+    triangles: 89020000
     adjacents: 
-  - triangles: 8a020000
+  - name: 650
+    triangles: 8a020000
     adjacents: 
-  - triangles: 8b020000
+  - name: 651
+    triangles: 8b020000
     adjacents: 
-  - triangles: 8c020000
+  - name: 652
+    triangles: 8c020000
     adjacents: 
-  - triangles: 8d020000
+  - name: 653
+    triangles: 8d020000
     adjacents: 
-  - triangles: 8e020000
+  - name: 654
+    triangles: 8e020000
     adjacents: 
-  - triangles: 8f020000
+  - name: 655
+    triangles: 8f020000
     adjacents: 
-  - triangles: 90020000
+  - name: 656
+    triangles: 90020000
     adjacents: 
-  - triangles: 91020000
+  - name: 657
+    triangles: 91020000
     adjacents: 
-  - triangles: 92020000
+  - name: 658
+    triangles: 92020000
     adjacents: 
-  - triangles: 93020000
+  - name: 659
+    triangles: 93020000
     adjacents: 
-  - triangles: 94020000
+  - name: 660
+    triangles: 94020000
     adjacents: 
-  - triangles: 95020000
+  - name: 661
+    triangles: 95020000
     adjacents: 
-  - triangles: 96020000
+  - name: 662
+    triangles: 96020000
     adjacents: 
-  - triangles: 97020000
+  - name: 663
+    triangles: 97020000
     adjacents: 
-  - triangles: 98020000
+  - name: 664
+    triangles: 98020000
     adjacents: 
-  - triangles: 99020000
+  - name: 665
+    triangles: 99020000
     adjacents: 
-  - triangles: 9a020000
+  - name: 666
+    triangles: 9a020000
     adjacents: 
-  - triangles: 9b020000
+  - name: 667
+    triangles: 9b020000
     adjacents: 
-  - triangles: 9c020000
+  - name: 668
+    triangles: 9c020000
     adjacents: 
-  - triangles: 9d020000
+  - name: 669
+    triangles: 9d020000
     adjacents: 
-  - triangles: 9e020000
+  - name: 670
+    triangles: 9e020000
     adjacents: 
-  - triangles: 9f020000
+  - name: 671
+    triangles: 9f020000
     adjacents: 
-  - triangles: a0020000
+  - name: 672
+    triangles: a0020000
     adjacents: 
-  - triangles: a1020000
+  - name: 673
+    triangles: a1020000
     adjacents: 
-  - triangles: a2020000
+  - name: 674
+    triangles: a2020000
     adjacents: 
-  - triangles: a3020000
+  - name: 675
+    triangles: a3020000
     adjacents: 
-  - triangles: a4020000
+  - name: 676
+    triangles: a4020000
     adjacents: 
-  - triangles: a5020000
+  - name: 677
+    triangles: a5020000
     adjacents: 
-  - triangles: a6020000
+  - name: 678
+    triangles: a6020000
     adjacents: 
-  - triangles: a7020000
+  - name: 679
+    triangles: a7020000
     adjacents: 
-  - triangles: a8020000
+  - name: 680
+    triangles: a8020000
     adjacents: 
-  - triangles: a9020000
+  - name: 681
+    triangles: a9020000
     adjacents: 
-  - triangles: aa020000
+  - name: 682
+    triangles: aa020000
     adjacents: 
-  - triangles: ab020000
+  - name: 683
+    triangles: ab020000
     adjacents: 
-  - triangles: ac020000
+  - name: 684
+    triangles: ac020000
     adjacents: 
-  - triangles: ad020000
+  - name: 685
+    triangles: ad020000
     adjacents: 
-  - triangles: ae020000
+  - name: 686
+    triangles: ae020000
     adjacents: 
-  - triangles: af020000
+  - name: 687
+    triangles: af020000
     adjacents: 
-  - triangles: b0020000
+  - name: 688
+    triangles: b0020000
     adjacents: 
-  - triangles: b1020000
+  - name: 689
+    triangles: b1020000
     adjacents: 
-  - triangles: b2020000
+  - name: 690
+    triangles: b2020000
     adjacents: 
-  - triangles: b3020000
+  - name: 691
+    triangles: b3020000
     adjacents: 
-  - triangles: b4020000
+  - name: 692
+    triangles: b4020000
     adjacents: 
-  - triangles: b5020000
+  - name: 693
+    triangles: b5020000
     adjacents: 
-  - triangles: b6020000
+  - name: 694
+    triangles: b6020000
     adjacents: 
-  - triangles: b7020000
+  - name: 695
+    triangles: b7020000
     adjacents: 
-  - triangles: b8020000
+  - name: 696
+    triangles: b8020000
     adjacents: 
-  - triangles: b9020000
+  - name: 697
+    triangles: b9020000
     adjacents: 
-  - triangles: ba020000
+  - name: 698
+    triangles: ba020000
     adjacents: 
-  - triangles: bb020000
+  - name: 699
+    triangles: bb020000
     adjacents: 
-  - triangles: bc020000
+  - name: 700
+    triangles: bc020000
     adjacents: 
-  - triangles: bd020000
+  - name: 701
+    triangles: bd020000
     adjacents: 
-  - triangles: be020000
+  - name: 702
+    triangles: be020000
     adjacents: 
-  - triangles: bf020000
+  - name: 703
+    triangles: bf020000
     adjacents: 
-  - triangles: c0020000
+  - name: 704
+    triangles: c0020000
     adjacents: 
-  - triangles: c1020000
+  - name: 705
+    triangles: c1020000
     adjacents: 
-  - triangles: c2020000
+  - name: 706
+    triangles: c2020000
     adjacents: 
-  - triangles: c3020000
+  - name: 707
+    triangles: c3020000
     adjacents: 
-  - triangles: c4020000
+  - name: 708
+    triangles: c4020000
     adjacents: 
-  - triangles: c5020000
+  - name: 709
+    triangles: c5020000
     adjacents: 
-  - triangles: c6020000
+  - name: 710
+    triangles: c6020000
     adjacents: 
-  - triangles: c7020000
+  - name: 711
+    triangles: c7020000
     adjacents: 
-  - triangles: c8020000
+  - name: 712
+    triangles: c8020000
     adjacents: 
-  - triangles: c9020000
+  - name: 713
+    triangles: c9020000
     adjacents: 
-  - triangles: ca020000
+  - name: 714
+    triangles: ca020000
     adjacents: 
-  - triangles: cb020000
+  - name: 715
+    triangles: cb020000
     adjacents: 
-  - triangles: cc020000
+  - name: 716
+    triangles: cc020000
     adjacents: 
-  - triangles: cd020000
+  - name: 717
+    triangles: cd020000
     adjacents: 
-  - triangles: ce020000
+  - name: 718
+    triangles: ce020000
     adjacents: 
-  - triangles: cf020000
+  - name: 719
+    triangles: cf020000
     adjacents: 
-  - triangles: d0020000
+  - name: 720
+    triangles: d0020000
     adjacents: 
-  - triangles: d1020000
+  - name: 721
+    triangles: d1020000
     adjacents: 
-  - triangles: d2020000
+  - name: 722
+    triangles: d2020000
     adjacents: 
-  - triangles: d3020000
+  - name: 723
+    triangles: d3020000
     adjacents: 
-  - triangles: d4020000
+  - name: 724
+    triangles: d4020000
     adjacents: 
-  - triangles: d5020000
+  - name: 725
+    triangles: d5020000
     adjacents: 
-  - triangles: d6020000
+  - name: 726
+    triangles: d6020000
     adjacents: 
-  - triangles: d7020000
+  - name: 727
+    triangles: d7020000
     adjacents: 
-  - triangles: d8020000
+  - name: 728
+    triangles: d8020000
     adjacents: 
-  - triangles: d9020000
+  - name: 729
+    triangles: d9020000
     adjacents: 
-  - triangles: da020000
+  - name: 730
+    triangles: da020000
     adjacents: 
-  - triangles: db020000
+  - name: 731
+    triangles: db020000
     adjacents: 
-  - triangles: dc020000
+  - name: 732
+    triangles: dc020000
     adjacents: 
-  - triangles: dd020000
+  - name: 733
+    triangles: dd020000
     adjacents: 
-  - triangles: de020000
+  - name: 734
+    triangles: de020000
     adjacents: 
-  - triangles: df020000
+  - name: 735
+    triangles: df020000
     adjacents: 
-  - triangles: e0020000
+  - name: 736
+    triangles: e0020000
     adjacents: 
-  - triangles: e1020000
+  - name: 737
+    triangles: e1020000
     adjacents: 
-  - triangles: e2020000
+  - name: 738
+    triangles: e2020000
     adjacents: 
-  - triangles: e3020000
+  - name: 739
+    triangles: e3020000
     adjacents: 
-  - triangles: e4020000
+  - name: 740
+    triangles: e4020000
     adjacents: 
-  - triangles: e5020000
+  - name: 741
+    triangles: e5020000
     adjacents: 
-  - triangles: e6020000
+  - name: 742
+    triangles: e6020000
     adjacents: 
-  - triangles: e7020000
+  - name: 743
+    triangles: e7020000
     adjacents: 
-  - triangles: e8020000
+  - name: 744
+    triangles: e8020000
     adjacents: 
-  - triangles: e9020000
+  - name: 745
+    triangles: e9020000
     adjacents: 
-  - triangles: ea020000
+  - name: 746
+    triangles: ea020000
     adjacents: 
-  - triangles: eb020000
+  - name: 747
+    triangles: eb020000
     adjacents: 
-  - triangles: ec020000
+  - name: 748
+    triangles: ec020000
     adjacents: 
-  - triangles: ed020000
+  - name: 749
+    triangles: ed020000
     adjacents: 
-  - triangles: ee020000
+  - name: 750
+    triangles: ee020000
     adjacents: 
-  - triangles: ef020000
+  - name: 751
+    triangles: ef020000
     adjacents: 
-  - triangles: f0020000
+  - name: 752
+    triangles: f0020000
     adjacents: 
-  - triangles: f1020000
+  - name: 753
+    triangles: f1020000
     adjacents: 
-  - triangles: f2020000
+  - name: 754
+    triangles: f2020000
     adjacents: 
-  - triangles: f3020000
+  - name: 755
+    triangles: f3020000
     adjacents: 
-  - triangles: f4020000
+  - name: 756
+    triangles: f4020000
     adjacents: 
-  - triangles: f5020000
+  - name: 757
+    triangles: f5020000
     adjacents: 
-  - triangles: f6020000
+  - name: 758
+    triangles: f6020000
     adjacents: 
-  - triangles: f7020000
+  - name: 759
+    triangles: f7020000
     adjacents: 
-  - triangles: f8020000
+  - name: 760
+    triangles: f8020000
     adjacents: 
-  - triangles: f9020000
+  - name: 761
+    triangles: f9020000
     adjacents: 
-  - triangles: fa020000
+  - name: 762
+    triangles: fa020000
     adjacents: 
-  - triangles: fb020000
+  - name: 763
+    triangles: fb020000
     adjacents: 
-  - triangles: fc020000
+  - name: 764
+    triangles: fc020000
     adjacents: 
-  - triangles: fd020000
+  - name: 765
+    triangles: fd020000
     adjacents: 
-  - triangles: fe020000
+  - name: 766
+    triangles: fe020000
     adjacents: 
-  - triangles: ff020000
+  - name: 767
+    triangles: ff020000
     adjacents: 
-  - triangles: 00030000
+  - name: 768
+    triangles: 00030000
     adjacents: 
-  - triangles: 01030000
+  - name: 769
+    triangles: 01030000
     adjacents: 
-  - triangles: 02030000
+  - name: 770
+    triangles: 02030000
     adjacents: 
-  - triangles: 03030000
+  - name: 771
+    triangles: 03030000
     adjacents: 
-  - triangles: 04030000
+  - name: 772
+    triangles: 04030000
     adjacents: 
-  - triangles: 05030000
+  - name: 773
+    triangles: 05030000
     adjacents: 
-  - triangles: 06030000
+  - name: 774
+    triangles: 06030000
     adjacents: 
-  - triangles: 07030000
+  - name: 775
+    triangles: 07030000
     adjacents: 
-  - triangles: 08030000
+  - name: 776
+    triangles: 08030000
     adjacents: 
-  - triangles: 09030000
+  - name: 777
+    triangles: 09030000
     adjacents: 
-  - triangles: 0a030000
+  - name: 778
+    triangles: 0a030000
     adjacents: 
-  - triangles: 0b030000
+  - name: 779
+    triangles: 0b030000
     adjacents: 
-  - triangles: 0c030000
+  - name: 780
+    triangles: 0c030000
     adjacents: 
-  - triangles: 0d030000
+  - name: 781
+    triangles: 0d030000
     adjacents: 
-  - triangles: 0e030000
+  - name: 782
+    triangles: 0e030000
     adjacents: 
-  - triangles: 0f030000
+  - name: 783
+    triangles: 0f030000
     adjacents: 
-  - triangles: 10030000
+  - name: 784
+    triangles: 10030000
     adjacents: 
-  - triangles: 11030000
+  - name: 785
+    triangles: 11030000
     adjacents: 
-  - triangles: 12030000
+  - name: 786
+    triangles: 12030000
     adjacents: 
-  - triangles: 13030000
+  - name: 787
+    triangles: 13030000
     adjacents: 
-  - triangles: 14030000
+  - name: 788
+    triangles: 14030000
     adjacents: 
-  - triangles: 15030000
+  - name: 789
+    triangles: 15030000
     adjacents: 
-  - triangles: 16030000
+  - name: 790
+    triangles: 16030000
     adjacents: 
-  - triangles: 17030000
+  - name: 791
+    triangles: 17030000
     adjacents: 
-  - triangles: 18030000
+  - name: 792
+    triangles: 18030000
     adjacents: 
-  - triangles: 19030000
+  - name: 793
+    triangles: 19030000
     adjacents: 
-  - triangles: 1a030000
+  - name: 794
+    triangles: 1a030000
     adjacents: 
-  - triangles: 1b030000
+  - name: 795
+    triangles: 1b030000
     adjacents: 
-  - triangles: 1c030000
+  - name: 796
+    triangles: 1c030000
     adjacents: 
-  - triangles: 1d030000
+  - name: 797
+    triangles: 1d030000
     adjacents: 
-  - triangles: 1e030000
+  - name: 798
+    triangles: 1e030000
     adjacents: 
-  - triangles: 1f030000
+  - name: 799
+    triangles: 1f030000
     adjacents: 
-  - triangles: 20030000
+  - name: 800
+    triangles: 20030000
     adjacents: 
-  - triangles: 21030000
+  - name: 801
+    triangles: 21030000
     adjacents: 
-  - triangles: 22030000
+  - name: 802
+    triangles: 22030000
     adjacents: 
-  - triangles: 23030000
+  - name: 803
+    triangles: 23030000
     adjacents: 
-  - triangles: 24030000
+  - name: 804
+    triangles: 24030000
     adjacents: 
-  - triangles: 25030000
+  - name: 805
+    triangles: 25030000
     adjacents: 
-  - triangles: 26030000
+  - name: 806
+    triangles: 26030000
     adjacents: 
-  - triangles: 27030000
+  - name: 807
+    triangles: 27030000
     adjacents: 
-  - triangles: 28030000
+  - name: 808
+    triangles: 28030000
     adjacents: 
-  - triangles: 29030000
+  - name: 809
+    triangles: 29030000
     adjacents: 
-  - triangles: 2a030000
+  - name: 810
+    triangles: 2a030000
     adjacents: 
-  - triangles: 2b030000
+  - name: 811
+    triangles: 2b030000
     adjacents: 
-  - triangles: 2c030000
+  - name: 812
+    triangles: 2c030000
     adjacents: 
-  - triangles: 2d030000
+  - name: 813
+    triangles: 2d030000
     adjacents: 
-  - triangles: 2e030000
+  - name: 814
+    triangles: 2e030000
     adjacents: 
-  - triangles: 2f030000
+  - name: 815
+    triangles: 2f030000
     adjacents: 
-  - triangles: 30030000
+  - name: 816
+    triangles: 30030000
     adjacents: 
-  - triangles: 31030000
+  - name: 817
+    triangles: 31030000
     adjacents: 
-  - triangles: 32030000
+  - name: 818
+    triangles: 32030000
     adjacents: 
-  - triangles: 33030000
+  - name: 819
+    triangles: 33030000
     adjacents: 
-  - triangles: 34030000
+  - name: 820
+    triangles: 34030000
     adjacents: 
-  - triangles: 35030000
+  - name: 821
+    triangles: 35030000
     adjacents: 
-  - triangles: 36030000
+  - name: 822
+    triangles: 36030000
     adjacents: 
-  - triangles: 37030000
+  - name: 823
+    triangles: 37030000
     adjacents: 
-  - triangles: 38030000
+  - name: 824
+    triangles: 38030000
     adjacents: 
-  - triangles: 39030000
+  - name: 825
+    triangles: 39030000
     adjacents: 
-  - triangles: 3a030000
+  - name: 826
+    triangles: 3a030000
     adjacents: 
-  - triangles: 3b030000
+  - name: 827
+    triangles: 3b030000
     adjacents: 
-  - triangles: 3c030000
+  - name: 828
+    triangles: 3c030000
     adjacents: 
-  - triangles: 3d030000
+  - name: 829
+    triangles: 3d030000
     adjacents: 
-  - triangles: 3e030000
+  - name: 830
+    triangles: 3e030000
     adjacents: 
-  - triangles: 3f030000
+  - name: 831
+    triangles: 3f030000
     adjacents: 
-  - triangles: 40030000
+  - name: 832
+    triangles: 40030000
     adjacents: 
-  - triangles: 41030000
+  - name: 833
+    triangles: 41030000
     adjacents: 
-  - triangles: 42030000
+  - name: 834
+    triangles: 42030000
     adjacents: 
-  - triangles: 43030000
+  - name: 835
+    triangles: 43030000
     adjacents: 
-  - triangles: 44030000
+  - name: 836
+    triangles: 44030000
     adjacents: 
-  - triangles: 45030000
+  - name: 837
+    triangles: 45030000
     adjacents: 
-  - triangles: 46030000
+  - name: 838
+    triangles: 46030000
     adjacents: 
-  - triangles: 47030000
+  - name: 839
+    triangles: 47030000
     adjacents: 
-  - triangles: 48030000
+  - name: 840
+    triangles: 48030000
     adjacents: 
-  - triangles: 49030000
+  - name: 841
+    triangles: 49030000
     adjacents: 
-  - triangles: 4a030000
+  - name: 842
+    triangles: 4a030000
     adjacents: 
-  - triangles: 4b030000
+  - name: 843
+    triangles: 4b030000
     adjacents: 
-  - triangles: 4c030000
+  - name: 844
+    triangles: 4c030000
     adjacents: 
-  - triangles: 4d030000
+  - name: 845
+    triangles: 4d030000
     adjacents: 
-  - triangles: 4e030000
+  - name: 846
+    triangles: 4e030000
     adjacents: 
-  - triangles: 4f030000
+  - name: 847
+    triangles: 4f030000
     adjacents: 
-  - triangles: 50030000
+  - name: 848
+    triangles: 50030000
     adjacents: 
-  - triangles: 51030000
+  - name: 849
+    triangles: 51030000
     adjacents: 
-  - triangles: 52030000
+  - name: 850
+    triangles: 52030000
     adjacents: 
-  - triangles: 53030000
+  - name: 851
+    triangles: 53030000
     adjacents: 
-  - triangles: 54030000
+  - name: 852
+    triangles: 54030000
     adjacents: 
-  - triangles: 55030000
+  - name: 853
+    triangles: 55030000
     adjacents: 
-  - triangles: 56030000
+  - name: 854
+    triangles: 56030000
     adjacents: 
-  - triangles: 57030000
+  - name: 855
+    triangles: 57030000
     adjacents: 
-  - triangles: 58030000
+  - name: 856
+    triangles: 58030000
     adjacents: 
-  - triangles: 59030000
+  - name: 857
+    triangles: 59030000
     adjacents: 
-  - triangles: 5a030000
+  - name: 858
+    triangles: 5a030000
     adjacents: 
-  - triangles: 5b030000
+  - name: 859
+    triangles: 5b030000
     adjacents: 
-  - triangles: 5c030000
+  - name: 860
+    triangles: 5c030000
     adjacents: 
-  - triangles: 5d030000
+  - name: 861
+    triangles: 5d030000
     adjacents: 
-  - triangles: 5e030000
+  - name: 862
+    triangles: 5e030000
     adjacents: 
-  - triangles: 5f030000
+  - name: 863
+    triangles: 5f030000
     adjacents: 
-  - triangles: 60030000
+  - name: 864
+    triangles: 60030000
     adjacents: 
-  - triangles: 61030000
+  - name: 865
+    triangles: 61030000
     adjacents: 
-  - triangles: 62030000
+  - name: 866
+    triangles: 62030000
     adjacents: 
-  - triangles: 63030000
+  - name: 867
+    triangles: 63030000
     adjacents: 
-  - triangles: 64030000
+  - name: 868
+    triangles: 64030000
     adjacents: 
-  - triangles: 65030000
+  - name: 869
+    triangles: 65030000
     adjacents: 
-  - triangles: 66030000
+  - name: 870
+    triangles: 66030000
     adjacents: 
-  - triangles: 67030000
+  - name: 871
+    triangles: 67030000
     adjacents: 
-  - triangles: 68030000
+  - name: 872
+    triangles: 68030000
     adjacents: 
-  - triangles: 69030000
+  - name: 873
+    triangles: 69030000
     adjacents: 
-  - triangles: 6a030000
+  - name: 874
+    triangles: 6a030000
     adjacents: 
-  - triangles: 6b030000
+  - name: 875
+    triangles: 6b030000
     adjacents: 
-  - triangles: 6c030000
+  - name: 876
+    triangles: 6c030000
     adjacents: 
-  - triangles: 6d030000
+  - name: 877
+    triangles: 6d030000
     adjacents: 
-  - triangles: 6e030000
+  - name: 878
+    triangles: 6e030000
     adjacents: 
-  - triangles: 6f030000
+  - name: 879
+    triangles: 6f030000
     adjacents: 
-  - triangles: 70030000
+  - name: 880
+    triangles: 70030000
     adjacents: 
-  - triangles: 71030000
+  - name: 881
+    triangles: 71030000
     adjacents: 
-  - triangles: 72030000
+  - name: 882
+    triangles: 72030000
     adjacents: 
-  - triangles: 73030000
+  - name: 883
+    triangles: 73030000
     adjacents: 
-  - triangles: 74030000
+  - name: 884
+    triangles: 74030000
     adjacents: 
-  - triangles: 75030000
+  - name: 885
+    triangles: 75030000
     adjacents: 
-  - triangles: 76030000
+  - name: 886
+    triangles: 76030000
     adjacents: 
-  - triangles: 77030000
+  - name: 887
+    triangles: 77030000
     adjacents: 
-  - triangles: 78030000
+  - name: 888
+    triangles: 78030000
     adjacents: 
-  - triangles: 79030000
+  - name: 889
+    triangles: 79030000
     adjacents: 
-  - triangles: 7a030000
+  - name: 890
+    triangles: 7a030000
     adjacents: 
-  - triangles: 7b030000
+  - name: 891
+    triangles: 7b030000
     adjacents: 
-  - triangles: 7c030000
+  - name: 892
+    triangles: 7c030000
     adjacents: 
-  - triangles: 7d030000
+  - name: 893
+    triangles: 7d030000
     adjacents: 
-  - triangles: 7e030000
+  - name: 894
+    triangles: 7e030000
     adjacents: 
-  - triangles: 7f030000
+  - name: 895
+    triangles: 7f030000
     adjacents: 
-  - triangles: 80030000
+  - name: 896
+    triangles: 80030000
     adjacents: 
-  - triangles: 81030000
+  - name: 897
+    triangles: 81030000
     adjacents: 
-  - triangles: 82030000
+  - name: 898
+    triangles: 82030000
     adjacents: 
-  - triangles: 83030000
+  - name: 899
+    triangles: 83030000
     adjacents: 
-  - triangles: 84030000
+  - name: 900
+    triangles: 84030000
     adjacents: 
-  - triangles: 85030000
+  - name: 901
+    triangles: 85030000
     adjacents: 
-  - triangles: 86030000
+  - name: 902
+    triangles: 86030000
     adjacents: 
-  - triangles: 87030000
+  - name: 903
+    triangles: 87030000
     adjacents: 
-  - triangles: 88030000
+  - name: 904
+    triangles: 88030000
     adjacents: 
-  - triangles: 89030000
+  - name: 905
+    triangles: 89030000
     adjacents: 
-  - triangles: 8a030000
+  - name: 906
+    triangles: 8a030000
     adjacents: 
-  - triangles: 8b030000
+  - name: 907
+    triangles: 8b030000
     adjacents: 
-  - triangles: 8c030000
+  - name: 908
+    triangles: 8c030000
     adjacents: 
-  - triangles: 8d030000
+  - name: 909
+    triangles: 8d030000
     adjacents: 
-  - triangles: 8e030000
+  - name: 910
+    triangles: 8e030000
     adjacents: 
-  - triangles: 8f030000
+  - name: 911
+    triangles: 8f030000
     adjacents: 
-  - triangles: 90030000
+  - name: 912
+    triangles: 90030000
     adjacents: 
-  - triangles: 91030000
+  - name: 913
+    triangles: 91030000
     adjacents: 
-  - triangles: 92030000
+  - name: 914
+    triangles: 92030000
     adjacents: 
-  - triangles: 93030000
+  - name: 915
+    triangles: 93030000
     adjacents: 
-  - triangles: 94030000
+  - name: 916
+    triangles: 94030000
     adjacents: 
-  - triangles: 95030000
+  - name: 917
+    triangles: 95030000
     adjacents: 
-  - triangles: 96030000
+  - name: 918
+    triangles: 96030000
     adjacents: 
-  - triangles: 97030000
+  - name: 919
+    triangles: 97030000
     adjacents: 
-  - triangles: 98030000
+  - name: 920
+    triangles: 98030000
     adjacents: 
-  - triangles: 99030000
+  - name: 921
+    triangles: 99030000
     adjacents: 
-  - triangles: 9a030000
+  - name: 922
+    triangles: 9a030000
     adjacents: 
-  - triangles: 9b030000
+  - name: 923
+    triangles: 9b030000
     adjacents: 
-  - triangles: 9c030000
+  - name: 924
+    triangles: 9c030000
     adjacents: 
-  - triangles: 9d030000
+  - name: 925
+    triangles: 9d030000
     adjacents: 
-  - triangles: 9e030000
+  - name: 926
+    triangles: 9e030000
     adjacents: 
-  - triangles: 9f030000
+  - name: 927
+    triangles: 9f030000
     adjacents: 
-  - triangles: a0030000
+  - name: 928
+    triangles: a0030000
     adjacents: 
-  - triangles: a1030000
+  - name: 929
+    triangles: a1030000
     adjacents: 
-  - triangles: a2030000
+  - name: 930
+    triangles: a2030000
     adjacents: 
-  - triangles: a3030000
+  - name: 931
+    triangles: a3030000
     adjacents: 
-  - triangles: a4030000
+  - name: 932
+    triangles: a4030000
     adjacents: 
-  - triangles: a5030000
+  - name: 933
+    triangles: a5030000
     adjacents: 
-  - triangles: a6030000
+  - name: 934
+    triangles: a6030000
     adjacents: 
-  - triangles: a7030000
+  - name: 935
+    triangles: a7030000
     adjacents: 
-  - triangles: a8030000
+  - name: 936
+    triangles: a8030000
     adjacents: 
-  - triangles: a9030000
+  - name: 937
+    triangles: a9030000
     adjacents: 
-  - triangles: aa030000
+  - name: 938
+    triangles: aa030000
     adjacents: 
-  - triangles: ab030000
+  - name: 939
+    triangles: ab030000
     adjacents: 
-  - triangles: ac030000
+  - name: 940
+    triangles: ac030000
     adjacents: 
-  - triangles: ad030000
+  - name: 941
+    triangles: ad030000
     adjacents: 
-  - triangles: ae030000
+  - name: 942
+    triangles: ae030000
     adjacents: 
-  - triangles: af030000
+  - name: 943
+    triangles: af030000
     adjacents: 
-  - triangles: b0030000
+  - name: 944
+    triangles: b0030000
     adjacents: 
-  - triangles: b1030000
+  - name: 945
+    triangles: b1030000
     adjacents: 
-  - triangles: b2030000
+  - name: 946
+    triangles: b2030000
     adjacents: 
-  - triangles: b3030000
+  - name: 947
+    triangles: b3030000
     adjacents: 
-  - triangles: b4030000
+  - name: 948
+    triangles: b4030000
     adjacents: 
-  - triangles: b5030000
+  - name: 949
+    triangles: b5030000
     adjacents: 
-  - triangles: b6030000
+  - name: 950
+    triangles: b6030000
     adjacents: 
-  - triangles: b7030000
+  - name: 951
+    triangles: b7030000
     adjacents: 
-  - triangles: b8030000
+  - name: 952
+    triangles: b8030000
     adjacents: 
-  - triangles: b9030000
+  - name: 953
+    triangles: b9030000
     adjacents: 
-  - triangles: ba030000
+  - name: 954
+    triangles: ba030000
     adjacents: 
-  - triangles: bb030000
+  - name: 955
+    triangles: bb030000
     adjacents: 
-  - triangles: bc030000
+  - name: 956
+    triangles: bc030000
     adjacents: 
-  - triangles: bd030000
+  - name: 957
+    triangles: bd030000
     adjacents: 
-  - triangles: be030000
+  - name: 958
+    triangles: be030000
     adjacents: 
-  - triangles: bf030000
+  - name: 959
+    triangles: bf030000
     adjacents: 
-  - triangles: c0030000
+  - name: 960
+    triangles: c0030000
     adjacents: 
-  - triangles: c1030000
+  - name: 961
+    triangles: c1030000
     adjacents: 
-  - triangles: c2030000
+  - name: 962
+    triangles: c2030000
     adjacents: 
-  - triangles: c3030000
+  - name: 963
+    triangles: c3030000
     adjacents: 
-  - triangles: c4030000
+  - name: 964
+    triangles: c4030000
     adjacents: 
-  - triangles: c5030000
+  - name: 965
+    triangles: c5030000
     adjacents: 
-  - triangles: c6030000
+  - name: 966
+    triangles: c6030000
     adjacents: 
-  - triangles: c7030000
+  - name: 967
+    triangles: c7030000
     adjacents: 
-  - triangles: c8030000
+  - name: 968
+    triangles: c8030000
     adjacents: 
-  - triangles: c9030000
+  - name: 969
+    triangles: c9030000
     adjacents: 
-  - triangles: ca030000
+  - name: 970
+    triangles: ca030000
     adjacents: 
-  - triangles: cb030000
+  - name: 971
+    triangles: cb030000
     adjacents: 
-  - triangles: cc030000
+  - name: 972
+    triangles: cc030000
     adjacents: 
-  - triangles: cd030000
+  - name: 973
+    triangles: cd030000
     adjacents: 
-  - triangles: ce030000
+  - name: 974
+    triangles: ce030000
     adjacents: 
-  - triangles: cf030000
+  - name: 975
+    triangles: cf030000
     adjacents: 
-  - triangles: d0030000
+  - name: 976
+    triangles: d0030000
     adjacents: 
-  - triangles: d1030000
+  - name: 977
+    triangles: d1030000
     adjacents: 
-  - triangles: d2030000
+  - name: 978
+    triangles: d2030000
     adjacents: 
-  - triangles: d3030000
+  - name: 979
+    triangles: d3030000
     adjacents: 
-  - triangles: d4030000
+  - name: 980
+    triangles: d4030000
     adjacents: 
-  - triangles: d5030000
+  - name: 981
+    triangles: d5030000
     adjacents: 
-  - triangles: d6030000
+  - name: 982
+    triangles: d6030000
     adjacents: 
-  - triangles: d7030000
+  - name: 983
+    triangles: d7030000
     adjacents: 
-  - triangles: d8030000
+  - name: 984
+    triangles: d8030000
     adjacents: 
-  - triangles: d9030000
+  - name: 985
+    triangles: d9030000
     adjacents: 
-  - triangles: da030000
+  - name: 986
+    triangles: da030000
     adjacents: 
-  - triangles: db030000
+  - name: 987
+    triangles: db030000
     adjacents: 
-  - triangles: dc030000
+  - name: 988
+    triangles: dc030000
     adjacents: 
-  - triangles: dd030000
+  - name: 989
+    triangles: dd030000
     adjacents: 
-  - triangles: de030000
+  - name: 990
+    triangles: de030000
     adjacents: 
-  - triangles: df030000
+  - name: 991
+    triangles: df030000
     adjacents: 
-  - triangles: e0030000
+  - name: 992
+    triangles: e0030000
     adjacents: 
-  - triangles: e1030000
+  - name: 993
+    triangles: e1030000
     adjacents: 
-  - triangles: e2030000
+  - name: 994
+    triangles: e2030000
     adjacents: 
-  - triangles: e3030000
+  - name: 995
+    triangles: e3030000
     adjacents: 
-  - triangles: e4030000
+  - name: 996
+    triangles: e4030000
     adjacents: 
-  - triangles: e5030000
+  - name: 997
+    triangles: e5030000
     adjacents: 
-  - triangles: e6030000
+  - name: 998
+    triangles: e6030000
     adjacents: 
-  - triangles: e7030000
+  - name: 999
+    triangles: e7030000
     adjacents: 
-  - triangles: e8030000
+  - name: 1000
+    triangles: e8030000
     adjacents: 
-  - triangles: e9030000
+  - name: 1001
+    triangles: e9030000
     adjacents: 
-  - triangles: ea030000
+  - name: 1002
+    triangles: ea030000
     adjacents: 
-  - triangles: eb030000
+  - name: 1003
+    triangles: eb030000
     adjacents: 
-  - triangles: ec030000
+  - name: 1004
+    triangles: ec030000
     adjacents: 
-  - triangles: ed030000
+  - name: 1005
+    triangles: ed030000
     adjacents: 
-  - triangles: ee030000
+  - name: 1006
+    triangles: ee030000
     adjacents: 
-  - triangles: ef030000
+  - name: 1007
+    triangles: ef030000
     adjacents: 
-  - triangles: f0030000
+  - name: 1008
+    triangles: f0030000
     adjacents: 
-  - triangles: f1030000
+  - name: 1009
+    triangles: f1030000
     adjacents: 
-  - triangles: f2030000
+  - name: 1010
+    triangles: f2030000
     adjacents: 
-  - triangles: f3030000
+  - name: 1011
+    triangles: f3030000
     adjacents: 
-  - triangles: f4030000
+  - name: 1012
+    triangles: f4030000
     adjacents: 
-  - triangles: f5030000
+  - name: 1013
+    triangles: f5030000
     adjacents: 
-  - triangles: f6030000
+  - name: 1014
+    triangles: f6030000
     adjacents: 
-  - triangles: f7030000
+  - name: 1015
+    triangles: f7030000
     adjacents: 
-  - triangles: f8030000
+  - name: 1016
+    triangles: f8030000
     adjacents: 
-  - triangles: f9030000
+  - name: 1017
+    triangles: f9030000
     adjacents: 
-  - triangles: fa030000
+  - name: 1018
+    triangles: fa030000
     adjacents: 
-  - triangles: fb030000
+  - name: 1019
+    triangles: fb030000
     adjacents: 
-  - triangles: fc030000
+  - name: 1020
+    triangles: fc030000
     adjacents: 
-  - triangles: fd030000
+  - name: 1021
+    triangles: fd030000
     adjacents: 
-  - triangles: fe030000
+  - name: 1022
+    triangles: fe030000
     adjacents: 
-  - triangles: ff030000
+  - name: 1023
+    triangles: ff030000
     adjacents: 
-  - triangles: 00040000
+  - name: 1024
+    triangles: 00040000
     adjacents: 
-  - triangles: 01040000
+  - name: 1025
+    triangles: 01040000
     adjacents: 
-  - triangles: 02040000
+  - name: 1026
+    triangles: 02040000
     adjacents: 
-  - triangles: 03040000
+  - name: 1027
+    triangles: 03040000
     adjacents: 
-  - triangles: 04040000
+  - name: 1028
+    triangles: 04040000
     adjacents: 
-  - triangles: 05040000
+  - name: 1029
+    triangles: 05040000
     adjacents: 
-  - triangles: 06040000
+  - name: 1030
+    triangles: 06040000
     adjacents: 
-  - triangles: 07040000
+  - name: 1031
+    triangles: 07040000
     adjacents: 
-  - triangles: 08040000
+  - name: 1032
+    triangles: 08040000
     adjacents: 
-  - triangles: 09040000
+  - name: 1033
+    triangles: 09040000
     adjacents: 
-  - triangles: 0a040000
+  - name: 1034
+    triangles: 0a040000
     adjacents: 
-  - triangles: 0b040000
+  - name: 1035
+    triangles: 0b040000
     adjacents: 
-  - triangles: 0c040000
+  - name: 1036
+    triangles: 0c040000
     adjacents: 
-  - triangles: 0d040000
+  - name: 1037
+    triangles: 0d040000
     adjacents: 
-  - triangles: 0e040000
+  - name: 1038
+    triangles: 0e040000
     adjacents: 
-  - triangles: 0f040000
+  - name: 1039
+    triangles: 0f040000
     adjacents: 
-  - triangles: 10040000
+  - name: 1040
+    triangles: 10040000
     adjacents: 
-  - triangles: 11040000
+  - name: 1041
+    triangles: 11040000
     adjacents: 
-  - triangles: 12040000
+  - name: 1042
+    triangles: 12040000
     adjacents: 
-  - triangles: 13040000
+  - name: 1043
+    triangles: 13040000
     adjacents: 
-  - triangles: 14040000
+  - name: 1044
+    triangles: 14040000
     adjacents: 
-  - triangles: 15040000
+  - name: 1045
+    triangles: 15040000
     adjacents: 
-  - triangles: 16040000
+  - name: 1046
+    triangles: 16040000
     adjacents: 
-  - triangles: 17040000
+  - name: 1047
+    triangles: 17040000
     adjacents: 
-  - triangles: 18040000
+  - name: 1048
+    triangles: 18040000
     adjacents: 
-  - triangles: 19040000
+  - name: 1049
+    triangles: 19040000
     adjacents: 
-  - triangles: 1a040000
+  - name: 1050
+    triangles: 1a040000
     adjacents: 
-  - triangles: 1b040000
+  - name: 1051
+    triangles: 1b040000
     adjacents: 
-  - triangles: 1c040000
+  - name: 1052
+    triangles: 1c040000
     adjacents: 
-  - triangles: 1d040000
+  - name: 1053
+    triangles: 1d040000
     adjacents: 
-  - triangles: 1e040000
+  - name: 1054
+    triangles: 1e040000
     adjacents: 
-  - triangles: 1f040000
+  - name: 1055
+    triangles: 1f040000
     adjacents: 
-  - triangles: 20040000
+  - name: 1056
+    triangles: 20040000
     adjacents: 
-  - triangles: 21040000
+  - name: 1057
+    triangles: 21040000
     adjacents: 
-  - triangles: 22040000
+  - name: 1058
+    triangles: 22040000
     adjacents: 
-  - triangles: 23040000
+  - name: 1059
+    triangles: 23040000
     adjacents: 
-  - triangles: 24040000
+  - name: 1060
+    triangles: 24040000
     adjacents: 
-  - triangles: 25040000
+  - name: 1061
+    triangles: 25040000
     adjacents: 
-  - triangles: 26040000
+  - name: 1062
+    triangles: 26040000
     adjacents: 
-  - triangles: 27040000
+  - name: 1063
+    triangles: 27040000
     adjacents: 
-  - triangles: 28040000
+  - name: 1064
+    triangles: 28040000
     adjacents: 
-  - triangles: 29040000
+  - name: 1065
+    triangles: 29040000
     adjacents: 
-  - triangles: 2a040000
+  - name: 1066
+    triangles: 2a040000
     adjacents: 
-  - triangles: 2b040000
+  - name: 1067
+    triangles: 2b040000
     adjacents: 
-  - triangles: 2c040000
+  - name: 1068
+    triangles: 2c040000
     adjacents: 
-  - triangles: 2d040000
+  - name: 1069
+    triangles: 2d040000
     adjacents: 
-  - triangles: 2e040000
+  - name: 1070
+    triangles: 2e040000
     adjacents: 
-  - triangles: 2f040000
+  - name: 1071
+    triangles: 2f040000
     adjacents: 
-  - triangles: 30040000
+  - name: 1072
+    triangles: 30040000
     adjacents: 
-  - triangles: 31040000
+  - name: 1073
+    triangles: 31040000
     adjacents: 
-  - triangles: 32040000
+  - name: 1074
+    triangles: 32040000
     adjacents: 
-  - triangles: 33040000
+  - name: 1075
+    triangles: 33040000
     adjacents: 
-  - triangles: 34040000
+  - name: 1076
+    triangles: 34040000
     adjacents: 
-  - triangles: 35040000
+  - name: 1077
+    triangles: 35040000
     adjacents: 
-  - triangles: 36040000
+  - name: 1078
+    triangles: 36040000
     adjacents: 
-  - triangles: 37040000
+  - name: 1079
+    triangles: 37040000
     adjacents: 
-  - triangles: 38040000
+  - name: 1080
+    triangles: 38040000
     adjacents: 
-  - triangles: 39040000
+  - name: 1081
+    triangles: 39040000
     adjacents: 
-  - triangles: 3a040000
+  - name: 1082
+    triangles: 3a040000
     adjacents: 
-  - triangles: 3b040000
+  - name: 1083
+    triangles: 3b040000
     adjacents: 
-  - triangles: 3c040000
+  - name: 1084
+    triangles: 3c040000
     adjacents: 
-  - triangles: 3d040000
+  - name: 1085
+    triangles: 3d040000
     adjacents: 
-  - triangles: 3e040000
+  - name: 1086
+    triangles: 3e040000
     adjacents: 
-  - triangles: 3f040000
+  - name: 1087
+    triangles: 3f040000
     adjacents: 
-  - triangles: 40040000
+  - name: 1088
+    triangles: 40040000
     adjacents: 
-  - triangles: 41040000
+  - name: 1089
+    triangles: 41040000
     adjacents: 
-  - triangles: 42040000
+  - name: 1090
+    triangles: 42040000
     adjacents: 
-  - triangles: 43040000
+  - name: 1091
+    triangles: 43040000
     adjacents: 
-  - triangles: 44040000
+  - name: 1092
+    triangles: 44040000
     adjacents: 
-  - triangles: 45040000
+  - name: 1093
+    triangles: 45040000
     adjacents: 
-  - triangles: 46040000
+  - name: 1094
+    triangles: 46040000
     adjacents: 
-  - triangles: 47040000
+  - name: 1095
+    triangles: 47040000
     adjacents: 
-  - triangles: 48040000
+  - name: 1096
+    triangles: 48040000
     adjacents: 
-  - triangles: 49040000
+  - name: 1097
+    triangles: 49040000
     adjacents: 
-  - triangles: 4a040000
+  - name: 1098
+    triangles: 4a040000
     adjacents: 
-  - triangles: 4b040000
+  - name: 1099
+    triangles: 4b040000
     adjacents: 
-  - triangles: 4c040000
+  - name: 1100
+    triangles: 4c040000
     adjacents: 
-  - triangles: 4d040000
+  - name: 1101
+    triangles: 4d040000
     adjacents: 
-  - triangles: 4e040000
+  - name: 1102
+    triangles: 4e040000
     adjacents: 
-  - triangles: 4f040000
+  - name: 1103
+    triangles: 4f040000
     adjacents: 
-  - triangles: 50040000
+  - name: 1104
+    triangles: 50040000
     adjacents: 
-  - triangles: 51040000
+  - name: 1105
+    triangles: 51040000
     adjacents: 
-  - triangles: 52040000
+  - name: 1106
+    triangles: 52040000
     adjacents: 
-  - triangles: 53040000
+  - name: 1107
+    triangles: 53040000
     adjacents: 
-  - triangles: 54040000
+  - name: 1108
+    triangles: 54040000
     adjacents: 
-  - triangles: 55040000
+  - name: 1109
+    triangles: 55040000
     adjacents: 
-  - triangles: 56040000
+  - name: 1110
+    triangles: 56040000
     adjacents: 
-  - triangles: 57040000
+  - name: 1111
+    triangles: 57040000
     adjacents: 
-  - triangles: 58040000
+  - name: 1112
+    triangles: 58040000
     adjacents: 
-  - triangles: 59040000
+  - name: 1113
+    triangles: 59040000
     adjacents: 
-  - triangles: 5a040000
+  - name: 1114
+    triangles: 5a040000
     adjacents: 
-  - triangles: 5b040000
+  - name: 1115
+    triangles: 5b040000
     adjacents: 
-  - triangles: 5c040000
+  - name: 1116
+    triangles: 5c040000
     adjacents: 
-  - triangles: 5d040000
+  - name: 1117
+    triangles: 5d040000
     adjacents: 
-  - triangles: 5e040000
+  - name: 1118
+    triangles: 5e040000
     adjacents: 
-  - triangles: 5f040000
+  - name: 1119
+    triangles: 5f040000
     adjacents: 
-  - triangles: 60040000
+  - name: 1120
+    triangles: 60040000
     adjacents: 
-  - triangles: 61040000
+  - name: 1121
+    triangles: 61040000
     adjacents: 
-  - triangles: 62040000
+  - name: 1122
+    triangles: 62040000
     adjacents: 
-  - triangles: 63040000
+  - name: 1123
+    triangles: 63040000
     adjacents: 
-  - triangles: 64040000
+  - name: 1124
+    triangles: 64040000
     adjacents: 
-  - triangles: 65040000
+  - name: 1125
+    triangles: 65040000
     adjacents: 
-  - triangles: 66040000
+  - name: 1126
+    triangles: 66040000
     adjacents: 
-  - triangles: 67040000
+  - name: 1127
+    triangles: 67040000
     adjacents: 
-  - triangles: 68040000
+  - name: 1128
+    triangles: 68040000
     adjacents: 
-  - triangles: 69040000
+  - name: 1129
+    triangles: 69040000
     adjacents: 
-  - triangles: 6a040000
+  - name: 1130
+    triangles: 6a040000
     adjacents: 
-  - triangles: 6b040000
+  - name: 1131
+    triangles: 6b040000
     adjacents: 
-  - triangles: 6c040000
+  - name: 1132
+    triangles: 6c040000
     adjacents: 
-  - triangles: 6d040000
+  - name: 1133
+    triangles: 6d040000
     adjacents: 
-  - triangles: 6e040000
+  - name: 1134
+    triangles: 6e040000
     adjacents: 
-  - triangles: 6f040000
+  - name: 1135
+    triangles: 6f040000
     adjacents: 
-  - triangles: 70040000
+  - name: 1136
+    triangles: 70040000
     adjacents: 
-  - triangles: 71040000
+  - name: 1137
+    triangles: 71040000
     adjacents: 
-  - triangles: 72040000
+  - name: 1138
+    triangles: 72040000
     adjacents: 
-  - triangles: 73040000
+  - name: 1139
+    triangles: 73040000
     adjacents: 
-  - triangles: 74040000
+  - name: 1140
+    triangles: 74040000
     adjacents: 
-  - triangles: 75040000
+  - name: 1141
+    triangles: 75040000
     adjacents: 
-  - triangles: 76040000
+  - name: 1142
+    triangles: 76040000
     adjacents: 
-  - triangles: 77040000
+  - name: 1143
+    triangles: 77040000
     adjacents: 
-  - triangles: 78040000
+  - name: 1144
+    triangles: 78040000
     adjacents: 
-  - triangles: 79040000
+  - name: 1145
+    triangles: 79040000
     adjacents: 
-  - triangles: 7a040000
+  - name: 1146
+    triangles: 7a040000
     adjacents: 
-  - triangles: 7b040000
+  - name: 1147
+    triangles: 7b040000
     adjacents: 
-  - triangles: 7c040000
+  - name: 1148
+    triangles: 7c040000
     adjacents: 
-  - triangles: 7d040000
+  - name: 1149
+    triangles: 7d040000
     adjacents: 
-  - triangles: 7e040000
+  - name: 1150
+    triangles: 7e040000
     adjacents: 
-  - triangles: 7f040000
+  - name: 1151
+    triangles: 7f040000
     adjacents: 
-  - triangles: 80040000
+  - name: 1152
+    triangles: 80040000
     adjacents: 
-  - triangles: 81040000
+  - name: 1153
+    triangles: 81040000
     adjacents: 
-  - triangles: 82040000
+  - name: 1154
+    triangles: 82040000
     adjacents: 
-  - triangles: 83040000
+  - name: 1155
+    triangles: 83040000
     adjacents: 
-  - triangles: 84040000
+  - name: 1156
+    triangles: 84040000
     adjacents: 
-  - triangles: 85040000
+  - name: 1157
+    triangles: 85040000
     adjacents: 
-  - triangles: 86040000
+  - name: 1158
+    triangles: 86040000
     adjacents: 
-  - triangles: 87040000
+  - name: 1159
+    triangles: 87040000
     adjacents: 
-  - triangles: 88040000
+  - name: 1160
+    triangles: 88040000
     adjacents: 
-  - triangles: 89040000
+  - name: 1161
+    triangles: 89040000
     adjacents: 
-  - triangles: 8a040000
+  - name: 1162
+    triangles: 8a040000
     adjacents: 
-  - triangles: 8b040000
+  - name: 1163
+    triangles: 8b040000
     adjacents: 
-  - triangles: 8c040000
+  - name: 1164
+    triangles: 8c040000
     adjacents: 
-  - triangles: 8d040000
+  - name: 1165
+    triangles: 8d040000
     adjacents: 
-  - triangles: 8e040000
+  - name: 1166
+    triangles: 8e040000
     adjacents: 
-  - triangles: 8f040000
+  - name: 1167
+    triangles: 8f040000
     adjacents: 
-  - triangles: 90040000
+  - name: 1168
+    triangles: 90040000
     adjacents: 
-  - triangles: 91040000
+  - name: 1169
+    triangles: 91040000
     adjacents: 
-  - triangles: 92040000
+  - name: 1170
+    triangles: 92040000
     adjacents: 
-  - triangles: 93040000
+  - name: 1171
+    triangles: 93040000
     adjacents: 
-  - triangles: 94040000
+  - name: 1172
+    triangles: 94040000
     adjacents: 
-  - triangles: 95040000
+  - name: 1173
+    triangles: 95040000
     adjacents: 
-  - triangles: 96040000
+  - name: 1174
+    triangles: 96040000
     adjacents: 
-  - triangles: 97040000
+  - name: 1175
+    triangles: 97040000
     adjacents: 
-  - triangles: 98040000
+  - name: 1176
+    triangles: 98040000
     adjacents: 
-  - triangles: 99040000
+  - name: 1177
+    triangles: 99040000
     adjacents: 
-  - triangles: 9a040000
+  - name: 1178
+    triangles: 9a040000
     adjacents: 
-  - triangles: 9b040000
+  - name: 1179
+    triangles: 9b040000
     adjacents: 
-  - triangles: 9c040000
+  - name: 1180
+    triangles: 9c040000
     adjacents: 
-  - triangles: 9d040000
+  - name: 1181
+    triangles: 9d040000
     adjacents: 
-  - triangles: 9e040000
+  - name: 1182
+    triangles: 9e040000
     adjacents: 
-  - triangles: 9f040000
+  - name: 1183
+    triangles: 9f040000
     adjacents: 
-  - triangles: a0040000
+  - name: 1184
+    triangles: a0040000
     adjacents: 
-  - triangles: a1040000
+  - name: 1185
+    triangles: a1040000
     adjacents: 
-  - triangles: a2040000
+  - name: 1186
+    triangles: a2040000
     adjacents: 
-  - triangles: a3040000
+  - name: 1187
+    triangles: a3040000
     adjacents: 
-  - triangles: a4040000
+  - name: 1188
+    triangles: a4040000
     adjacents: 
-  - triangles: a5040000
+  - name: 1189
+    triangles: a5040000
     adjacents: 
-  - triangles: a6040000
+  - name: 1190
+    triangles: a6040000
     adjacents: 
-  - triangles: a7040000
+  - name: 1191
+    triangles: a7040000
     adjacents: 
-  - triangles: a8040000
+  - name: 1192
+    triangles: a8040000
     adjacents: 
-  - triangles: a9040000
+  - name: 1193
+    triangles: a9040000
     adjacents: 
-  - triangles: aa040000
+  - name: 1194
+    triangles: aa040000
     adjacents: 
-  - triangles: ab040000
+  - name: 1195
+    triangles: ab040000
     adjacents: 
-  - triangles: ac040000
+  - name: 1196
+    triangles: ac040000
     adjacents: 
-  - triangles: ad040000
+  - name: 1197
+    triangles: ad040000
     adjacents: 
-  - triangles: ae040000
+  - name: 1198
+    triangles: ae040000
     adjacents: 
-  - triangles: af040000
+  - name: 1199
+    triangles: af040000
     adjacents: 
-  - triangles: b0040000
+  - name: 1200
+    triangles: b0040000
     adjacents: 
-  - triangles: b1040000
+  - name: 1201
+    triangles: b1040000
     adjacents: 
-  - triangles: b2040000
+  - name: 1202
+    triangles: b2040000
     adjacents: 
-  - triangles: b3040000
+  - name: 1203
+    triangles: b3040000
     adjacents: 
-  - triangles: b4040000
+  - name: 1204
+    triangles: b4040000
     adjacents: 
-  - triangles: b5040000
+  - name: 1205
+    triangles: b5040000
     adjacents: 
-  - triangles: b6040000
+  - name: 1206
+    triangles: b6040000
     adjacents: 
-  - triangles: b7040000
+  - name: 1207
+    triangles: b7040000
     adjacents: 
-  - triangles: b8040000
+  - name: 1208
+    triangles: b8040000
     adjacents: 
-  - triangles: b9040000
+  - name: 1209
+    triangles: b9040000
     adjacents: 
-  - triangles: ba040000
+  - name: 1210
+    triangles: ba040000
     adjacents: 
-  - triangles: bb040000
+  - name: 1211
+    triangles: bb040000
     adjacents: 
-  - triangles: bc040000
+  - name: 1212
+    triangles: bc040000
     adjacents: 
-  - triangles: bd040000
+  - name: 1213
+    triangles: bd040000
     adjacents: 
-  - triangles: be040000
+  - name: 1214
+    triangles: be040000
     adjacents: 
-  - triangles: bf040000
+  - name: 1215
+    triangles: bf040000
     adjacents: 
-  - triangles: c0040000
+  - name: 1216
+    triangles: c0040000
     adjacents: 
-  - triangles: c1040000
+  - name: 1217
+    triangles: c1040000
     adjacents: 
-  - triangles: c2040000
+  - name: 1218
+    triangles: c2040000
     adjacents: 
-  - triangles: c3040000
+  - name: 1219
+    triangles: c3040000
     adjacents: 
-  - triangles: c4040000
+  - name: 1220
+    triangles: c4040000
     adjacents: 
-  - triangles: c5040000
+  - name: 1221
+    triangles: c5040000
     adjacents: 
-  - triangles: c6040000
+  - name: 1222
+    triangles: c6040000
     adjacents: 
-  - triangles: c7040000
+  - name: 1223
+    triangles: c7040000
     adjacents: 
-  - triangles: c8040000
+  - name: 1224
+    triangles: c8040000
     adjacents: 
-  - triangles: c9040000
+  - name: 1225
+    triangles: c9040000
     adjacents: 
-  - triangles: ca040000
+  - name: 1226
+    triangles: ca040000
     adjacents: 
-  - triangles: cb040000
+  - name: 1227
+    triangles: cb040000
     adjacents: 
-  - triangles: cc040000
+  - name: 1228
+    triangles: cc040000
     adjacents: 
-  - triangles: cd040000
+  - name: 1229
+    triangles: cd040000
     adjacents: 
-  - triangles: ce040000
+  - name: 1230
+    triangles: ce040000
     adjacents: 
-  - triangles: cf040000
+  - name: 1231
+    triangles: cf040000
     adjacents: 
-  - triangles: d0040000
+  - name: 1232
+    triangles: d0040000
     adjacents: 
-  - triangles: d1040000
+  - name: 1233
+    triangles: d1040000
     adjacents: 
-  - triangles: d2040000
+  - name: 1234
+    triangles: d2040000
     adjacents: 
-  - triangles: d3040000
+  - name: 1235
+    triangles: d3040000
     adjacents: 
-  - triangles: d4040000
+  - name: 1236
+    triangles: d4040000
     adjacents: 
-  - triangles: d5040000
+  - name: 1237
+    triangles: d5040000
     adjacents: 
-  - triangles: d6040000
+  - name: 1238
+    triangles: d6040000
     adjacents: 
-  - triangles: d7040000
+  - name: 1239
+    triangles: d7040000
     adjacents: 
-  - triangles: d8040000
+  - name: 1240
+    triangles: d8040000
     adjacents: 
-  - triangles: d9040000
+  - name: 1241
+    triangles: d9040000
     adjacents: 
-  - triangles: da040000
+  - name: 1242
+    triangles: da040000
     adjacents: 
-  - triangles: db040000
+  - name: 1243
+    triangles: db040000
     adjacents: 
-  - triangles: dc040000
+  - name: 1244
+    triangles: dc040000
     adjacents: 
-  - triangles: dd040000
+  - name: 1245
+    triangles: dd040000
     adjacents: 
-  - triangles: de040000
+  - name: 1246
+    triangles: de040000
     adjacents: 
-  - triangles: df040000
+  - name: 1247
+    triangles: df040000
     adjacents: 
-  - triangles: e0040000
+  - name: 1248
+    triangles: e0040000
     adjacents: 
-  - triangles: e1040000
+  - name: 1249
+    triangles: e1040000
     adjacents: 
-  - triangles: e2040000
+  - name: 1250
+    triangles: e2040000
     adjacents: 
-  - triangles: e3040000
+  - name: 1251
+    triangles: e3040000
     adjacents: 
-  - triangles: e4040000
+  - name: 1252
+    triangles: e4040000
     adjacents: 
-  - triangles: e5040000
+  - name: 1253
+    triangles: e5040000
     adjacents: 
-  - triangles: e6040000
+  - name: 1254
+    triangles: e6040000
     adjacents: 
-  - triangles: e7040000
+  - name: 1255
+    triangles: e7040000
     adjacents: 
-  - triangles: e8040000
+  - name: 1256
+    triangles: e8040000
     adjacents: 
-  - triangles: e9040000
+  - name: 1257
+    triangles: e9040000
     adjacents: 
-  - triangles: ea040000
+  - name: 1258
+    triangles: ea040000
     adjacents: 
-  - triangles: eb040000
+  - name: 1259
+    triangles: eb040000
     adjacents: 
-  - triangles: ec040000
+  - name: 1260
+    triangles: ec040000
     adjacents: 
-  - triangles: ed040000
+  - name: 1261
+    triangles: ed040000
     adjacents: 
-  - triangles: ee040000
+  - name: 1262
+    triangles: ee040000
     adjacents: 
-  - triangles: ef040000
+  - name: 1263
+    triangles: ef040000
     adjacents: 
-  - triangles: f0040000
+  - name: 1264
+    triangles: f0040000
     adjacents: 
-  - triangles: f1040000
+  - name: 1265
+    triangles: f1040000
     adjacents: 
-  - triangles: f2040000
+  - name: 1266
+    triangles: f2040000
     adjacents: 
-  - triangles: f3040000
+  - name: 1267
+    triangles: f3040000
     adjacents: 
-  - triangles: f4040000
+  - name: 1268
+    triangles: f4040000
     adjacents: 
-  - triangles: f5040000
+  - name: 1269
+    triangles: f5040000
     adjacents: 
-  - triangles: f6040000
+  - name: 1270
+    triangles: f6040000
     adjacents: 
-  - triangles: f7040000
+  - name: 1271
+    triangles: f7040000
     adjacents: 
-  - triangles: f8040000
+  - name: 1272
+    triangles: f8040000
     adjacents: 
-  - triangles: f9040000
+  - name: 1273
+    triangles: f9040000
     adjacents: 
-  - triangles: fa040000
+  - name: 1274
+    triangles: fa040000
     adjacents: 
-  - triangles: fb040000
+  - name: 1275
+    triangles: fb040000
     adjacents: 
-  - triangles: fc040000
+  - name: 1276
+    triangles: fc040000
     adjacents: 
-  - triangles: fd040000
+  - name: 1277
+    triangles: fd040000
     adjacents: 
-  - triangles: fe040000
+  - name: 1278
+    triangles: fe040000
     adjacents: 
-  - triangles: ff040000
+  - name: 1279
+    triangles: ff040000
     adjacents: 
-  - triangles: 00050000
+  - name: 1280
+    triangles: 00050000
     adjacents: 
-  - triangles: 01050000
+  - name: 1281
+    triangles: 01050000
     adjacents: 
-  - triangles: 02050000
+  - name: 1282
+    triangles: 02050000
     adjacents: 
-  - triangles: 03050000
+  - name: 1283
+    triangles: 03050000
     adjacents: 
-  - triangles: 04050000
+  - name: 1284
+    triangles: 04050000
     adjacents: 
-  - triangles: 05050000
+  - name: 1285
+    triangles: 05050000
     adjacents: 
-  - triangles: 06050000
+  - name: 1286
+    triangles: 06050000
     adjacents: 
-  - triangles: 07050000
+  - name: 1287
+    triangles: 07050000
     adjacents: 
-  - triangles: 08050000
+  - name: 1288
+    triangles: 08050000
     adjacents: 
-  - triangles: 09050000
+  - name: 1289
+    triangles: 09050000
     adjacents: 
-  - triangles: 0a050000
+  - name: 1290
+    triangles: 0a050000
     adjacents: 
-  - triangles: 0b050000
+  - name: 1291
+    triangles: 0b050000
     adjacents: 
-  - triangles: 0c050000
+  - name: 1292
+    triangles: 0c050000
     adjacents: 
-  - triangles: 0d050000
+  - name: 1293
+    triangles: 0d050000
     adjacents: 
-  - triangles: 0e050000
+  - name: 1294
+    triangles: 0e050000
     adjacents: 
-  - triangles: 0f050000
+  - name: 1295
+    triangles: 0f050000
     adjacents: 
-  - triangles: 10050000
+  - name: 1296
+    triangles: 10050000
     adjacents: 
-  - triangles: 11050000
+  - name: 1297
+    triangles: 11050000
     adjacents: 
-  - triangles: 12050000
+  - name: 1298
+    triangles: 12050000
     adjacents: 
-  - triangles: 13050000
+  - name: 1299
+    triangles: 13050000
     adjacents: 
-  - triangles: 14050000
+  - name: 1300
+    triangles: 14050000
     adjacents: 
-  - triangles: 15050000
+  - name: 1301
+    triangles: 15050000
     adjacents: 
-  - triangles: 16050000
+  - name: 1302
+    triangles: 16050000
     adjacents: 
-  - triangles: 17050000
+  - name: 1303
+    triangles: 17050000
     adjacents: 
-  - triangles: 18050000
+  - name: 1304
+    triangles: 18050000
     adjacents: 
-  - triangles: 19050000
+  - name: 1305
+    triangles: 19050000
     adjacents: 
-  - triangles: 1a050000
+  - name: 1306
+    triangles: 1a050000
     adjacents: 
-  - triangles: 1b050000
+  - name: 1307
+    triangles: 1b050000
     adjacents: 
-  - triangles: 1c050000
+  - name: 1308
+    triangles: 1c050000
     adjacents: 
-  - triangles: 1d050000
+  - name: 1309
+    triangles: 1d050000
     adjacents: 
-  - triangles: 1e050000
+  - name: 1310
+    triangles: 1e050000
     adjacents: 
-  - triangles: 1f050000
+  - name: 1311
+    triangles: 1f050000
     adjacents: 
-  - triangles: 20050000
+  - name: 1312
+    triangles: 20050000
     adjacents: 
-  - triangles: 21050000
+  - name: 1313
+    triangles: 21050000
     adjacents: 
-  - triangles: 22050000
+  - name: 1314
+    triangles: 22050000
     adjacents: 
-  - triangles: 23050000
+  - name: 1315
+    triangles: 23050000
     adjacents: 
-  - triangles: 24050000
+  - name: 1316
+    triangles: 24050000
     adjacents: 
-  - triangles: 25050000
+  - name: 1317
+    triangles: 25050000
     adjacents: 
-  - triangles: 26050000
+  - name: 1318
+    triangles: 26050000
     adjacents: 
-  - triangles: 27050000
+  - name: 1319
+    triangles: 27050000
     adjacents: 
-  - triangles: 28050000
+  - name: 1320
+    triangles: 28050000
     adjacents: 
-  - triangles: 29050000
+  - name: 1321
+    triangles: 29050000
     adjacents: 
-  - triangles: 2a050000
+  - name: 1322
+    triangles: 2a050000
     adjacents: 
-  - triangles: 2b050000
+  - name: 1323
+    triangles: 2b050000
     adjacents: 
-  - triangles: 2c050000
+  - name: 1324
+    triangles: 2c050000
     adjacents: 
-  - triangles: 2d050000
+  - name: 1325
+    triangles: 2d050000
     adjacents: 
-  - triangles: 2e050000
+  - name: 1326
+    triangles: 2e050000
     adjacents: 
-  - triangles: 2f050000
+  - name: 1327
+    triangles: 2f050000
     adjacents: 
-  - triangles: 30050000
+  - name: 1328
+    triangles: 30050000
     adjacents: 
-  - triangles: 31050000
+  - name: 1329
+    triangles: 31050000
     adjacents: 
-  - triangles: 32050000
+  - name: 1330
+    triangles: 32050000
     adjacents: 
-  - triangles: 33050000
+  - name: 1331
+    triangles: 33050000
     adjacents: 
-  - triangles: 34050000
+  - name: 1332
+    triangles: 34050000
     adjacents: 
-  - triangles: 35050000
+  - name: 1333
+    triangles: 35050000
     adjacents: 
-  - triangles: 36050000
+  - name: 1334
+    triangles: 36050000
     adjacents: 
-  - triangles: 37050000
+  - name: 1335
+    triangles: 37050000
     adjacents: 
-  - triangles: 38050000
+  - name: 1336
+    triangles: 38050000
     adjacents: 
-  - triangles: 39050000
+  - name: 1337
+    triangles: 39050000
     adjacents: 
-  - triangles: 3a050000
+  - name: 1338
+    triangles: 3a050000
     adjacents: 
-  - triangles: 3b050000
+  - name: 1339
+    triangles: 3b050000
     adjacents: 
-  - triangles: 3c050000
+  - name: 1340
+    triangles: 3c050000
     adjacents: 
-  - triangles: 3d050000
+  - name: 1341
+    triangles: 3d050000
     adjacents: 
-  - triangles: 3e050000
+  - name: 1342
+    triangles: 3e050000
     adjacents: 
-  - triangles: 3f050000
+  - name: 1343
+    triangles: 3f050000
     adjacents: 
-  - triangles: 40050000
+  - name: 1344
+    triangles: 40050000
     adjacents: 
-  - triangles: 41050000
+  - name: 1345
+    triangles: 41050000
     adjacents: 
-  - triangles: 42050000
+  - name: 1346
+    triangles: 42050000
     adjacents: 
-  - triangles: 43050000
+  - name: 1347
+    triangles: 43050000
     adjacents: 
-  - triangles: 44050000
+  - name: 1348
+    triangles: 44050000
     adjacents: 
-  - triangles: 45050000
+  - name: 1349
+    triangles: 45050000
     adjacents: 
-  - triangles: 46050000
+  - name: 1350
+    triangles: 46050000
     adjacents: 
-  - triangles: 47050000
+  - name: 1351
+    triangles: 47050000
     adjacents: 
-  - triangles: 48050000
+  - name: 1352
+    triangles: 48050000
     adjacents: 
-  - triangles: 49050000
+  - name: 1353
+    triangles: 49050000
     adjacents: 
-  - triangles: 4a050000
+  - name: 1354
+    triangles: 4a050000
     adjacents: 
-  - triangles: 4b050000
+  - name: 1355
+    triangles: 4b050000
     adjacents: 
-  - triangles: 4c050000
+  - name: 1356
+    triangles: 4c050000
     adjacents: 
-  - triangles: 4d050000
+  - name: 1357
+    triangles: 4d050000
     adjacents: 
-  - triangles: 4e050000
+  - name: 1358
+    triangles: 4e050000
     adjacents: 
-  - triangles: 4f050000
+  - name: 1359
+    triangles: 4f050000
     adjacents: 
-  - triangles: 50050000
+  - name: 1360
+    triangles: 50050000
     adjacents: 
-  - triangles: 51050000
+  - name: 1361
+    triangles: 51050000
     adjacents: 
-  - triangles: 52050000
+  - name: 1362
+    triangles: 52050000
     adjacents: 
-  - triangles: 53050000
+  - name: 1363
+    triangles: 53050000
     adjacents: 
-  - triangles: 54050000
+  - name: 1364
+    triangles: 54050000
     adjacents: 
-  - triangles: 55050000
+  - name: 1365
+    triangles: 55050000
     adjacents: 
-  - triangles: 56050000
+  - name: 1366
+    triangles: 56050000
     adjacents: 
-  - triangles: 57050000
+  - name: 1367
+    triangles: 57050000
     adjacents: 
-  - triangles: 58050000
+  - name: 1368
+    triangles: 58050000
     adjacents: 
-  - triangles: 59050000
+  - name: 1369
+    triangles: 59050000
     adjacents: 
-  - triangles: 5a050000
+  - name: 1370
+    triangles: 5a050000
     adjacents: 
-  - triangles: 5b050000
+  - name: 1371
+    triangles: 5b050000
     adjacents: 
-  - triangles: 5c050000
+  - name: 1372
+    triangles: 5c050000
     adjacents: 
-  - triangles: 5d050000
+  - name: 1373
+    triangles: 5d050000
     adjacents: 
-  - triangles: 5e050000
+  - name: 1374
+    triangles: 5e050000
     adjacents: 
-  - triangles: 5f050000
+  - name: 1375
+    triangles: 5f050000
     adjacents: 
-  - triangles: 60050000
+  - name: 1376
+    triangles: 60050000
     adjacents: 
-  - triangles: 61050000
+  - name: 1377
+    triangles: 61050000
     adjacents: 
-  - triangles: 62050000
+  - name: 1378
+    triangles: 62050000
     adjacents: 
-  - triangles: 63050000
+  - name: 1379
+    triangles: 63050000
     adjacents: 
-  - triangles: 64050000
+  - name: 1380
+    triangles: 64050000
     adjacents: 
-  - triangles: 65050000
+  - name: 1381
+    triangles: 65050000
     adjacents: 
-  - triangles: 66050000
+  - name: 1382
+    triangles: 66050000
     adjacents: 
-  - triangles: 67050000
+  - name: 1383
+    triangles: 67050000
     adjacents: 
-  - triangles: 68050000
+  - name: 1384
+    triangles: 68050000
     adjacents: 
-  - triangles: 69050000
+  - name: 1385
+    triangles: 69050000
     adjacents: 
-  - triangles: 6a050000
+  - name: 1386
+    triangles: 6a050000
     adjacents: 
-  - triangles: 6b050000
+  - name: 1387
+    triangles: 6b050000
     adjacents: 
-  - triangles: 6c050000
+  - name: 1388
+    triangles: 6c050000
     adjacents: 
-  - triangles: 6d050000
+  - name: 1389
+    triangles: 6d050000
     adjacents: 
-  - triangles: 6e050000
+  - name: 1390
+    triangles: 6e050000
     adjacents: 
-  - triangles: 6f050000
+  - name: 1391
+    triangles: 6f050000
     adjacents: 
-  - triangles: 70050000
+  - name: 1392
+    triangles: 70050000
     adjacents: 
-  - triangles: 71050000
+  - name: 1393
+    triangles: 71050000
     adjacents: 
-  - triangles: 72050000
+  - name: 1394
+    triangles: 72050000
     adjacents: 
-  - triangles: 73050000
+  - name: 1395
+    triangles: 73050000
     adjacents: 
-  - triangles: 74050000
+  - name: 1396
+    triangles: 74050000
     adjacents: 
-  - triangles: 75050000
+  - name: 1397
+    triangles: 75050000
     adjacents: 
-  - triangles: 76050000
+  - name: 1398
+    triangles: 76050000
     adjacents: 
-  - triangles: 77050000
+  - name: 1399
+    triangles: 77050000
     adjacents: 
-  - triangles: 78050000
+  - name: 1400
+    triangles: 78050000
     adjacents: 
-  - triangles: 79050000
+  - name: 1401
+    triangles: 79050000
     adjacents: 
-  - triangles: 7a050000
+  - name: 1402
+    triangles: 7a050000
     adjacents: 
-  - triangles: 7b050000
+  - name: 1403
+    triangles: 7b050000
     adjacents: 
-  - triangles: 7c050000
+  - name: 1404
+    triangles: 7c050000
     adjacents: 
-  - triangles: 7d050000
+  - name: 1405
+    triangles: 7d050000
     adjacents: 

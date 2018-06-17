@@ -1009,6 +1009,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 500, y: 713}
+  subRegionCount: 14
   triangles:
   - region: 0
     vertices:
@@ -1088,25 +1089,36 @@ MonoBehaviour:
     hashes: 259604000000000094700500000000008872050000000000
     adjacents: 0800000009000000
   regions:
-  - triangles: 00000000
+  - name: 0
+    triangles: 00000000
     adjacents: 
-  - triangles: 01000000
+  - name: 1
+    triangles: 01000000
     adjacents: 
-  - triangles: 02000000
+  - name: 2
+    triangles: 02000000
     adjacents: 
-  - triangles: 03000000
+  - name: 3
+    triangles: 03000000
     adjacents: 
-  - triangles: 04000000
+  - name: 4
+    triangles: 04000000
     adjacents: 
-  - triangles: 05000000
+  - name: 5
+    triangles: 05000000
     adjacents: 
-  - triangles: 06000000
+  - name: 6
+    triangles: 06000000
     adjacents: 
-  - triangles: 07000000
+  - name: 7
+    triangles: 07000000
     adjacents: 
-  - triangles: 08000000
+  - name: 8
+    triangles: 08000000
     adjacents: 
-  - triangles: 09000000
+  - name: 9
+    triangles: 09000000
     adjacents: 
-  - triangles: 0a000000
+  - name: 10
+    triangles: 0a000000
     adjacents: 
