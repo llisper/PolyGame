@@ -20,20 +20,34 @@ public class Puzzle : MonoBehaviour
     Dictionary<GameObject, Vector3> positionMap = new Dictionary<GameObject, Vector3>();
     bool[] finished;
 
+    void Awake()
+    {
+        PuzzleTouch.onFingerDrag += OnObjMove;
+        PuzzleTouch.onObjPicked += OnObjPicked;
+        PuzzleTouch.onObjReleased += OnObjReleased;
+    }
+
+    void OnDestroy()
+    {
+        PuzzleTouch.onFingerDrag -= OnObjMove;
+        PuzzleTouch.onObjPicked -= OnObjPicked;
+        PuzzleTouch.onObjReleased -= OnObjReleased;
+    }
+
     void Run(string puzzleName)
     {
         this.puzzleName = puzzleName;
         puzzleObject = Load();
+
         // TODO: if there is a save, load the save, or else start anew
         StartNew();
+
         PuzzleCamera.Instance.Init(puzzleObject.size);
     }
 
     void StartNew()
     {
         Scramble();
-        
-
     }
 
     PolyGraphBehaviour Load()
@@ -66,5 +80,27 @@ public class Puzzle : MonoBehaviour
             var child = puzzleObject.transform.GetChild(i);
             child.localPosition += (Vector3)(Random.insideUnitCircle * ScrambleRadius);
         }
+    }
+
+    void OnObjMove(Vector2 screenCurrent, Vector2 screenDelta, Transform objPicked)
+    {
+        if (null == objPicked)
+            return;
+
+        Vector3 pos = objPicked.transform.position;
+        Vector3 newPos = PuzzleCamera.Main.ScreenToWorldPoint(screenCurrent);
+        pos.x = newPos.x;
+        pos.y = newPos.y;
+        objPicked.transform.position = pos;
+    }
+
+    void OnObjPicked(Transform objPicked)
+    {
+
+    }
+
+    void OnObjReleased(Transform objPicked)
+    {
+
     }
 }

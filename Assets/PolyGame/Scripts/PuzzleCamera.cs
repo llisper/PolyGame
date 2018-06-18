@@ -8,6 +8,7 @@ public class PuzzleCamera : MonoBehaviour
     const float sizeExtendScale = 1.5f;
     const float minRangeScale = 3f; 
     const float cameraMoveSpeed = 2f;
+    const float zoomScale = 125f;
 
     Camera main;
     Vector2 size;
@@ -20,11 +21,13 @@ public class PuzzleCamera : MonoBehaviour
         Instance = this;
         main = Camera.main;
         PuzzleTouch.onFingerDrag += OnCameraMove;
+        PuzzleTouch.onFingerPinched += OnCameraZoom;
     }
 
     void OnDestroy()
     {
         PuzzleTouch.onFingerDrag -= OnCameraMove;
+        PuzzleTouch.onFingerPinched -= OnCameraZoom;
         Instance = null;
     }
 
@@ -50,8 +53,11 @@ public class PuzzleCamera : MonoBehaviour
         zoomRange = new Vector2(main.orthographicSize / minRangeScale, main.orthographicSize);
     }
 
-    void OnCameraMove(Vector2 screenDelta)
+    void OnCameraMove(Vector2 screenCurrent, Vector2 screenDelta, Transform objPicked)
     {
+        if (null != objPicked)
+            return;
+
         Vector3 delta = (Vector3)screenDelta * (main.orthographicSize / zoomRange.y) * cameraMoveSpeed * -1;
         Vector3 newPos = main.transform.localPosition + delta;
         Vector2 orthoSize = new Vector2(main.aspect * main.orthographicSize, main.orthographicSize);
@@ -62,5 +68,11 @@ public class PuzzleCamera : MonoBehaviour
         if ((delta.y < 0 && newPos.y - orthoSize.y >= yLimit.x) || (delta.y >= 0 && newPos.y + orthoSize.y <= yLimit.y))
             finalPos.y = newPos.y;
         main.transform.localPosition = finalPos;
+    }
+
+    void OnCameraZoom(float pinchRatio)
+    {
+        float newSize = main.orthographicSize + (pinchRatio - 1f) * zoomScale;
+        main.orthographicSize = Mathf.Clamp(newSize, zoomRange.x, zoomRange.y);
     }
 }

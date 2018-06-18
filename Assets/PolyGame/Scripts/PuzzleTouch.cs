@@ -21,11 +21,10 @@ public class PuzzleTouch : MonoBehaviour
     Transform objPicked;
     LeanFinger mainFinger;
 
+    public static Action<Transform> onObjPicked;
     public static Action<Transform> onObjReleased;
-    public static Action<Vector2> onFingerDrag;
-    // on object move
-    // on finger move
-    // on pinch
+    public static Action<Vector2, Vector2, Transform> onFingerDrag;
+    public static Action<float> onFingerPinched;
 
     void Start()
     {
@@ -55,7 +54,7 @@ public class PuzzleTouch : MonoBehaviour
             return;
         }
 
-        if (null == mainFinger || !mainFinger.IsActive)
+        if (null == mainFinger || !mainFinger.IsActive || !mainFinger.Set)
         {
             if (null != objPicked)
             {
@@ -79,6 +78,8 @@ public class PuzzleTouch : MonoBehaviour
                 if (Physics.Raycast(ray, out hit, Utils.CameraDistance, ~Layers.Debris))
                 {
                     objPicked = hit.transform;
+                    if (null != onObjPicked)
+                        onObjPicked(objPicked);
                 }
                 phase = Phase.Update;
             }
@@ -88,9 +89,23 @@ public class PuzzleTouch : MonoBehaviour
         {
             if (null == objPicked || fingers.Count > 1)
             {
-                Vector2 delta = LeanGesture.GetScreenCenter(fingers) - LeanGesture.GetLastScreenCenter(fingers);
+                Vector2 current = LeanGesture.GetScreenCenter(fingers); 
+                Vector2 delta = current - LeanGesture.GetLastScreenCenter(fingers);
                 if (null != onFingerDrag)
-                    onFingerDrag(delta);
+                    onFingerDrag(current, delta, null);
+
+                if (fingers.Count == 2)
+                {
+                    if (null != onFingerPinched)
+                        onFingerPinched(LeanGesture.GetPinchRatio());
+                }
+            }
+
+            if (null != objPicked && fingers.Count == 1)
+            {
+                Vector2 delta = mainFinger.ScreenPosition - mainFinger.LastScreenPosition;
+                if (null != onFingerDrag)
+                    onFingerDrag(mainFinger.ScreenPosition, delta, objPicked);
             }
         }
     }
