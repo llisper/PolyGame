@@ -21,7 +21,7 @@ public class PuzzleTouch : MonoBehaviour
     Transform objPicked;
     LeanFinger mainFinger;
 
-    public static Action<Transform> onObjPicked;
+    public static Func<Transform, bool> onObjPicked;
     public static Action<Vector2> onObjMove;
     public static Action<Transform> onObjReleased;
     public static Action<Vector2> onFingerDrag;
@@ -80,9 +80,9 @@ public class PuzzleTouch : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, Utils.CameraDistance, ~Layers.Debris))
                 {
-                    objPicked = hit.transform;
-                    if (null != onObjPicked)
-                        onObjPicked(objPicked);
+                    var xform = hit.transform;
+                    if (null != onObjPicked && onObjPicked(xform))
+                        objPicked = xform;
                 }
                 phase = Phase.Update;
             }
@@ -106,7 +106,6 @@ public class PuzzleTouch : MonoBehaviour
 
             if (null != objPicked && fingers.Count == 1)
             {
-                Vector2 delta = mainFinger.ScreenPosition - mainFinger.LastScreenPosition;
                 if (null != onObjMove)
                     onObjMove(mainFinger.ScreenPosition);
             }

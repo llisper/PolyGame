@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using Battlehub.Wireframe;
 
@@ -16,15 +17,23 @@ public class Puzzle : MonoBehaviour
 
     const float ScrambleRadius = 50f;
     const float moveSpeed = 30f;
-    public float fadeSpeed = 15f;
+    const float fadeSpeed = 15f;
+    const float fitThreshold = 50f;
+    const float finishDebrisMoveSpeed = 10f;
     
     string puzzleName;
     bool[] finished;
 
+    class DebrisInfo
+    {
+        public int index;
+        public Vector2 position;
+    }
+
     PolyGraphBehaviour puzzleObject;
     GameObject wireframeObject;
     DebrisMoveContainer debrisMoveContainer;
-    Dictionary<GameObject, Vector3> positionMap = new Dictionary<GameObject, Vector3>();
+    Dictionary<GameObject, DebrisInfo> debrisMap = new Dictionary<GameObject, DebrisInfo>();
 
     Material objectMat;
     Material wireframeMat;
@@ -98,7 +107,8 @@ public class Puzzle : MonoBehaviour
         {
             var child = go.transform.GetChild(i);
             Vector3 pos = child.localPosition;
-            positionMap.Add(child.gameObject, pos);
+            var info = new DebrisInfo() { index = i, position = pos };
+            debrisMap.Add(child.gameObject, info);
             child.localPosition = ArrangeDepth(i, pos);
         }
         finished = new bool[go.transform.childCount];
@@ -152,7 +162,7 @@ public class Puzzle : MonoBehaviour
 
         finishedMat.SetColor(propColor, new Color(1f, 1f, 1f, finishedAlpha));
         wireframeMat.SetFloat(propAlpha, wireframeAlpha);
-        wireframeMat.SetColor(propColor, new Color(200f, 200f, 200f, 1f));
+        wireframeMat.SetColor(propColor, new Color32(200, 200, 200, 255));
         wireframeMat.SetFloat("_Thickness", 0.75f);
     }
 
@@ -183,30 +193,62 @@ public class Puzzle : MonoBehaviour
         debrisMoveContainer.transform.position = pos;
     }
 
-    void OnObjPicked(Transform objPicked)
+    bool OnObjPicked(Transform objPicked)
     {
-        if (null != objPicked)
-        {
-            Vector3 screenPos = PuzzleTouch.Instance.MainFinger.ScreenPosition;
-            debrisMoveContainer.transform.position = PuzzleCamera.Main.ScreenToWorldPoint(screenPos);
-            debrisMoveContainer.Target = objPicked;
-            objPicked.GetComponent<MeshRenderer>().sharedMaterial = selectedMat;
+        if (null == objPicked)
+            return false;
 
-            objectAlpha = 0f;
-            finishedAlpha = 1f;
-            wireframeAlpha = 1f;
+        DebrisInfo di;
+        if (!debrisMap.TryGetValue(objPicked.gameObject, out di) || finished[di.index])
+            return false;
 
-            Debug.Log("pick " + objPicked);
-        }
+        Vector3 screenPos = PuzzleTouch.Instance.MainFinger.ScreenPosition;
+        debrisMoveContainer.transform.position = PuzzleCamera.Main.ScreenToWorldPoint(screenPos);
+        debrisMoveContainer.Target = objPicked;
+        objPicked.GetComponent<MeshRenderer>().sharedMaterial = selectedMat;
+
+        objectAlpha = 0f;
+        finishedAlpha = 1f;
+        wireframeAlpha = 1f;
+
+        Debug.Log("Pick " + objPicked);
+        return true;
     }
 
     void OnObjReleased(Transform objPicked)
     {
+        var target = debrisMoveContainer.Target;
         debrisMoveContainer.Target = null;
-        objPicked.GetComponent<MeshRenderer>().sharedMaterial = objectMat; // OR; finishedMat
+
+        DebrisInfo di;
+        if (!debrisMap.TryGetValue(target.gameObject, out di))
+        {
+            target.GetComponent<MeshRenderer>().sharedMaterial = objectMat;
+            Debug.LogError(target + " is not found in debris map");
+        }
+        else
+        {
+            if (Vector2.Distance(target.localPosition, di.position) <= fitThreshold)
+            {
+                finished[di.index] = true;
+                target.GetComponent<MeshRenderer>().sharedMaterial = finishedMat;
+                target.GetComponent<MeshCollider>().enabled = false;
+                StartCoroutine(FinishDebrisAnimation(target, di.position));
+            }
+        }
 
         objectAlpha = 1f;
         finishedAlpha = 0.5f;
         wireframeAlpha = 0f;
+    }
+
+    IEnumerator FinishDebrisAnimation(Transform xform, Vector3 position)
+    {
+        while (Vector3.Distance(xform.localPosition, position) > 0.1f)
+        {
+            xform.localPosition = Vector3.Lerp(xform.localPosition, position, Time.deltaTime * finishDebrisMoveSpeed);
+            yield return null;
+        }
+        xform.localPosition = position;
     }
 }
