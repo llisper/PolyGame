@@ -53,11 +53,8 @@ public class PuzzleCamera : MonoBehaviour
         zoomRange = new Vector2(main.orthographicSize / minRangeScale, main.orthographicSize);
     }
 
-    void OnCameraMove(Vector2 screenCurrent, Vector2 screenDelta, Transform objPicked)
+    void OnCameraMove(Vector2 screenDelta)
     {
-        if (null != objPicked)
-            return;
-
         Vector3 delta = (Vector3)screenDelta * (main.orthographicSize / zoomRange.y) * cameraMoveSpeed * -1;
         Vector3 newPos = main.transform.localPosition + delta;
         Vector2 orthoSize = new Vector2(main.aspect * main.orthographicSize, main.orthographicSize);

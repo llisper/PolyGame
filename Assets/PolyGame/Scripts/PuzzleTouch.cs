@@ -22,9 +22,12 @@ public class PuzzleTouch : MonoBehaviour
     LeanFinger mainFinger;
 
     public static Action<Transform> onObjPicked;
+    public static Action<Vector2> onObjMove;
     public static Action<Transform> onObjReleased;
-    public static Action<Vector2, Vector2, Transform> onFingerDrag;
+    public static Action<Vector2> onFingerDrag;
     public static Action<float> onFingerPinched;
+
+    public LeanFinger MainFinger { get { return mainFinger; } }
 
     void Start()
     {
@@ -92,7 +95,7 @@ public class PuzzleTouch : MonoBehaviour
                 Vector2 current = LeanGesture.GetScreenCenter(fingers); 
                 Vector2 delta = current - LeanGesture.GetLastScreenCenter(fingers);
                 if (null != onFingerDrag)
-                    onFingerDrag(current, delta, null);
+                    onFingerDrag(delta);
 
                 if (fingers.Count == 2)
                 {
@@ -104,8 +107,8 @@ public class PuzzleTouch : MonoBehaviour
             if (null != objPicked && fingers.Count == 1)
             {
                 Vector2 delta = mainFinger.ScreenPosition - mainFinger.LastScreenPosition;
-                if (null != onFingerDrag)
-                    onFingerDrag(mainFinger.ScreenPosition, delta, objPicked);
+                if (null != onObjMove)
+                    onObjMove(mainFinger.ScreenPosition);
             }
         }
     }

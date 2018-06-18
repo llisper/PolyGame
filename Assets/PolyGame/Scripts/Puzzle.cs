@@ -17,20 +17,25 @@ public class Puzzle : MonoBehaviour
     
     string puzzleName;
     PolyGraphBehaviour puzzleObject;
+    DebrisMoveContainer debrisMoveContainer;
     Dictionary<GameObject, Vector3> positionMap = new Dictionary<GameObject, Vector3>();
     bool[] finished;
 
     void Awake()
     {
-        PuzzleTouch.onFingerDrag += OnObjMove;
+        var go = new GameObject("DebrisMoveContainer");
+        go.transform.SetParent(transform);
+        debrisMoveContainer = go.AddComponent<DebrisMoveContainer>();
+
         PuzzleTouch.onObjPicked += OnObjPicked;
+        PuzzleTouch.onObjMove += OnObjMove;
         PuzzleTouch.onObjReleased += OnObjReleased;
     }
 
     void OnDestroy()
     {
-        PuzzleTouch.onFingerDrag -= OnObjMove;
         PuzzleTouch.onObjPicked -= OnObjPicked;
+        PuzzleTouch.onObjMove -= OnObjMove;
         PuzzleTouch.onObjReleased -= OnObjReleased;
     }
 
@@ -82,25 +87,29 @@ public class Puzzle : MonoBehaviour
         }
     }
 
-    void OnObjMove(Vector2 screenCurrent, Vector2 screenDelta, Transform objPicked)
+    public float moveSpeed = 15f;
+
+    void OnObjMove(Vector2 screenCurrent)
     {
-        if (null == objPicked)
+        if (null == debrisMoveContainer.Target)
             return;
 
-        Vector3 pos = objPicked.transform.position;
+        Vector3 pos = debrisMoveContainer.transform.position;
         Vector3 newPos = PuzzleCamera.Main.ScreenToWorldPoint(screenCurrent);
-        pos.x = newPos.x;
-        pos.y = newPos.y;
-        objPicked.transform.position = pos;
+        newPos.z = pos.z;
+        pos = Vector3.Lerp(pos, newPos, Time.deltaTime * moveSpeed);
+        debrisMoveContainer.transform.position = pos;
     }
 
     void OnObjPicked(Transform objPicked)
     {
-
+        Vector3 screenPos = PuzzleTouch.Instance.MainFinger.ScreenPosition;
+        debrisMoveContainer.transform.position = PuzzleCamera.Main.ScreenToWorldPoint(screenPos);
+        debrisMoveContainer.Target = objPicked;
     }
 
     void OnObjReleased(Transform objPicked)
     {
-
+        debrisMoveContainer.Target = null;
     }
 }
