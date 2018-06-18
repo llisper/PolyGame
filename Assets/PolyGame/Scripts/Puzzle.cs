@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Battlehub.Wireframe;
 
 public class Puzzle : MonoBehaviour
 {
@@ -14,12 +15,27 @@ public class Puzzle : MonoBehaviour
     }
 
     const float ScrambleRadius = 50f;
+    const float moveSpeed = 30f;
+    public float fadeSpeed = 15f;
     
     string puzzleName;
+    bool[] finished;
+
     PolyGraphBehaviour puzzleObject;
+    GameObject wireframeObject;
     DebrisMoveContainer debrisMoveContainer;
     Dictionary<GameObject, Vector3> positionMap = new Dictionary<GameObject, Vector3>();
-    bool[] finished;
+
+    Material objectMat;
+    Material wireframeMat;
+    Material finishedMat;
+    Material selectedMat;
+
+    int propColor;
+    int propAlpha;
+    float objectAlpha;
+    float finishedAlpha;
+    float wireframeAlpha;
 
     void Awake()
     {
@@ -37,12 +53,29 @@ public class Puzzle : MonoBehaviour
         PuzzleTouch.onObjPicked -= OnObjPicked;
         PuzzleTouch.onObjMove -= OnObjMove;
         PuzzleTouch.onObjReleased -= OnObjReleased;
+
+        if (null != wireframeMat)
+            Destroy(wireframeMat);
+        if (null != finishedMat)
+            Destroy(finishedMat);
+        if (null != selectedMat)
+            Destroy(selectedMat);
+    }
+
+    void Update()
+    {
+        if (null != puzzleObject)
+        {
+            objectMat.SetColor(propColor, Color.Lerp(objectMat.GetColor(propColor), new Color(1f, 1f, 1f, objectAlpha), Time.deltaTime * fadeSpeed));
+            wireframeMat.SetFloat(propAlpha, Mathf.Lerp(wireframeMat.GetFloat(propAlpha), wireframeAlpha, Time.deltaTime * fadeSpeed));
+            finishedMat.SetColor(propColor, Color.Lerp(finishedMat.GetColor(propColor), new Color(1f, 1f, 1f, finishedAlpha), Time.deltaTime * fadeSpeed));
+        }
     }
 
     void Run(string puzzleName)
     {
         this.puzzleName = puzzleName;
-        puzzleObject = Load();
+        Load();
 
         // TODO: if there is a save, load the save, or else start anew
         StartNew();
@@ -55,7 +88,7 @@ public class Puzzle : MonoBehaviour
         Scramble();
     }
 
-    PolyGraphBehaviour Load()
+    void Load()
     {
         var prefab = Resources.Load(string.Format("{0}/{1}/{1}", Paths.Artworks, puzzleName));
         var go = (GameObject)Instantiate(prefab);
@@ -69,7 +102,58 @@ public class Puzzle : MonoBehaviour
             child.localPosition = ArrangeDepth(i, pos);
         }
         finished = new bool[go.transform.childCount];
-        return go.GetComponent<PolyGraphBehaviour>();
+        puzzleObject = go.GetComponent<PolyGraphBehaviour>();
+
+        GenerateWireframe();
+        InitMaterials();
+    }
+
+    void GenerateWireframe()
+    {
+        wireframeObject = new GameObject(puzzleName + "Wireframe", typeof(MeshFilter), typeof(MeshRenderer));
+        wireframeObject.transform.SetParent(transform);
+
+		var meshFilters = puzzleObject.GetComponentsInChildren<MeshFilter>();
+        CombineInstance[] combine = new CombineInstance[meshFilters.Length];
+        for (int i = 0; i < combine.Length; ++i)
+        {
+            combine[i].mesh = meshFilters[i].sharedMesh;
+            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
+        }
+
+        var mesh = new Mesh();
+        mesh.name = puzzleName + "WireframeMesh";
+        mesh.CombineMeshes(combine);
+		Barycentric.CalculateBarycentric(mesh);
+		wireframeObject.GetComponent<MeshFilter>().sharedMesh = mesh;
+
+        var mat = new Material(Shader.Find("Battlehub/WireframeSimplify"));
+        mat.name = puzzleName + "WireframeMaterial";
+        var renderer = wireframeObject.GetComponent<MeshRenderer>();
+        Utils.SetupMeshRenderer(renderer);
+        renderer.sharedMaterial = mat;
+    }
+
+    void InitMaterials()
+    {
+        objectMat = puzzleObject.GetComponentInChildren<MeshRenderer>().sharedMaterial;
+        wireframeMat = wireframeObject.GetComponent<MeshRenderer>().sharedMaterial;
+        finishedMat = Instantiate(objectMat);
+        finishedMat.name = objectMat.name + "Finished";
+        selectedMat = Instantiate(objectMat);
+        selectedMat.name = objectMat.name + "Selected";
+
+        propColor = Shader.PropertyToID("_Color");
+        propAlpha = Shader.PropertyToID("_Alpha");
+
+        objectAlpha = 1f;
+        finishedAlpha = 0.5f;
+        wireframeAlpha = 0f;
+
+        finishedMat.SetColor(propColor, new Color(1f, 1f, 1f, finishedAlpha));
+        wireframeMat.SetFloat(propAlpha, wireframeAlpha);
+        wireframeMat.SetColor(propColor, new Color(200f, 200f, 200f, 1f));
+        wireframeMat.SetFloat("_Thickness", 0.75f);
     }
 
     Vector3 ArrangeDepth(int i, Vector3 pos)
@@ -87,8 +171,6 @@ public class Puzzle : MonoBehaviour
         }
     }
 
-    public float moveSpeed = 15f;
-
     void OnObjMove(Vector2 screenCurrent)
     {
         if (null == debrisMoveContainer.Target)
@@ -103,13 +185,28 @@ public class Puzzle : MonoBehaviour
 
     void OnObjPicked(Transform objPicked)
     {
-        Vector3 screenPos = PuzzleTouch.Instance.MainFinger.ScreenPosition;
-        debrisMoveContainer.transform.position = PuzzleCamera.Main.ScreenToWorldPoint(screenPos);
-        debrisMoveContainer.Target = objPicked;
+        if (null != objPicked)
+        {
+            Vector3 screenPos = PuzzleTouch.Instance.MainFinger.ScreenPosition;
+            debrisMoveContainer.transform.position = PuzzleCamera.Main.ScreenToWorldPoint(screenPos);
+            debrisMoveContainer.Target = objPicked;
+            objPicked.GetComponent<MeshRenderer>().sharedMaterial = selectedMat;
+
+            objectAlpha = 0f;
+            finishedAlpha = 1f;
+            wireframeAlpha = 1f;
+
+            Debug.Log("pick " + objPicked);
+        }
     }
 
     void OnObjReleased(Transform objPicked)
     {
         debrisMoveContainer.Target = null;
+        objPicked.GetComponent<MeshRenderer>().sharedMaterial = objectMat; // OR; finishedMat
+
+        objectAlpha = 1f;
+        finishedAlpha = 0.5f;
+        wireframeAlpha = 0f;
     }
 }
