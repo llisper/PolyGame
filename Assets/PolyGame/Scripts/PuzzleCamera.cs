@@ -11,7 +11,9 @@ public class PuzzleCamera : MonoBehaviour
 
     Camera main;
     Vector2 size;
-    Vector2 range;
+    Vector2 xLimit;
+    Vector2 yLimit;
+    Vector2 zoomRange;
 
     void Awake()
     {
@@ -33,21 +35,32 @@ public class PuzzleCamera : MonoBehaviour
         pos.y = size.y / 2;
         transform.localPosition = pos;
 
-        size *= sizeExtendScale;
-        this.size = size;
-        float graphAspect = size.x / size.y;
+        Vector2 extendedSize = size * sizeExtendScale;
+        this.size = extendedSize;
+        float graphAspect = extendedSize.x / extendedSize.y;
         if (graphAspect < main.aspect)
-            main.orthographicSize = size.y / 2f;
+            main.orthographicSize = extendedSize.y / 2f;
         else
-            main.orthographicSize = size.x / (2f * main.aspect);
+            main.orthographicSize = extendedSize.x / (2f * main.aspect);
 
-        range = new Vector2(main.orthographicSize / minRangeScale, main.orthographicSize);
+        Vector2 orthoSize = new Vector2(main.aspect * main.orthographicSize, main.orthographicSize);
+        xLimit = new Vector2(pos.x - orthoSize.x, pos.x + orthoSize.x);
+        yLimit = new Vector2(pos.y - orthoSize.y, pos.y + orthoSize.y);
+
+        zoomRange = new Vector2(main.orthographicSize / minRangeScale, main.orthographicSize);
     }
 
     void OnCameraMove(Vector2 screenDelta)
     {
-        main.transform.localPosition += (Vector3)screenDelta * (main.orthographicSize / range.y) * cameraMoveSpeed;
-        // restrcts
+        Vector3 delta = (Vector3)screenDelta * (main.orthographicSize / zoomRange.y) * cameraMoveSpeed * -1;
+        Vector3 newPos = main.transform.localPosition + delta;
+        Vector2 orthoSize = new Vector2(main.aspect * main.orthographicSize, main.orthographicSize);
 
+        Vector3 finalPos = main.transform.localPosition;
+        if ((delta.x < 0 && newPos.x - orthoSize.x >= xLimit.x) || (delta.x >= 0 && newPos.x + orthoSize.x <= xLimit.y))
+            finalPos.x = newPos.x;
+        if ((delta.y < 0 && newPos.y - orthoSize.y >= yLimit.x) || (delta.y >= 0 && newPos.y + orthoSize.y <= yLimit.y))
+            finalPos.y = newPos.y;
+        main.transform.localPosition = finalPos;
     }
 }
