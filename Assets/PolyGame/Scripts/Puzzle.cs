@@ -251,12 +251,12 @@ public partial class Puzzle : MonoBehaviour
     void OnObjReleased(Transform objPicked)
     {
         var target = debrisMoveContainer.Target;
+        target.GetComponent<MeshRenderer>().sharedMaterial = objectMat;
         debrisMoveContainer.Target = null;
 
         DebrisInfo di;
         if (!debrisMap.TryGetValue(target.gameObject, out di))
         {
-            target.GetComponent<MeshRenderer>().sharedMaterial = objectMat;
             Debug.LogError(target + " is not found in debris map");
         }
         else
