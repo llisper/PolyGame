@@ -4,6 +4,8 @@ public class Game : MonoBehaviour
 {
     public static Game Instance;
 
+    public GameObject testPuzzle;
+
     void Awake()
     {
         Instance = this;
@@ -12,6 +14,7 @@ public class Game : MonoBehaviour
 
     void Start ()
     {
-        Puzzle.Start("Bill");
+        if (null != testPuzzle)
+            Puzzle.Start(testPuzzle.name);
 	}
 }

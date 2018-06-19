@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5845c2cc72ad352419ddf04079616187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testPuzzle: {fileID: 1813580638718952, guid: a57c6322f8693a149865404869c0258f, type: 2}
 --- !u!4 &1895706844
 Transform:
   m_ObjectHideFlags: 0
