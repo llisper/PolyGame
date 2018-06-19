@@ -43,6 +43,8 @@ public partial class Puzzle : MonoBehaviour
 
     int propColor;
     int propAlpha;
+    int propZWrite;
+
     float objectAlpha;
     float finishedAlpha;
     float wireframeAlpha;
@@ -149,8 +151,13 @@ public partial class Puzzle : MonoBehaviour
 
         propColor = Shader.PropertyToID("_Color");
         propAlpha = Shader.PropertyToID("_Alpha");
+        propZWrite = Shader.PropertyToID("_ZWrite");
 
         ShowWireframe(false);
+
+        objectMat.SetFloat(propZWrite, 1f);
+        selectedMat.SetFloat(propZWrite, 1f);
+        finishedMat.SetFloat(propZWrite, 1f);
         finishedMat.SetColor(propColor, new Color(1f, 1f, 1f, finishedAlpha));
         wireframeMat.SetFloat(propAlpha, wireframeAlpha);
         wireframeMat.SetColor(propColor, new Color32(200, 200, 200, 255));
@@ -164,12 +171,14 @@ public partial class Puzzle : MonoBehaviour
             objectAlpha = 0f;
             finishedAlpha = 1f;
             wireframeAlpha = 1f;
+            objectMat.SetFloat(propZWrite, 0f);
         }
         else
         {
             objectAlpha = 1f;
             finishedAlpha = 0.25f;
             wireframeAlpha = 0f;
+            objectMat.SetFloat(propZWrite, 1f);
         }
     }
 

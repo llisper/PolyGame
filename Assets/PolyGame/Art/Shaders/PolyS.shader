@@ -4,6 +4,7 @@
     {
         _MainTex ("Texture", 2D) = "white" {}
         _Color ("Color", Color) = (1, 1, 1, 1)
+		_ZWrite ("ZWrite", Float) = 0.0
     }
 
     SubShader 
@@ -11,7 +12,7 @@
         Pass {
             Tags { "Queue" = "Transparent" }
             Blend SrcAlpha OneMinusSrcAlpha
-			ZWrite Off
+			ZWrite [_ZWrite]
             
             CGPROGRAM
             #pragma vertex vert
