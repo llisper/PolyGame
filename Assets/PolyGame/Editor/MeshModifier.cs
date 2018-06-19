@@ -76,7 +76,7 @@ class MeshModifier : EditorWindow
     void Awake()
     {
         Instance = this;
-        string[] dirs = Directory.GetDirectories(Application.dataPath + Paths.AssetResArtworksNoPrefix);
+        string[] dirs = Directory.GetDirectories(Application.dataPath + '/' + Paths.AssetResArtworksNoPrefix);
         names = Array.ConvertAll(dirs, v => Path.GetFileName(v));
         labelStyle = new GUIStyle(EditorStyles.boldLabel);
     }
