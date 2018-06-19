@@ -50,7 +50,7 @@ public partial class Puzzle : MonoBehaviour
     void Awake()
     {
         var go = new GameObject("DebrisMoveContainer");
-        go.transform.SetParent(transform);
+        go.transform.SetParent(transform, true);
         debrisMoveContainer = go.AddComponent<DebrisMoveContainer>();
 
         PuzzleTouch.onObjPicked += OnObjPicked;
@@ -223,8 +223,7 @@ public partial class Puzzle : MonoBehaviour
             return;
 
         Vector3 pos = debrisMoveContainer.transform.position;
-        Vector3 newPos = PuzzleCamera.Main.ScreenToWorldPoint(screenCurrent);
-        newPos.z = pos.z;
+        Vector2 newPos = PuzzleCamera.Main.ScreenToWorldPoint(screenCurrent);
         pos = Vector3.Lerp(pos, newPos, Time.deltaTime * moveSpeed);
         debrisMoveContainer.transform.position = pos;
     }
@@ -239,7 +238,7 @@ public partial class Puzzle : MonoBehaviour
             return false;
 
         Vector3 screenPos = PuzzleTouch.Instance.MainFinger.ScreenPosition;
-        debrisMoveContainer.transform.position = PuzzleCamera.Main.ScreenToWorldPoint(screenPos);
+        debrisMoveContainer.transform.position = (Vector2)PuzzleCamera.Main.ScreenToWorldPoint(screenPos);
         debrisMoveContainer.Target = objPicked;
         objPicked.GetComponent<MeshRenderer>().sharedMaterial = selectedMat;
 
@@ -268,8 +267,11 @@ public partial class Puzzle : MonoBehaviour
                 target.GetComponent<MeshRenderer>().sharedMaterial = finishedMat;
                 target.GetComponent<MeshCollider>().enabled = false;
                 StartCoroutine(FinishDebrisAnimation(target, di.position));
+                return;
             }
         }
+        ShowWireframe(false);
+        isMovingDebris = false;
     }
 
     IEnumerator FinishDebrisAnimation(Transform xform, Vector3 position)
