@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Battlehub.Wireframe;
 
-public class Puzzle : MonoBehaviour
+public partial class Puzzle : MonoBehaviour
 {
     public static void Start(string puzzleName)
     {
@@ -60,6 +60,7 @@ public class Puzzle : MonoBehaviour
 
     void OnDestroy()
     {
+        SaveProgress();
         PuzzleTouch.onObjPicked -= OnObjPicked;
         PuzzleTouch.onObjMove -= OnObjMove;
         PuzzleTouch.onObjReleased -= OnObjReleased;
@@ -85,20 +86,13 @@ public class Puzzle : MonoBehaviour
     void Run(string puzzleName)
     {
         this.puzzleName = puzzleName;
-        Load();
-
-        // TODO: if there is a save, load the save, or else start anew
-        StartNew();
-
+        InstantiatePrefab();
+        Scramble();
+        ApplyProgress();
         PuzzleCamera.Instance.Init(puzzleObject.size);
     }
 
-    void StartNew()
-    {
-        Scramble();
-    }
-
-    void Load()
+    void InstantiatePrefab()
     {
         var prefab = Resources.Load(string.Format("{0}/{1}/{1}", Paths.Artworks, puzzleName));
         var go = (GameObject)Instantiate(prefab);
@@ -112,7 +106,6 @@ public class Puzzle : MonoBehaviour
             debrisMap.Add(child.gameObject, info);
             child.localPosition = ArrangeDepth(i, pos);
         }
-        finished = new bool[go.transform.childCount];
         puzzleObject = go.GetComponent<PolyGraphBehaviour>();
 
         GenerateWireframe();
@@ -192,6 +185,35 @@ public class Puzzle : MonoBehaviour
         {
             var child = puzzleObject.transform.GetChild(i);
             child.localPosition += (Vector3)(Random.insideUnitCircle * ScrambleRadius);
+        }
+    }
+
+    void ApplyProgress()
+    {
+        LoadProgress();
+
+        for (int i = 0; i < finished.Length; ++i)
+        {
+            if (finished[i])
+            {
+                var child = puzzleObject.transform.GetChild(i);
+                if (null == child)
+                {
+                    Debug.LogErrorFormat("Missing child({0}) when applying progress", i);
+                    continue;
+                }
+
+                DebrisInfo di;
+                if (!debrisMap.TryGetValue(child.gameObject, out di))
+                {
+                    Debug.LogErrorFormat("Missing child({0}) from debris map when applying progress", child);
+                    continue;
+                }
+
+                child.localPosition = di.position;
+                child.GetComponent<MeshRenderer>().sharedMaterial = finishedMat;
+                child.GetComponent<MeshCollider>().enabled = false;
+            }
         }
     }
 
