@@ -23,6 +23,7 @@ public class Puzzle : MonoBehaviour
     
     string puzzleName;
     bool[] finished;
+    bool isMovingDebris;
 
     class DebrisInfo
     {
@@ -156,14 +157,27 @@ public class Puzzle : MonoBehaviour
         propColor = Shader.PropertyToID("_Color");
         propAlpha = Shader.PropertyToID("_Alpha");
 
-        objectAlpha = 1f;
-        finishedAlpha = 0.5f;
-        wireframeAlpha = 0f;
-
+        ShowWireframe(false);
         finishedMat.SetColor(propColor, new Color(1f, 1f, 1f, finishedAlpha));
         wireframeMat.SetFloat(propAlpha, wireframeAlpha);
         wireframeMat.SetColor(propColor, new Color32(200, 200, 200, 255));
         wireframeMat.SetFloat("_Thickness", 0.75f);
+    }
+
+    void ShowWireframe(bool show)
+    {
+        if (show)
+        {
+            objectAlpha = 0f;
+            finishedAlpha = 1f;
+            wireframeAlpha = 1f;
+        }
+        else
+        {
+            objectAlpha = 1f;
+            finishedAlpha = 0.25f;
+            wireframeAlpha = 0f;
+        }
     }
 
     Vector3 ArrangeDepth(int i, Vector3 pos)
@@ -195,7 +209,7 @@ public class Puzzle : MonoBehaviour
 
     bool OnObjPicked(Transform objPicked)
     {
-        if (null == objPicked)
+        if (isMovingDebris || null == objPicked)
             return false;
 
         DebrisInfo di;
@@ -207,10 +221,8 @@ public class Puzzle : MonoBehaviour
         debrisMoveContainer.Target = objPicked;
         objPicked.GetComponent<MeshRenderer>().sharedMaterial = selectedMat;
 
-        objectAlpha = 0f;
-        finishedAlpha = 1f;
-        wireframeAlpha = 1f;
-
+        ShowWireframe(true);
+        isMovingDebris = true;
         Debug.Log("Pick " + objPicked);
         return true;
     }
@@ -236,10 +248,6 @@ public class Puzzle : MonoBehaviour
                 StartCoroutine(FinishDebrisAnimation(target, di.position));
             }
         }
-
-        objectAlpha = 1f;
-        finishedAlpha = 0.5f;
-        wireframeAlpha = 0f;
     }
 
     IEnumerator FinishDebrisAnimation(Transform xform, Vector3 position)
@@ -250,5 +258,7 @@ public class Puzzle : MonoBehaviour
             yield return null;
         }
         xform.localPosition = position;
+        ShowWireframe(false);
+        isMovingDebris = false;
     }
 }
