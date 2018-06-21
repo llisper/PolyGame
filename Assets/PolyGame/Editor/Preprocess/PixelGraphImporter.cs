@@ -1,52 +1,41 @@
-﻿using UnityEditor;
 using UnityEngine;
+using UnityEditor;
 using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Delaunay;
 
-public static class Preprocess
+public class PixelGraphImporter : Preprocess.Importer
 {
-    static GameObject mainObj;
+    public const string Suffix = ".png";
 
-    public static void Process(string name)
+    public string Name { get { return graph.name; } }
+    public Mesh[] Meshes { get; private set; }
+    public Material Material { get; private set; }
+    public GameObject GameObject { get { return mainObj; } }
+
+    PolyGraph graph;
+    GameObject mainObj;
+
+    public PixelGraphImporter(string name)
     {
-        var graph = new PolyGraph();
-        graph.name = name;
-        Clear(graph);
-        CreateFolders(graph);
-        ReadConfig(graph);
-        GenerateTriangles(graph);
-        GenerateMesh(graph);
-        GenerateMaterial(graph);
-        SavePrefabs(graph);
+        graph = new PolyGraph() { name = name };
     }
 
-    static void Clear(PolyGraph graph)
+    public void Import()
     {
-        string parent = string.Format("{0}/{1}/", Paths.AssetArtworks, graph.name);
-        DeleteFolder(parent + "Materials");
-        DeleteFolder(parent + "Meshes");
-        DeleteFolder(Paths.AssetResArtworks + '/' + graph.name);
-        AssetDatabase.Refresh();
+        ReadConfig();
+        GenerateTriangles();
+        GenerateMesh();
+        GenerateMaterial();
+
+        var polyGraphBehaviour = mainObj.AddComponent<PolyGraphBehaviour>();
+        polyGraphBehaviour.size = graph.size;
+        RegionResolver.Resolve(polyGraphBehaviour);
     }
 
-    static void DeleteFolder(string name)
-    {
-        if (Directory.Exists(name))
-            Directory.Delete(name, true);
-    }
-
-    static void CreateFolders(PolyGraph graph)
-    {
-        string parent = string.Format("{0}/{1}", Paths.AssetArtworks, graph.name);
-        AssetDatabase.CreateFolder(parent, "Materials");
-        AssetDatabase.CreateFolder(parent, "Meshes");
-        AssetDatabase.CreateFolder(Paths.AssetResArtworks, graph.name);
-    }
-
-    static void ReadConfig(PolyGraph graph)
+    void ReadConfig()
     {
         HashSet<long> hash = new HashSet<long>();
         string path = string.Format("{0}/{1}/{1}.txt", Paths.AssetArtworks, graph.name);
@@ -83,7 +72,7 @@ public static class Preprocess
         }
     }
 
-    static void GenerateTriangles(PolyGraph graph)
+    void GenerateTriangles()
     {
         var colors = new List<uint>();
         for (int i = 0; i < graph.points.Count; ++i)
@@ -101,9 +90,10 @@ public static class Preprocess
         resolver.Resolve();
     }
 
-    static void GenerateMesh(PolyGraph graph)
+    void GenerateMesh()
     {
         mainObj = new GameObject(graph.name);
+        Meshes = new Mesh[graph.triangles.Count];
         for (int i = 0; i < graph.triangles.Count; ++i)
         {
             GameObject triObj = new GameObject(i.ToString(), typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
@@ -134,15 +124,11 @@ public static class Preprocess
             triObj.GetComponent<MeshFilter>().mesh = mesh;
             triObj.transform.localPosition = centroid;
             triObj.GetComponent<MeshCollider>().sharedMesh = mesh;
-
-            MeshUtility.Optimize(mesh);
-            string savePath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, graph.name, mesh.name);
-            AssetDatabase.CreateAsset(mesh, savePath);
-            AssetDatabase.SaveAssets();
+            Meshes[i] = mesh;
         }
     }
 
-    static void GenerateMaterial(PolyGraph graph)
+    void GenerateMaterial()
     {
         Material mat = new Material(Shader.Find("PolyGame/PolyS"));
         mat.name = graph.name;
@@ -151,31 +137,9 @@ public static class Preprocess
         if (null == texture)
             throw new Exception("Failed to load texture " + path);
         mat.SetTexture("_MainTex", texture);
-
-        string savePath = string.Format("{0}/{1}/Materials/{2}.mat", Paths.AssetArtworks, graph.name, mat.name);
-        AssetDatabase.CreateAsset(mat, savePath);
-        AssetDatabase.SaveAssets();
+        Material = mat;
 
         foreach (var renderer in mainObj.GetComponentsInChildren<MeshRenderer>())
             renderer.sharedMaterial = mat;
-    }
-
-    static void SavePrefabs(PolyGraph graph)
-    {
-        var polyGraphBehaviour = mainObj.AddComponent<PolyGraphBehaviour>();
-        polyGraphBehaviour.size = graph.size;
-        RegionResolver.Resolve(polyGraphBehaviour);
-
-        SavePrefab(graph.name, ref mainObj);
-    }
-
-    static void SavePrefab(string folder, ref GameObject obj)
-    {
-        string savePath = string.Format("{0}/{1}/{2}.prefab", Paths.AssetResArtworks, folder, obj.name);
-        UnityEngine.Object prefab = PrefabUtility.CreatePrefab(savePath, obj);
-        PrefabUtility.ReplacePrefab(obj, prefab, ReplacePrefabOptions.ConnectToPrefab);
-
-        GameObject.DestroyImmediate(obj);
-        obj = null;
     }
 }
