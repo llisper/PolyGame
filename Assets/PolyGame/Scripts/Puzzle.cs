@@ -15,6 +15,8 @@ public partial class Puzzle : MonoBehaviour
         });
     }
 
+    public static Puzzle Current;
+
     const float ScrambleRadius = 50f;
     const float moveSpeed = 30f;
     const float fadeSpeed = 15f;
@@ -37,6 +39,7 @@ public partial class Puzzle : MonoBehaviour
         public Vector3 inboundPos;
     }
 
+    Bounds playgroundBounds;
     PolyGraphBehaviour puzzleObject;
     GameObject wireframeObject;
     DebrisMoveContainer debrisMoveContainer;
@@ -56,8 +59,11 @@ public partial class Puzzle : MonoBehaviour
     float finishedAlpha;
     float wireframeAlpha;
 
+    public Bounds PlaygroundBounds { get { return playgroundBounds; } }
+
     void Awake()
     {
+        Current = this;
         var go = new GameObject("DebrisMoveContainer");
         go.transform.SetParent(transform, true);
         debrisMoveContainer = go.AddComponent<DebrisMoveContainer>();
@@ -80,6 +86,7 @@ public partial class Puzzle : MonoBehaviour
             Destroy(finishedMat);
         if (null != selectedMat)
             Destroy(selectedMat);
+        Current = null;
     }
 
     void Update()
@@ -115,7 +122,13 @@ public partial class Puzzle : MonoBehaviour
         InstantiatePrefab();
         Scramble();
         ApplyProgress();
+
         PuzzleCamera.Instance.Init(puzzleObject.size);
+        var cam = PuzzleCamera.Main;
+        Vector2 orthoSize = new Vector2(cam.aspect * cam.orthographicSize, cam.orthographicSize);
+        Vector2 pos = puzzleObject.size;
+        pos = pos / 2f;
+        playgroundBounds = new Bounds(pos, orthoSize * 2);
     }
 
     void InstantiatePrefab()
@@ -251,7 +264,7 @@ public partial class Puzzle : MonoBehaviour
         }
     }
 
-    void OnObjMove(Vector2 screenCurrent)
+    void OnObjMove(Transform objPicked, Vector2 screenCurrent)
     {
         if (null == debrisMoveContainer.Target)
             return;
@@ -307,7 +320,7 @@ public partial class Puzzle : MonoBehaviour
                 return;
             }
 
-            var bounds = PuzzleCamera.Instance.Bounds;
+            var bounds = playgroundBounds;
             var b = targetRenderer.bounds;
             if (!bounds.Contains(b.min) || !bounds.Contains(b.max))
             {
@@ -345,14 +358,11 @@ public partial class Puzzle : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        if (null != PuzzleCamera.Instance)
-        {
-            var bounds = PuzzleCamera.Instance.Bounds;
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(bounds.min, bounds.min + new Vector3(0f, bounds.size.y, 0f));
-            Gizmos.DrawLine(bounds.min + new Vector3(0f, bounds.size.y, 0f), bounds.max);
-            Gizmos.DrawLine(bounds.max, bounds.max - new Vector3(0f, bounds.size.y, 0f));
-            Gizmos.DrawLine(bounds.max - new Vector3(0f, bounds.size.y, 0f), bounds.min);
-        }
+        var bounds = playgroundBounds;
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(bounds.min, bounds.min + new Vector3(0f, bounds.size.y, 0f));
+        Gizmos.DrawLine(bounds.min + new Vector3(0f, bounds.size.y, 0f), bounds.max);
+        Gizmos.DrawLine(bounds.max, bounds.max - new Vector3(0f, bounds.size.y, 0f));
+        Gizmos.DrawLine(bounds.max - new Vector3(0f, bounds.size.y, 0f), bounds.min);
     }
 }

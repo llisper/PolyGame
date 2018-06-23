@@ -22,7 +22,7 @@ public class PuzzleTouch : MonoBehaviour
     LeanFinger mainFinger;
 
     public static Func<Transform, bool> onObjPicked;
-    public static Action<Vector2> onObjMove;
+    public static Action<Transform, Vector2> onObjMove;
     public static Action<Transform> onObjReleased;
     public static Action<Vector2> onFingerDrag;
     public static Action<float> onFingerPinched;
@@ -107,7 +107,7 @@ public class PuzzleTouch : MonoBehaviour
             if (null != objPicked && fingers.Count == 1)
             {
                 if (null != onObjMove)
-                    onObjMove(mainFinger.ScreenPosition);
+                    onObjMove(objPicked, mainFinger.ScreenPosition);
             }
         }
     }
