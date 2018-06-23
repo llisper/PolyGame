@@ -62,6 +62,10 @@ public class VectorGraphImporter : Preprocess.Importer
         ParseSvg();
         GenerateMesh();
         GenerateMaterial();
+
+        var polyGraphBehaviour = mainObj.AddComponent<PolyGraphBehaviour>();
+        polyGraphBehaviour.size = graph.size;
+        RegionResolver.Resolve(polyGraphBehaviour);
     }
 
     void ParseSvg()
@@ -85,9 +89,9 @@ public class VectorGraphImporter : Preprocess.Importer
             if (!match.Success)
                 throw new Exception("Failed to parse svg points " + polygon.Points);
 
-            Vector2 p0 = new Vector2(int.Parse(match.Groups[1].Value), int.Parse(match.Groups[2].Value));
-            Vector2 p1 = new Vector2(int.Parse(match.Groups[3].Value), int.Parse(match.Groups[4].Value));
-            Vector2 p2 = new Vector2(int.Parse(match.Groups[5].Value), int.Parse(match.Groups[6].Value));
+            Vector2 p0 = new Vector2(int.Parse(match.Groups[1].Value), graph.size.y - int.Parse(match.Groups[2].Value));
+            Vector2 p2 = new Vector2(int.Parse(match.Groups[3].Value), graph.size.y - int.Parse(match.Groups[4].Value));
+            Vector2 p1 = new Vector2(int.Parse(match.Groups[5].Value), graph.size.y - int.Parse(match.Groups[6].Value));
             graph.AddTriangle(p0, p1, p2);
 
             match = Regex.Match(polygon.Fill, @"rgb\((\d+), (\d+), (\d+)\)");
