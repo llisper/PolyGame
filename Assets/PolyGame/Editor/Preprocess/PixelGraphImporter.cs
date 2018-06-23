@@ -79,6 +79,7 @@ public class PixelGraphImporter : Preprocess.Importer
             colors.Add(0);
         var rect = new Rect(0, 0, graph.size.x, graph.size.y);
         Voronoi v = new Voronoi(graph.points, colors, rect);
+        // imporyt
         var delaunayTriangulation = v.DelaunayTriangulation();
         var resolver = new TriangleResolver(graph);
         for (int i = 0; i < delaunayTriangulation.Count; ++i)

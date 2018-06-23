@@ -27,6 +27,7 @@ public class PolyGraph
     public Vector2Int size;
     public List<Vector2> points = new List<Vector2>();
     public List<Vector2[]> triangles = new List<Vector2[]>();
+    public List<Color> fillColors = new List<Color>();
 
     public static long PointHash(Vector2 p, Vector2Int size)
     {

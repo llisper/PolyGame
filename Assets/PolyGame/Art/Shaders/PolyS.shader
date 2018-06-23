@@ -26,12 +26,14 @@
             struct vdata 
             {
                 float4 position : POSITION;
+				float4 color : COLOR;
                 float2 uv : TEXCOORD0;
             };
 
             struct fdata 
             {
                 float4 position : SV_POSITION;
+				float3 color : COLOR;
                 float2 uv : TEXCOORD0;
             };
 
@@ -39,13 +41,16 @@
             {
                 fdata i;
                 i.position = UnityObjectToClipPos(v.position);
+				i.color = v.color.rgb;
                 i.uv = v.uv;
                 return i;
             }
 
             float4 frag (fdata i) : SV_TARGET 
             {
-                return tex2D(_MainTex, i.uv) * _Color;
+				float3 tex = tex2D(_MainTex, i.uv).rgb;
+				float3 v = i.color;
+                return float4(tex * v * _Color.rgb, _Color.a);
             }
             ENDCG
         }

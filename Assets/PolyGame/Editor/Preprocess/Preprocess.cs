@@ -1,10 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using Delaunay;
 
 public static class Preprocess
 {
@@ -35,9 +31,11 @@ public static class Preprocess
             Application.dataPath, 
             Paths.AssetArtworksNoPrefix, 
             name);
-        
+
         if (File.Exists(path + PixelGraphImporter.Suffix))
             return new PixelGraphImporter(name);
+        else if (File.Exists(path + VectorGraphImporter.Suffix))
+            return new VectorGraphImporter(name);
         return null;
     }
 
