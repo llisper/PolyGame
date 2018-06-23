@@ -31,10 +31,17 @@ public partial class Puzzle : MonoBehaviour
         public Vector2 position;
     }
 
+    struct OutofBoundDebris
+    {
+        public Transform target;
+        public Vector3 inboundPos;
+    }
+
     PolyGraphBehaviour puzzleObject;
     GameObject wireframeObject;
     DebrisMoveContainer debrisMoveContainer;
     Dictionary<GameObject, DebrisInfo> debrisMap = new Dictionary<GameObject, DebrisInfo>();
+    List<OutofBoundDebris> outOfBounds = new List<OutofBoundDebris>();
 
     Material objectMat;
     Material wireframeMat;
@@ -82,6 +89,23 @@ public partial class Puzzle : MonoBehaviour
             objectMat.SetColor(propColor, Color.Lerp(objectMat.GetColor(propColor), new Color(1f, 1f, 1f, objectAlpha), Time.deltaTime * fadeSpeed));
             wireframeMat.SetFloat(propAlpha, Mathf.Lerp(wireframeMat.GetFloat(propAlpha), wireframeAlpha, Time.deltaTime * fadeSpeed));
             finishedMat.SetColor(propColor, Color.Lerp(finishedMat.GetColor(propColor), new Color(1f, 1f, 1f, finishedAlpha), Time.deltaTime * fadeSpeed));
+        }
+
+        if (outOfBounds.Count > 0)
+        {
+            for (int i = outOfBounds.Count - 1; i >= 0; --i)
+            {
+                var obd = outOfBounds[i];
+                var pos = obd.target.position;
+                pos = Vector3.Lerp(pos, obd.inboundPos, Time.deltaTime * moveSpeed);
+                if (Vector3.Distance(pos, obd.inboundPos) < 0.1f)
+                {
+                    pos = obd.inboundPos;
+                    obd.target.GetComponent<MeshCollider>().enabled = true;
+                    outOfBounds.RemoveAt(i);
+                }
+                obd.target.position = pos;
+            }
         }
     }
 
@@ -150,6 +174,7 @@ public partial class Puzzle : MonoBehaviour
         selectedMat.name = objectMat.name + "Selected";
 
         propColor = Shader.PropertyToID("_Color");
+        
         propAlpha = Shader.PropertyToID("_Alpha");
         propZWrite = Shader.PropertyToID("_ZWrite");
 
@@ -260,7 +285,10 @@ public partial class Puzzle : MonoBehaviour
     void OnObjReleased(Transform objPicked)
     {
         var target = debrisMoveContainer.Target;
-        target.GetComponent<MeshRenderer>().sharedMaterial = objectMat;
+        var targetRenderer = target.GetComponent<MeshRenderer>();
+        var targetCollider = target.GetComponent<MeshCollider>();
+
+        targetRenderer.sharedMaterial = objectMat;
         debrisMoveContainer.Target = null;
 
         DebrisInfo di;
@@ -273,10 +301,30 @@ public partial class Puzzle : MonoBehaviour
             if (Vector2.Distance(target.localPosition, di.position) <= fitThreshold)
             {
                 finished[di.index] = true;
-                target.GetComponent<MeshRenderer>().sharedMaterial = finishedMat;
-                target.GetComponent<MeshCollider>().enabled = false;
+                targetRenderer.sharedMaterial = finishedMat;
+                targetCollider.enabled = false;
                 StartCoroutine(FinishDebrisAnimation(target, di.position));
                 return;
+            }
+
+            var bounds = PuzzleCamera.Instance.Bounds;
+            var b = targetRenderer.bounds;
+            if (!bounds.Contains(b.min) || !bounds.Contains(b.max))
+            {
+                Vector3 center = b.center;
+                Vector3 offset = center - target.position;
+                offset.z = 0;
+
+                center.x = Mathf.Clamp(b.center.x, bounds.min.x + b.extents.x, bounds.max.x - b.extents.x);
+                center.y = Mathf.Clamp(b.center.y, bounds.min.y + b.extents.y, bounds.max.y - b.extents.y);
+                Vector3 pos = center - offset;
+                pos.z = transform.position.z;
+
+                OutofBoundDebris obd = new OutofBoundDebris();
+                obd.target = target;
+                obd.inboundPos = pos;
+                targetCollider.enabled = false;
+                outOfBounds.Add(obd);
             }
         }
         ShowWireframe(false);
@@ -293,5 +341,18 @@ public partial class Puzzle : MonoBehaviour
         xform.localPosition = position;
         ShowWireframe(false);
         isMovingDebris = false;
+    }
+
+    void OnDrawGizmos()
+    {
+        if (null != PuzzleCamera.Instance)
+        {
+            var bounds = PuzzleCamera.Instance.Bounds;
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(bounds.min, bounds.min + new Vector3(0f, bounds.size.y, 0f));
+            Gizmos.DrawLine(bounds.min + new Vector3(0f, bounds.size.y, 0f), bounds.max);
+            Gizmos.DrawLine(bounds.max, bounds.max - new Vector3(0f, bounds.size.y, 0f));
+            Gizmos.DrawLine(bounds.max - new Vector3(0f, bounds.size.y, 0f), bounds.min);
+        }
     }
 }

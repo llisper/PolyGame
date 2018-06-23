@@ -12,8 +12,7 @@ public class PuzzleCamera : MonoBehaviour
 
     Camera main;
     Vector2 size;
-    Vector2 xLimit;
-    Vector2 yLimit;
+    Bounds bounds;
     Vector2 zoomRange;
 
     void Awake()
@@ -31,6 +30,8 @@ public class PuzzleCamera : MonoBehaviour
         Instance = null;
     }
 
+    public Bounds Bounds { get { return bounds; } }
+
     public void Init(Vector2 size)
     {
         Vector3 pos = transform.localPosition;
@@ -47,9 +48,7 @@ public class PuzzleCamera : MonoBehaviour
             main.orthographicSize = extendedSize.x / (2f * main.aspect);
 
         Vector2 orthoSize = new Vector2(main.aspect * main.orthographicSize, main.orthographicSize);
-        xLimit = new Vector2(pos.x - orthoSize.x, pos.x + orthoSize.x);
-        yLimit = new Vector2(pos.y - orthoSize.y, pos.y + orthoSize.y);
-
+        bounds = new Bounds(new Vector3(pos.x, pos.y, 0f), orthoSize * 2);
         zoomRange = new Vector2(main.orthographicSize / minRangeScale, main.orthographicSize);
     }
 
@@ -60,9 +59,9 @@ public class PuzzleCamera : MonoBehaviour
         Vector2 orthoSize = new Vector2(main.aspect * main.orthographicSize, main.orthographicSize);
 
         Vector3 finalPos = main.transform.localPosition;
-        if ((delta.x < 0 && newPos.x - orthoSize.x >= xLimit.x) || (delta.x >= 0 && newPos.x + orthoSize.x <= xLimit.y))
+        if ((delta.x < 0 && newPos.x - orthoSize.x >= bounds.min.x) || (delta.x >= 0 && newPos.x + orthoSize.x <= bounds.max.x))
             finalPos.x = newPos.x;
-        if ((delta.y < 0 && newPos.y - orthoSize.y >= yLimit.x) || (delta.y >= 0 && newPos.y + orthoSize.y <= yLimit.y))
+        if ((delta.y < 0 && newPos.y - orthoSize.y >= bounds.min.y) || (delta.y >= 0 && newPos.y + orthoSize.y <= bounds.max.y))
             finalPos.y = newPos.y;
         main.transform.localPosition = finalPos;
     }

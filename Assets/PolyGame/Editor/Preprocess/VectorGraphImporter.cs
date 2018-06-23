@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using SvgXml;
 
+// NOTE: use this website to genereate xml descriptor
+// http://xmltocsharp.azurewebsites.net/
 namespace SvgXml
 {
     [XmlRoot(ElementName = "polygon", Namespace = "http://www.w3.org/2000/svg")]
