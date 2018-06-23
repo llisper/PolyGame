@@ -12,7 +12,6 @@ public class PuzzleCamera : MonoBehaviour
     const float followObjMoveDistance = 5f;
 
     Camera main;
-    Vector2 size;
     Bounds bounds;
     Vector2 zoomRange;
 
@@ -40,7 +39,6 @@ public class PuzzleCamera : MonoBehaviour
         transform.position = pos;
 
         Vector2 extendedSize = size * sizeExtendScale;
-        this.size = extendedSize;
         float graphAspect = extendedSize.x / extendedSize.y;
         if (graphAspect < main.aspect)
             main.orthographicSize = extendedSize.y / 2f;
