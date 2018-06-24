@@ -6,8 +6,13 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using SvgXml;
 
-// NOTE: use this website to genereate xml descriptor
-// http://xmltocsharp.azurewebsites.net/
+/*
+    NOTE: use this website to genereate xml descriptor
+    http://xmltocsharp.azurewebsites.net/
+    image triangulator
+    https://snorpey.github.io/triangulation/
+*/
+
 namespace SvgXml
 {
     [XmlRoot(ElementName = "polygon", Namespace = "http://www.w3.org/2000/svg")]
