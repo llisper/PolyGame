@@ -34,6 +34,7 @@ public class UI : MonoBehaviour
     void Start()
     {
         OpenPanel<ScreenOverlay>(UILayer.Overlay);
+        OpenPanel<FpsCounter>(UILayer.Overlay);
     }
 
     public Panel OpenPanel<T>(UILayer layer = UILayer.Base) where T : Panel
