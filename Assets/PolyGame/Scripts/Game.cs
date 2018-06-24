@@ -4,20 +4,19 @@ public class Game : MonoBehaviour
 {
     public static Game Instance;
 
-    public GameObject testPuzzle;
-
     void Awake()
     {
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start ()
+    void Start()
     {
-        if (null != testPuzzle)
-            Puzzle.Start(testPuzzle.name);
+        UI.Init();
+        GameScene.Init();
 	}
 
+    #region fps counter
     GUIStyle style;
     float fps;
     float fpsTimer;
@@ -39,6 +38,7 @@ public class Game : MonoBehaviour
             fpsCounter = Time.frameCount;
             fpsTimer = 0f;
         }
-        GUI.Label(new Rect(10, 10, 1000, 1000), string.Format("fps: {0:f2}", fps), style);
+        GUI.Label(new Rect(Screen.width - 75, 10, 75, 30), string.Format("fps: {0:f2}", fps), style);
     }
+    #endregion fps counter
 }

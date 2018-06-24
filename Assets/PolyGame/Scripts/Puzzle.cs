@@ -7,7 +7,7 @@ public partial class Puzzle : MonoBehaviour
 {
     public static void Start(string puzzleName)
     {
-        GameScene.LoadScene("Puzzle", (c, n) => 
+        GameScene.LoadScene<PuzzleScene>((c, n) => 
         {
             var go = new GameObject("Puzzle_" + puzzleName);
             var puzzle = go.AddComponent<Puzzle>();
