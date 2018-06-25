@@ -186,8 +186,17 @@ class MeshModifier : EditorWindow
         if (GUILayout.Button("Select Regions", GUILayout.Width(100f)))
             Selection.activeGameObject = info.editObj;
 
-        if (meshPicker.renderers.Count > 0)
+
+        if (meshPicker.renderers.Count <= 0)
         {
+            // TODO: clip follow vertecies on convex hull            
+        }
+        else
+        {
+            if (GUILayout.Button("Clear Selection", GUILayout.Width(100f)))
+            {
+                meshPicker.Clear();
+            }
             if (GUILayout.Button("Drop Regions", GUILayout.Width(100f)))
             {
                 meshPicker.renderers.ForEach(v => v.gameObject.SetActive(false));

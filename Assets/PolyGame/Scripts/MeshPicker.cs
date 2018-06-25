@@ -39,6 +39,13 @@ public class MeshPicker : MonoBehaviour
         }
     }
 
+    public void Clear()
+    {
+        foreach (var r in renderers)
+            r.sharedMaterial = sharedMat;
+        renderers.Clear();
+    }
+
     public void RecordRay(Ray ray)
     {
         this.ray = ray;
