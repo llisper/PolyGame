@@ -36,4 +36,5 @@ public class Tags
 public class Layers
 {
     public const int Debris = 8;
+    public const int Snapshot = 9;
 }

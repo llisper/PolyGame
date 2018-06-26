@@ -43,6 +43,7 @@ public partial class Puzzle : MonoBehaviour
     PolyGraphBehaviour puzzleObject;
     GameObject wireframeObject;
     DebrisMoveContainer debrisMoveContainer;
+    PuzzleSnapshot snapshot;
     Dictionary<GameObject, DebrisInfo> debrisMap = new Dictionary<GameObject, DebrisInfo>();
     List<OutofBoundDebris> outOfBounds = new List<OutofBoundDebris>();
 
@@ -67,6 +68,9 @@ public partial class Puzzle : MonoBehaviour
         var go = new GameObject("DebrisMoveContainer");
         go.transform.SetParent(transform, true);
         debrisMoveContainer = go.AddComponent<DebrisMoveContainer>();
+
+        go = new GameObject("PuzzleSnapshot");
+        snapshot = go.AddComponent<PuzzleSnapshot>();
 
         PuzzleTouch.onObjPicked += OnObjPicked;
         PuzzleTouch.onObjMove += OnObjMove;
@@ -120,8 +124,8 @@ public partial class Puzzle : MonoBehaviour
     {
         this.puzzleName = puzzleName;
         InstantiatePrefab();
-        Scramble();
         ApplyProgress();
+        Scramble();
 
         PuzzleCamera.Instance.Init(puzzleObject.size);
         var cam = PuzzleCamera.Main;
@@ -129,13 +133,14 @@ public partial class Puzzle : MonoBehaviour
         Vector2 pos = puzzleObject.size;
         pos = pos / 2f;
         playgroundBounds = new Bounds(pos, orthoSize * 2);
+
     }
 
     void InstantiatePrefab()
     {
         var prefab = Resources.Load(string.Format("{0}/{1}/{1}", Paths.Artworks, puzzleName));
-        var go = (GameObject)Instantiate(prefab);
-        go.transform.SetParent(transform);
+        var go = (GameObject)Instantiate(prefab, transform);
+        go.name = puzzleName;
 
         for (int i = 0; i < go.transform.childCount; ++i)
         {
@@ -155,6 +160,7 @@ public partial class Puzzle : MonoBehaviour
     {
         wireframeObject = new GameObject(puzzleName + "Wireframe", typeof(MeshFilter), typeof(MeshRenderer));
         wireframeObject.transform.SetParent(transform);
+        wireframeObject.layer = Layers.Debris;
 
 		var meshFilters = puzzleObject.GetComponentsInChildren<MeshFilter>();
         CombineInstance[] combine = new CombineInstance[meshFilters.Length];
@@ -230,15 +236,18 @@ public partial class Puzzle : MonoBehaviour
     {
         for (int i = 0; i < puzzleObject.transform.childCount; ++i)
         {
-            var child = puzzleObject.transform.GetChild(i);
-            child.localPosition += (Vector3)(Random.insideUnitCircle * ScrambleRadius);
+            if (i >= finished.Length || !finished[i])
+            {
+                var child = puzzleObject.transform.GetChild(i);
+                child.localPosition += (Vector3)(Random.insideUnitCircle * ScrambleRadius);
+            }
         }
     }
 
     void ApplyProgress()
     {
         LoadProgress();
-
+        snapshot.Init(puzzleObject, finishedMat, finished);
         for (int i = 0; i < finished.Length; ++i)
         {
             if (finished[i])
@@ -250,14 +259,6 @@ public partial class Puzzle : MonoBehaviour
                     continue;
                 }
 
-                DebrisInfo di;
-                if (!debrisMap.TryGetValue(child.gameObject, out di))
-                {
-                    Debug.LogErrorFormat("Missing child({0}) from debris map when applying progress", child);
-                    continue;
-                }
-
-                child.localPosition = di.position;
                 child.GetComponent<MeshRenderer>().sharedMaterial = finishedMat;
                 child.GetComponent<MeshCollider>().enabled = false;
             }
@@ -316,6 +317,7 @@ public partial class Puzzle : MonoBehaviour
                 finished[di.index] = true;
                 targetRenderer.sharedMaterial = finishedMat;
                 targetCollider.enabled = false;
+                snapshot.OnFinish(di.index);
                 StartCoroutine(FinishDebrisAnimation(target, di.position));
                 return;
             }

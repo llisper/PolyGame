@@ -18,7 +18,7 @@ public class PuzzleCamera : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        main = Camera.main;
+        main = GetComponent<Camera>();
         PuzzleTouch.onFingerDrag += OnCameraMove;
         PuzzleTouch.onFingerPinched += OnCameraZoom;
     }
