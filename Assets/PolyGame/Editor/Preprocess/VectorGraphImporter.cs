@@ -148,6 +148,7 @@ public class VectorGraphImporter : Preprocess.Importer
     {
         Material mat = new Material(Shader.Find("PolyGame/PolyS"));
         mat.name = graph.name;
+        mat.EnableKeyword(ShaderFeatures._USE_VERT_COLOR);
         Material = mat;
 
         foreach (var renderer in mainObj.GetComponentsInChildren<MeshRenderer>())
