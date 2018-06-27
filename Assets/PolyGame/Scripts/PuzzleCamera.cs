@@ -11,14 +11,13 @@ public class PuzzleCamera : MonoBehaviour
     const float zoomScale = 125f;
     const float followObjMoveDistance = 5f;
 
-    Camera main;
+    public Camera main;
     Bounds bounds;
     Vector2 zoomRange;
 
     void Awake()
     {
         Instance = this;
-        main = GetComponent<Camera>();
         PuzzleTouch.onFingerDrag += OnCameraMove;
         PuzzleTouch.onFingerPinched += OnCameraZoom;
     }
@@ -33,28 +32,32 @@ public class PuzzleCamera : MonoBehaviour
 
     public void Init(Vector2 size)
     {
-        Vector3 pos = transform.position;
-        pos.x = size.x / 2;
-        pos.y = size.y / 2;
-        transform.position = pos;
-
-        Vector2 extendedSize = size * sizeExtendScale;
-        float graphAspect = extendedSize.x / extendedSize.y;
-        if (graphAspect < main.aspect)
-            main.orthographicSize = extendedSize.y / 2f;
-        else
-            main.orthographicSize = extendedSize.x / (2f * main.aspect);
-
-        zoomRange = new Vector2(main.orthographicSize / minRangeScale, main.orthographicSize);
+        SetupCamera(main, size, sizeExtendScale);
         UpdateBounds();
 
+        zoomRange = new Vector2(main.orthographicSize / minRangeScale, main.orthographicSize);
         PuzzleTouch.onObjMove += OnObjMove;
+    }
+
+    public static void SetupCamera(Camera camera, Vector2 graphSize, float extendScale = 1f)
+    {
+        Vector3 pos = camera.transform.position;
+        pos.x = graphSize.x / 2;
+        pos.y = graphSize.y / 2;
+        camera.transform.position = pos;
+
+        Vector2 extendedSize = graphSize * extendScale;
+        float graphAspect = extendedSize.x / extendedSize.y;
+        if (graphAspect < camera.aspect)
+            camera.orthographicSize = extendedSize.y / 2f;
+        else
+            camera.orthographicSize = extendedSize.x / (2f * camera.aspect);
     }
 
     void UpdateBounds()
     {
         Vector2 orthoSize = new Vector2(main.aspect * main.orthographicSize, main.orthographicSize);
-        var pos = transform.position;
+        var pos = main.transform.position;
         bounds = new Bounds(new Vector3(pos.x, pos.y, 0f), orthoSize * 2);
     }
 
@@ -85,11 +88,11 @@ public class PuzzleCamera : MonoBehaviour
                 var exDelta = bounds.extents - b.extents;
                 pos.x = Mathf.Clamp(pos.x, b.center.x - exDelta.x, b.center.x + exDelta.x);
                 pos.y = Mathf.Clamp(pos.y, b.center.y - exDelta.y, b.center.y + exDelta.y);
-                pos.z = transform.position.z;
-                if (null != transform.parent)
-                    pos = transform.parent.InverseTransformPoint(pos);
+                pos.z = main.transform.position.z;
+                if (null != main.transform.parent)
+                    pos = main.transform.parent.InverseTransformPoint(pos);
 
-                var dir = pos - transform.localPosition;
+                var dir = pos - main.transform.localPosition;
                 dir = dir.normalized * Mathf.Min(dir.magnitude, followObjMoveDistance);
                 MoveCamera(dir);
             }

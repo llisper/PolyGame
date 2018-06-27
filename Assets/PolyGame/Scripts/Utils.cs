@@ -3,8 +3,6 @@ using UnityEngine.Rendering;
 
 public class Utils
 {
-    public const float CameraDistance = 1001f;
-
     public static void SetupMeshRenderer(GameObject go)
     {
         var renderer = go.GetComponent<MeshRenderer>();
@@ -22,10 +20,21 @@ public class Utils
     }
 }
 
+public class Config
+{
+    public const float CameraDistance = 1001f;
+    public static Vector2Int SnapshotSize = new Vector2Int(256, 256);
+}
+
 public class ShaderFeatures
 {
     public const string _USE_VERT_COLOR = "_USE_VERT_COLOR";
     public const string _GREYSCALE = "_GREYSCALE";
+}
+
+public class Prefabs
+{
+    public const string PuzzleCamera = "Prefabs/PuzzleCamera";
 }
 
 public class Tags

@@ -78,7 +78,7 @@ public class PuzzleTouch : MonoBehaviour
             {
                 var ray = PuzzleCamera.Main.ScreenPointToRay(mainFinger.ScreenPosition);
                 RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, Utils.CameraDistance, ~Layers.Debris))
+                if (Physics.Raycast(ray, out hit, Config.CameraDistance, ~Layers.Debris))
                 {
                     var xform = hit.transform;
                     if (null != onObjPicked && onObjPicked(xform))

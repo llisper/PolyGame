@@ -113,6 +113,58 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &1535267252
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2037205295}
+    m_Modifications:
+    - target: {fileID: 4482316358339272, guid: b1b573f67baf24fb0aae477b84f2bcc9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482316358339272, guid: b1b573f67baf24fb0aae477b84f2bcc9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482316358339272, guid: b1b573f67baf24fb0aae477b84f2bcc9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482316358339272, guid: b1b573f67baf24fb0aae477b84f2bcc9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482316358339272, guid: b1b573f67baf24fb0aae477b84f2bcc9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482316358339272, guid: b1b573f67baf24fb0aae477b84f2bcc9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482316358339272, guid: b1b573f67baf24fb0aae477b84f2bcc9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482316358339272, guid: b1b573f67baf24fb0aae477b84f2bcc9, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b1b573f67baf24fb0aae477b84f2bcc9, type: 2}
+  m_IsPrefabParent: 0
+--- !u!20 &1535267253 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 20154962726592976, guid: b1b573f67baf24fb0aae477b84f2bcc9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1535267252}
+--- !u!4 &1535267254 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4482316358339272, guid: b1b573f67baf24fb0aae477b84f2bcc9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1535267252}
 --- !u!1 &2037205290
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,8 +173,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2037205295}
-  - component: {fileID: 2037205294}
-  - component: {fileID: 2037205291}
   - component: {fileID: 2037205292}
   m_Layer: 0
   m_Name: PuzzleCamera
@@ -131,13 +181,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &2037205291
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2037205290}
-  m_Enabled: 1
 --- !u!114 &2037205292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,42 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc311a7f2c3ceb42aa20a3ebfdd2e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!20 &2037205294
-Camera:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2037205290}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0.019607844}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 1
-  orthographic size: 551.34
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 256
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 0
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 0
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
+  main: {fileID: 1535267253}
 --- !u!4 &2037205295
 Transform:
   m_ObjectHideFlags: 0
@@ -192,9 +200,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2037205290}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 250, y: 356.5, z: -1000}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1535267254}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

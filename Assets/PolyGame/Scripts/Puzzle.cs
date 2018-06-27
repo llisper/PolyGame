@@ -43,7 +43,6 @@ public partial class Puzzle : MonoBehaviour
     PolyGraphBehaviour puzzleObject;
     GameObject wireframeObject;
     DebrisMoveContainer debrisMoveContainer;
-    PuzzleSnapshot snapshot;
     Dictionary<GameObject, DebrisInfo> debrisMap = new Dictionary<GameObject, DebrisInfo>();
     List<OutofBoundDebris> outOfBounds = new List<OutofBoundDebris>();
 
@@ -60,7 +59,9 @@ public partial class Puzzle : MonoBehaviour
     float finishedAlpha;
     float wireframeAlpha;
 
+    public string PuzzleName { get { return puzzleName; } }
     public Bounds PlaygroundBounds { get { return playgroundBounds; } }
+    public bool[] FinishedFlags { get { return finished; } }
 
     void Awake()
     {
@@ -69,9 +70,6 @@ public partial class Puzzle : MonoBehaviour
         go.transform.SetParent(transform, true);
         debrisMoveContainer = go.AddComponent<DebrisMoveContainer>();
 
-        go = new GameObject("PuzzleSnapshot");
-        snapshot = go.AddComponent<PuzzleSnapshot>();
-
         PuzzleTouch.onObjPicked += OnObjPicked;
         PuzzleTouch.onObjMove += OnObjMove;
         PuzzleTouch.onObjReleased += OnObjReleased;
@@ -79,7 +77,6 @@ public partial class Puzzle : MonoBehaviour
 
     void OnDestroy()
     {
-        SaveProgress();
         PuzzleTouch.onObjPicked -= OnObjPicked;
         PuzzleTouch.onObjMove -= OnObjMove;
         PuzzleTouch.onObjReleased -= OnObjReleased;
@@ -247,7 +244,6 @@ public partial class Puzzle : MonoBehaviour
     void ApplyProgress()
     {
         LoadProgress();
-        snapshot.Init(puzzleObject, finishedMat, finished);
         for (int i = 0; i < finished.Length; ++i)
         {
             if (finished[i])
@@ -317,7 +313,6 @@ public partial class Puzzle : MonoBehaviour
                 finished[di.index] = true;
                 targetRenderer.sharedMaterial = finishedMat;
                 targetCollider.enabled = false;
-                snapshot.OnFinish(di.index);
                 StartCoroutine(FinishDebrisAnimation(target, di.position));
                 return;
             }

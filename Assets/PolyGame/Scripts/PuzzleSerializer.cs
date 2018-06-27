@@ -12,7 +12,7 @@ public partial class Puzzle
         return string.Format("{0}/{1}/", Paths.Saves, puzzleName);
     }
 
-    void SaveProgress()
+    public void SaveProgress()
     {
         try
         {
