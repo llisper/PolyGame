@@ -3,6 +3,18 @@ using UnityEngine.Rendering;
 
 public class Utils
 {
+    public static void Destroy(UnityEngine.Object obj)
+    {
+        #if UNITY_EDITOR
+        if (Application.isPlaying)
+            UnityEngine.Object.Destroy(obj);
+        else
+            UnityEngine.Object.DestroyImmediate(obj);
+        #else
+        UnityEngine.Object.Destroy(obj);
+        #endif // UNITY_EDITOR
+    }
+
     public static void SetupMeshRenderer(GameObject go)
     {
         var renderer = go.GetComponent<MeshRenderer>();

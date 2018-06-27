@@ -29,11 +29,12 @@ public class PuzzleSnapshot : MonoBehaviour
 
     void OnDestroy()
     {
-        Destroy(renderTexture);
+        camera.targetTexture = null;
+        Utils.Destroy(renderTexture);
         if (null != originMat)
-            Destroy(originMat);
+            Utils.Destroy(originMat);
         if (null != greyscaleMat)
-            Destroy(greyscaleMat);
+            Utils.Destroy(greyscaleMat);
     }
 
     public void Init(string puzzleName, bool[] finished = null)
@@ -123,7 +124,7 @@ public class PuzzleSnapshot : MonoBehaviour
     {
         if (null != greyscaleMat)
         {
-            Destroy(greyscaleMat);
+            Utils.Destroy(greyscaleMat);
             greyscaleMat = null;
         }
 
@@ -147,7 +148,7 @@ public static class PuzzleSnapshotOneOff
         var snapshot = go.AddComponent<PuzzleSnapshot>();
         snapshot.Init(puzzleName, finished);
         snapshot.Save();
-        GameObject.Destroy(go);
+        Utils.Destroy(go);
     }
 
     public static void Take(PolyGraphBehaviour puzzleObject, Material mat, bool[] finished = null)
@@ -156,6 +157,6 @@ public static class PuzzleSnapshotOneOff
         var snapshot = go.AddComponent<PuzzleSnapshot>();
         snapshot.Init(puzzleObject, mat, finished);
         snapshot.Save();
-        GameObject.Destroy(go);
+        Utils.Destroy(go);
     }
 }

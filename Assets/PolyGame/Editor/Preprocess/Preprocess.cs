@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using System;
 using System.IO;
 
 public static class Preprocess
@@ -74,11 +75,26 @@ public static class Preprocess
         string matPath = string.Format("{0}/{1}/Materials/{2}.mat", Paths.AssetArtworks, importer.Name, importer.Material.name);
         AssetDatabase.CreateAsset(importer.Material, matPath);
 
+        PuzzleSnapshotOneOff.Take(importer.GameObject.GetComponent<PolyGraphBehaviour>(), importer.Material);
+
         string prefabPath = string.Format("{0}/{1}/{1}.prefab", Paths.AssetResArtworks, importer.Name);
         UnityEngine.Object prefab = PrefabUtility.CreatePrefab(prefabPath, importer.GameObject);
         PrefabUtility.ReplacePrefab(importer.GameObject, prefab, ReplacePrefabOptions.ConnectToPrefab);
         GameObject.DestroyImmediate(importer.GameObject);
 
         AssetDatabase.SaveAssets();
+    }
+
+    [MenuItem("Tools/Preprocess/Complete Initial Snapshots")]
+    static void CompleteInitialSnapshots()
+    {
+        string[] dirs = Directory.GetDirectories(Application.dataPath + '/' + Paths.AssetResArtworksNoPrefix);
+        string[] names = Array.ConvertAll(dirs, v => Path.GetFileName(v));
+        for (int i = 0; i < names.Length; ++i)
+        {
+            string path = PuzzleSnapshot.SavePath(names[i]);
+            if (!File.Exists(path))
+                PuzzleSnapshotOneOff.Take(names[i]);
+        }
     }
 }
