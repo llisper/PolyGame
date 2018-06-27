@@ -58,6 +58,11 @@ public class PuzzleSnapshot : MonoBehaviour
             renderer.sharedMaterial = originMat;
     }
 
+    public static string SavePath(string puzzleName)
+    {
+        return string.Format("{0}/{1}/Snapshot.jpg", Paths.Saves, puzzleName);
+    }
+
     [ContextMenu("Save")]
     public void Save()
     {
@@ -75,7 +80,7 @@ public class PuzzleSnapshot : MonoBehaviour
                 tex2d.ReadPixels(new Rect(0, 0, size.x, size.y), 0, 0);
 
                 byte[] bytes = tex2d.EncodeToJPG();
-                string path = string.Format("{0}/{1}/Snapshot.jpg", Paths.Saves, puzzleName);
+                string path = SavePath(puzzleName);
                 File.WriteAllBytes(path, bytes);
                 Debug.Log("Save snapshot to " + path);
             }
