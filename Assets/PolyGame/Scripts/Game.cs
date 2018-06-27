@@ -23,13 +23,21 @@ public class Game : MonoBehaviour
      */
     public static void CompleteInitialSnapshots()
     {
+        var go = new GameObject("PuzzleSnapshot");
+        var snapshot = go.AddComponent<PuzzleSnapshot>();
+
         string[] dirs = Directory.GetDirectories(Application.dataPath + '/' + Paths.AssetResArtworksNoPrefix);
         string[] names = Array.ConvertAll(dirs, v => Path.GetFileName(v));
         for (int i = 0; i < names.Length; ++i)
         {
             string path = PuzzleSnapshot.SavePath(names[i]);
             if (!File.Exists(path))
-                PuzzleSnapshotOneOff.Take(names[i]);
+            {
+                snapshot.Init(names[i]);
+                snapshot.Save();
+            }
         }
+
+        Destroy(go);
     }
 }

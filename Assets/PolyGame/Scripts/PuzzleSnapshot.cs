@@ -99,6 +99,8 @@ public class PuzzleSnapshot : MonoBehaviour
 
     void InternalInit(PolyGraphBehaviour puzzleObject, bool[] finished)
     {
+        if (null != this.puzzleObject)
+            Utils.Destroy(this.puzzleObject);
         this.puzzleObject = puzzleObject;
         var renderer = puzzleObject.GetComponentInChildren<MeshRenderer>();
         if (null != renderer)
@@ -122,6 +124,12 @@ public class PuzzleSnapshot : MonoBehaviour
 
     void InitMaterial(Material mat)
     {
+        if (null != originMat)
+        {
+            Utils.Destroy(originMat);
+            originMat = null;
+        }
+
         if (null != greyscaleMat)
         {
             Utils.Destroy(greyscaleMat);
