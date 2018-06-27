@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System;
+using System.IO;
 
 public class Game : MonoBehaviour
 {
@@ -8,6 +10,7 @@ public class Game : MonoBehaviour
     {
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        CompleteInitialSnapshots();
     }
 
     void Start()
@@ -15,4 +18,18 @@ public class Game : MonoBehaviour
         UI.Init();
         GameScene.Init();
 	}
+
+    /* NOTE: temporary code generate snapshots 
+     */
+    public static void CompleteInitialSnapshots()
+    {
+        string[] dirs = Directory.GetDirectories(Application.dataPath + '/' + Paths.AssetResArtworksNoPrefix);
+        string[] names = Array.ConvertAll(dirs, v => Path.GetFileName(v));
+        for (int i = 0; i < names.Length; ++i)
+        {
+            string path = PuzzleSnapshot.SavePath(names[i]);
+            if (!File.Exists(path))
+                PuzzleSnapshotOneOff.Take(names[i]);
+        }
+    }
 }
