@@ -26,7 +26,7 @@ public class MenuPanel : Panel
 
     #if UNITY_EDITOR
     [ContextMenu("Auto Fill Options")]
-    void AutoFillOptions()
+    public void AutoFillOptions()
     {
         string[] dirs = Directory.GetDirectories(Application.dataPath + '/' + Paths.AssetResArtworksNoPrefix);
         options = new List<string>(Array.ConvertAll(dirs, v => Path.GetFileName(v)));
