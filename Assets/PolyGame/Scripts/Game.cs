@@ -23,6 +23,7 @@ public class Game : MonoBehaviour
      */
     public static void CompleteInitialSnapshots()
     {
+        /*
         var go = new GameObject("PuzzleSnapshot");
         var snapshot = go.AddComponent<PuzzleSnapshot>();
 
@@ -39,5 +40,6 @@ public class Game : MonoBehaviour
         }
 
         Destroy(go);
+        */
     }
 }
