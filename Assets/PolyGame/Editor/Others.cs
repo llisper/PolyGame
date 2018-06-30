@@ -72,7 +72,7 @@ static class Others
                         Color[] colors = new Color[tris.Length];
                         for (int i = 0; i < tris.Length; i += 3)
                         {
-                            Vector2 centroidUV = PolyGraph.GetCentroid(verts[i], verts[i + 1], verts[i + 2]);
+                            Vector2 centroidUV = PolyGraph.GetCentroid(uv[tris[i]], uv[tris[i + 1]], uv[tris[i + 2]]);
                             Color c = texture.GetPixelBilinear(centroidUV.x, centroidUV.y);
                             colors[i] = colors[i + 1] = colors[i + 2] = c;
                         }
