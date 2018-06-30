@@ -10,6 +10,7 @@ class ImportPostProcessor : AssetPostprocessor
         var importer = (TextureImporter)assetImporter;
         importer.textureType = TextureImporterType.Default;
         importer.alphaSource = TextureImporterAlphaSource.None;
+        importer.isReadable = true;
         importer.mipmapEnabled = false;
         importer.filterMode = FilterMode.Trilinear;
     }

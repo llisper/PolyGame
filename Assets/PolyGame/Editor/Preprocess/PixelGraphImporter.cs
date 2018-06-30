@@ -137,8 +137,6 @@ public class PixelGraphImporter : Preprocess.Importer
             triObj.GetComponent<MeshCollider>().sharedMesh = mesh;
             Meshes[i] = mesh;
         }
-
-        Utils.Destroy(texture);
     }
 
     void GenerateMaterial()

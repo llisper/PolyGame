@@ -34,7 +34,7 @@ Mesh:
   m_IndexBuffer: 000001000200
   m_Skin: []
   m_VertexData:
-    m_CurrentChannels: 9
+    m_CurrentChannels: 5
     m_VertexCount: 3
     m_Channels:
     - stream: 0
@@ -46,13 +46,9 @@ Mesh:
       format: 0
       dimension: 0
     - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
       offset: 12
       format: 0
-      dimension: 2
+      dimension: 4
     - stream: 0
       offset: 0
       format: 0
@@ -69,8 +65,12 @@ Mesh:
       offset: 0
       format: 0
       dimension: 0
-    m_DataSize: 60
-    _typelessdata: 4055d540c0aa8ac0000000003846303fa2bc063fc0aaaac0805515c000000000bee22b3f5a4c073f00abaabf4055d540000000003c592d3f16d3093f
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 84
+    _typelessdata: 4055d540c0aa8ac000000000e4ff463f620b363f50f9233f0000803fc0aaaac0805515c000000000e4ff463f620b363f50f9233f0000803f00abaabf4055d54000000000e4ff463f620b363f50f9233f0000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
