@@ -93,6 +93,11 @@ public class PixelGraphImporter : Preprocess.Importer
 
     void GenerateMesh()
     {
+        string path = string.Format("{0}/{1}/{1}.png", Paths.AssetArtworks, graph.name);
+        Texture2D texture = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
+        if (null == texture)
+            throw new Exception("Failed to load texture " + path);
+
         mainObj = new GameObject(graph.name);
         Meshes = new Mesh[graph.triangles.Count];
         for (int i = 0; i < graph.triangles.Count; ++i)
@@ -114,30 +119,38 @@ public class PixelGraphImporter : Preprocess.Importer
             mesh.vertices = Array.ConvertAll(vertices, v => (Vector3)v);
             mesh.triangles = new int[] { 0, 1, 2 };
 
-            Vector2[] uv = new Vector2[3];
-            for (int j = 0; j < mesh.vertices.Length; ++j)
-            {
-                uv[j].x = points[j].x / graph.size.x;
-                uv[j].y = points[j].y / graph.size.y;
-            }
-            mesh.uv = uv;
+            Color fillColor = texture.GetPixelBilinear(
+                centroid.x / graph.size.x,
+                centroid.y / graph.size.y);
+            mesh.colors = new Color[] { fillColor, fillColor, fillColor };
+
+            //Vector2[] uv = new Vector2[3];
+            //for (int j = 0; j < mesh.vertices.Length; ++j)
+            //{
+            //    uv[j].x = points[j].x / graph.size.x;
+            //    uv[j].y = points[j].y / graph.size.y;
+            //}
+            //mesh.uv = uv;
 
             triObj.GetComponent<MeshFilter>().mesh = mesh;
             triObj.transform.localPosition = centroid;
             triObj.GetComponent<MeshCollider>().sharedMesh = mesh;
             Meshes[i] = mesh;
         }
+
+        Utils.Destroy(texture);
     }
 
     void GenerateMaterial()
     {
         Material mat = new Material(Shader.Find("PolyGame/PolyS"));
         mat.name = graph.name;
-        string path = string.Format("{0}/{1}/{1}.png", Paths.AssetArtworks, graph.name);
-        Texture texture = AssetDatabase.LoadAssetAtPath<Texture>(path);
-        if (null == texture)
-            throw new Exception("Failed to load texture " + path);
-        mat.SetTexture("_MainTex", texture);
+        //string path = string.Format("{0}/{1}/{1}.png", Paths.AssetArtworks, graph.name);
+        //Texture texture = AssetDatabase.LoadAssetAtPath<Texture>(path);
+        //if (null == texture)
+        //    throw new Exception("Failed to load texture " + path);
+        //mat.SetTexture("_MainTex", texture);
+        mat.EnableKeyword(ShaderFeatures._USE_VERT_COLOR);
         Material = mat;
 
         foreach (var renderer in mainObj.GetComponentsInChildren<MeshRenderer>())

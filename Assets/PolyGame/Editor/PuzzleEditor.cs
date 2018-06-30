@@ -30,4 +30,17 @@ class PuzzleEditor
         PrefabUtility.ReplacePrefab(menu, prefab, ReplacePrefabOptions.ConnectToPrefab);
         GameObject.DestroyImmediate(ui);
     }
+
+    [MenuItem("Tools/Test")]
+    static void Test()
+    {
+        string path = string.Format("{0}/{1}/{1}.png", Paths.AssetArtworks, "Bill");
+        Texture texture = AssetDatabase.LoadAssetAtPath<Texture>(path);
+        if (null == texture)
+            throw new Exception("Failed to load texture " + path);
+
+        Debug.Log(texture);
+        Debug.Log(texture.GetType().Name);
+        GameObject.Destroy(texture);
+    }
 }
