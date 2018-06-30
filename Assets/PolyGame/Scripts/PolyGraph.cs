@@ -46,7 +46,7 @@ public class PolyGraph
         triangles.Add(new Vector2[] { p0, p1, p2 });
     }
 
-    public static Vector2 GetCentroid(Vector2[] points)
+    public static Vector2 GetCentroid(params Vector2[] points)
     {
         Vector2 ret = Vector2.zero;
         for (int i = 0; i < points.Length; ++i)

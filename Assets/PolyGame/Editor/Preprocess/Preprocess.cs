@@ -82,10 +82,4 @@ public static class Preprocess
 
         AssetDatabase.SaveAssets();
     }
-
-    [MenuItem("Tools/Preprocess/Complete Initial Snapshots")]
-    static void CompleteInitialSnapshots()
-    {
-        Game.CompleteInitialSnapshots();
-    }
 }
