@@ -41,10 +41,11 @@ static class Others
     static void ConvertToUseVectexColor()
     {
         string[] guids = AssetDatabase.FindAssets("t:GameObject", new string[] { Paths.AssetResArtworks });
-        foreach (string guid in guids)
+        for (int g = 0; g < guids.Length; ++g)
         {
             GameObject go = null;
-            string path = AssetDatabase.GUIDToAssetPath(guid);
+            string path = AssetDatabase.GUIDToAssetPath(guids[g]);
+            EditorUtility.DisplayProgressBar("ConvertToUseVectexColor", path, (float)g / guids.Length);
             try
             {
                 var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
@@ -95,6 +96,7 @@ static class Others
             {
                 if (null != go)
                     GameObject.DestroyImmediate(go);
+                EditorUtility.ClearProgressBar();
             }
         }
     }
