@@ -12,7 +12,7 @@ public class PuzzleScene : GameScene.IScene
 		if (null != puzzle)
 		{
 			puzzle.SaveProgress();
-            // PuzzleSnapshotOneOff.Take(puzzle.PuzzleName, puzzle.FinishedFlags);
+            PuzzleSnapshotOneOff.Take(puzzle.PuzzleName, puzzle.FinishedFlags);
 		}
 	}
 }

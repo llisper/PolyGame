@@ -19,11 +19,8 @@ public class Game : MonoBehaviour
         GameScene.Init();
 	}
 
-    /* NOTE: temporary code generate snapshots 
-     */
     public static void CompleteInitialSnapshots()
     {
-        /*
         var go = new GameObject("PuzzleSnapshot");
         var snapshot = go.AddComponent<PuzzleSnapshot>();
 
@@ -40,6 +37,5 @@ public class Game : MonoBehaviour
         }
 
         Destroy(go);
-        */
     }
 }

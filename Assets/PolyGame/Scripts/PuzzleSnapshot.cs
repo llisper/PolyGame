@@ -82,6 +82,7 @@ public class PuzzleSnapshot : MonoBehaviour
 
                 byte[] bytes = tex2d.EncodeToJPG();
                 string path = SavePath(puzzleName);
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
                 File.WriteAllBytes(path, bytes);
                 Debug.Log("Save snapshot to " + path);
             }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Rendering;
+using System.Text;
 
 public class Utils
 {
@@ -13,6 +14,16 @@ public class Utils
         #else
         UnityEngine.Object.Destroy(obj);
         #endif // UNITY_EDITOR
+    }
+
+    public static string Utf16ToUtf8(string utf16String)
+    {
+        // Get UTF16 bytes and convert UTF16 bytes to UTF8 bytes
+        byte[] utf16Bytes = Encoding.Unicode.GetBytes(utf16String);
+        byte[] utf8Bytes = Encoding.Convert(Encoding.Unicode, Encoding.UTF8, utf16Bytes);
+
+        // Return UTF8 bytes as ANSI string
+        return Encoding.UTF8.GetString(utf8Bytes);
     }
 
     public static void SetupMeshRenderer(GameObject go)

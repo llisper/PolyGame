@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System;
 using System.IO;
 using System.Collections.Generic;
 
@@ -23,15 +22,6 @@ public class MenuPanel : Panel
         if (null != tex2d)        
             Destroy(tex2d);
     }
-
-    #if UNITY_EDITOR
-    [ContextMenu("Auto Fill Options")]
-    public void AutoFillOptions()
-    {
-        string[] dirs = Directory.GetDirectories(Application.dataPath + '/' + Paths.AssetResArtworksNoPrefix);
-        options = new List<string>(Array.ConvertAll(dirs, v => Path.GetFileName(v)));
-    }
-    #endif // UNITY_EDITOR
 
     void LoadSnapshot()
     {
