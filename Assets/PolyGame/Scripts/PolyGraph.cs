@@ -48,11 +48,6 @@ public class PolyGraph : MonoBehaviour
     public List<Triangle> triangles = new List<Triangle>();
     public List<Region> regions = new List<Region>();
 
-    public void Build()
-    {
-
-    }
-
     public static long PointHash(Vector2 p, Vector2Int size)
     {
         // NOTE: points are output by ImageTriangulator, and these coordinates are actually integers
