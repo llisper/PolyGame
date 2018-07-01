@@ -144,8 +144,11 @@ class RegionResolver
         if (i < 0)
         {
             edges.Add(new Edge(v0, v1));
-            i = edges.Count - 1;
+            sharedCounts.Add(1);
         }
-        sharedCounts[i] = sharedCounts[i] + 1;
+        else
+        {
+            sharedCounts[i] = sharedCounts[i] + 1;
+        }
     }
 }
