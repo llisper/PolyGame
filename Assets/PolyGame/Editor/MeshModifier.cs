@@ -245,7 +245,7 @@ class MeshModifier : EditorWindow
                 GameObject.DestroyImmediate(m.gameObject);
 
             EditorUtility.DisplayProgressBar("Saving " + info.editObj.name, "Resolving regions", 0.5f);
-            RegionResolver.Resolve(copy.GetComponent<PolyGraphBehaviour>());
+            copy.GetComponent<PolyGraph>().Build();
 
             EditorUtility.DisplayProgressBar("Saving " + info.editObj.name, "Saving prefab", 0.75f);
             string path = string.Format("{0}/{1}/{1}.prefab", Paths.AssetResArtworks, copy.name);

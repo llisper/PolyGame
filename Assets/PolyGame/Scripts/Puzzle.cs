@@ -40,7 +40,7 @@ public partial class Puzzle : MonoBehaviour
     }
 
     Bounds playgroundBounds;
-    PolyGraphBehaviour puzzleObject;
+    PolyGraph puzzleObject;
     GameObject wireframeObject;
     DebrisMoveContainer debrisMoveContainer;
     Dictionary<GameObject, DebrisInfo> debrisMap = new Dictionary<GameObject, DebrisInfo>();
@@ -147,7 +147,7 @@ public partial class Puzzle : MonoBehaviour
             debrisMap.Add(child.gameObject, info);
             child.localPosition = ArrangeDepth(i, pos);
         }
-        puzzleObject = go.GetComponent<PolyGraphBehaviour>();
+        puzzleObject = go.GetComponent<PolyGraph>();
 
         GenerateWireframe();
         InitMaterials();

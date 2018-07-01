@@ -2,15 +2,34 @@
 using System;
 using System.Collections.Generic;
 
+#region data structures
+[Serializable]
+public class Edge
+{
+    public Vector2Int v0;
+    public Vector2Int v1;
+    public List<int> wireframeTriangles = new List<int>();
+
+    public Edge(Vector2Int v0, Vector2Int v1)
+    {
+        this.v0 = v0;
+        this.v1 = v1;
+    }
+
+    public bool EqualTo(Vector2Int v0, Vector2Int v1)
+    {
+        return (this.v0 == v0 && this.v1 == v1) ||
+               (this.v0 == v1 && this.v1 == v0);
+    }
+}
+
 [Serializable]
 public class Triangle
 {
     public int region;
-    public Vector2[] vertices;
-    public long[] hashes;
+    public Vector2Int[] vertices = new Vector2Int[3];
+    public long[] hashes = new long[3];
     public List<int> adjacents = new List<int>();
-
-    public Vector2 Centroid { get { return PolyGraph.GetCentroid(vertices); } }
 }
 
 [Serializable]
@@ -19,15 +38,20 @@ public class Region
     public string name;
     public List<int> triangles = new List<int>();
     public List<int> adjacents = new List<int>();
+    public List<Edge> borderEdges;
 }
+#endregion data structures
 
-public class PolyGraph
+public class PolyGraph : MonoBehaviour
 {
-    public string name;
     public Vector2Int size;
-    public List<Vector2> points = new List<Vector2>();
-    public List<Vector2[]> triangles = new List<Vector2[]>();
-    public List<Color> fillColors = new List<Color>();
+    public List<Triangle> triangles = new List<Triangle>();
+    public List<Region> regions = new List<Region>();
+
+    public void Build()
+    {
+
+    }
 
     public static long PointHash(Vector2 p, Vector2Int size)
     {
@@ -39,11 +63,6 @@ public class PolyGraph
     public long PointHash(Vector2 p)
     {
         return PointHash(p, size);
-    }
-
-    public void AddTriangle(Vector2 p0, Vector2 p1, Vector2 p2)
-    {
-        triangles.Add(new Vector2[] { p0, p1, p2 });
     }
 
     public static Vector2 GetCentroid(params Vector2[] points)

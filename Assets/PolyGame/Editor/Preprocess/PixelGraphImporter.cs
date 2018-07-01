@@ -17,10 +17,13 @@ public class PixelGraphImporter : Preprocess.Importer
 
     PolyGraph graph;
     GameObject mainObj;
+    List<Vector2[]> triangles;
+    List<Vector2> points = new List<Vector2>();
 
     public PixelGraphImporter(string name)
     {
-        graph = new PolyGraph() { name = name };
+        mainObj = new GameObject(graph.name);
+        graph = mainObj.AddComponent<PolyGraph>();
     }
 
     public void Import()
@@ -29,15 +32,16 @@ public class PixelGraphImporter : Preprocess.Importer
         GenerateTriangles();
         GenerateMesh();
         GenerateMaterial();
+    }
 
-        var polyGraphBehaviour = mainObj.AddComponent<PolyGraphBehaviour>();
-        polyGraphBehaviour.size = graph.size;
-        RegionResolver.Resolve(polyGraphBehaviour);
+    public void Dispose()
+    {
+        if (null != mainObj)
+            GameObject.DestroyImmediate(mainObj);
     }
 
     void ReadConfig()
     {
-        HashSet<long> hash = new HashSet<long>();
         string path = string.Format("{0}/{1}/{1}.txt", Paths.AssetArtworks, graph.name);
         var asset = AssetDatabase.LoadAssetAtPath<TextAsset>(path);
         using (StringReader reader = new StringReader(asset.text))
@@ -57,16 +61,13 @@ public class PixelGraphImporter : Preprocess.Importer
                 match = Regex.Match(line, @"([0-9.]+), ([0-9.]+)");
                 if (match.Success)
                 {
-                    float x = float.Parse(match.Groups[1].Value);
-                    float y = graph.size.y - float.Parse(match.Groups[2].Value);
+                    int x = (int)float.Parse(match.Groups[1].Value);
+                    int y = (int)(graph.size.y - float.Parse(match.Groups[2].Value));
                     var p = new Vector2(x, y);
-                    graph.points.Add(p);
-
-                    long hashCode = graph.PointHash(p);
-                    if (hash.Contains(hashCode))
-                        throw new Exception("Duplicated Point Hash!");
+                    if (points.Contains(p))
+                        throw new Exception("Duplicated vertex: " + match.Groups[0].Value);
                     else
-                        hash.Add(hashCode);
+                        points.Add(p);
                 }
             }
         }
@@ -75,20 +76,21 @@ public class PixelGraphImporter : Preprocess.Importer
     void GenerateTriangles()
     {
         var colors = new List<uint>();
-        for (int i = 0; i < graph.points.Count; ++i)
+        for (int i = 0; i < points.Count; ++i)
             colors.Add(0);
+
         var rect = new Rect(0, 0, graph.size.x, graph.size.y);
-        Voronoi v = new Voronoi(graph.points, colors, rect);
-        // imporyt
+        Voronoi v = new Voronoi(points, colors, rect);
         var delaunayTriangulation = v.DelaunayTriangulation();
-        var resolver = new TriangleResolver(graph);
+        var resolver = new TriangleResolver(graph.size);
         for (int i = 0; i < delaunayTriangulation.Count; ++i)
         {
             var p0 = (Vector2)delaunayTriangulation[i].p0;
             var p1 = (Vector2)delaunayTriangulation[i].p1;
-            resolver.AddLine(p0, p1);
+            resolver.AddEdge(p0, p1);
         }
         resolver.Resolve();
+        triangles = resolver.Triangles;
     }
 
     void GenerateMesh()
@@ -98,9 +100,8 @@ public class PixelGraphImporter : Preprocess.Importer
         if (null == texture)
             throw new Exception("Failed to load texture " + path);
 
-        mainObj = new GameObject(graph.name);
-        Meshes = new Mesh[graph.triangles.Count];
-        for (int i = 0; i < graph.triangles.Count; ++i)
+        Meshes = new Mesh[triangles.Count];
+        for (int i = 0; i < triangles.Count; ++i)
         {
             GameObject triObj = new GameObject(i.ToString(), typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
             Utils.SetupMeshRenderer(triObj);
@@ -110,7 +111,7 @@ public class PixelGraphImporter : Preprocess.Importer
             var mesh = new Mesh();
             mesh.name = "mesh_" + i;
 
-            Vector2[] points = graph.triangles[i];
+            Vector2[] points = triangles[i];
             Vector2 centroid = PolyGraph.GetCentroid(points);
             Vector2[] vertices = new Vector2[3];
             for (int j = 0; j < 3; ++j)
@@ -124,14 +125,6 @@ public class PixelGraphImporter : Preprocess.Importer
                 centroid.y / graph.size.y);
             mesh.colors = new Color[] { fillColor, fillColor, fillColor };
 
-            //Vector2[] uv = new Vector2[3];
-            //for (int j = 0; j < mesh.vertices.Length; ++j)
-            //{
-            //    uv[j].x = points[j].x / graph.size.x;
-            //    uv[j].y = points[j].y / graph.size.y;
-            //}
-            //mesh.uv = uv;
-
             triObj.GetComponent<MeshFilter>().mesh = mesh;
             triObj.transform.localPosition = centroid;
             triObj.GetComponent<MeshCollider>().sharedMesh = mesh;
@@ -143,11 +136,6 @@ public class PixelGraphImporter : Preprocess.Importer
     {
         Material mat = new Material(Shader.Find("PolyGame/PolyS"));
         mat.name = graph.name;
-        //string path = string.Format("{0}/{1}/{1}.png", Paths.AssetArtworks, graph.name);
-        //Texture texture = AssetDatabase.LoadAssetAtPath<Texture>(path);
-        //if (null == texture)
-        //    throw new Exception("Failed to load texture " + path);
-        //mat.SetTexture("_MainTex", texture);
         mat.EnableKeyword(ShaderFeatures._USE_VERT_COLOR);
         Material = mat;
 

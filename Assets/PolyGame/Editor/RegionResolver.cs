@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 class RegionResolver
 {
-    PolyGraphBehaviour graph;
+    PolyGraph graph;
     Dictionary<Triangle, Region> tri2region = new Dictionary<Triangle, Region>();
 
-    public RegionResolver(PolyGraphBehaviour graph)
+    public RegionResolver(PolyGraph graph)
     {
         this.graph = graph;
     }
@@ -20,9 +20,10 @@ class RegionResolver
         Collect();
         CalculateTriangleAdjacents();
         CalculateRegionAdjacents();
+        CalculateRegionBorderEdges();
     }
 
-    public static void Resolve(PolyGraphBehaviour graph)
+    public static void Resolve(PolyGraph graph)
     {
         var resolver = new RegionResolver(graph);
         resolver.Resolve();
@@ -48,7 +49,12 @@ class RegionResolver
                 var triangle = new Triangle()
                 {
                     region = graph.regions.Count - 1,
-                    vertices = new Vector2[] { p0, p1, p2 },
+                    vertices = new Vector2Int[]
+                    {
+                        new Vector2Int((int)p0.x, (int)p0.y),
+                        new Vector2Int((int)p1.x, (int)p1.y),
+                        new Vector2Int((int)p2.x, (int)p2.y)
+                    },
                     hashes = new long[] { graph.PointHash(p0), graph.PointHash(p1), graph.PointHash(p2) }
                 };
                 graph.triangles.Add(triangle);
@@ -106,5 +112,40 @@ class RegionResolver
             }
         }
         return false;
+    }
+
+    void CalculateRegionBorderEdges()
+    {
+        foreach (var region in graph.regions)
+        {
+            List<Edge> edges = new List<Edge>();
+            List<int> sharedCounts = new List<int>();
+            for (int i = 0; i < region.triangles.Count; ++i)
+            {
+                var tri = graph.triangles[region.triangles[i]];
+                CountEdge(tri.vertices[0], tri.vertices[1], edges, sharedCounts);
+                CountEdge(tri.vertices[1], tri.vertices[2], edges, sharedCounts);
+                CountEdge(tri.vertices[2], tri.vertices[0], edges, sharedCounts);
+            }
+
+            for (int i = edges.Count - 1; i >= 0; --i)
+            {
+                if (sharedCounts[i] > 1)
+                    edges.RemoveAt(i);
+            }
+
+            region.borderEdges = edges;
+        }
+    }
+
+    void CountEdge(Vector2Int v0, Vector2Int v1, List<Edge> edges, List<int> sharedCounts)
+    {
+        int i = edges.FindIndex(val => val.EqualTo(v0, v1));
+        if (i < 0)
+        {
+            edges.Add(new Edge(v0, v1));
+            i = edges.Count - 1;
+        }
+        sharedCounts[i] = sharedCounts[i] + 1;
     }
 }

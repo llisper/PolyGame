@@ -9,7 +9,7 @@ public class PuzzleSnapshot : MonoBehaviour
     RenderTexture renderTexture;
     Material originMat;
     Material greyscaleMat;
-    PolyGraphBehaviour puzzleObject;
+    PolyGraph puzzleObject;
 
     string puzzleName;
 
@@ -42,10 +42,10 @@ public class PuzzleSnapshot : MonoBehaviour
         this.puzzleName = puzzleName;
         var prefab = Resources.Load(string.Format("{0}/{1}/{1}", Paths.Artworks, puzzleName));
         var go = (GameObject)Instantiate(prefab, transform);
-        InternalInit(go.GetComponent<PolyGraphBehaviour>(), finished);
+        InternalInit(go.GetComponent<PolyGraph>(), finished);
     }
 
-    public void Init(PolyGraphBehaviour puzzleObject, Material mat, bool[] finished = null)
+    public void Init(PolyGraph puzzleObject, Material mat, bool[] finished = null)
     {
         puzzleName = puzzleObject.name;
         InternalInit(Instantiate(puzzleObject, transform), finished);
@@ -98,7 +98,7 @@ public class PuzzleSnapshot : MonoBehaviour
         }
     }
 
-    void InternalInit(PolyGraphBehaviour puzzleObject, bool[] finished)
+    void InternalInit(PolyGraph puzzleObject, bool[] finished)
     {
         if (null != this.puzzleObject)
             Utils.Destroy(this.puzzleObject);
@@ -160,7 +160,7 @@ public static class PuzzleSnapshotOneOff
         Utils.Destroy(go);
     }
 
-    public static void Take(PolyGraphBehaviour puzzleObject, Material mat, bool[] finished = null)
+    public static void Take(PolyGraph puzzleObject, Material mat, bool[] finished = null)
     {
         var go = new GameObject("PuzzleSnapshot");
         var snapshot = go.AddComponent<PuzzleSnapshot>();

@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using System;
-using System.Text;
-using System.Linq;
 using System.Collections.Generic;
 
 class TriangleResolver
@@ -12,15 +10,18 @@ class TriangleResolver
         public List<Vector2> adjacents = new List<Vector2>();
     }
 
-    PolyGraph graph;
+    Vector2Int size;
+    List<Vector2[]> triangles = new List<Vector2[]>();
     Dictionary<long, AdjacentPoints> adjacents = new Dictionary<long, AdjacentPoints>();
 
-    public TriangleResolver(PolyGraph graph)
+    public List<Vector2[]> Triangles { get { return triangles; } }
+
+    public TriangleResolver(Vector2Int size)
     {
-        this.graph = graph;
+        this.size = size;
     }
 
-    public void AddLine(Vector2 p0, Vector2 p1)
+    public void AddEdge(Vector2 p0, Vector2 p1)
     {
         AddPoint(p0, p1);
         AddPoint(p1, p0);
@@ -33,8 +34,8 @@ class TriangleResolver
 
     void AddPoint(Vector2 p0, Vector2 p1)
     {
-        long p0h = graph.PointHash(p0);
-        long p1h = graph.PointHash(p1);
+        long p0h = PolyGraph.PointHash(p0, size);
+        long p1h = PolyGraph.PointHash(p1, size);
 
         AdjacentPoints ap;
         if (!adjacents.TryGetValue(p0h, out ap))
@@ -43,7 +44,7 @@ class TriangleResolver
             adjacents.Add(p0h, ap);
         }
 
-        if (-1 == ap.adjacents.FindIndex(v => graph.PointHash(v) == p1h))
+        if (-1 == ap.adjacents.FindIndex(v => PolyGraph.PointHash(v, size) == p1h))
             ap.adjacents.Add(p1);
     }
 
@@ -56,23 +57,23 @@ class TriangleResolver
             var p0 = kv.Value.point;
             foreach (var p1 in kv.Value.adjacents)
             {
-                long p1h = graph.PointHash(p1);
+                long p1h = PolyGraph.PointHash(p1, size);
                 if (finishedPoints.Contains(p1h))
                     continue;
 
                 foreach (var p2 in adjacents[p1h].adjacents)
                 {
-                    long p2h = graph.PointHash(p2);
+                    long p2h = PolyGraph.PointHash(p2, size);
                     if (finishedPoints.Contains(p2h) && p2h != hashCode)
                         continue;
 
-                    if (-1 != adjacents[p2h].adjacents.FindIndex(v => graph.PointHash(v) == hashCode))
+                    if (-1 != adjacents[p2h].adjacents.FindIndex(v => PolyGraph.PointHash(v, size) == hashCode))
                     {
                         float cross = Vector3.Cross(p1 - p0, p2 - p0).z;
                         if (cross == 0f)
                             throw new Exception("Cross Product is zero, we got some degenerated triangles");
                         if (cross < 0f)
-                            graph.AddTriangle(p0, p1, p2);
+                            triangles.Add(new Vector2[] { p0, p1, p2 });
                     }
                 }
             }

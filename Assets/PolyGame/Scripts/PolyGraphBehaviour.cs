@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 
+[Obsolete]
 public class PolyGraphBehaviour : MonoBehaviour
 {
     public Vector2Int size;
@@ -18,7 +19,8 @@ public class PolyGraphBehaviour : MonoBehaviour
 
     public long PointHash(Vector2 p)
     {
-        return PolyGraph.PointHash(p, size);
+        // return PolyGraph.PointHash(p, size);
+        return 0;
     }
 
     void Awake()
@@ -27,6 +29,7 @@ public class PolyGraphBehaviour : MonoBehaviour
         // GenerateSubRegionMeshes();
     }
 
+    /*
     void CalculateSubRegions()
     {
         queue.Enqueue(regions[0]);
@@ -92,4 +95,5 @@ public class PolyGraphBehaviour : MonoBehaviour
             go.GetComponent<MeshFilter>().sharedMesh = mesh;
         }
     }
+    */
 }

@@ -58,10 +58,13 @@ public class VectorGraphImporter : Preprocess.Importer
 
     PolyGraph graph;
     GameObject mainObj;
+    List<Vector2[]> triangles = new List<Vector2[]>();
+    public List<Color> colors = new List<Color>();
 
     public VectorGraphImporter(string name)
     {
-        graph = new PolyGraph() { name = name };
+        mainObj = new GameObject(graph.name);
+        graph = mainObj.AddComponent<PolyGraph>();
     }
 
     public void Import()
@@ -69,10 +72,12 @@ public class VectorGraphImporter : Preprocess.Importer
         ParseSvg();
         GenerateMesh();
         GenerateMaterial();
+    }
 
-        var polyGraphBehaviour = mainObj.AddComponent<PolyGraphBehaviour>();
-        polyGraphBehaviour.size = graph.size;
-        RegionResolver.Resolve(polyGraphBehaviour);
+    public void Dispose()
+    {
+        if (null != mainObj)
+            GameObject.DestroyImmediate(mainObj);
     }
 
     void ParseSvg()
@@ -99,7 +104,7 @@ public class VectorGraphImporter : Preprocess.Importer
             Vector2 p0 = new Vector2(int.Parse(match.Groups[1].Value), graph.size.y - int.Parse(match.Groups[2].Value));
             Vector2 p2 = new Vector2(int.Parse(match.Groups[3].Value), graph.size.y - int.Parse(match.Groups[4].Value));
             Vector2 p1 = new Vector2(int.Parse(match.Groups[5].Value), graph.size.y - int.Parse(match.Groups[6].Value));
-            graph.AddTriangle(p0, p1, p2);
+            triangles.Add(new Vector2[] { p0, p1, p2 });
 
             match = Regex.Match(polygon.Fill, @"rgb\((\d+), (\d+), (\d+)\)");
             if (!match.Success)
@@ -109,15 +114,14 @@ public class VectorGraphImporter : Preprocess.Importer
                 byte.Parse(match.Groups[1].Value),
                 byte.Parse(match.Groups[2].Value),
                 byte.Parse(match.Groups[3].Value), 255);
-            graph.fillColors.Add(color);
+            colors.Add(color);
         }
     }
 
     void GenerateMesh()
     {
-        mainObj = new GameObject(graph.name);
-        Meshes = new Mesh[graph.triangles.Count];
-        for (int i = 0; i < graph.triangles.Count; ++i)
+        Meshes = new Mesh[triangles.Count];
+        for (int i = 0; i < triangles.Count; ++i)
         {
             GameObject triObj = new GameObject(i.ToString(), typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
             Utils.SetupMeshRenderer(triObj);
@@ -127,7 +131,7 @@ public class VectorGraphImporter : Preprocess.Importer
             var mesh = new Mesh();
             mesh.name = "mesh_" + i;
 
-            Vector2[] points = graph.triangles[i];
+            Vector2[] points = triangles[i];
             Vector2 centroid = PolyGraph.GetCentroid(points);
             Vector2[] vertices = new Vector2[3];
             for (int j = 0; j < 3; ++j)
@@ -135,7 +139,7 @@ public class VectorGraphImporter : Preprocess.Importer
 
             mesh.vertices = Array.ConvertAll(vertices, v => (Vector3)v);
             mesh.triangles = new int[] { 0, 1, 2 };
-            mesh.colors = new Color[] { graph.fillColors[i], graph.fillColors[i], graph.fillColors[i] };
+            mesh.colors = new Color[] { colors[i], colors[i], colors[i] };
 
             triObj.GetComponent<MeshFilter>().mesh = mesh;
             triObj.transform.localPosition = centroid;

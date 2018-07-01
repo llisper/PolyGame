@@ -5,9 +5,7 @@ using System.IO;
 
 public static class Preprocess
 {
-    static GameObject mainObj;
-
-    public interface Importer
+    public interface Importer : IDisposable
     {
         string Name { get; }
         Mesh[] Meshes { get; }
@@ -21,9 +19,13 @@ public static class Preprocess
     {
         Clear(name);
         CreateFolders(name);
-        var importer = CreateImporter(name);
-        importer.Import();        
-        Save(importer);
+        using (var importer = CreateImporter(name))
+        {
+            importer.Import();
+            var graph = importer.GameObject.GetComponent<PolyGraph>();
+            RegionResolver.Resolve(graph);
+            Save(importer);
+        }
     }
 
     static Importer CreateImporter(string name)
@@ -37,7 +39,8 @@ public static class Preprocess
             return new PixelGraphImporter(name);
         else if (File.Exists(path + VectorGraphImporter.Suffix))
             return new VectorGraphImporter(name);
-        return null;
+        else
+            throw new Exception("No appropriate importer for " + path);
     }
 
     static void Clear(string name)
@@ -78,7 +81,6 @@ public static class Preprocess
         string prefabPath = string.Format("{0}/{1}/{1}.prefab", Paths.AssetResArtworks, importer.Name);
         UnityEngine.Object prefab = PrefabUtility.CreatePrefab(prefabPath, importer.GameObject);
         PrefabUtility.ReplacePrefab(importer.GameObject, prefab, ReplacePrefabOptions.ConnectToPrefab);
-        GameObject.DestroyImmediate(importer.GameObject);
 
         AssetDatabase.SaveAssets();
     }
