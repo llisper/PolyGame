@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.Rendering;
+using System;
 using System.Text;
+using System.Diagnostics;
 
 public class Utils
 {
@@ -40,6 +42,26 @@ public class Utils
         renderer.shadowCastingMode = ShadowCastingMode.Off;
         renderer.receiveShadows = false;
         renderer.allowOcclusionWhenDynamic = false;
+    }
+}
+
+public class TimeCount : IDisposable
+{
+    string desc;
+    Stopwatch stopwatch;
+
+    public TimeCount(string desc)
+    {
+        this.desc = desc;
+        stopwatch = Stopwatch.StartNew();
+    }
+
+    public void Dispose()
+    {
+        stopwatch.Stop();
+        UnityEngine.Debug.LogFormat(
+            "--- {0}: {1:f3}s",
+            desc, stopwatch.ElapsedMilliseconds / 1000.0);
     }
 }
 

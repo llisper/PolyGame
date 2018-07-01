@@ -17,6 +17,7 @@ public static class Preprocess
 
     public static void Process(string name)
     {
+        Debug.LogFormat("--- Preprocess {0} Start ---", name);
         Clear(name);
         CreateFolders(name);
         using (var importer = CreateImporter(name))
@@ -26,6 +27,7 @@ public static class Preprocess
             RegionResolver.Resolve(graph);
             Save(importer);
         }
+        Debug.LogFormat("--- Preprocess {0} Finished ---", name);
     }
 
     static Importer CreateImporter(string name)
