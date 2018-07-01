@@ -22,7 +22,7 @@ public class PixelGraphImporter : Preprocess.Importer
 
     public PixelGraphImporter(string name)
     {
-        mainObj = new GameObject(graph.name);
+        mainObj = new GameObject(name);
         graph = mainObj.AddComponent<PolyGraph>();
     }
 

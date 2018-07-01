@@ -63,7 +63,7 @@ public class VectorGraphImporter : Preprocess.Importer
 
     public VectorGraphImporter(string name)
     {
-        mainObj = new GameObject(graph.name);
+        mainObj = new GameObject(name);
         graph = mainObj.AddComponent<PolyGraph>();
     }
 
