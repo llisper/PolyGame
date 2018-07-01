@@ -8,7 +8,7 @@ public class Edge
 {
     public Vector2Int v0;
     public Vector2Int v1;
-    public List<int> wireframeTriangles = new List<int>();
+    public List<int> wireframeTriangles;
 
     public Edge(Vector2Int v0, Vector2Int v1)
     {
