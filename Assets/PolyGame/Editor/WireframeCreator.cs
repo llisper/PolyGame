@@ -70,14 +70,9 @@ class WireframeCreator
         var meshFilter = wireframeObject.GetComponent<MeshFilter>();
         meshFilter.sharedMesh = mesh;
 
-        var mat = new Material(Shader.Find("PolyGame/PolyWireframe"));
-        mat.name = graph.name + "Wireframe";
-        string matPath = string.Format("{0}/{1}/Materials/{2}.mat", Paths.AssetArtworks, graph.name, mat.name);
-        AssetDatabase.CreateAsset(mat, matPath);
-
         var renderer = wireframeObject.GetComponent<MeshRenderer>();
         Utils.SetupMeshRenderer(renderer);
-        renderer.sharedMaterial = mat;
+        renderer.sharedMaterial = AssetDatabase.LoadAssetAtPath<Material>(Paths.PolyWireframe);
 
         string prefabPath = string.Format("{0}/{1}/{2}.prefab", Paths.AssetResArtworks, graph.name, wireframeObject.name);
         UnityEngine.Object prefab = PrefabUtility.CreatePrefab(prefabPath, wireframeObject);
