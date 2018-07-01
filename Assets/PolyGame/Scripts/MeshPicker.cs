@@ -10,11 +10,13 @@ public class MeshPicker : MonoBehaviour
     [NonSerialized]
     public List<MeshRenderer> renderers = new List<MeshRenderer>();
 
+    PolyGraph graph;
     Material sharedMat;
-    Ray? ray;
+    Region hoveringRegion;
 
     void Awake()
     {
+        graph = GetComponent<PolyGraph>();
         sharedMat = GetComponentInChildren<MeshRenderer>().sharedMaterial;
     }
 
@@ -46,18 +48,31 @@ public class MeshPicker : MonoBehaviour
         renderers.Clear();
     }
 
-    public void RecordRay(Ray ray)
+    public void SetHoveringRegion(string name)
     {
-        this.ray = ray;
+        hoveringRegion = null;
+        if (null != name && null != graph)
+            hoveringRegion = graph.regions.Find(v => v.name == name);
     }
-     
-    void OnDrawGizmos()
+
+    void OnDrawGizmosSelected()
     {
-        if (ray.HasValue)
+        if (null != hoveringRegion)
         {
-            Gizmos.color = Color.green;
-            Ray r = ray.Value;
-            Gizmos.DrawLine(r.origin, r.origin + r.direction * 10000);
+            foreach (int adj in hoveringRegion.adjacents)
+                DrawRegionBorder(graph.regions[adj], Color.magenta);
+            DrawRegionBorder(hoveringRegion, Color.green);
+        }
+    }
+
+    void DrawRegionBorder(Region region, Color color)
+    {
+        Gizmos.color = color;
+        foreach (var edge in region.borderEdges)
+        {
+            Gizmos.DrawLine(
+                new Vector3(edge.v0.x, edge.v0.y, 0f),
+                new Vector3(edge.v1.x, edge.v1.y, 0f));
         }
     }
 }
