@@ -6,8 +6,8 @@ using System.Collections.Generic;
 
 class WireframeCreator
 {
-    public const float wireframeWidth = 1f;
-    public static Color wireframeColor = Color.grey;
+    public const float wireframeWidth = 0.75f;
+    public static Color wireframeColor = new Color32(200, 200, 200, 255);
 
     public static void Create(PolyGraph graph, float width = wireframeWidth, Color? color = null)
     {
@@ -85,4 +85,31 @@ class WireframeCreator
         GameObject.DestroyImmediate(wireframeObject);
         AssetDatabase.SaveAssets();
     }
+
+    //[MenuItem("Tools/Others/Update Wireframe Width,Color")]
+    //static void UpdateWidthColor()
+    //{
+    //    string[] guids = AssetDatabase.FindAssets("t:GameObject", new string[] { Paths.AssetResArtworks });
+    //    for (int g = 0; g < guids.Length; ++g)
+    //    {
+    //        string path = AssetDatabase.GUIDToAssetPath(guids[g]);
+    //        if (path.Contains("Wireframe"))
+    //            continue;
+
+    //        GameObject go = null;
+    //        EditorUtility.DisplayProgressBar("Update Wireframe", path, (float)g / guids.Length);
+    //        try
+    //        {
+    //            var graphObject = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+    //            Create(graphObject.GetComponent<PolyGraph>());
+    //        }
+    //        finally
+    //        {
+    //            if (null != go)
+    //                GameObject.DestroyImmediate(go);
+    //            EditorUtility.ClearProgressBar();
+    //        }
+    //    }
+    //    AssetDatabase.SaveAssets();
+    //}
 }
