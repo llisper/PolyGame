@@ -39,6 +39,7 @@ class PuzzleEditor
         {
             GameObject.DestroyImmediate(polyGraphBehaviour);
             var polyGraph = go.AddComponent<PolyGraph>();
+            polyGraph.size = polyGraphBehaviour.size;
             RegionResolver.Resolve(polyGraph);
             WireframeCreator.Create(polyGraph);
             return true;

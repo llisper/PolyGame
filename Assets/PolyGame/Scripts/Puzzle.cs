@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Battlehub.Wireframe;
 
 public partial class Puzzle : MonoBehaviour
 {
@@ -81,8 +80,6 @@ public partial class Puzzle : MonoBehaviour
         PuzzleTouch.onObjMove -= OnObjMove;
         PuzzleTouch.onObjReleased -= OnObjReleased;
 
-        if (null != wireframeMat)
-            Destroy(wireframeMat);
         if (null != finishedMat)
             Destroy(finishedMat);
         if (null != selectedMat)
@@ -120,7 +117,9 @@ public partial class Puzzle : MonoBehaviour
     void Run(string puzzleName)
     {
         this.puzzleName = puzzleName;
-        InstantiatePrefab();
+        LoadPuzzleObject();
+        LoadWireframe();
+        InitMaterials();
         ApplyProgress();
         Scramble();
 
@@ -133,7 +132,7 @@ public partial class Puzzle : MonoBehaviour
 
     }
 
-    void InstantiatePrefab()
+    void LoadPuzzleObject()
     {
         var prefab = Resources.Load(string.Format("{0}/{1}/{1}", Paths.Artworks, puzzleName));
         var go = (GameObject)Instantiate(prefab, transform);
@@ -148,36 +147,13 @@ public partial class Puzzle : MonoBehaviour
             child.localPosition = ArrangeDepth(i, pos);
         }
         puzzleObject = go.GetComponent<PolyGraph>();
-
-        GenerateWireframe();
-        InitMaterials();
     }
 
-    void GenerateWireframe()
+    void LoadWireframe()
     {
-        wireframeObject = new GameObject(puzzleName + "Wireframe", typeof(MeshFilter), typeof(MeshRenderer));
-        wireframeObject.transform.SetParent(transform);
-        wireframeObject.layer = Layers.Debris;
-
-		var meshFilters = puzzleObject.GetComponentsInChildren<MeshFilter>();
-        CombineInstance[] combine = new CombineInstance[meshFilters.Length];
-        for (int i = 0; i < combine.Length; ++i)
-        {
-            combine[i].mesh = meshFilters[i].sharedMesh;
-            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
-        }
-
-        var mesh = new Mesh();
-        mesh.name = puzzleName + "WireframeMesh";
-        mesh.CombineMeshes(combine);
-		Barycentric.CalculateBarycentric(mesh);
-		wireframeObject.GetComponent<MeshFilter>().sharedMesh = mesh;
-
-        var mat = new Material(Shader.Find("Battlehub/WireframeSimplify"));
-        mat.name = puzzleName + "WireframeMaterial";
-        var renderer = wireframeObject.GetComponent<MeshRenderer>();
-        Utils.SetupMeshRenderer(renderer);
-        renderer.sharedMaterial = mat;
+        var prefab = Resources.Load(string.Format("{0}/{1}/{1}Wireframe", Paths.Artworks, puzzleName));
+        wireframeObject = (GameObject)Instantiate(prefab, transform);
+        wireframeObject.name = prefab.name;
     }
 
     void InitMaterials()
@@ -201,7 +177,6 @@ public partial class Puzzle : MonoBehaviour
         finishedMat.SetFloat(propZWrite, 1f);
         finishedMat.SetColor(propColor, new Color(1f, 1f, 1f, finishedAlpha));
         wireframeMat.SetFloat(propAlpha, wireframeAlpha);
-        wireframeMat.SetColor(propColor, new Color32(200, 200, 200, 255));
         wireframeMat.SetFloat("_Thickness", 0.75f);
     }
 
