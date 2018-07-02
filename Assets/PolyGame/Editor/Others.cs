@@ -37,6 +37,7 @@ static class Others
         Game.CompleteInitialSnapshots();
     }
 
+    /*
     [MenuItem("Tools/Others/Convert To Use Vectex Color")]
     static void ConvertToUseVectexColor()
     {
@@ -100,4 +101,5 @@ static class Others
             }
         }
     }
+    */
 }

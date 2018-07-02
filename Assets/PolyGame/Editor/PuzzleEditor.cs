@@ -1,4 +1,95 @@
+using UnityEditor;
+using UnityEngine;
 
 class PuzzleEditor
 {
+    [MenuItem("Tools/Others/Update PolyGraph")]
+    static void UpdatePolyGraph()
+    {
+        string[] guids = AssetDatabase.FindAssets("t:GameObject", new string[] { Paths.AssetResArtworks });
+        for (int g = 0; g < guids.Length; ++g)
+        {
+            GameObject go = null;
+            string path = AssetDatabase.GUIDToAssetPath(guids[g]);
+            EditorUtility.DisplayProgressBar("Update PolyGraph", path, (float)g / guids.Length);
+            try
+            {
+                var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                go = GameObject.Instantiate<GameObject>(prefab);
+                bool modified = UpdatePolyGraph(go);
+                modified |= ConvertToUseVertexColor(go);
+                if (modified)
+                    PrefabUtility.ReplacePrefab(go, prefab, ReplacePrefabOptions.ConnectToPrefab);
+            }
+            finally
+            {
+                if (null != go)
+                    GameObject.DestroyImmediate(go);
+                EditorUtility.ClearProgressBar();
+            }
+        }
+        AssetDatabase.SaveAssets();
+    }
+
+    static bool UpdatePolyGraph(GameObject go)
+    {
+        var polyGraphBehaviour = go.GetComponent<PolyGraphBehaviour>();
+        if (null != polyGraphBehaviour)
+        {
+            GameObject.DestroyImmediate(polyGraphBehaviour);
+            var polyGraph = go.AddComponent<PolyGraph>();
+            RegionResolver.Resolve(polyGraph);
+            WireframeCreator.Create(polyGraph);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    static bool ConvertToUseVertexColor(GameObject go)
+    {
+        var mat = go.GetComponentInChildren<MeshRenderer>().sharedMaterial;
+        var texture = mat.mainTexture as Texture2D;
+        if (null != texture)
+        {
+            foreach (var meshFilter in go.GetComponentsInChildren<MeshFilter>())
+            {
+                var mesh = meshFilter.sharedMesh;
+                Vector3[] verts = mesh.vertices;
+                int[] tris = mesh.triangles;
+                Vector2[] uv = mesh.uv;
+
+                Vector3[] newVerts = new Vector3[tris.Length];
+                int[] newTris = new int[tris.Length];
+                for (int i = 0; i < tris.Length; ++i)
+                {
+                    newVerts[i] = verts[tris[i]];
+                    newTris[i] = i;
+                }
+
+                Color[] colors = new Color[tris.Length];
+                for (int i = 0; i < tris.Length; i += 3)
+                {
+                    Vector2 centroidUV = PolyGraph.GetCentroid(uv[tris[i]], uv[tris[i + 1]], uv[tris[i + 2]]);
+                    Color c = texture.GetPixelBilinear(centroidUV.x, centroidUV.y);
+                    colors[i] = colors[i + 1] = colors[i + 2] = c;
+                }
+
+                mesh.vertices = newVerts;
+                mesh.triangles = newTris;
+                mesh.uv = null;
+                mesh.colors = colors;
+            }
+
+            mat.mainTexture = null;
+            mat.EnableKeyword(ShaderFeatures._USE_VERT_COLOR);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

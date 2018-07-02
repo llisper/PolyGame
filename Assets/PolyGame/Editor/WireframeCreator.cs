@@ -85,11 +85,4 @@ class WireframeCreator
         GameObject.DestroyImmediate(wireframeObject);
         AssetDatabase.SaveAssets();
     }
-
-    [MenuItem("Tools/Test Wireframe Creator")]
-    static void Test()
-    {
-        var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(Paths.AssetResArtworks + "/DeadCells/DeadCells.prefab");
-        Create(prefab.GetComponent<PolyGraph>(), 1f, Color.grey);
-    }
 }
