@@ -28,10 +28,10 @@ public class PixelGraphImporter : Preprocess.Importer
 
     public void Import()
     {
-        ReadConfig();
-        GenerateTriangles();
-        GenerateMesh();
-        GenerateMaterial();
+        TimeCount.Measure(ReadConfig);
+        TimeCount.Measure(GenerateTriangles);
+        TimeCount.Measure(GenerateMesh);
+        TimeCount.Measure(GenerateMaterial);
     }
 
     public void Dispose()

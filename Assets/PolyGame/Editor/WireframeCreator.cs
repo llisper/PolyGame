@@ -6,7 +6,10 @@ using System.Collections.Generic;
 
 class WireframeCreator
 {
-    public static void Create(PolyGraph graph, float width, Color color)
+    public const float wireframeWidth = 1f;
+    public static Color wireframeColor = Color.grey;
+
+    public static void Create(PolyGraph graph, float width = wireframeWidth, Color? color = null)
     {
         if (width <= 0f)
             throw new Exception("Width must greater than 0!");
@@ -62,7 +65,8 @@ class WireframeCreator
         mesh.name = graph.name + "Wireframe";
         mesh.vertices = verts.ToArray();
         mesh.triangles = tris.ToArray();
-        mesh.colors = Enumerable.Repeat(color, verts.Count).ToArray();
+        Color c = color.HasValue ? color.Value : wireframeColor;
+        mesh.colors = Enumerable.Repeat(c, verts.Count).ToArray();
         MeshUtility.Optimize(mesh);
         string savePath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, graph.name, mesh.name);
         AssetDatabase.CreateAsset(mesh, savePath);
@@ -78,6 +82,7 @@ class WireframeCreator
         UnityEngine.Object prefab = PrefabUtility.CreatePrefab(prefabPath, wireframeObject);
         PrefabUtility.ReplacePrefab(wireframeObject, prefab, ReplacePrefabOptions.ConnectToPrefab);
 
+        GameObject.DestroyImmediate(wireframeObject);
         AssetDatabase.SaveAssets();
     }
 

@@ -234,27 +234,47 @@ class MeshModifier : EditorWindow
 
         try
         {
-            EditorUtility.DisplayProgressBar("Saving " + info.editObj.name, "Copying instance", 0f);
-            var copy = GameObject.Instantiate<GameObject>(info.editObj);
-            copy.name = info.editObj.name;
+            using (TimeCount.Start("Saving " + info.editObj.name))
+            {
+                EditorUtility.DisplayProgressBar("Saving " + info.editObj.name, "Copying instance", 0f);
+                GameObject copy = null;
+                using (TimeCount.Start("Copying instance"))
+                {
+                    copy = GameObject.Instantiate<GameObject>(info.editObj);
+                    copy.name = info.editObj.name;
+                }
 
-            EditorUtility.DisplayProgressBar("Saving " + info.editObj.name, "Destroying inactive meshes", 0.25f);
-            GameObject.DestroyImmediate(copy.GetComponent<MeshPicker>());
-            var inactiveMeshes = copy.GetComponentsInChildren<MeshFilter>(true).Where(v => !v.gameObject.activeSelf);
-            foreach (var m in inactiveMeshes)
-                GameObject.DestroyImmediate(m.gameObject);
+                EditorUtility.DisplayProgressBar("Saving " + info.editObj.name, "Destroying inactive meshes", 0.25f);
+                using (TimeCount.Start("Destroying inactive meshes"))
+                {
+                    GameObject.DestroyImmediate(copy.GetComponent<MeshPicker>());
+                    var inactiveMeshes = copy.GetComponentsInChildren<MeshFilter>(true).Where(v => !v.gameObject.activeSelf);
+                    foreach (var m in inactiveMeshes)
+                        GameObject.DestroyImmediate(m.gameObject);
+                }
 
-            EditorUtility.DisplayProgressBar("Saving " + info.editObj.name, "Resolving regions", 0.5f);
-            var polyGraph = copy.GetComponent<PolyGraph>();
-            RegionResolver.Resolve(polyGraph);
+                EditorUtility.DisplayProgressBar("Saving " + info.editObj.name, "Resolving regions & create wireframe", 0.5f);
+                var polyGraph = copy.GetComponent<PolyGraph>();
+                using (TimeCount.Start("Resolve Regions"))
+                    RegionResolver.Resolve(polyGraph);
+                using (TimeCount.Start("Create Wireframe"))
+                    WireframeCreator.Create(polyGraph);
 
-            EditorUtility.DisplayProgressBar("Saving " + info.editObj.name, "Saving prefab", 0.75f);
-            string path = string.Format("{0}/{1}/{1}.prefab", Paths.AssetResArtworks, copy.name);
-            UnityEngine.Object prefab = PrefabUtility.CreatePrefab(path, copy);
-            PrefabUtility.ReplacePrefab(copy, prefab, ReplacePrefabOptions.ConnectToPrefab);
+                EditorUtility.DisplayProgressBar("Saving " + info.editObj.name, "Saving prefab", 0.75f);
+                using (TimeCount.Start("Saving prefab"))
+                {
+                    string path = string.Format("{0}/{1}/{1}.prefab", Paths.AssetResArtworks, copy.name);
+                    UnityEngine.Object prefab = PrefabUtility.CreatePrefab(path, copy);
+                    PrefabUtility.ReplacePrefab(copy, prefab, ReplacePrefabOptions.ConnectToPrefab);
+                }
 
-            GameObject.DestroyImmediate(copy);
-            unsavedModification = false;
+                using (TimeCount.Start("Saving assets"))
+                {
+                    GameObject.DestroyImmediate(copy);
+                    AssetDatabase.SaveAssets();
+                }
+                unsavedModification = false;
+            }
         }
         catch (Exception e)
         {

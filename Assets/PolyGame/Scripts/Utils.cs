@@ -63,6 +63,17 @@ public class TimeCount : IDisposable
             "--- {0}: {1:f3}s",
             desc, stopwatch.ElapsedMilliseconds / 1000.0);
     }
+
+    public static TimeCount Start(string desc)
+    {
+        return new TimeCount(desc);
+    }
+
+    public static void Measure(Action action)
+    {
+        using (new TimeCount(action.Method.Name))
+            action();
+    }
 }
 
 public class Config

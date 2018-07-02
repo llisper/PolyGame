@@ -69,9 +69,9 @@ public class VectorGraphImporter : Preprocess.Importer
 
     public void Import()
     {
-        ParseSvg();
-        GenerateMesh();
-        GenerateMaterial();
+        TimeCount.Measure(ParseSvg);
+        TimeCount.Measure(GenerateMesh);
+        TimeCount.Measure(GenerateMaterial);
     }
 
     public void Dispose()

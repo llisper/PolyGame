@@ -18,14 +18,23 @@ public static class Preprocess
     public static void Process(string name)
     {
         Debug.LogFormat("--- Preprocess {0} Start ---", name);
-        Clear(name);
-        CreateFolders(name);
-        using (var importer = CreateImporter(name))
+        using (TimeCount.Start("Total"))
         {
-            importer.Import();
-            var graph = importer.GameObject.GetComponent<PolyGraph>();
-            RegionResolver.Resolve(graph);
-            Save(importer);
+            Clear(name);
+            CreateFolders(name);
+            using (var importer = CreateImporter(name))
+            {
+                Debug.Log(importer.GetType().Name);
+                importer.Import();
+
+                var graph = importer.GameObject.GetComponent<PolyGraph>();
+                using (TimeCount.Start("Resolve Regions"))
+                    RegionResolver.Resolve(graph);
+                using (TimeCount.Start("Create Wireframe"))
+                    WireframeCreator.Create(graph);
+
+                Save(importer);
+            }
         }
         Debug.LogFormat("--- Preprocess {0} Finished ---", name);
     }
@@ -70,20 +79,30 @@ public static class Preprocess
 
     static void Save(Importer importer)
     {
-        foreach (var mesh in importer.Meshes)
+        using (TimeCount.Start("Saving meshes"))
         {
-            MeshUtility.Optimize(mesh);
-            string meshPath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, importer.Name, mesh.name);
-            AssetDatabase.CreateAsset(mesh, meshPath);
+            foreach (var mesh in importer.Meshes)
+            {
+                MeshUtility.Optimize(mesh);
+                string meshPath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, importer.Name, mesh.name);
+                AssetDatabase.CreateAsset(mesh, meshPath);
+            }
         }
 
-        string matPath = string.Format("{0}/{1}/Materials/{2}.mat", Paths.AssetArtworks, importer.Name, importer.Material.name);
-        AssetDatabase.CreateAsset(importer.Material, matPath);
+        using (TimeCount.Start("Saving material"))
+        {
+            string matPath = string.Format("{0}/{1}/Materials/{2}.mat", Paths.AssetArtworks, importer.Name, importer.Material.name);
+            AssetDatabase.CreateAsset(importer.Material, matPath);
+        }
 
-        string prefabPath = string.Format("{0}/{1}/{1}.prefab", Paths.AssetResArtworks, importer.Name);
-        UnityEngine.Object prefab = PrefabUtility.CreatePrefab(prefabPath, importer.GameObject);
-        PrefabUtility.ReplacePrefab(importer.GameObject, prefab, ReplacePrefabOptions.ConnectToPrefab);
+        using (TimeCount.Start("Saving prefab"))
+        {
+            string prefabPath = string.Format("{0}/{1}/{1}.prefab", Paths.AssetResArtworks, importer.Name);
+            UnityEngine.Object prefab = PrefabUtility.CreatePrefab(prefabPath, importer.GameObject);
+            PrefabUtility.ReplacePrefab(importer.GameObject, prefab, ReplacePrefabOptions.ConnectToPrefab);
+        }
 
-        AssetDatabase.SaveAssets();
+        using (TimeCount.Start("Saving assets"))
+            AssetDatabase.SaveAssets();
     }
 }
