@@ -16,6 +16,7 @@ class PuzzleEditor
             {
                 var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
                 go = GameObject.Instantiate<GameObject>(prefab);
+                go.name = prefab.name;
                 bool modified = UpdatePolyGraph(go);
                 modified |= ConvertToUseVertexColor(go);
                 if (modified)
