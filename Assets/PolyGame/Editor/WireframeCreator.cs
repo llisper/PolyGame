@@ -29,7 +29,6 @@ class WireframeCreator
                 var ei = edgeIndex.Find(v => v.edge.EqualTo(edge));
                 if (null != ei)
                 {
-                    Debug.Log("Find existed edge");
                     edge.wireframeTriangles = ei.index;
                     continue;
                 }

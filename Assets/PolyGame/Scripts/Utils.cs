@@ -80,7 +80,7 @@ public class Config
 {
     public const float CameraDistance = 1001f;
     public static Vector2Int SnapshotSize = new Vector2Int(256, 256);
-    public const float wireframeWidth = 0.75f;
+    public const float wireframeWidth = 0.85f;
     public static Color wireframeColor = new Color32(200, 200, 200, 255);
 
 }
