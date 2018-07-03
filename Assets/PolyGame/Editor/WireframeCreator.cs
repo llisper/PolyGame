@@ -6,6 +6,13 @@ using System.Collections.Generic;
 
 class WireframeCreator
 {
+    class EdgeIndex
+    {
+        public Edge edge;
+        public List<int> index;
+        public EdgeIndex(Edge e, List<int> i) { edge = e; index = i; }
+    }
+
     public static void Create(PolyGraph graph, float width = Config.wireframeWidth, Color? color = null)
     {
         if (width <= 0f)
@@ -13,15 +20,16 @@ class WireframeCreator
 
         List<Vector3> verts = new List<Vector3>();
         List<int> tris = new List<int>();
-        Dictionary<Edge, List<int>> edgeIndex = new Dictionary<Edge, List<int>>();
+        List<EdgeIndex> edgeIndex = new List<EdgeIndex>();
         foreach (var region in graph.regions)
         {
             foreach (var edge in region.borderEdges)
             {
-                List<int> index;
-                if (edgeIndex.TryGetValue(edge, out index))
+                var ei = edgeIndex.Find(v => v.edge.EqualTo(edge));
+                if (null != ei)
                 {
-                    edge.wireframeTriangles = index;
+                    Debug.Log("Find existed edge");
+                    edge.wireframeTriangles = ei.index;
                     continue;
                 }
 
@@ -39,7 +47,7 @@ class WireframeCreator
                 verts.Add(p1);
                 verts.Add(p2);
                 verts.Add(p3);
-                index = new List<int>();
+                List<int> index = new List<int>();
                 if (Vector3.Cross(p2 - p0, p3 - p0).z < 0)
                 {
                     index.Add(start);
@@ -60,7 +68,7 @@ class WireframeCreator
                 }
                 edge.wireframeTriangles = index;
                 tris.AddRange(index);
-                edgeIndex.Add(edge, index);
+                edgeIndex.Add(new EdgeIndex(edge, index));
             }
         }
 
