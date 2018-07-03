@@ -16,7 +16,22 @@ public class Edge
         this.v1 = v1;
     }
 
-    public bool EqualTo(Vector2Int v0, Vector2Int v1)
+    public override int GetHashCode()
+    {
+        return v0.GetHashCode() ^ v1.GetHashCode();
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (null == obj || !(obj is Edge))
+            return false;
+
+        var other = (Edge)obj;
+        return (this.v0 == other.v0 && this.v1 == other.v1) ||
+               (this.v0 == other.v1 && this.v1 == v0);
+    }
+
+    public bool Equals(Vector2Int v0, Vector2Int v1)
     {
         return (this.v0 == v0 && this.v1 == v1) ||
                (this.v0 == v1 && this.v1 == v0);

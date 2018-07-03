@@ -40,7 +40,7 @@ public partial class Puzzle : MonoBehaviour
 
     Bounds playgroundBounds;
     PolyGraph puzzleObject;
-    GameObject wireframeObject;
+    PuzzleWireframe wireframeObject;
     DebrisMoveContainer debrisMoveContainer;
     Dictionary<GameObject, DebrisInfo> debrisMap = new Dictionary<GameObject, DebrisInfo>();
     List<OutofBoundDebris> outOfBounds = new List<OutofBoundDebris>();
@@ -129,7 +129,6 @@ public partial class Puzzle : MonoBehaviour
         Vector2 pos = puzzleObject.size;
         pos = pos / 2f;
         playgroundBounds = new Bounds(pos, orthoSize * 2);
-
     }
 
     void LoadPuzzleObject()
@@ -152,8 +151,9 @@ public partial class Puzzle : MonoBehaviour
     void LoadWireframe()
     {
         var prefab = Resources.Load(string.Format("{0}/{1}/{1}Wireframe", Paths.Artworks, puzzleName));
-        wireframeObject = (GameObject)Instantiate(prefab, transform);
-        wireframeObject.name = prefab.name;
+        var go = (GameObject)Instantiate(prefab, transform);
+        go.name = prefab.name;
+        wireframeObject = go.GetComponent<PuzzleWireframe>();
     }
 
     void InitMaterials()
@@ -256,6 +256,8 @@ public partial class Puzzle : MonoBehaviour
         if (!debrisMap.TryGetValue(objPicked.gameObject, out di) || finished[di.index])
             return false;
 
+        wireframeObject.SetColor(Color.black, puzzleObject.regions[di.index].borderEdges);
+
         Vector3 screenPos = PuzzleTouch.Instance.MainFinger.ScreenPosition;
         debrisMoveContainer.transform.position = (Vector2)PuzzleCamera.Main.ScreenToWorldPoint(screenPos);
         debrisMoveContainer.Target = objPicked;
@@ -283,6 +285,8 @@ public partial class Puzzle : MonoBehaviour
         }
         else
         {
+            wireframeObject.SetColor(Config.wireframeColor, puzzleObject.regions[di.index].borderEdges);
+
             if (Vector2.Distance(target.localPosition, di.position) <= fitThreshold)
             {
                 finished[di.index] = true;

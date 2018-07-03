@@ -6,20 +6,25 @@ using System.Collections.Generic;
 
 class WireframeCreator
 {
-    public const float wireframeWidth = 0.75f;
-    public static Color wireframeColor = new Color32(200, 200, 200, 255);
-
-    public static void Create(PolyGraph graph, float width = wireframeWidth, Color? color = null)
+    public static void Create(PolyGraph graph, float width = Config.wireframeWidth, Color? color = null)
     {
         if (width <= 0f)
             throw new Exception("Width must greater than 0!");
 
         List<Vector3> verts = new List<Vector3>();
         List<int> tris = new List<int>();
+        Dictionary<Edge, List<int>> edgeIndex = new Dictionary<Edge, List<int>>();
         foreach (var region in graph.regions)
         {
             foreach (var edge in region.borderEdges)
             {
+                List<int> index;
+                if (edgeIndex.TryGetValue(edge, out index))
+                {
+                    edge.wireframeTriangles = index;
+                    continue;
+                }
+
                 Vector3 v0 = new Vector3(edge.v0.x, edge.v0.y, 0f);
                 Vector3 v1 = new Vector3(edge.v1.x, edge.v1.y, 0f);
 
@@ -34,7 +39,7 @@ class WireframeCreator
                 verts.Add(p1);
                 verts.Add(p2);
                 verts.Add(p3);
-                List<int> index = new List<int>();
+                index = new List<int>();
                 if (Vector3.Cross(p2 - p0, p3 - p0).z < 0)
                 {
                     index.Add(start);
@@ -55,17 +60,22 @@ class WireframeCreator
                 }
                 edge.wireframeTriangles = index;
                 tris.AddRange(index);
+                edgeIndex.Add(edge, index);
             }
         }
 
-        var wireframeObject = new GameObject(graph.name + "Wireframe", typeof(MeshFilter), typeof(MeshRenderer));
+        var wireframeObject = new GameObject(
+            graph.name + "Wireframe",
+            typeof(MeshFilter),
+            typeof(MeshRenderer),
+            typeof(PuzzleWireframe));
         wireframeObject.layer = Layers.Debris;
 
         var mesh = new Mesh();
         mesh.name = graph.name + "Wireframe";
         mesh.vertices = verts.ToArray();
         mesh.triangles = tris.ToArray();
-        Color c = color.HasValue ? color.Value : wireframeColor;
+        Color c = color.HasValue ? color.Value : Config.wireframeColor;
         mesh.colors = Enumerable.Repeat(c, verts.Count).ToArray();
         MeshUtility.Optimize(mesh);
         string savePath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, graph.name, mesh.name);
@@ -86,30 +96,53 @@ class WireframeCreator
         AssetDatabase.SaveAssets();
     }
 
-    //[MenuItem("Tools/Others/Update Wireframe Width,Color")]
-    //static void UpdateWidthColor()
-    //{
-    //    string[] guids = AssetDatabase.FindAssets("t:GameObject", new string[] { Paths.AssetResArtworks });
-    //    for (int g = 0; g < guids.Length; ++g)
-    //    {
-    //        string path = AssetDatabase.GUIDToAssetPath(guids[g]);
-    //        if (path.Contains("Wireframe"))
-    //            continue;
+    static void EdgeDuplicateCheck(PolyGraph graph)
+    {
+        List<Edge> edges = new List<Edge>();
+        foreach (var region in graph.regions)
+        {
+            foreach (var edge in region.borderEdges)
+            {
+                int i = edges.IndexOf(edge);
+                if (-1 == i)
+                {
+                    edges.Add(edge);
+                }
+                else
+                {
+                    if (!edges[i].Equals(edge))
+                        Debug.LogError("Inconsistent equal check");
+                }
+            }
+        }
+    }
 
-    //        GameObject go = null;
-    //        EditorUtility.DisplayProgressBar("Update Wireframe", path, (float)g / guids.Length);
-    //        try
-    //        {
-    //            var graphObject = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-    //            Create(graphObject.GetComponent<PolyGraph>());
-    //        }
-    //        finally
-    //        {
-    //            if (null != go)
-    //                GameObject.DestroyImmediate(go);
-    //            EditorUtility.ClearProgressBar();
-    //        }
-    //    }
-    //    AssetDatabase.SaveAssets();
-    //}
+    [MenuItem("Tools/Others/Regenerate Wireframes")]
+    static void RegenerateWireframes()
+    {
+       string[] guids = AssetDatabase.FindAssets("t:GameObject", new string[] { Paths.AssetResArtworks });
+       for (int g = 0; g < guids.Length; ++g)
+       {
+           string path = AssetDatabase.GUIDToAssetPath(guids[g]);
+           if (path.Contains("Wireframe"))
+               continue;
+
+           GameObject go = null;
+           EditorUtility.DisplayProgressBar("Update Wireframe", path, (float)g / guids.Length);
+           try
+           {
+               var graphObject = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+               var graph = graphObject.GetComponent<PolyGraph>();
+               EdgeDuplicateCheck(graph);
+               Create(graph);
+           }
+           finally
+           {
+               if (null != go)
+                   GameObject.DestroyImmediate(go);
+               EditorUtility.ClearProgressBar();
+           }
+       }
+       AssetDatabase.SaveAssets();
+    }
 }

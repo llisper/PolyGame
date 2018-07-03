@@ -140,7 +140,7 @@ class RegionResolver
 
     void CountEdge(Vector2Int v0, Vector2Int v1, List<Edge> edges, List<int> sharedCounts)
     {
-        int i = edges.FindIndex(val => val.EqualTo(v0, v1));
+        int i = edges.FindIndex(val => val.Equals(v0, v1));
         if (i < 0)
         {
             edges.Add(new Edge(v0, v1));
