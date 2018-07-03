@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using System;
+using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -101,56 +102,34 @@ class WireframeCreator
         PrefabUtility.ReplacePrefab(wireframeObject, prefab, ReplacePrefabOptions.ConnectToPrefab);
 
         GameObject.DestroyImmediate(wireframeObject);
-        AssetDatabase.SaveAssets();
-    }
-
-    static void EdgeDuplicateCheck(PolyGraph graph)
-    {
-        List<Edge> edges = new List<Edge>();
-        foreach (var region in graph.regions)
-        {
-            foreach (var edge in region.borderEdges)
-            {
-                int i = edges.IndexOf(edge);
-                if (-1 == i)
-                {
-                    edges.Add(edge);
-                }
-                else
-                {
-                    if (!edges[i].Equals(edge))
-                        Debug.LogError("Inconsistent equal check");
-                }
-            }
-        }
     }
 
     [MenuItem("Tools/Others/Regenerate Wireframes")]
     static void RegenerateWireframes()
     {
-       string[] guids = AssetDatabase.FindAssets("t:GameObject", new string[] { Paths.AssetResArtworks });
-       for (int g = 0; g < guids.Length; ++g)
-       {
-           string path = AssetDatabase.GUIDToAssetPath(guids[g]);
-           if (path.Contains("Wireframe"))
-               continue;
+        string[] guids = AssetDatabase.FindAssets("t:GameObject", new string[] { Paths.AssetResArtworks });
+        for (int g = 0; g < guids.Length; ++g)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guids[g]);
+            if (path.Contains("Wireframe"))
+                continue;
 
-           GameObject go = null;
-           EditorUtility.DisplayProgressBar("Update Wireframe", path, (float)g / guids.Length);
-           try
-           {
-               var graphObject = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-               var graph = graphObject.GetComponent<PolyGraph>();
-               EdgeDuplicateCheck(graph);
-               Create(graph);
-           }
-           finally
-           {
-               if (null != go)
-                   GameObject.DestroyImmediate(go);
-               EditorUtility.ClearProgressBar();
-           }
-       }
-       AssetDatabase.SaveAssets();
+            EditorUtility.DisplayProgressBar("Update Wireframe", path, (float)g / guids.Length);
+            try
+            {
+                var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                var go = GameObject.Instantiate(prefab);
+                var graph = go.GetComponent<PolyGraph>();
+                graph.name = Path.GetFileNameWithoutExtension(path);
+                Create(graph);
+                PrefabUtility.ReplacePrefab(go, prefab, ReplacePrefabOptions.ConnectToPrefab);
+                GameObject.DestroyImmediate(go);
+            }
+            finally
+            {
+                EditorUtility.ClearProgressBar();
+            }
+        }
+        AssetDatabase.SaveAssets();
     }
 }

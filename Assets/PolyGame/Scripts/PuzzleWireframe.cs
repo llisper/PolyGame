@@ -29,6 +29,8 @@ public class PuzzleWireframe : MonoBehaviour
                 int index = edge.wireframeTriangles[j];
                 if (index >= 0 && index < colors.Length)
                     colors[index] = color;
+                else
+                    Debug.LogError("Invalid color index: " + index);
             }
         }
         mesh.colors = colors;
