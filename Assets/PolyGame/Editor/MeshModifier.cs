@@ -24,8 +24,8 @@ class MeshModifier : EditorWindow
     public class Info : IDisposable
     {
         public GameObject editObj;
+        public MeshPicker meshPicker;
         public Material originalMat;
-        public Material selectedMat;
         public int vertices;
         public int triangles;
         public int regions;
@@ -36,11 +36,13 @@ class MeshModifier : EditorWindow
             var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
             editObj = GameObject.Instantiate<GameObject>(prefab);
             editObj.name = name;
+            meshPicker = editObj.AddComponent<MeshPicker>();
 
             originalMat = editObj.GetComponentInChildren<MeshRenderer>().sharedMaterial;
-            selectedMat = UnityEngine.Object.Instantiate<Material>(originalMat);
-            selectedMat.name = originalMat.name + "_selected";
-            selectedMat.color = Color.green;
+            meshPicker.selectedMat = UnityEngine.Object.Instantiate<Material>(originalMat);
+            meshPicker.selectedMat.name = originalMat.name + "_selected";
+            meshPicker.selectedMat.color = Color.green;
+
             Update();
         }
 
@@ -57,8 +59,8 @@ class MeshModifier : EditorWindow
 
         public void Dispose()
         {
+            GameObject.DestroyImmediate(meshPicker.selectedMat);
             GameObject.DestroyImmediate(editObj);
-            GameObject.DestroyImmediate(selectedMat);
         }
     }
 
@@ -170,6 +172,7 @@ class MeshModifier : EditorWindow
         EditorGUILayout.LabelField("vertices", info.vertices.ToString());
         EditorGUILayout.LabelField("triangles", info.triangles.ToString());
         EditorGUILayout.LabelField("regions", info.regions.ToString());
+        EditorGUILayout.LabelField("selected regions", info.meshPicker.renderers.Count.ToString());
         labelStyle.normal.textColor = unsavedModification ? Color.yellow : Color.green;
         EditorGUILayout.LabelField(unsavedModification ? "modified" : "clear", labelStyle);
     }
@@ -213,16 +216,10 @@ class MeshModifier : EditorWindow
     void EditObj()
     {
         ShortcutCheck();
-        var meshPicker = info.editObj.GetComponent<MeshPicker>();
-        if (null == meshPicker)
-        {
-            meshPicker = info.editObj.AddComponent<MeshPicker>();
-            meshPicker.selectedMat = info.selectedMat;
-        }
+        var meshPicker = info.meshPicker;
 
         if (GUILayout.Button("[S]elect Regions", GUILayout.Width(100f)) || keyPressed[KeyCode.S])
             Selection.activeGameObject = info.editObj;
-
 
         if (meshPicker.renderers.Count <= 0)
         {
