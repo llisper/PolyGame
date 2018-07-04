@@ -80,6 +80,10 @@ public partial class Puzzle : MonoBehaviour
         PuzzleTouch.onObjMove -= OnObjMove;
         PuzzleTouch.onObjReleased -= OnObjReleased;
 
+        if (null != objectMat)
+            objectMat.SetFloat(propZWrite, 1f);
+        if (null != wireframeMat)
+            wireframeMat.SetFloat(propAlpha, 1f);
         if (null != finishedMat)
             Destroy(finishedMat);
         if (null != selectedMat)
@@ -166,7 +170,6 @@ public partial class Puzzle : MonoBehaviour
         selectedMat.name = objectMat.name + "Selected";
 
         propColor = Shader.PropertyToID("_Color");
-        
         propAlpha = Shader.PropertyToID("_Alpha");
         propZWrite = Shader.PropertyToID("_ZWrite");
 
@@ -177,7 +180,6 @@ public partial class Puzzle : MonoBehaviour
         finishedMat.SetFloat(propZWrite, 1f);
         finishedMat.SetColor(propColor, new Color(1f, 1f, 1f, finishedAlpha));
         wireframeMat.SetFloat(propAlpha, wireframeAlpha);
-        wireframeMat.SetFloat("_Thickness", 0.75f);
     }
 
     void ShowWireframe(bool show)
