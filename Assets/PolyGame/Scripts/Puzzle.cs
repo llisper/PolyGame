@@ -256,7 +256,8 @@ public partial class Puzzle : MonoBehaviour
         if (!debrisMap.TryGetValue(objPicked.gameObject, out di) || finished[di.index])
             return false;
 
-        wireframeObject.SetColor(Color.black, puzzleObject.regions[di.index].borderEdges);
+        // wireframeObject.SetColor(Color.black, puzzleObject.regions[di.index].borderEdges);
+        wireframeObject.SetColor(Color.black, puzzleObject, puzzleObject.regions[di.index]);
 
         Vector3 screenPos = PuzzleTouch.Instance.MainFinger.ScreenPosition;
         debrisMoveContainer.transform.position = (Vector2)PuzzleCamera.Main.ScreenToWorldPoint(screenPos);
@@ -285,7 +286,8 @@ public partial class Puzzle : MonoBehaviour
         }
         else
         {
-            wireframeObject.SetColor(Config.wireframeColor, puzzleObject.regions[di.index].borderEdges);
+            // wireframeObject.SetColor(Config.wireframeColor, puzzleObject.regions[di.index].borderEdges);
+            wireframeObject.ResetColors();
 
             if (Vector2.Distance(target.localPosition, di.position) <= fitThreshold)
             {

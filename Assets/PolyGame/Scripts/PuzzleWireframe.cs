@@ -14,12 +14,48 @@ public class PuzzleWireframe : MonoBehaviour
 
     void OnDestroy()
     {
+        ResetColors();
+    }
+
+    public void SetColor(Color color, List<Edge> borderEdges)
+    {
+        InternalSetColor(color, borderEdges);
+        mesh.colors = colors;
+    }
+
+    public void ResetColors()
+    {
         for (int i = 0; i < colors.Length; ++i)
             colors[i] = Config.wireframeColor;
         mesh.colors = colors;   
     }
 
-    public void SetColor(Color color, List<Edge> borderEdges)
+    const int showRegions = 14;
+
+    public void SetColor(Color color, PolyGraph graph, Region region)
+    {
+        var queue = new Queue<Region>();
+        queue.Enqueue(region);
+        var visited = new HashSet<Region>();
+        visited.Add(region);
+        for (int i = 0; i < showRegions && queue.Count > 0; ++i)
+        {
+            var r = queue.Dequeue();
+            InternalSetColor(color, r.borderEdges);
+            for (int index = 0; index < r.adjacents.Count; ++index)
+            {
+                var adj = graph.regions[r.adjacents[index]];
+                if (!visited.Contains(adj))
+                {
+                    queue.Enqueue(adj);
+                    visited.Add(adj);
+                }
+            }
+        }
+        mesh.colors = colors;
+    }
+
+    void InternalSetColor(Color color, List<Edge> borderEdges)
     {
         for (int i = 0; i < borderEdges.Count; ++i)
         {
@@ -33,6 +69,5 @@ public class PuzzleWireframe : MonoBehaviour
                     Debug.LogError("Invalid color index: " + index);
             }
         }
-        mesh.colors = colors;
     }
 }
