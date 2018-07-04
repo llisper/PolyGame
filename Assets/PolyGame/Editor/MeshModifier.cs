@@ -174,8 +174,45 @@ class MeshModifier : EditorWindow
         EditorGUILayout.LabelField(unsavedModification ? "modified" : "clear", labelStyle);
     }
 
+    static KeyCode[] keys = new KeyCode[] { KeyCode.S, KeyCode.C, KeyCode.D, KeyCode.J, KeyCode.U };
+    static Dictionary<KeyCode, bool> keyPressed = new Dictionary<KeyCode, bool>()
+    {
+        { KeyCode.S, false },
+        { KeyCode.C, false },
+        { KeyCode.D, false },
+        { KeyCode.J, false },
+        { KeyCode.U, false },
+    };
+
+    public static void ShortcutCheck(bool repaint = false)
+    {
+        var current = Event.current;
+        if (current.type == EventType.KeyDown)
+        {
+            foreach (var k in keys)
+            {
+                if (current.keyCode == k)
+                {
+                    keyPressed[k] = true;
+                    current.Use();
+                    break;
+                }
+            }
+        }
+
+        if (repaint && null != Instance)
+            Instance.Repaint();
+    }
+
+    static void ClearKeys()
+    {
+        foreach (var k in keys)
+            keyPressed[k] = false;
+    }
+
     void EditObj()
     {
+        ShortcutCheck();
         var meshPicker = info.editObj.GetComponent<MeshPicker>();
         if (null == meshPicker)
         {
@@ -183,7 +220,7 @@ class MeshModifier : EditorWindow
             meshPicker.selectedMat = info.selectedMat;
         }
 
-        if (GUILayout.Button("Select Regions", GUILayout.Width(100f)))
+        if (GUILayout.Button("[S]elect Regions", GUILayout.Width(100f)) || keyPressed[KeyCode.S])
             Selection.activeGameObject = info.editObj;
 
 
@@ -193,11 +230,11 @@ class MeshModifier : EditorWindow
         }
         else
         {
-            if (GUILayout.Button("Clear Selection", GUILayout.Width(100f)))
+            if (GUILayout.Button("[C]lear Selection", GUILayout.Width(100f)) || keyPressed[KeyCode.C])
             {
                 meshPicker.Clear();
             }
-            if (GUILayout.Button("Drop Regions", GUILayout.Width(100f)))
+            if (GUILayout.Button("[D]rop Regions", GUILayout.Width(100f)) || keyPressed[KeyCode.D])
             {
                 meshPicker.renderers.ForEach(v => v.gameObject.SetActive(false));
                 undoStack.Push(new DropCommand(info, meshPicker.renderers));
@@ -205,7 +242,7 @@ class MeshModifier : EditorWindow
                 MarkModified();
             }
 
-            if (GUILayout.Button("Join Regions", GUILayout.Width(100f)))
+            if (GUILayout.Button("[J]oin Regions", GUILayout.Width(100f)) || keyPressed[KeyCode.J])
             {
                 var newRegion = RegionCombiner.Combine(info.editObj, meshPicker.renderers.ConvertAll(v => v.gameObject));
                 newRegion.GetComponent<MeshRenderer>().sharedMaterial = info.originalMat;
@@ -218,13 +255,14 @@ class MeshModifier : EditorWindow
 
         if (undoStack.Count > 0)
         {
-            if (GUILayout.Button(string.Format("Undo({0})", undoStack.Count), GUILayout.Width(100f)))
+            if (GUILayout.Button(string.Format("[U]ndo({0})", undoStack.Count), GUILayout.Width(100f)) || keyPressed[KeyCode.U])
             {
                 var command = undoStack.Pop();
                 command.Undo();
                 MarkModified();
             }
         }
+        ClearKeys();
     }
 
     void Save()
