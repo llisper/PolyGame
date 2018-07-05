@@ -34,7 +34,7 @@ Mesh:
   m_IndexBuffer: 000001000200030004000500060007000800
   m_Skin: []
   m_VertexData:
-    m_CurrentChannels: 9
+    m_CurrentChannels: 5
     m_VertexCount: 9
     m_Channels:
     - stream: 0
@@ -46,13 +46,9 @@ Mesh:
       format: 0
       dimension: 0
     - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
       offset: 12
       format: 0
-      dimension: 2
+      dimension: 4
     - stream: 0
       offset: 0
       format: 0
@@ -69,8 +65,12 @@ Mesh:
       offset: 0
       format: 0
       dimension: 0
-    m_DataSize: 180
-    _typelessdata: 00729c3f80aaaac000000000f814483f2f77453f00c771c06055854100000000cae5453f20394d3f801ca74080aaaac00000000050d4493f2f77453f00729c3f80aaaac000000000f814483f2f77453fc0711cc1c0aa3a4100000000c546433fc6754b3f00c771c06055854100000000cae5453f20394d3f00394e40a0aa92c100000000a4f4483fade1403f00729c3f80aaaac000000000f814483f2f77453f801ca74080aaaac00000000050d4493f2f77453f
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    m_DataSize: 252
+    _typelessdata: 00729c3f80aaaac0000000000d5e6c3f2271463fb0a4243f0000803f00c771c060558541000000000d5e6c3f2271463fb0a4243f0000803f801ca74080aaaac0000000000d5e6c3f2271463fb0a4243f0000803f00729c3f80aaaac000000000933b663f02562b3f489aef3e0000803fc0711cc1c0aa3a4100000000933b663f02562b3f489aef3e0000803f00c771c06055854100000000933b663f02562b3f489aef3e0000803f00394e40a0aa92c1000000009c3be63e0a52a73e5a8a5f3e0000803f00729c3f80aaaac0000000009c3be63e0a52a73e5a8a5f3e0000803f801ca74080aaaac0000000009c3be63e0a52a73e5a8a5f3e0000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0

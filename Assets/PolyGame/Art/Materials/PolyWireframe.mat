@@ -19,5 +19,5 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - _Alpha: 0.0000000012445723
+    - _Alpha: 1
     m_Colors: []
