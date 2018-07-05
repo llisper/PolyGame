@@ -50,9 +50,9 @@ class PuzzleEditor
         var polyGraphBehaviour = go.GetComponent<PolyGraphBehaviour>();
         if (null != polyGraphBehaviour)
         {
-            GameObject.DestroyImmediate(polyGraphBehaviour);
             var polyGraph = go.AddComponent<PolyGraph>();
             polyGraph.size = polyGraphBehaviour.size;
+            GameObject.DestroyImmediate(polyGraphBehaviour);
             RegionResolver.Resolve(polyGraph);
             WireframeCreator.Create(polyGraph);
             return true;
@@ -66,8 +66,9 @@ class PuzzleEditor
     static bool ConvertToUseVertexColor(GameObject go)
     {
         var mat = go.GetComponentInChildren<MeshRenderer>().sharedMaterial;
-        var texture = mat.mainTexture as Texture2D;
-        if (null != texture)
+        Texture2D texture = null;
+        if (mat.HasProperty("_MainTex") && 
+            null != (texture = mat.mainTexture as Texture2D))
         {
             foreach (var meshFilter in go.GetComponentsInChildren<MeshFilter>())
             {
