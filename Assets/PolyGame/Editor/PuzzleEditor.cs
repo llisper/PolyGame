@@ -3,19 +3,7 @@ using UnityEngine;
 
 class PuzzleEditor
 {
-    [MenuItem("Tools/Others/[Test]Change Vertex Color")]
-    static void ChangeVertexColorTest()
-    {
-        var prefab = Resources.Load(Paths.Artworks + "/DeadCells/DeadCellsWireframe");
-        var go = (GameObject)GameObject.Instantiate(prefab);
-        var mesh = go.GetComponent<MeshFilter>().sharedMesh;
-        Color[] colors = mesh.colors;
-        for (int i = 0; i < colors.Length; ++i)
-            colors[i] = Color.red;
-        mesh.colors = colors;
-        GameObject.DestroyImmediate(go);
-    }
-
+    /*
     [MenuItem("Tools/Others/Update PolyGraph")]
     static void UpdatePolyGraph()
     {
@@ -108,4 +96,5 @@ class PuzzleEditor
             return false;
         }
     }
+    */
 }

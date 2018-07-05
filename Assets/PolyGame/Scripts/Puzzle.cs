@@ -16,7 +16,7 @@ public partial class Puzzle : MonoBehaviour
 
     public static Puzzle Current;
 
-    const float ScrambleRadius = 50f;
+    const float ScrambleRadius = 150f;
     const float moveSpeed = 30f;
     const float fadeSpeed = 15f;
     const float fitThreshold = 50f;

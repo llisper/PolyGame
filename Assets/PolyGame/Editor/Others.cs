@@ -30,10 +30,4 @@ static class Others
         PrefabUtility.ReplacePrefab(menu, prefab, ReplacePrefabOptions.ConnectToPrefab);
         GameObject.DestroyImmediate(ui);
     }
-
-    [MenuItem("Tools/Others/Complete Initial Snapshots")]
-    static void CompleteInitialSnapshots()
-    {
-        Game.CompleteInitialSnapshots();
-    }
 }

@@ -5,7 +5,7 @@ using System.IO;
 [ExecuteInEditMode]
 public class PuzzleSnapshot : MonoBehaviour
 {
-    Camera camera;
+    Camera ssCamera;
     RenderTexture renderTexture;
     Material originMat;
     Material greyscaleMat;
@@ -21,15 +21,15 @@ public class PuzzleSnapshot : MonoBehaviour
         renderTexture.Create();
 
         var camGo = (GameObject)Instantiate(Resources.Load(Prefabs.PuzzleCamera), transform, true);
-        camera = camGo.GetComponent<Camera>();
-        camera.cullingMask = (1 << Layers.Snapshot);
-        camera.targetTexture = renderTexture;
+        ssCamera = camGo.GetComponent<Camera>();
+        ssCamera.cullingMask = (1 << Layers.Snapshot);
+        ssCamera.targetTexture = renderTexture;
         camGo.SetActive(false);
     }
 
     void OnDestroy()
     {
-        camera.targetTexture = null;
+        ssCamera.targetTexture = null;
         Utils.Destroy(renderTexture);
         if (null != originMat)
             Utils.Destroy(originMat);
@@ -71,8 +71,8 @@ public class PuzzleSnapshot : MonoBehaviour
         {
             var currentRT = RenderTexture.active;
             RenderTexture.active = renderTexture; 
-            camera.gameObject.SetActive(true);
-            camera.Render();
+            ssCamera.gameObject.SetActive(true);
+            ssCamera.Render();
 
             try
             {
@@ -93,7 +93,7 @@ public class PuzzleSnapshot : MonoBehaviour
             finally
             {
                 RenderTexture.active = currentRT;
-                camera.gameObject.SetActive(false);
+                ssCamera.gameObject.SetActive(false);
             }
         }
     }
@@ -120,7 +120,7 @@ public class PuzzleSnapshot : MonoBehaviour
                     renderer.sharedMaterial = originMat;
             }
         }
-        PuzzleCamera.SetupCamera(camera, puzzleObject.size);
+        PuzzleCamera.SetupCamera(ssCamera, puzzleObject.size);
     }
 
     void InitMaterial(Material mat)
