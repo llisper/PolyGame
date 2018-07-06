@@ -45,7 +45,7 @@ public class PuzzleSnapshot : MonoBehaviour
         InternalInit(go.GetComponent<PolyGraph>(), finished);
     }
 
-    public void Init(PolyGraph puzzleObject, Material mat, bool[] finished = null)
+    public void Init(PolyGraph puzzleObject, bool[] finished = null)
     {
         puzzleName = puzzleObject.name;
         InternalInit(Instantiate(puzzleObject, transform), finished);
@@ -59,29 +59,29 @@ public class PuzzleSnapshot : MonoBehaviour
             renderer.sharedMaterial = originMat;
     }
 
+    public const string FileName = "Snapshot.png";
+
     public static string SavePath(string puzzleName)
     {
-        return string.Format("{0}/{1}/Snapshot.jpg", Paths.Saves, puzzleName);
+        return string.Format("{0}/{1}/{2}", Paths.Saves, puzzleName, FileName);
     }
 
-    [ContextMenu("Save")]
-    public void Save()
+    public void Save(string path = null)
     {
         if (null != puzzleObject)
         {
             var currentRT = RenderTexture.active;
             RenderTexture.active = renderTexture; 
-            ssCamera.gameObject.SetActive(true);
             ssCamera.Render();
 
             try
             {
                 var size = Config.SnapshotSize;
-                Texture2D tex2d = new Texture2D(size.x, size.y, TextureFormat.RGB24, false);
+                Texture2D tex2d = new Texture2D(size.x, size.y, TextureFormat.RGBAHalf, false);
                 tex2d.ReadPixels(new Rect(0, 0, size.x, size.y), 0, 0);
 
-                byte[] bytes = tex2d.EncodeToJPG();
-                string path = SavePath(puzzleName);
+                byte[] bytes = tex2d.EncodeToPNG();
+                path = null != path ? path : SavePath(puzzleName);
                 Directory.CreateDirectory(Path.GetDirectoryName(path));
                 File.WriteAllBytes(path, bytes);
                 Debug.Log("Save snapshot to " + path);
@@ -93,7 +93,6 @@ public class PuzzleSnapshot : MonoBehaviour
             finally
             {
                 RenderTexture.active = currentRT;
-                ssCamera.gameObject.SetActive(false);
             }
         }
     }
@@ -151,21 +150,21 @@ public class PuzzleSnapshot : MonoBehaviour
 
 public static class PuzzleSnapshotOneOff
 {
-    public static void Take(string puzzleName, bool[] finished = null)
+    public static void Take(string puzzleName, bool[] finished = null, string savePath = null)
     {
         var go = new GameObject("PuzzleSnapshot");
         var snapshot = go.AddComponent<PuzzleSnapshot>();
         snapshot.Init(puzzleName, finished);
-        snapshot.Save();
+        snapshot.Save(savePath);
         Utils.Destroy(go);
     }
 
-    public static void Take(PolyGraph puzzleObject, Material mat, bool[] finished = null)
+    public static void Take(PolyGraph puzzleObject, bool[] finished = null, string savePath = null)
     {
         var go = new GameObject("PuzzleSnapshot");
         var snapshot = go.AddComponent<PuzzleSnapshot>();
-        snapshot.Init(puzzleObject, mat, finished);
-        snapshot.Save();
+        snapshot.Init(puzzleObject, finished);
+        snapshot.Save(savePath);
         Utils.Destroy(go);
     }
 }

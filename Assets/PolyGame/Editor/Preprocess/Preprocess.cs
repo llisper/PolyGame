@@ -26,13 +26,8 @@ public static class Preprocess
             {
                 Debug.Log(importer.GetType().Name);
                 importer.Import();
-
                 var graph = importer.GameObject.GetComponent<PolyGraph>();
-                using (TimeCount.Start("Resolve Regions"))
-                    RegionResolver.Resolve(graph);
-                using (TimeCount.Start("Create Wireframe"))
-                    WireframeCreator.Create(graph);
-
+                ProcessAfterImport(graph);
                 Save(importer);
             }
         }
@@ -52,6 +47,15 @@ public static class Preprocess
             return new VectorGraphImporter(name);
         else
             throw new Exception("No appropriate importer for " + path);
+    }
+
+    static void ProcessAfterImport(PolyGraph graph)
+    {
+        using (TimeCount.Start("Resolve Regions"))
+            RegionResolver.Resolve(graph);
+        using (TimeCount.Start("Create Wireframe"))
+            WireframeCreator.Create(graph);
+        SaveInitialSnapshot(graph);
     }
 
     static void Clear(string name)
@@ -104,5 +108,20 @@ public static class Preprocess
 
         using (TimeCount.Start("Saving assets"))
             AssetDatabase.SaveAssets();
+    }
+
+    static void SaveInitialSnapshot(PolyGraph graph)
+    {
+        using (TimeCount.Start("Saving initial snapshot"))
+        {
+            string path = string.Format(
+                "{0}/{1}/{2}/{3}",
+                Application.dataPath,
+                Paths.AssetArtworksNoPrefix,
+                graph.name,
+                PuzzleSnapshot.FileName);
+
+            PuzzleSnapshotOneOff.Take(graph, null, path);
+        }
     }
 }

@@ -1,9 +1,33 @@
 using UnityEditor;
 using UnityEngine;
+using System;
+using System.IO;
 
 class PuzzleEditor
 {
     /*
+    [MenuItem("Tools/CompleteInitialSnapshots")]
+    static void CompleteInitialSnapshots()
+    {
+        string[] dirs = Directory.GetDirectories(Application.dataPath + '/' + Paths.AssetResArtworksNoPrefix);
+        string[] names = Array.ConvertAll(dirs, v => Path.GetFileName(v));
+        for (int i = 0; i < names.Length; ++i)
+        {
+            EditorUtility.DisplayProgressBar("CompleteInitialSnapshots", names[i], (float)i / names.Length);
+            string path = string.Format(
+                "{0}/{1}/{2}/{3}",
+                 Application.dataPath,
+                 Paths.AssetArtworksNoPrefix,
+                 names[i],
+                 PuzzleSnapshot.FileName);
+            
+            PuzzleSnapshotOneOff.Take(names[i], null, path);
+        }
+
+        EditorUtility.ClearProgressBar();
+        AssetDatabase.Refresh();
+    }
+
     [MenuItem("Tools/Others/Update PolyGraph")]
     static void UpdatePolyGraph()
     {
