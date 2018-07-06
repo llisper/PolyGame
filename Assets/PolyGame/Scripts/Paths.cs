@@ -10,4 +10,9 @@ public class Paths
     public const string PolyWireframe = "Assets/PolyGame/Art/Materials/PolyWireframe.mat";
 
     public static string Saves { get { return Application.persistentDataPath + "/Saves"; } }
+
+    public static string ToAssetPath(string absPath)
+    {
+        return absPath.Replace(Application.dataPath, "Assets");
+    }
 }

@@ -5,7 +5,6 @@ using System.IO;
 
 class PuzzleEditor
 {
-    /*
     [MenuItem("Tools/CompleteInitialSnapshots")]
     static void CompleteInitialSnapshots()
     {
@@ -22,12 +21,20 @@ class PuzzleEditor
                  PuzzleSnapshot.FileName);
             
             PuzzleSnapshotOneOff.Take(names[i], null, path);
+
+            string graphPath = string.Format("{0}/{1}/{1}.prefab", Paths.AssetResArtworks, names[i]);
+            var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(graphPath);
+            var go = GameObject.Instantiate(prefab);
+            go.GetComponent<PolyGraph>().initialSnapshot = AssetDatabase.LoadAssetAtPath<Texture2D>(Paths.ToAssetPath(path));
+            PrefabUtility.ReplacePrefab(go, prefab, ReplacePrefabOptions.ConnectToPrefab);
+            GameObject.DestroyImmediate(go);
         }
 
         EditorUtility.ClearProgressBar();
         AssetDatabase.Refresh();
     }
 
+    /*
     [MenuItem("Tools/Others/Update PolyGraph")]
     static void UpdatePolyGraph()
     {

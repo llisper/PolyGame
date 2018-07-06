@@ -66,7 +66,7 @@ public class PuzzleSnapshot : MonoBehaviour
         return string.Format("{0}/{1}/{2}", Paths.Saves, puzzleName, FileName);
     }
 
-    public void Save(string path = null)
+    public void Take(string path = null, bool destroy = true)
     {
         if (null != puzzleObject)
         {
@@ -93,6 +93,8 @@ public class PuzzleSnapshot : MonoBehaviour
             finally
             {
                 RenderTexture.active = currentRT;
+                if (destroy)
+                    Utils.Destroy(gameObject);
             }
         }
     }
@@ -155,8 +157,7 @@ public static class PuzzleSnapshotOneOff
         var go = new GameObject("PuzzleSnapshot");
         var snapshot = go.AddComponent<PuzzleSnapshot>();
         snapshot.Init(puzzleName, finished);
-        snapshot.Save(savePath);
-        Utils.Destroy(go);
+        snapshot.Take(savePath);
     }
 
     public static void Take(PolyGraph puzzleObject, bool[] finished = null, string savePath = null)
@@ -164,7 +165,6 @@ public static class PuzzleSnapshotOneOff
         var go = new GameObject("PuzzleSnapshot");
         var snapshot = go.AddComponent<PuzzleSnapshot>();
         snapshot.Init(puzzleObject, finished);
-        snapshot.Save(savePath);
-        Utils.Destroy(go);
+        snapshot.Take(savePath);
     }
 }

@@ -122,6 +122,7 @@ public static class Preprocess
                 PuzzleSnapshot.FileName);
 
             PuzzleSnapshotOneOff.Take(graph, null, path);
+            graph.initialSnapshot = AssetDatabase.LoadAssetAtPath<Texture2D>(Paths.ToAssetPath(path));
         }
     }
 }
