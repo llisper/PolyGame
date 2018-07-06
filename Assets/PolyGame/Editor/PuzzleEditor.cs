@@ -5,7 +5,7 @@ using System.IO;
 
 class PuzzleEditor
 {
-    [MenuItem("Tools/CompleteInitialSnapshots")]
+    [MenuItem("Tools/Others/CompleteInitialSnapshots")]
     static void CompleteInitialSnapshots()
     {
         string[] dirs = Directory.GetDirectories(Application.dataPath + '/' + Paths.AssetResArtworksNoPrefix);
