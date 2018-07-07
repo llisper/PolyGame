@@ -13,9 +13,9 @@ public class Game : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    IEnumerator Start()
+    void Start()
     {
-        yield return StartCoroutine(CompleteInitialSnapshots());
+        // yield return StartCoroutine(CompleteInitialSnapshots());
 
         UI.Init();
         GameScene.Init();

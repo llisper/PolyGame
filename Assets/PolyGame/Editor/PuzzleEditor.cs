@@ -13,13 +13,7 @@ class PuzzleEditor
         for (int i = 0; i < names.Length; ++i)
         {
             EditorUtility.DisplayProgressBar("CompleteInitialSnapshots", names[i], (float)i / names.Length);
-            string path = string.Format(
-                "{0}/{1}/{2}/{3}",
-                 Application.dataPath,
-                 Paths.AssetArtworksNoPrefix,
-                 names[i],
-                 PuzzleSnapshot.FileName);
-            
+            string path = Paths.SnapshotRes(names[i]);
             PuzzleSnapshotOneOff.Take(names[i], null, path);
 
             string graphPath = string.Format("{0}/{1}/{1}.prefab", Paths.AssetResArtworks, names[i]);
@@ -32,6 +26,60 @@ class PuzzleEditor
 
         EditorUtility.ClearProgressBar();
         AssetDatabase.Refresh();
+    }
+
+    [MenuItem("Tools/Others/RecalculateSize")]
+    static void RecalucateSize()
+    {
+        string[] guids = AssetDatabase.FindAssets("t:GameObject", new string[] { Paths.AssetResArtworks });
+        for (int g = 0; g < guids.Length; ++g)
+        {
+            GameObject go = null;
+            string path = AssetDatabase.GUIDToAssetPath(guids[g]);
+            if (path.Contains("Wireframe"))
+                continue;
+
+            EditorUtility.DisplayProgressBar("Recalculate Size", path, (float)g / guids.Length);
+            try
+            {
+                var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                go = GameObject.Instantiate<GameObject>(prefab);
+                var graph = go.GetComponent<PolyGraph>();
+                go.name = prefab.name;
+
+                MeshRenderer[] renderers = go.GetComponentsInChildren<MeshRenderer>();
+                var bounds = renderers[0].bounds;
+                for (int i = 1; i < renderers.Length; ++i)
+                    bounds.Encapsulate(renderers[i].bounds);
+
+                var newSize = new Vector2Int((int)bounds.size.x, (int)bounds.size.y);
+                if (newSize.x != bounds.size.x || newSize.y != bounds.size.y)
+                {
+                    Debug.LogErrorFormat("{0}: bounds.size can't convert to integers, {1}", graph.name);
+                    continue;
+                }
+                graph.size = newSize;
+
+                Vector2 centerOffset = bounds.extents - bounds.center;
+                for (int i = 0; i < renderers.Length; ++i)
+                    renderers[i].transform.localPosition += (Vector3)centerOffset;
+
+                RegionResolver.Resolve(graph);
+                WireframeCreator.Create(graph);
+                string ssPath = Paths.SnapshotRes(graph.name);
+                PuzzleSnapshotOneOff.Take(graph, null, ssPath);
+                graph.initialSnapshot = AssetDatabase.LoadAssetAtPath<Texture2D>(Paths.ToAssetPath(ssPath));
+
+                PrefabUtility.ReplacePrefab(go, prefab, ReplacePrefabOptions.ConnectToPrefab);
+            }
+            finally
+            {
+                if (null != go)
+                    GameObject.DestroyImmediate(go);
+                EditorUtility.ClearProgressBar();
+            }
+        }
+        AssetDatabase.SaveAssets();
     }
 
     /*

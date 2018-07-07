@@ -15,4 +15,14 @@ public class Paths
     {
         return absPath.Replace(Application.dataPath, "Assets");
     }
+
+    public static string SnapshotRes(string name)
+    {
+        return string.Format(
+            "{0}/{1}/{2}/{3}",
+            Application.dataPath,
+            Paths.AssetArtworksNoPrefix,
+            name,
+            PuzzleSnapshot.FileName);
+    }
 }

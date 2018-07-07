@@ -114,13 +114,7 @@ public static class Preprocess
     {
         using (TimeCount.Start("Saving initial snapshot"))
         {
-            string path = string.Format(
-                "{0}/{1}/{2}/{3}",
-                Application.dataPath,
-                Paths.AssetArtworksNoPrefix,
-                graph.name,
-                PuzzleSnapshot.FileName);
-
+            string path = Paths.SnapshotRes(graph.name);
             PuzzleSnapshotOneOff.Take(graph, null, path);
             graph.initialSnapshot = AssetDatabase.LoadAssetAtPath<Texture2D>(Paths.ToAssetPath(path));
         }
