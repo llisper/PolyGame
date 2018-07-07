@@ -78,9 +78,17 @@ public class TimeCount : IDisposable
 
 public class Config
 {
-    public const float CameraDistance = 1001f;
+    public class ZOrder
+    {
+        public float debrisStart = -0.1f;
+        public float wireframe = -0.01f;
+        public float background = -0.001f;
+    }
+
+    public static ZOrder zorder = new ZOrder();
+    public static float CameraDistance = 1001f;
     public static Vector2Int SnapshotSize = new Vector2Int(256, 256);
-    public const float wireframeWidth = 0.85f;
+    public static float wireframeWidth = 0.85f;
     public static Color wireframeColor = new Color32(200, 200, 200, 255);
 
 }
@@ -94,6 +102,7 @@ public class ShaderFeatures
 public class Prefabs
 {
     public const string PuzzleCamera = "Prefabs/PuzzleCamera";
+    public const string Background = "Prefabs/Background";
 }
 
 public class Tags

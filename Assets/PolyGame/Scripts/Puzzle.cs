@@ -59,6 +59,7 @@ public partial class Puzzle : MonoBehaviour
     float wireframeAlpha;
 
     public string PuzzleName { get { return puzzleName; } }
+    public PolyGraph PuzzleObject { get { return puzzleObject; } }
     public Bounds PlaygroundBounds { get { return playgroundBounds; } }
     public bool[] FinishedFlags { get { return finished; } }
 
@@ -128,6 +129,7 @@ public partial class Puzzle : MonoBehaviour
         PuzzleCamera.Instance.Init(puzzleObject.size);
         InitPlaygroundBounds();
         Scramble();
+        LoadBackgroundQuad();
     }
 
     void LoadPuzzleObject()
@@ -151,8 +153,15 @@ public partial class Puzzle : MonoBehaviour
     {
         var prefab = Resources.Load(string.Format("{0}/{1}/{1}Wireframe", Paths.Artworks, puzzleName));
         var go = (GameObject)Instantiate(prefab, transform);
+        go.transform.position = new Vector3(0f, 0f, Config.zorder.wireframe);
         go.name = prefab.name;
         wireframeObject = go.GetComponent<PuzzleWireframe>();
+    }
+
+    void LoadBackgroundQuad()
+    {
+        var go = PuzzleBackground.Create(puzzleObject, playgroundBounds);
+        go.transform.SetParent(transform, true);
     }
 
     void InitMaterials()
@@ -197,7 +206,7 @@ public partial class Puzzle : MonoBehaviour
 
     Vector3 ArrangeDepth(int i, Vector3 pos)
     {
-        pos.z = -i * 0.1f;
+        pos.z = (i + 1) * Config.zorder.debrisStart;
         return pos;
     }
 
@@ -248,6 +257,7 @@ public partial class Puzzle : MonoBehaviour
         Vector2 pos = puzzleObject.size;
         pos = pos / 2f;
         playgroundBounds = new Bounds(pos, orthoSize * 2);
+        Debug.Log("playgroundBounds: " + playgroundBounds);
     }
 
     void OnObjMove(Transform objPicked, Vector2 screenCurrent)
@@ -270,7 +280,6 @@ public partial class Puzzle : MonoBehaviour
         if (!debrisMap.TryGetValue(objPicked.gameObject, out di) || finished[di.index])
             return false;
 
-        // wireframeObject.SetColor(Color.black, puzzleObject.regions[di.index].borderEdges);
         wireframeObject.SetColor(Color.black, puzzleObject, puzzleObject.regions[di.index]);
 
         Vector3 screenPos = PuzzleTouch.Instance.MainFinger.ScreenPosition;
@@ -300,7 +309,6 @@ public partial class Puzzle : MonoBehaviour
         }
         else
         {
-            // wireframeObject.SetColor(Config.wireframeColor, puzzleObject.regions[di.index].borderEdges);
             wireframeObject.ResetColors();
 
             if (Vector2.Distance(target.localPosition, di.position) <= fitThreshold)

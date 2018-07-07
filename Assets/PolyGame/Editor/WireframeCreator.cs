@@ -14,8 +14,10 @@ class WireframeCreator
         public EdgeIndex(Edge e, List<int> i) { edge = e; index = i; }
     }
 
-    public static void Create(PolyGraph graph, float width = Config.wireframeWidth, Color? color = null)
+    public static void Create(PolyGraph graph, float? width = null, Color? color = null)
     {
+        float w = width.HasValue ? width.Value : Config.wireframeWidth;
+        Color c = color.HasValue ? color.Value : Config.wireframeColor;
         if (width <= 0f)
             throw new Exception("Width must greater than 0!");
 
@@ -36,7 +38,7 @@ class WireframeCreator
                 Vector3 v0 = new Vector3(edge.v0.x, edge.v0.y, 0f);
                 Vector3 v1 = new Vector3(edge.v1.x, edge.v1.y, 0f);
 
-                Vector3 d = Vector3.Cross(Vector3.back, v1 - v0).normalized * 0.5f * width;
+                Vector3 d = Vector3.Cross(Vector3.back, v1 - v0).normalized * 0.5f * w;
                 Vector3 p0 = v0 + d;
                 Vector3 p1 = v0 - d;
                 Vector3 p2 = v1 + d;
@@ -83,7 +85,6 @@ class WireframeCreator
         mesh.name = graph.name + "Wireframe";
         mesh.vertices = verts.ToArray();
         mesh.triangles = tris.ToArray();
-        Color c = color.HasValue ? color.Value : Config.wireframeColor;
         mesh.colors = Enumerable.Repeat(c, verts.Count).ToArray();
         MeshUtility.Optimize(mesh);
         string savePath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, graph.name, mesh.name);
