@@ -36,9 +36,9 @@ public static class Preprocess
 
     static Importer CreateImporter(string name)
     {
-        string path = string.Format("{0}/{1}/{2}/{2}", 
-            Application.dataPath, 
-            Paths.AssetArtworksNoPrefix, 
+        string path = string.Format("{0}/{1}/{2}/{2}",
+            Application.dataPath,
+            Paths.AssetArtworksNoPrefix,
             name);
 
         if (File.Exists(path + PixelGraphImporter.Suffix))
@@ -55,7 +55,8 @@ public static class Preprocess
             RegionResolver.Resolve(graph);
         using (TimeCount.Start("Create Wireframe"))
             WireframeCreator.Create(graph);
-        SaveInitialSnapshot(graph);
+        using (TimeCount.Start("Saving initial snapshot"))
+            Others.SaveInitialSnapshot(graph);
     }
 
     static void Clear(string name)
@@ -108,15 +109,5 @@ public static class Preprocess
 
         using (TimeCount.Start("Saving assets"))
             AssetDatabase.SaveAssets();
-    }
-
-    static void SaveInitialSnapshot(PolyGraph graph)
-    {
-        using (TimeCount.Start("Saving initial snapshot"))
-        {
-            string path = Paths.SnapshotRes(graph.name);
-            PuzzleSnapshotOneOff.Take(graph, null, path);
-            graph.initialSnapshot = AssetDatabase.LoadAssetAtPath<Texture2D>(Paths.ToAssetPath(path));
-        }
     }
 }

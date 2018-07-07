@@ -28,6 +28,7 @@ class PuzzleEditor
         AssetDatabase.Refresh();
     }
 
+    /*
     [MenuItem("Tools/Others/RecalculateSize")]
     static void RecalucateSize()
     {
@@ -82,7 +83,6 @@ class PuzzleEditor
         AssetDatabase.SaveAssets();
     }
 
-    /*
     [MenuItem("Tools/Others/Update PolyGraph")]
     static void UpdatePolyGraph()
     {

@@ -290,10 +290,14 @@ class MeshModifier : EditorWindow
 
                 EditorUtility.DisplayProgressBar("Saving " + info.editObj.name, "Resolving regions & create wireframe", 0.5f);
                 var polyGraph = copy.GetComponent<PolyGraph>();
+                using (TimeCount.Start("Recenter Graph"))
+                    RecenterGraph(polyGraph);
                 using (TimeCount.Start("Resolve Regions"))
                     RegionResolver.Resolve(polyGraph);
                 using (TimeCount.Start("Create Wireframe"))
                     WireframeCreator.Create(polyGraph);
+                using (TimeCount.Start("Saving initial snapshot"))
+                    Others.SaveInitialSnapshot(polyGraph);
 
                 EditorUtility.DisplayProgressBar("Saving " + info.editObj.name, "Saving prefab", 0.75f);
                 using (TimeCount.Start("Saving prefab"))
@@ -354,5 +358,25 @@ class MeshModifier : EditorWindow
         unsavedModification = true;
         if (null != info)
             info.Update();
+    }
+
+    void RecenterGraph(PolyGraph graph)
+    {
+        MeshRenderer[] renderers = graph.GetComponentsInChildren<MeshRenderer>();
+        var bounds = renderers[0].bounds;
+        for (int i = 1; i < renderers.Length; ++i)
+            bounds.Encapsulate(renderers[i].bounds);
+
+        var newSize = new Vector2Int((int)bounds.size.x, (int)bounds.size.y);
+        if (newSize.x != bounds.size.x || newSize.y != bounds.size.y)
+        {
+            Debug.LogErrorFormat("{0}: bounds.size can't convert to integers, {1}", graph.name);
+            return;
+        }
+        graph.size = newSize;
+
+        Vector2 centerOffset = bounds.extents - bounds.center;
+        for (int i = 0; i < renderers.Length; ++i)
+            renderers[i].transform.localPosition += (Vector3)centerOffset;
     }
 }

@@ -6,6 +6,13 @@ using System.Collections.Generic;
 
 static class Others
 {
+    public static void SaveInitialSnapshot(PolyGraph graph)
+    {
+        string path = Paths.SnapshotRes(graph.name);
+        PuzzleSnapshotOneOff.Take(graph, null, path);
+        graph.initialSnapshot = AssetDatabase.LoadAssetAtPath<Texture2D>(Paths.ToAssetPath(path));
+    }
+
     [MenuItem("Tools/Others/Clear Saves")]
     static void ClearSaves()
     {
