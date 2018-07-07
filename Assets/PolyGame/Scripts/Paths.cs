@@ -25,4 +25,9 @@ public class Paths
             name,
             PuzzleSnapshot.FileName);
     }
+
+    public static string SnapshotSave(string name)
+    {
+        return string.Format("{0}/{1}/{2}", Saves, name, PuzzleSnapshot.FileName);
+    }
 }

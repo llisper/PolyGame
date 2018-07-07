@@ -61,11 +61,6 @@ public class PuzzleSnapshot : MonoBehaviour
 
     public const string FileName = "Snapshot.png";
 
-    public static string SavePath(string puzzleName)
-    {
-        return string.Format("{0}/{1}/{2}", Paths.Saves, puzzleName, FileName);
-    }
-
     public void Take(string path = null, bool destroy = true)
     {
         if (null != puzzleObject)
@@ -81,7 +76,7 @@ public class PuzzleSnapshot : MonoBehaviour
                 tex2d.ReadPixels(new Rect(0, 0, size.x, size.y), 0, 0);
 
                 byte[] bytes = tex2d.EncodeToPNG();
-                path = null != path ? path : SavePath(puzzleName);
+                path = null != path ? path : Paths.SnapshotSave(puzzleName);
                 Directory.CreateDirectory(Path.GetDirectoryName(path));
                 File.WriteAllBytes(path, bytes);
                 Debug.Log("Save snapshot to " + path);

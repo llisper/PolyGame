@@ -29,7 +29,7 @@ public class MenuPanel : Panel
         snapshot.enabled = false;
         if (!string.IsNullOrEmpty(text))
         {
-            string path = PuzzleSnapshot.SavePath(text);
+            string path = Paths.SnapshotSave(text);
             if (File.Exists(path))
             {
                 byte[] bytes = File.ReadAllBytes(path);
@@ -40,6 +40,16 @@ public class MenuPanel : Panel
                 }
                 tex2d.LoadImage(bytes);
                 snapshot.enabled = true;
+            }
+            else
+            {
+                // NOTE: can't load the whole puzzle prefab just to find out the snapshot texture reference
+                var prefab = (GameObject)Resources.Load(string.Format("{0}/{1}/{1}", Paths.Artworks, text));
+                if (null != prefab)
+                {
+                    snapshot.texture = prefab.GetComponent<PolyGraph>().initialSnapshot;
+                    snapshot.enabled = true;
+                }
             }
         }
     }
