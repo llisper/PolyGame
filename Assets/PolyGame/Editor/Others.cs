@@ -12,7 +12,7 @@ static class Others
         string saveName = graph.name + Path.GetFileNameWithoutExtension(PuzzleSnapshot.FileName);
 
         var go = new GameObject(saveName);
-        var holder = go.AddComponent<PuzzleSnapshot.Holder>();
+        var holder = go.AddComponent<PuzzleSnapshotHolder>();
         PuzzleSnapshotOneOff.Take(graph, null, path);
         holder.texture = AssetDatabase.LoadAssetAtPath<Texture2D>(Paths.ToAssetPath(path));
 

@@ -51,7 +51,7 @@ public class MenuPanel : Panel
 
                 if (null != prefab)
                 {
-                    snapshot.texture = prefab.GetComponent<PuzzleSnapshot.Holder>().texture;
+                    snapshot.texture = prefab.GetComponent<PuzzleSnapshotHolder>().texture;
                     snapshot.enabled = true;
                 }
             }
