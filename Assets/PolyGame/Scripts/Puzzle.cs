@@ -125,14 +125,9 @@ public partial class Puzzle : MonoBehaviour
         LoadWireframe();
         InitMaterials();
         ApplyProgress();
-        Scramble();
-
         PuzzleCamera.Instance.Init(puzzleObject.size);
-        var cam = PuzzleCamera.Main;
-        Vector2 orthoSize = new Vector2(cam.aspect * cam.orthographicSize, cam.orthographicSize);
-        Vector2 pos = puzzleObject.size;
-        pos = pos / 2f;
-        playgroundBounds = new Bounds(pos, orthoSize * 2);
+        InitPlaygroundBounds();
+        Scramble();
     }
 
     void LoadPuzzleObject()
@@ -208,12 +203,20 @@ public partial class Puzzle : MonoBehaviour
 
     void Scramble()
     {
+        float radius = Mathf.Min(ScrambleRadius, playgroundBounds.extents.x, playgroundBounds.extents.y);
+        Vector3 min = playgroundBounds.min + new Vector3(radius, radius);
+        Vector3 max = playgroundBounds.max - new Vector3(radius, radius);
         for (int i = 0; i < puzzleObject.transform.childCount; ++i)
         {
             if (i >= finished.Length || !finished[i])
             {
                 var child = puzzleObject.transform.GetChild(i);
-                child.localPosition += (Vector3)(Random.insideUnitCircle * ScrambleRadius);
+                var ext = child.GetComponent<MeshRenderer>().bounds.extents;
+                var startPos = child.position;
+                startPos.x = Mathf.Clamp(startPos.x, min.x, max.x);
+                startPos.y = Mathf.Clamp(startPos.y, min.y, max.y);
+                float r = Mathf.Max(0, Mathf.Min(radius - ext.x, radius - ext.y));
+                child.position = startPos + (Vector3)(Random.insideUnitCircle * r);
             }
         }
     }
@@ -236,6 +239,15 @@ public partial class Puzzle : MonoBehaviour
                 child.GetComponent<MeshCollider>().enabled = false;
             }
         }
+    }
+
+    void InitPlaygroundBounds()
+    {
+        var cam = PuzzleCamera.Main;
+        Vector2 orthoSize = new Vector2(cam.aspect * cam.orthographicSize, cam.orthographicSize);
+        Vector2 pos = puzzleObject.size;
+        pos = pos / 2f;
+        playgroundBounds = new Bounds(pos, orthoSize * 2);
     }
 
     void OnObjMove(Transform objPicked, Vector2 screenCurrent)
