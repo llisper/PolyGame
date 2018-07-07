@@ -23,19 +23,10 @@ class PreprocessWin : EditorWindow
         path = Application.dataPath + '/' + Paths.AssetArtworksNoPrefix + '/';
     }
 
-    bool HasMark(string name, string mark)
+    bool HasImported(string name)
     {
-        string p = string.Format("{0}/{1}/{2}", path, name, mark);
-        if (File.Exists(p))
-            return true;
-        return false;
-    }
-
-    void RemoveMark(string name, string mark)
-    {
-        string p = string.Format("{0}/{1}/{2}", path, name, mark);
-        if (File.Exists(p))
-            File.Delete(p);
+        string folder = string.Format("{0}/{1}/{2}", Application.dataPath, Paths.AssetResArtworksNoPrefix, name);
+        return Directory.Exists(folder);
     }
 
     void Process(params string[] names)
@@ -59,7 +50,6 @@ class PreprocessWin : EditorWindow
                 {
                     EditorUtility.DisplayProgressBar("Pre-process", n, 0);
                     Preprocess.Process(n);
-                    RemoveMark(n, "(update)");
                 }
                 catch (Exception e)
                 {
@@ -84,9 +74,9 @@ class PreprocessWin : EditorWindow
             Process(names);
             return;
         }
-        if (GUILayout.Button("update-only", EditorStyles.miniButton, GUILayout.Width(90)))
+        if (GUILayout.Button("not-imported only", EditorStyles.miniButton, GUILayout.Width(120)))
         {
-            Process(names.Where(v => HasMark(v, "(update)")).ToArray());
+            Process(names.Where(v => !HasImported(v)).ToArray());
             return;
         }
         EditorGUILayout.EndHorizontal();
@@ -98,8 +88,8 @@ class PreprocessWin : EditorWindow
         {
             string name = names[i];
             string displayName = name;
-            if (HasMark(name, "(update)"))
-                displayName += "(update)";
+            if (!HasImported(name))
+                displayName += "(not-imported)";
 
             EditorGUILayout.BeginHorizontal();
             GUILayout.Space(20);
