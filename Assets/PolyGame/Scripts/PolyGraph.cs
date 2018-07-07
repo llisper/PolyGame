@@ -52,7 +52,6 @@ public class PolyGraph : MonoBehaviour
     public Vector2Int size;
     public List<Triangle> triangles = new List<Triangle>();
     public List<Region> regions = new List<Region>();
-    public Texture2D initialSnapshot;
 
     public static long PointHash(Vector2 p, Vector2Int size)
     {

@@ -13,17 +13,10 @@ class PuzzleEditor
         for (int i = 0; i < names.Length; ++i)
         {
             EditorUtility.DisplayProgressBar("CompleteInitialSnapshots", names[i], (float)i / names.Length);
-            string path = Paths.SnapshotRes(names[i]);
-            PuzzleSnapshotOneOff.Take(names[i], null, path);
-
             string graphPath = string.Format("{0}/{1}/{1}.prefab", Paths.AssetResArtworks, names[i]);
             var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(graphPath);
-            var go = GameObject.Instantiate(prefab);
-            go.GetComponent<PolyGraph>().initialSnapshot = AssetDatabase.LoadAssetAtPath<Texture2D>(Paths.ToAssetPath(path));
-            PrefabUtility.ReplacePrefab(go, prefab, ReplacePrefabOptions.ConnectToPrefab);
-            GameObject.DestroyImmediate(go);
+            Others.SaveInitialSnapshot(prefab.GetComponent<PolyGraph>());
         }
-
         EditorUtility.ClearProgressBar();
         AssetDatabase.Refresh();
     }
@@ -69,7 +62,6 @@ class PuzzleEditor
                 WireframeCreator.Create(graph);
                 string ssPath = Paths.SnapshotRes(graph.name);
                 PuzzleSnapshotOneOff.Take(graph, null, ssPath);
-                graph.initialSnapshot = AssetDatabase.LoadAssetAtPath<Texture2D>(Paths.ToAssetPath(ssPath));
 
                 PrefabUtility.ReplacePrefab(go, prefab, ReplacePrefabOptions.ConnectToPrefab);
             }

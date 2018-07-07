@@ -9,8 +9,21 @@ static class Others
     public static void SaveInitialSnapshot(PolyGraph graph)
     {
         string path = Paths.SnapshotRes(graph.name);
+        string saveName = graph.name + Path.GetFileNameWithoutExtension(PuzzleSnapshot.FileName);
+
+        var go = new GameObject(saveName);
+        var holder = go.AddComponent<PuzzleSnapshot.Holder>();
         PuzzleSnapshotOneOff.Take(graph, null, path);
-        graph.initialSnapshot = AssetDatabase.LoadAssetAtPath<Texture2D>(Paths.ToAssetPath(path));
+        holder.texture = AssetDatabase.LoadAssetAtPath<Texture2D>(Paths.ToAssetPath(path));
+
+        string prefabPath = string.Format(
+            "{0}/{1}/{2}.prefab",
+            Paths.AssetResArtworks,
+            graph.name,
+            saveName);
+        UnityEngine.Object prefab = PrefabUtility.CreatePrefab(prefabPath, go);
+        PrefabUtility.ReplacePrefab(go, prefab, ReplacePrefabOptions.ConnectToPrefab);
+        GameObject.DestroyImmediate(go);
     }
 
     [MenuItem("Tools/Others/Clear Saves")]

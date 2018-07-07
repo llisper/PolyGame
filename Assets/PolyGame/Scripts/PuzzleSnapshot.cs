@@ -5,6 +5,11 @@ using System.IO;
 [ExecuteInEditMode]
 public class PuzzleSnapshot : MonoBehaviour
 {
+    public class Holder : MonoBehaviour
+    {
+        public Texture2D texture;
+    }
+
     Camera ssCamera;
     RenderTexture renderTexture;
     Material originMat;

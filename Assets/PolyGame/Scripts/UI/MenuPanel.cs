@@ -43,11 +43,15 @@ public class MenuPanel : Panel
             }
             else
             {
-                // NOTE: can't load the whole puzzle prefab just to find out the snapshot texture reference
-                var prefab = (GameObject)Resources.Load(string.Format("{0}/{1}/{1}", Paths.Artworks, text));
+                var prefab = (GameObject)Resources.Load(string.Format(
+                    "{0}/{1}/{1}{2}",
+                    Paths.Artworks,
+                    text,
+                    Path.GetFileNameWithoutExtension(PuzzleSnapshot.FileName)));
+
                 if (null != prefab)
                 {
-                    snapshot.texture = prefab.GetComponent<PolyGraph>().initialSnapshot;
+                    snapshot.texture = prefab.GetComponent<PuzzleSnapshot.Holder>().texture;
                     snapshot.enabled = true;
                 }
             }
