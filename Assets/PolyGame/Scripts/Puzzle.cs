@@ -44,7 +44,7 @@ public partial class Puzzle : MonoBehaviour
     DebrisMoveContainer debrisMoveContainer;
     Dictionary<GameObject, DebrisInfo> debrisMap = new Dictionary<GameObject, DebrisInfo>();
     List<OutofBoundDebris> outOfBounds = new List<OutofBoundDebris>();
-    MaterialPropertyBlock materialPropertyBlock = new MaterialPropertyBlock();
+    MaterialPropertyBlock materialPropertyBlock;
 
     Material objectMat;
     Material finishedMat;
@@ -69,6 +69,7 @@ public partial class Puzzle : MonoBehaviour
         var go = new GameObject("DebrisMoveContainer");
         go.transform.SetParent(transform, true);
         debrisMoveContainer = go.AddComponent<DebrisMoveContainer>();
+        materialPropertyBlock = new MaterialPropertyBlock();
 
         PuzzleTouch.onObjPicked += OnObjPicked;
         PuzzleTouch.onObjMove += OnObjMove;
