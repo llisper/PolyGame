@@ -51,6 +51,7 @@ static class Others
         GameObject.DestroyImmediate(ui);
     }
 
+    /*
     [MenuItem("Tools/Others/UseSharedMat")]
     static void UseSharedMat()
     {
@@ -83,7 +84,6 @@ static class Others
         AssetDatabase.SaveAssets();
     }
 
-    /*
     [MenuItem("Tools/Others/CompleteInitialSnapshots")]
     static void CompleteInitialSnapshots()
     {

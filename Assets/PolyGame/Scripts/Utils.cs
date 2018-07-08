@@ -43,6 +43,12 @@ public class Utils
         renderer.receiveShadows = false;
         renderer.allowOcclusionWhenDynamic = false;
     }
+
+    public static Bounds CalculateBounds(Vector2 pos, float aspect, float orthographicSize)
+    {
+        Vector2 orthoSize = new Vector2(aspect * orthographicSize, orthographicSize);
+        return new Bounds(pos, orthoSize * 2);
+    }
 }
 
 public class TimeCount : IDisposable

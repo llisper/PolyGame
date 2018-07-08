@@ -6,7 +6,6 @@ public class PuzzleBackground
     {
         var prefab = Resources.Load<GameObject>(Prefabs.Background);
         var go = GameObject.Instantiate(prefab);
-        go.layer = Layers.Debris;
 
         var bounds = backgroundBounds;
         go.transform.localScale = new Vector3(bounds.size.x, bounds.size.y, 1f);

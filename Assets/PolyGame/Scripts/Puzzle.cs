@@ -166,6 +166,7 @@ public partial class Puzzle : MonoBehaviour
     void LoadBackgroundQuad()
     {
         var go = PuzzleBackground.Create(puzzleObject, playgroundBounds);
+        go.layer = Layers.Debris;
         go.transform.SetParent(transform, true);
     }
 
@@ -259,11 +260,9 @@ public partial class Puzzle : MonoBehaviour
     void InitPlaygroundBounds()
     {
         var cam = PuzzleCamera.Main;
-        Vector2 orthoSize = new Vector2(cam.aspect * cam.orthographicSize, cam.orthographicSize);
         Vector2 pos = puzzleObject.size;
         pos = pos / 2f;
-        playgroundBounds = new Bounds(pos, orthoSize * 2);
-        Debug.Log("playgroundBounds: " + playgroundBounds);
+        playgroundBounds = Utils.CalculateBounds(pos, cam.aspect, cam.orthographicSize);
     }
 
     void OnObjMove(Transform objPicked, Vector2 screenCurrent)

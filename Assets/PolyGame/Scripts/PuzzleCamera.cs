@@ -56,9 +56,7 @@ public class PuzzleCamera : MonoBehaviour
 
     void UpdateBounds()
     {
-        Vector2 orthoSize = new Vector2(main.aspect * main.orthographicSize, main.orthographicSize);
-        var pos = main.transform.position;
-        bounds = new Bounds(new Vector3(pos.x, pos.y, 0f), orthoSize * 2);
+        bounds = Utils.CalculateBounds(main.transform.position, main.aspect, main.orthographicSize);
     }
 
     void MoveCamera(Vector3 delta)
