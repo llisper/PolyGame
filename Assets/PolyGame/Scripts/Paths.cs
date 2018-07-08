@@ -7,7 +7,8 @@ public class Paths
     public const string AssetArtworksNoPrefix = "PolyGame/Art/Artworks";
     public const string AssetResArtworks = "Assets/Resources/Artworks";
     public const string AssetResArtworksNoPrefix = "Resources/Artworks";
-    public const string PolyWireframe = "Assets/PolyGame/Art/Materials/PolyWireframe.mat";
+    public const string PolyWireframeMat = "Assets/PolyGame/Art/Materials/PolyWireframe.mat";
+    public const string PolyGraphMat = "Assets/PolyGame/Art/Materials/PolyGraph.mat";
 
     public static string Saves { get { return Application.persistentDataPath + "/Saves"; } }
 

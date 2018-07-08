@@ -9,7 +9,6 @@ public static class Preprocess
     {
         string Name { get; }
         Mesh[] Meshes { get; }
-        Material Material { get; }
         GameObject GameObject { get; }
 
         void Import();
@@ -77,7 +76,6 @@ public static class Preprocess
     static void CreateFolders(string name)
     {
         string parent = string.Format("{0}/{1}", Paths.AssetArtworks, name);
-        AssetDatabase.CreateFolder(parent, "Materials");
         AssetDatabase.CreateFolder(parent, "Meshes");
         AssetDatabase.CreateFolder(Paths.AssetResArtworks, name);
     }
@@ -92,12 +90,6 @@ public static class Preprocess
                 string meshPath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, importer.Name, mesh.name);
                 AssetDatabase.CreateAsset(mesh, meshPath);
             }
-        }
-
-        using (TimeCount.Start("Saving material"))
-        {
-            string matPath = string.Format("{0}/{1}/Materials/{2}.mat", Paths.AssetArtworks, importer.Name, importer.Material.name);
-            AssetDatabase.CreateAsset(importer.Material, matPath);
         }
 
         using (TimeCount.Start("Saving prefab"))

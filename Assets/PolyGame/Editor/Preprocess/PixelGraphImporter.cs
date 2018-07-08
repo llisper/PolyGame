@@ -12,7 +12,6 @@ public class PixelGraphImporter : Preprocess.Importer
 
     public string Name { get { return graph.name; } }
     public Mesh[] Meshes { get; private set; }
-    public Material Material { get; private set; }
     public GameObject GameObject { get { return mainObj; } }
 
     PolyGraph graph;
@@ -134,11 +133,7 @@ public class PixelGraphImporter : Preprocess.Importer
 
     void GenerateMaterial()
     {
-        Material mat = new Material(Shader.Find("PolyGame/PolyS"));
-        mat.name = graph.name;
-        mat.EnableKeyword(ShaderFeatures._USE_VERT_COLOR);
-        Material = mat;
-
+        var mat = AssetDatabase.LoadAssetAtPath<Material>(Paths.PolyGraphMat);
         foreach (var renderer in mainObj.GetComponentsInChildren<MeshRenderer>())
             renderer.sharedMaterial = mat;
     }

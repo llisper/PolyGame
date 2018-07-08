@@ -95,7 +95,7 @@ class WireframeCreator
 
         var renderer = wireframeObject.GetComponent<MeshRenderer>();
         Utils.SetupMeshRenderer(renderer);
-        renderer.sharedMaterial = AssetDatabase.LoadAssetAtPath<Material>(Paths.PolyWireframe);
+        renderer.sharedMaterial = AssetDatabase.LoadAssetAtPath<Material>(Paths.PolyWireframeMat);
 
         string prefabPath = string.Format("{0}/{1}/{2}.prefab", Paths.AssetResArtworks, graph.name, wireframeObject.name);
         UnityEngine.Object prefab = PrefabUtility.CreatePrefab(prefabPath, wireframeObject);
