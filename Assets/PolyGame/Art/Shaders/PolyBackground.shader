@@ -3,9 +3,10 @@
     Properties 
     {
         _Alpha ("Alpha", Float) = 1.0
+		[PerRendererData]
 		_Color ("_Color", Color) = (1, 1, 1, 1)
+		[PerRendererData]
 		_Bounds ("_Bounds", Vector) = (0, 0, 0, 0)
-    
     }
 
     SubShader 

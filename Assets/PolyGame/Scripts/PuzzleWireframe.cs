@@ -8,6 +8,7 @@ public class PuzzleWireframe : MonoBehaviour
 
     void Awake()
     {
+        Renderer = GetComponent<MeshRenderer>();
         mesh = GetComponent<MeshFilter>().sharedMesh;
         colors = mesh.colors;
     }
@@ -16,6 +17,8 @@ public class PuzzleWireframe : MonoBehaviour
     {
         ResetColors();
     }
+
+    public Renderer Renderer { get; private set; }
 
     public void SetColor(Color color, List<Edge> borderEdges)
     {

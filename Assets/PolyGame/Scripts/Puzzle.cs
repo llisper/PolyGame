@@ -44,9 +44,9 @@ public partial class Puzzle : MonoBehaviour
     DebrisMoveContainer debrisMoveContainer;
     Dictionary<GameObject, DebrisInfo> debrisMap = new Dictionary<GameObject, DebrisInfo>();
     List<OutofBoundDebris> outOfBounds = new List<OutofBoundDebris>();
+    MaterialPropertyBlock materialPropertyBlock = new MaterialPropertyBlock();
 
     Material objectMat;
-    Material wireframeMat;
     Material finishedMat;
     Material selectedMat;
 
@@ -82,9 +82,10 @@ public partial class Puzzle : MonoBehaviour
         PuzzleTouch.onObjReleased -= OnObjReleased;
 
         if (null != objectMat)
+        {
+            objectMat.SetColor(propColor, Color.white);
             objectMat.SetFloat(propZWrite, 1f);
-        if (null != wireframeMat)
-            wireframeMat.SetFloat(propAlpha, 1f);
+        }
         if (null != finishedMat)
             Destroy(finishedMat);
         if (null != selectedMat)
@@ -97,8 +98,11 @@ public partial class Puzzle : MonoBehaviour
         if (null != puzzleObject)
         {
             objectMat.SetColor(propColor, Color.Lerp(objectMat.GetColor(propColor), new Color(1f, 1f, 1f, objectAlpha), Time.deltaTime * fadeSpeed));
-            wireframeMat.SetFloat(propAlpha, Mathf.Lerp(wireframeMat.GetFloat(propAlpha), wireframeAlpha, Time.deltaTime * fadeSpeed));
             finishedMat.SetColor(propColor, Color.Lerp(finishedMat.GetColor(propColor), new Color(1f, 1f, 1f, finishedAlpha), Time.deltaTime * fadeSpeed));
+
+            wireframeObject.Renderer.GetPropertyBlock(materialPropertyBlock);
+            materialPropertyBlock.SetFloat(propAlpha, Mathf.Lerp(materialPropertyBlock.GetFloat(propAlpha), wireframeAlpha, Time.deltaTime * fadeSpeed));
+            wireframeObject.Renderer.SetPropertyBlock(materialPropertyBlock);
         }
 
         if (outOfBounds.Count > 0)
@@ -167,7 +171,6 @@ public partial class Puzzle : MonoBehaviour
     void InitMaterials()
     {
         objectMat = puzzleObject.GetComponentInChildren<MeshRenderer>().sharedMaterial;
-        wireframeMat = wireframeObject.GetComponent<MeshRenderer>().sharedMaterial;
         finishedMat = Instantiate(objectMat);
         finishedMat.name = objectMat.name + "Finished";
         selectedMat = Instantiate(objectMat);
@@ -183,7 +186,9 @@ public partial class Puzzle : MonoBehaviour
         selectedMat.SetFloat(propZWrite, 1f);
         finishedMat.SetFloat(propZWrite, 1f);
         finishedMat.SetColor(propColor, new Color(1f, 1f, 1f, finishedAlpha));
-        wireframeMat.SetFloat(propAlpha, wireframeAlpha);
+        wireframeObject.Renderer.GetPropertyBlock(materialPropertyBlock);
+        materialPropertyBlock.SetFloat(propAlpha, wireframeAlpha);
+        wireframeObject.Renderer.SetPropertyBlock(materialPropertyBlock);
     }
 
     void ShowWireframe(bool show)

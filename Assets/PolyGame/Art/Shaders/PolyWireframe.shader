@@ -2,8 +2,8 @@
 {
     Properties 
     {
+		[PerRendererData]
         _Alpha ("Alpha", Float) = 0.0
-    
     }
 
     SubShader 
