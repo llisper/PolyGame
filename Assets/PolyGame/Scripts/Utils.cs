@@ -28,6 +28,20 @@ public class Utils
         return Encoding.UTF8.GetString(utf8Bytes);
     }
 
+    public static byte[] RemoveBOM(byte[] bytes)
+    {
+        byte[] ret = bytes;
+        if (bytes.Length >= 3 &&
+            bytes[0] == 0xef &&
+            bytes[1] == 0xbb &&
+            bytes[2] == 0xbf)
+        {
+            ret = new byte[bytes.Length - 3];
+            Array.Copy(bytes, 3, ret, 0, bytes.Length - 3);
+        }
+        return ret;
+    }
+
     public static void SetupMeshRenderer(GameObject go)
     {
         var renderer = go.GetComponent<MeshRenderer>();
@@ -80,23 +94,6 @@ public class TimeCount : IDisposable
         using (new TimeCount(action.Method.Name))
             action();
     }
-}
-
-public class Config
-{
-    public class ZOrder
-    {
-        public float debrisStart = -0.1f;
-        public float wireframe = -0.01f;
-        public float background = -0.001f;
-    }
-
-    public static ZOrder zorder = new ZOrder();
-    public static float CameraDistance = 1001f;
-    public static Vector2Int SnapshotSize = new Vector2Int(256, 256);
-    public static float wireframeWidth = 0.85f;
-    public static Color wireframeColor = new Color32(200, 200, 200, 255);
-
 }
 
 public class ShaderFeatures

@@ -16,8 +16,8 @@ class WireframeCreator
 
     public static void Create(PolyGraph graph, float? width = null, Color? color = null)
     {
-        float w = width.HasValue ? width.Value : Config.wireframeWidth;
-        Color c = color.HasValue ? color.Value : Config.wireframeColor;
+        float w = width.HasValue ? width.Value : Config.Instance.wireframe.width;
+        Color c = color.HasValue ? color.Value : Config.Instance.wireframe.color;
         if (width <= 0f)
             throw new Exception("Width must greater than 0!");
 

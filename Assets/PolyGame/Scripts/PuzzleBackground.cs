@@ -9,7 +9,7 @@ public class PuzzleBackground
 
         var bounds = backgroundBounds;
         go.transform.localScale = new Vector3(bounds.size.x, bounds.size.y, 1f);
-        go.transform.localPosition = new Vector3(bounds.center.x, bounds.center.y, Config.zorder.background);
+        go.transform.localPosition = new Vector3(bounds.center.x, bounds.center.y, Config.Instance.zorder.background);
 
         var renderer = go.GetComponent<MeshRenderer>();
         MaterialPropertyBlock mpb = new MaterialPropertyBlock();

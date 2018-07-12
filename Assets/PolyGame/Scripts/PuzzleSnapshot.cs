@@ -15,7 +15,7 @@ public class PuzzleSnapshot : MonoBehaviour
 
     void Awake()
     {
-        var size = Config.SnapshotSize;
+        var size = Config.Instance.snapshotSize;
         renderTexture = new RenderTexture(size.x, size.y, 0, RenderTextureFormat.ARGB32);
         renderTexture.antiAliasing = 8;
         renderTexture.name = "PuzzleSnapshotRT";
@@ -72,7 +72,7 @@ public class PuzzleSnapshot : MonoBehaviour
 
             try
             {
-                var size = Config.SnapshotSize;
+                var size = Config.Instance.snapshotSize;
                 Texture2D tex2d = new Texture2D(size.x, size.y, TextureFormat.RGBA32, false);
                 tex2d.ReadPixels(new Rect(0, 0, size.x, size.y), 0, 0);
 

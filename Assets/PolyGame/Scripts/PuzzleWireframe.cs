@@ -29,7 +29,7 @@ public class PuzzleWireframe : MonoBehaviour
     public void ResetColors()
     {
         for (int i = 0; i < colors.Length; ++i)
-            colors[i] = Config.wireframeColor;
+            colors[i] = Config.Instance.wireframe.color;
         mesh.colors = colors;   
     }
 
