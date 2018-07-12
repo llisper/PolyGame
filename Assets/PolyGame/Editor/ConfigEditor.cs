@@ -24,4 +24,10 @@ class ConfigEditor
         AssetDatabase.Refresh();
         Debug.Log("Done!");
     }
+
+    [MenuItem("Tools/Configs/Reload All")]
+    static void ReloadAll()
+    {
+        ConfigLoader.LoadAll();
+    }
 }

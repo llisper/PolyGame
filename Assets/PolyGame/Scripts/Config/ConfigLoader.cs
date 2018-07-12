@@ -13,6 +13,8 @@ public static class ConfigLoader
     public static Type[] types = new Type[]
     {
         typeof(Config),
+        typeof(Category),
+        typeof(I18n),
     };
 
     public static void LoadAll()
@@ -39,12 +41,56 @@ public static class ConfigLoader
 
     public static void Load(Type type)
     {
-        var asset = Resources.Load<TextAsset>(string.Format("{0}/{1}", Paths.Configs, type.Name));
-        string json = Encoding.UTF8.GetString(Utils.RemoveBOM(asset.bytes));
-        var obj = JsonUtility.FromJson(json, type);
-        type.InvokeMember(
-            "Instance",
-             BindingFlags.Public | BindingFlags.Static | BindingFlags.SetField | BindingFlags.FlattenHierarchy,
-             null, null, new object[] { obj });
+        try
+        {
+            string json = LoadJson(type);
+            var obj = JsonUtility.FromJson(json, type);
+
+            type.InvokeMember(
+                "Instance",
+                 BindingFlags.Public | BindingFlags.Static | BindingFlags.SetField | BindingFlags.FlattenHierarchy,
+                 null, null, new object[] { obj });
+
+            var afterLoaded = type.GetMethod(
+                "AfterLoaded",
+                 BindingFlags.NonPublic | BindingFlags.Instance);
+            if (null != afterLoaded)
+                afterLoaded.Invoke(obj, null);
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
+    }
+
+    static string LoadJson(Type type)
+    {
+        byte[] bytes = null;
+        if (type != typeof(I18n))
+        {
+            string path = string.Format("{0}/{1}", Paths.Configs, type.Name);
+            var asset = Resources.Load<TextAsset>(path);
+            if (null != asset)
+                bytes = asset.bytes;
+            else
+                throw new Exception("Failed to load Config: " + type.Name);
+        }
+        else
+        {
+            var lang = Application.systemLanguage;
+            string path = string.Format("{0}/{1}/{2}", Paths.Configs, type.Name, lang);
+            var asset = Resources.Load<TextAsset>(path);
+            if (null == asset && lang != SystemLanguage.English)
+            {
+                lang = SystemLanguage.English;
+                path = string.Format("{0}/{1}/{2}", Paths.Configs, type.Name, lang);
+                asset = Resources.Load<TextAsset>(path);
+            }
+            if (null != asset)
+                bytes = asset.bytes;
+            else
+                throw new Exception(string.Format("Failed to load I18n: {0}, default(English) also failed", Application.systemLanguage));
+        }
+        return Encoding.UTF8.GetString(Utils.RemoveBOM(bytes));
     }
 }
