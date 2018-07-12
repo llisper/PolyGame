@@ -72,7 +72,7 @@ public class PuzzleSnapshot : MonoBehaviour
             try
             {
                 var size = Config.Instance.snapshotSize;
-                Texture2D tex2d = new Texture2D(size.x, size.y, TextureFormat.RGBA32, false);
+                Texture2D tex2d = new Texture2D(size.x, size.y, TextureFormat.RGB24, false);
                 tex2d.ReadPixels(new Rect(0, 0, size.x, size.y), 0, 0);
 
                 byte[] bytes = tex2d.EncodeToPNG();
@@ -118,6 +118,7 @@ public class PuzzleSnapshot : MonoBehaviour
             }
         }
         PuzzleCamera.SetupCamera(ssCamera, graph.size, Config.Instance.camera.sizeExtendScale);
+        InitBackground();
     }
 
     void InitMaterial(Material mat)
@@ -145,7 +146,7 @@ public class PuzzleSnapshot : MonoBehaviour
         var mat = Application.isPlaying ? renderer.material : renderer.sharedMaterial;
         mat.EnableKeyword(ShaderFeatures._USE_CIRCLE_ALPHA);
         if (!Application.isPlaying)
-            mat.SetColor("_Color", Color.grey);
+            mat.SetColor("_Color", new Color32(140, 140, 140, 255));
     }
 
     void Clear()
