@@ -1,0 +1,44 @@
+﻿{
+    "groups": [
+        {
+            "name": "0001",
+            "themeColor": "000000",
+            "items": [
+                {
+                    "name": "Animal005",
+                    "bgColor": "7680a7"
+                },
+                {
+                    "name": "Animal006",
+                    "bgColor": "a8927f"
+                },
+                {
+                    "name": "Animal007",
+                    "bgColor": "449dad"
+                }
+            ]
+        },
+        {
+            "name": "0002",
+            "themeColor": "000000",
+            "items": [
+                {
+                    "name": "food002",
+                    "bgColor": "79a027"
+                },
+                {
+                    "name": "food003",
+                    "bgColor": "937364"
+                },
+                {
+                    "name": "food004",
+                    "bgColor": "98a05d"
+                },
+                {
+                    "name": "food005",
+                    "bgColor": "f0da99"
+                }
+            ]
+        }
+    ]
+}

@@ -1,11 +1,18 @@
 using UnityEngine;
 using System;
 using System.IO;
+using System.Text;
 using System.Collections;
 
 public partial class Puzzle
 {
-    const int saveVersion = 1;
+    const string Filename = "Progress.json";
+
+    [Serializable]
+    class Progress
+    {
+        public string finished;
+    }
 
     string ProgressFolder()
     {
@@ -23,15 +30,13 @@ public partial class Puzzle
             byte[] finishedBytes = new byte[Mathf.CeilToInt(finished.Length / 8f)];
             bitArray.CopyTo(finishedBytes, 0);
 
-            using (var stream = new FileStream(folder + "Save", FileMode.Create, FileAccess.Write))
-            {
-                using (var writer = new BinaryWriter(stream))
-                {
-                    writer.Write(saveVersion);
-                    writer.Write(finishedBytes.Length);
-                    writer.Write(finishedBytes);
-                }
-            }
+            Progress p = new Progress();
+            p.finished = Convert.ToBase64String(finishedBytes);
+
+            File.WriteAllText(
+                folder + Filename,
+                JsonUtility.ToJson(p, true), 
+                Encoding.UTF8);
         }
         catch (Exception e)
         {
@@ -45,30 +50,18 @@ public partial class Puzzle
         try
         {
             finished = new bool[puzzleObject.transform.childCount];
-            string path = ProgressFolder() + "Save";
+            string path = ProgressFolder() + Filename;
             if (File.Exists(path))
             {
-                using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                string json = File.ReadAllText(path, Encoding.UTF8);
+                Progress p = JsonUtility.FromJson<Progress>(json);
+                if (null != p)
                 {
-                    using (var reader = new BinaryReader(stream))
-                    {
-                        int version = reader.ReadInt32();
-                        if (version != saveVersion)
-                        {
-                            Debug.LogFormat(
-                                "[{0}]: Save version not match, save({1}) != current({2})",
-                                puzzleName, version, saveVersion);
-                            return;
-                        }
-                        int len = reader.ReadInt32();
-                        byte[] finishedBytes = reader.ReadBytes(len);
-
-                        var bitArray = new BitArray(finishedBytes);
-                        bool[] loadFinished = new bool[bitArray.Count];
-                        bitArray.CopyTo(loadFinished, 0);
-                        Array.Copy(loadFinished, finished, finished.Length);
-
-                    }
+                    byte[] bytes = Convert.FromBase64String(p.finished);
+                    var bitArray = new BitArray(bytes);
+                    bool[] loadFinished = new bool[bitArray.Count];
+                    bitArray.CopyTo(loadFinished, 0);
+                    Array.Copy(loadFinished, finished, finished.Length);
                 }
             }
         }

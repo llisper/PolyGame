@@ -19,6 +19,7 @@
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag   
+            #pragma shader_feature _USE_CIRCLE_ALPHA
 
             #include "UnityCG.cginc"
 
@@ -75,8 +76,11 @@
 
             float4 frag (fdata i) : SV_TARGET 
             {
-                // float a = circleAlpha(i);
+                #if defined (_USE_CIRCLE_ALPHA)
+                float a = circleAlpha(i);
+                #else
                 float a = ellipseAlpha(i);
+                #endif
 				return float4(_Color, a);
             }
             ENDCG

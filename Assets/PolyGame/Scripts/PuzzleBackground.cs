@@ -14,14 +14,23 @@ public class PuzzleBackground
         var renderer = go.GetComponent<MeshRenderer>();
         MaterialPropertyBlock mpb = new MaterialPropertyBlock();
         renderer.GetPropertyBlock(mpb);
-        mpb.SetColor("_Color", AvarageColor(graph));
+        mpb.SetColor("_Color", BackgroundColor(graph));
         mpb.SetVector("_Bounds", new Vector4(bounds.extents.x, bounds.extents.y));
         renderer.SetPropertyBlock(mpb);
 
         return go;
     }
+
+    static Color BackgroundColor(PolyGraph graph)
+    {
+        ArtCollection.Item item;
+        if (ArtCollection.Instance.itemMap.TryGetValue(graph.name, out item))
+            return Utils.ColorFromString(item.bgColor);
+        else
+            return AvarageColor(graph);
+    }
     
-    static Color AvarageColor(PolyGraph graph)
+    public static Color AvarageColor(PolyGraph graph)
     {
         Vector4 c = Vector4.zero;
         int count = 0;

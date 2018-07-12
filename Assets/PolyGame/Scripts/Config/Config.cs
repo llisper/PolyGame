@@ -37,7 +37,7 @@ public class Config : IConfig<Config>
     public class Wireframe
     {
         public float width = 0.85f;
-        public Color32 color = new Color32(200, 200, 200, 255);
+        public string color = "c8c8c8";
     }
 
     public ZOrder zorder = new ZOrder();

@@ -13,7 +13,7 @@ public static class ConfigLoader
     public static Type[] types = new Type[]
     {
         typeof(Config),
-        typeof(Category),
+        typeof(ArtCollection),
         typeof(I18n),
     };
 

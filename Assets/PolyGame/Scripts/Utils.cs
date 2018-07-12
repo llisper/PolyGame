@@ -42,6 +42,26 @@ public class Utils
         return ret;
     }
 
+    public static string ColorToString(Color color)
+    {
+        Color32 c32 = color;
+        if (c32.a != 255)
+            return string.Format("{0:x2}{1:x2}{2:x2}{3:x2}", c32.r, c32.g, c32.b, c32.a);
+        else
+            return string.Format("{0:x2}{1:x2}{2:x2}", c32.r, c32.g, c32.b);
+    }
+
+    public static Color ColorFromString(string str)
+    {
+        if (string.IsNullOrEmpty(str))
+            return Color.black;
+
+        byte[] c = new byte[4] { 0, 0, 0, 255 };
+        for (int i = 0; i < str.Length - 1; i += 2)
+            c[i / 2] = Convert.ToByte(str.Substring(i, 2), 16);
+        return new Color32(c[0], c[1], c[2], c[3]);
+    }
+
     public static void SetupMeshRenderer(GameObject go)
     {
         var renderer = go.GetComponent<MeshRenderer>();
@@ -100,6 +120,7 @@ public class ShaderFeatures
 {
     public const string _USE_VERT_COLOR = "_USE_VERT_COLOR";
     public const string _GREYSCALE = "_GREYSCALE";
+    public const string _USE_CIRCLE_ALPHA = "_USE_CIRCLE_ALPHA";
 }
 
 public class Prefabs
