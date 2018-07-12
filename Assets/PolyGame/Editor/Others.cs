@@ -51,6 +51,14 @@ static class Others
         GameObject.DestroyImmediate(ui);
     }
 
+    [MenuItem("Tools/Others/Set Snapshot Env")]
+    static void SetSnapshotEnv()
+    {
+        var go = new GameObject("PuzzleSnapshot");
+        var snapshot = go.AddComponent<PuzzleSnapshot>();
+        snapshot.Init("Animal005");
+    }
+
     /*
     [MenuItem("Tools/Others/UseSharedMat")]
     static void UseSharedMat()

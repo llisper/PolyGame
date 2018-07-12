@@ -12,11 +12,9 @@ public class PuzzleBackground
         go.transform.localPosition = new Vector3(bounds.center.x, bounds.center.y, Config.Instance.zorder.background);
 
         var renderer = go.GetComponent<MeshRenderer>();
-        MaterialPropertyBlock mpb = new MaterialPropertyBlock();
-        renderer.GetPropertyBlock(mpb);
-        mpb.SetColor("_Color", BackgroundColor(graph));
-        mpb.SetVector("_Bounds", new Vector4(bounds.extents.x, bounds.extents.y));
-        renderer.SetPropertyBlock(mpb);
+        var mat = renderer.material;
+        mat.SetColor("_Color", BackgroundColor(graph));
+        mat.SetVector("_Bounds", new Vector4(bounds.extents.x, bounds.extents.y));
 
         return go;
     }
