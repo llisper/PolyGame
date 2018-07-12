@@ -15,7 +15,7 @@ public class PuzzleBackground
         MaterialPropertyBlock mpb = new MaterialPropertyBlock();
         renderer.GetPropertyBlock(mpb);
         mpb.SetColor("_Color", AvarageColor(graph));
-        mpb.SetVector("_Bounds", new Vector4(bounds.center.x, bounds.center.y, bounds.extents.x, bounds.extents.y));
+        mpb.SetVector("_Bounds", new Vector4(bounds.extents.x, bounds.extents.y));
         renderer.SetPropertyBlock(mpb);
 
         return go;
