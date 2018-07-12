@@ -15,12 +15,22 @@ public class I18n : IConfig<I18n>
 
     const string ErrorValue = "##ERROR##";
 
+    public static bool Exists(string key)
+    {
+        if (null == Instance || null == Instance.query)
+        {
+            Debug.LogError("I18n has not been initialized!");
+            return false;
+        }
+        return Instance.query.ContainsKey(key);
+    }
+
     public static string Get(string key)
     {
         if (null == Instance || null == Instance.query)
         {
             Debug.LogError("I18n has not been initialized!");
-            return ErrorValue ;
+            return ErrorValue;
         }
 
         string value;

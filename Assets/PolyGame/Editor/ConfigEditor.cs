@@ -4,8 +4,14 @@ using System;
 using System.IO;
 using System.Text;
 
-class ConfigEditor
+[InitializeOnLoad]
+static class ConfigEditor
 {
+    static ConfigEditor()
+    {
+        ConfigLoader.LoadAll();
+    }
+
     [MenuItem("Tools/Configs/Generate Default Configs")]
     static void GenerateDefaultConfigs()
     {
