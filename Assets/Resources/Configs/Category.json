@@ -1,13 +1,8 @@
-﻿{
+{
     "catInfos": [
         {
             "name": "0001",
-            "themeColor": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 255
-            },
+            "themeColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
             "items": [
                 "Animal005",
                 "Animal006",
@@ -16,12 +11,7 @@
         },
         {
             "name": "0002",
-            "themeColor": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 255
-            },
+            "themeColor": { "r": 0, "g": 0, "b": 0, "a": 255 },
             "items": [
                 "food002",
                 "food003",
