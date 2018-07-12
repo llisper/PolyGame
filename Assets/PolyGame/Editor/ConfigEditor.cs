@@ -57,5 +57,6 @@ static class ConfigEditor
     static void ReloadAll()
     {
         ConfigLoader.LoadAll();
+        Debug.Log("Done!");
     }
 }

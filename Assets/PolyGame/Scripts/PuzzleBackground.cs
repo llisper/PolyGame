@@ -12,7 +12,16 @@ public class PuzzleBackground
         go.transform.localPosition = new Vector3(bounds.center.x, bounds.center.y, Config.Instance.zorder.background);
 
         var renderer = go.GetComponent<MeshRenderer>();
-        var mat = renderer.material;
+        Material mat;
+        if (Application.isPlaying)
+        {
+            mat = renderer.material;
+        }
+        else
+        {
+            mat = GameObject.Instantiate(renderer.sharedMaterial);
+            renderer.sharedMaterial = mat;
+        }
         mat.SetColor("_Color", BackgroundColor(graph));
         mat.SetVector("_Bounds", new Vector4(bounds.extents.x, bounds.extents.y));
 

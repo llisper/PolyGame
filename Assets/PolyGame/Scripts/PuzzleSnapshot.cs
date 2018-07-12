@@ -9,7 +9,8 @@ public class PuzzleSnapshot : MonoBehaviour
     RenderTexture renderTexture;
     Material originMat;
     Material greyscaleMat;
-    PolyGraph puzzleObject;
+    PolyGraph graph;
+    GameObject backgroundObject;
 
     string puzzleName;
 
@@ -25,6 +26,7 @@ public class PuzzleSnapshot : MonoBehaviour
         ssCamera = camGo.GetComponent<Camera>();
         ssCamera.cullingMask = (1 << Layers.Snapshot);
         ssCamera.targetTexture = renderTexture;
+        ssCamera.backgroundColor = Color.white;
         camGo.SetActive(false);
     }
 
@@ -32,10 +34,7 @@ public class PuzzleSnapshot : MonoBehaviour
     {
         ssCamera.targetTexture = null;
         Utils.Destroy(renderTexture);
-        if (null != originMat)
-            Utils.Destroy(originMat);
-        if (null != greyscaleMat)
-            Utils.Destroy(greyscaleMat);
+        Clear();
     }
 
     public void Init(string puzzleName, bool[] finished = null)
@@ -54,7 +53,7 @@ public class PuzzleSnapshot : MonoBehaviour
 
     public void OnFinish(int index)
     {
-        var child = puzzleObject.transform.GetChild(index);
+        var child = graph.transform.GetChild(index);
         var renderer = child.GetComponent<MeshRenderer>();
         if (null != renderer)
             renderer.sharedMaterial = originMat;
@@ -64,7 +63,7 @@ public class PuzzleSnapshot : MonoBehaviour
 
     public void Take(string path = null, bool destroy = true)
     {
-        if (null != puzzleObject)
+        if (null != graph)
         {
             var currentRT = RenderTexture.active;
             RenderTexture.active = renderTexture; 
@@ -95,18 +94,19 @@ public class PuzzleSnapshot : MonoBehaviour
         }
     }
 
-    void InternalInit(PolyGraph puzzleObject, bool[] finished)
+    void InternalInit(PolyGraph graph, bool[] finished)
     {
-        if (null != this.puzzleObject)
-            Utils.Destroy(this.puzzleObject);
-        this.puzzleObject = puzzleObject;
-        var renderer = puzzleObject.GetComponentInChildren<MeshRenderer>();
+        Clear();
+
+        this.graph = graph;
+        graph.transform.localPosition = new Vector3(0f, 0f, Config.Instance.zorder.debrisStart);
+        var renderer = graph.GetComponentInChildren<MeshRenderer>();
         if (null != renderer)
             InitMaterial(renderer.sharedMaterial);
 
-        for (int i = 0; i < puzzleObject.transform.childCount; ++i)
+        for (int i = 0; i < graph.transform.childCount; ++i)
         {
-            var child = puzzleObject.transform.GetChild(i);
+            var child = graph.transform.GetChild(i);
             child.gameObject.layer = Layers.Snapshot;
             renderer = child.GetComponent<MeshRenderer>();
             if (null != renderer)
@@ -117,11 +117,56 @@ public class PuzzleSnapshot : MonoBehaviour
                     renderer.sharedMaterial = originMat;
             }
         }
-        PuzzleCamera.SetupCamera(ssCamera, puzzleObject.size);
+        PuzzleCamera.SetupCamera(ssCamera, graph.size, Config.Instance.camera.sizeExtendScale);
     }
 
     void InitMaterial(Material mat)
     {
+        if (null != mat)
+        {
+            originMat = Instantiate(mat);
+            originMat.name = mat.name;
+
+            greyscaleMat = Instantiate(mat);
+            greyscaleMat.name = mat.name + "Greyscale";
+            greyscaleMat.EnableKeyword(ShaderFeatures._GREYSCALE);
+        }
+    }
+
+    void InitBackground()
+    {
+        Vector2 pos = graph.size;
+        pos = pos / 2f;
+        var bounds = Utils.CalculateBounds(pos, ssCamera.aspect, ssCamera.orthographicSize);
+        backgroundObject = PuzzleBackground.Create(graph, bounds);
+        backgroundObject.layer = Layers.Snapshot;
+        backgroundObject.transform.SetParent(transform, true);
+        var renderer = backgroundObject.GetComponent<MeshRenderer>();
+        var mat = Application.isPlaying ? renderer.material : renderer.sharedMaterial;
+        mat.EnableKeyword(ShaderFeatures._USE_CIRCLE_ALPHA);
+        if (!Application.isPlaying)
+            mat.SetColor("_Color", Color.grey);
+    }
+
+    void Clear()
+    {
+        if (null != graph)
+        {
+            Utils.Destroy(graph);
+            graph = null;
+        }
+
+        if (null != backgroundObject)
+        {
+            var renderer = backgroundObject.GetComponent<MeshRenderer>();
+            if (Application.isPlaying)
+                Utils.Destroy(renderer.material);
+            else
+                Utils.Destroy(renderer.sharedMaterial);
+            Utils.Destroy(backgroundObject);
+            backgroundObject = null;
+        }
+
         if (null != originMat)
         {
             Utils.Destroy(originMat);
@@ -132,16 +177,6 @@ public class PuzzleSnapshot : MonoBehaviour
         {
             Utils.Destroy(greyscaleMat);
             greyscaleMat = null;
-        }
-
-        if (null != mat)
-        {
-            originMat = Instantiate(mat);
-            originMat.name = mat.name;
-
-            greyscaleMat = Instantiate(mat);
-            greyscaleMat.name = mat.name + "Greyscale";
-            greyscaleMat.EnableKeyword(ShaderFeatures._GREYSCALE);
         }
     }
 }
