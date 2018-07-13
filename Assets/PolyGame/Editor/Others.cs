@@ -51,6 +51,31 @@ static class Others
         GameObject.DestroyImmediate(ui);
     }
 
+    [MenuItem("Tools/Others/Set Snapshot Env")]
+    static void SetSnapshotEnv()
+    {
+        var go = new GameObject("PuzzleSnapshot");
+        var snapshot = go.AddComponent<PuzzleSnapshot>();
+        snapshot.Init("Animal005");
+    }
+
+    [MenuItem("Tools/Others/Generate Initial Snapshots")]
+    static void GenerateInitialSnapshots()
+    {
+        string[] dirs = Directory.GetDirectories(Application.dataPath + '/' + Paths.AssetResArtworksNoPrefix);
+        string[] names = Array.ConvertAll(dirs, v => Path.GetFileName(v));
+        for (int i = 0; i < names.Length; ++i)
+        {
+            EditorUtility.DisplayProgressBar("GenerateInitialSnapshots", names[i], (float)i / names.Length);
+            string graphPath = string.Format("{0}/{1}/{1}.prefab", Paths.AssetResArtworks, names[i]);
+            var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(graphPath);
+            Others.SaveInitialSnapshot(prefab.GetComponent<PolyGraph>());
+        }
+        EditorUtility.ClearProgressBar();
+        AssetDatabase.Refresh();
+    }
+
+
     /*
     [MenuItem("Tools/Others/UseSharedMat")]
     static void UseSharedMat()
@@ -82,22 +107,6 @@ static class Others
             }
         }
         AssetDatabase.SaveAssets();
-    }
-
-    [MenuItem("Tools/Others/CompleteInitialSnapshots")]
-    static void CompleteInitialSnapshots()
-    {
-        string[] dirs = Directory.GetDirectories(Application.dataPath + '/' + Paths.AssetResArtworksNoPrefix);
-        string[] names = Array.ConvertAll(dirs, v => Path.GetFileName(v));
-        for (int i = 0; i < names.Length; ++i)
-        {
-            EditorUtility.DisplayProgressBar("CompleteInitialSnapshots", names[i], (float)i / names.Length);
-            string graphPath = string.Format("{0}/{1}/{1}.prefab", Paths.AssetResArtworks, names[i]);
-            var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(graphPath);
-            Others.SaveInitialSnapshot(prefab.GetComponent<PolyGraph>());
-        }
-        EditorUtility.ClearProgressBar();
-        AssetDatabase.Refresh();
     }
 
     [MenuItem("Tools/Others/RecalculateSize")]

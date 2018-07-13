@@ -16,11 +16,11 @@ public partial class Puzzle : MonoBehaviour
 
     public static Puzzle Current;
 
-    const float ScrambleRadius = 150f;
-    const float moveSpeed = 30f;
-    const float fadeSpeed = 15f;
-    const float fitThreshold = 50f;
-    const float finishDebrisMoveSpeed = 10f;
+    float scrambleRadius { get { return Config.Instance.puzzle.scrambleRadius; } }
+    float moveSpeed { get { return Config.Instance.puzzle.moveSpeed; } }
+    float fadeSpeed { get { return Config.Instance.puzzle.fadeSpeed; } }
+    float fitThreshold { get { return Config.Instance.puzzle.fitThreshold; } }
+    float finishDebrisMoveSpeed { get { return Config.Instance.puzzle.finishDebrisMoveSpeed; } }
     
     string puzzleName;
     bool[] finished;
@@ -158,7 +158,7 @@ public partial class Puzzle : MonoBehaviour
     {
         var prefab = Resources.Load(string.Format("{0}/{1}/{1}Wireframe", Paths.Artworks, puzzleName));
         var go = (GameObject)Instantiate(prefab, transform);
-        go.transform.position = new Vector3(0f, 0f, Config.zorder.wireframe);
+        go.transform.position = new Vector3(0f, 0f, Config.Instance.zorder.wireframe);
         go.name = prefab.name;
         wireframeObject = go.GetComponent<PuzzleWireframe>();
     }
@@ -213,13 +213,13 @@ public partial class Puzzle : MonoBehaviour
 
     Vector3 ArrangeDepth(int i, Vector3 pos)
     {
-        pos.z = (i + 1) * Config.zorder.debrisStart;
+        pos.z = (i + 1) * Config.Instance.zorder.debrisStart;
         return pos;
     }
 
     void Scramble()
     {
-        float radius = Mathf.Min(ScrambleRadius, playgroundBounds.extents.x, playgroundBounds.extents.y);
+        float radius = Mathf.Min(scrambleRadius, playgroundBounds.extents.x, playgroundBounds.extents.y);
         Vector3 min = playgroundBounds.min + new Vector3(radius, radius);
         Vector3 max = playgroundBounds.max - new Vector3(radius, radius);
         for (int i = 0; i < puzzleObject.transform.childCount; ++i)

@@ -5,11 +5,11 @@ public class PuzzleCamera : MonoBehaviour
     public static PuzzleCamera Instance;
     public static Camera Main { get { return null != Instance ? Instance.main : null; } }
 
-    const float sizeExtendScale = 1.5f;
-    const float minRangeScale = 3f; 
-    const float cameraMoveSpeed = 2f;
-    const float zoomScale = 125f;
-    const float followObjMoveDistance = 5f;
+    float sizeExtendScale { get { return Config.Instance.camera.sizeExtendScale; } }
+    float minRangeScale { get { return Config.Instance.camera.minRangeScale; } }
+    float cameraMoveSpeed { get { return Config.Instance.camera.moveSpeed; } }
+    float zoomScale { get { return Config.Instance.camera.zoomScale; } }
+    float followObjMoveDistance { get { return Config.Instance.camera.followObjMoveDistance; } }
 
     public Camera main;
     Bounds bounds;

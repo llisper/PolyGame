@@ -28,6 +28,40 @@ public class Utils
         return Encoding.UTF8.GetString(utf8Bytes);
     }
 
+    public static byte[] RemoveBOM(byte[] bytes)
+    {
+        byte[] ret = bytes;
+        if (bytes.Length >= 3 &&
+            bytes[0] == 0xef &&
+            bytes[1] == 0xbb &&
+            bytes[2] == 0xbf)
+        {
+            ret = new byte[bytes.Length - 3];
+            Array.Copy(bytes, 3, ret, 0, bytes.Length - 3);
+        }
+        return ret;
+    }
+
+    public static string ColorToString(Color color)
+    {
+        Color32 c32 = color;
+        if (c32.a != 255)
+            return string.Format("{0:x2}{1:x2}{2:x2}{3:x2}", c32.r, c32.g, c32.b, c32.a);
+        else
+            return string.Format("{0:x2}{1:x2}{2:x2}", c32.r, c32.g, c32.b);
+    }
+
+    public static Color ColorFromString(string str)
+    {
+        if (string.IsNullOrEmpty(str))
+            return Color.black;
+
+        byte[] c = new byte[4] { 0, 0, 0, 255 };
+        for (int i = 0; i < str.Length - 1; i += 2)
+            c[i / 2] = Convert.ToByte(str.Substring(i, 2), 16);
+        return new Color32(c[0], c[1], c[2], c[3]);
+    }
+
     public static void SetupMeshRenderer(GameObject go)
     {
         var renderer = go.GetComponent<MeshRenderer>();
@@ -82,27 +116,11 @@ public class TimeCount : IDisposable
     }
 }
 
-public class Config
-{
-    public class ZOrder
-    {
-        public float debrisStart = -0.1f;
-        public float wireframe = -0.01f;
-        public float background = -0.001f;
-    }
-
-    public static ZOrder zorder = new ZOrder();
-    public static float CameraDistance = 1001f;
-    public static Vector2Int SnapshotSize = new Vector2Int(256, 256);
-    public static float wireframeWidth = 0.85f;
-    public static Color wireframeColor = new Color32(200, 200, 200, 255);
-
-}
-
 public class ShaderFeatures
 {
     public const string _USE_VERT_COLOR = "_USE_VERT_COLOR";
     public const string _GREYSCALE = "_GREYSCALE";
+    public const string _USE_CIRCLE_ALPHA = "_USE_CIRCLE_ALPHA";
 }
 
 public class Prefabs

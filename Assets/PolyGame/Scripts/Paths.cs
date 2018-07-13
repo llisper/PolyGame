@@ -3,6 +3,7 @@
 public class Paths
 {
     public const string Artworks = "Artworks";
+    public const string Configs = "Configs";
     public const string AssetArtworks = "Assets/PolyGame/Art/Artworks";
     public const string AssetArtworksNoPrefix = "PolyGame/Art/Artworks";
     public const string AssetResArtworks = "Assets/Resources/Artworks";

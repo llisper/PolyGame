@@ -56,6 +56,10 @@ public class GameScene
 
         while (!sceneChangedFlag)
             yield return null;
+
+        Resources.UnloadUnusedAssets();
+        GC.Collect();
+
         yield return ScreenOverlay.Fade(true);
     }
 

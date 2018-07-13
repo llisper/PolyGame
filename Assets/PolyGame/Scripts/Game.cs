@@ -15,6 +15,7 @@ public class Game : MonoBehaviour
 
     void Start()
     {
+        ConfigLoader.LoadAll();
         UI.Init();
         GameScene.Init();
 	}

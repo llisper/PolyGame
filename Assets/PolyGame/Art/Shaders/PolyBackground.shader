@@ -3,9 +3,7 @@
     Properties 
     {
         _Alpha ("Alpha", Float) = 1.0
-		[PerRendererData]
 		_Color ("_Color", Color) = (1, 1, 1, 1)
-		[PerRendererData]
 		_Bounds ("_Bounds", Vector) = (0, 0, 0, 0)
     }
 
@@ -19,6 +17,7 @@
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag   
+            #pragma shader_feature _USE_CIRCLE_ALPHA
 
             #include "UnityCG.cginc"
 
@@ -35,22 +34,23 @@
             {
                 float4 position : SV_POSITION;
 				float2 worldPos : TEXCOORD0;
+				float2 worldOrigin : TEXCOORD1;
             };
 
-            float circleAlpha(float2 worldPos)
+            float circleAlpha(fdata i)
             {
-                float r = max(_Bounds.z, _Bounds.w);
-                float2 v = worldPos - _Bounds.xy;
+                float r = max(_Bounds.x, _Bounds.y);
+                float2 v = i.worldPos - i.worldOrigin;
                 return min(1.0, sqrt(dot(v, v)) / r) * _Alpha;
             } 
 
-            float ellipseAlpha(float2 worldPos)
+            float ellipseAlpha(fdata i)
             {
-                float2 v = worldPos - _Bounds.xy;
+                float2 v = i.worldPos - i.worldOrigin;
                 float k = v.y / v.x;
                 float k2 = k * k;
-                float a2 = _Bounds.z * _Bounds.z;
-                float b2 = _Bounds.w * _Bounds.w;
+                float a2 = _Bounds.x * _Bounds.x;
+                float b2 = _Bounds.y * _Bounds.y;
 
 				// find points cross with ellipse by vector v
 				// v: y = kx
@@ -68,13 +68,17 @@
                 fdata i;
                 i.position = UnityObjectToClipPos(v.position);
 				i.worldPos = mul(unity_ObjectToWorld, v.position).xy;
+                i.worldOrigin = mul(unity_ObjectToWorld, float4(0, 0, 0, 1)).xy;
                 return i;
             }
 
             float4 frag (fdata i) : SV_TARGET 
             {
-                // float a = circleAlpha(i.worldPos);
-                float a = ellipseAlpha(i.worldPos);
+                #if defined (_USE_CIRCLE_ALPHA)
+                float a = circleAlpha(i);
+                #else
+                float a = ellipseAlpha(i);
+                #endif
 				return float4(_Color, a);
             }
             ENDCG
