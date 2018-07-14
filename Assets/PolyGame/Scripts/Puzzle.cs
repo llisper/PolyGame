@@ -321,7 +321,9 @@ public partial class Puzzle : MonoBehaviour
                 finished[di.index] = true;
                 targetRenderer.sharedMaterial = finishedMat;
                 targetCollider.enabled = false;
-                StartCoroutine(FinishDebrisAnimation(target, di.position));
+                var finishPosition = (Vector3)di.position;
+                finishPosition.z = target.localPosition.z;
+                StartCoroutine(FinishDebrisAnimation(target, finishPosition));
                 return;
             }
 
