@@ -61,8 +61,7 @@ public static class Preprocess
     static void Clear(string name)
     {
         string parent = string.Format("{0}/{1}/", Paths.AssetArtworks, name);
-        DeleteFolder(parent + "Materials");
-        DeleteFolder(parent + "Meshes");
+        DeleteFolder(parent + "meshes");
         DeleteFolder(Paths.AssetResArtworks + '/' + name);
         AssetDatabase.Refresh();
     }
@@ -76,7 +75,7 @@ public static class Preprocess
     static void CreateFolders(string name)
     {
         string parent = string.Format("{0}/{1}", Paths.AssetArtworks, name);
-        AssetDatabase.CreateFolder(parent, "Meshes");
+        AssetDatabase.CreateFolder(parent, "meshes");
         AssetDatabase.CreateFolder(Paths.AssetResArtworks, name);
     }
 
@@ -87,7 +86,7 @@ public static class Preprocess
             foreach (var mesh in importer.Meshes)
             {
                 MeshUtility.Optimize(mesh);
-                string meshPath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, importer.Name, mesh.name);
+                string meshPath = string.Format("{0}/{1}/meshes/{2}.prefab", Paths.AssetArtworks, importer.Name, mesh.name);
                 AssetDatabase.CreateAsset(mesh, meshPath);
             }
         }

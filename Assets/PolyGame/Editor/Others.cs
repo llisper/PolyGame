@@ -9,7 +9,7 @@ static class Others
     public static void SaveInitialSnapshot(PolyGraph graph)
     {
         string path = Paths.SnapshotRes(graph.name);
-        string saveName = graph.name + Path.GetFileNameWithoutExtension(PuzzleSnapshot.FileName);
+        string saveName = graph.name + '_' + Path.GetFileNameWithoutExtension(PuzzleSnapshot.FileName);
 
         var go = new GameObject(saveName);
         var holder = go.AddComponent<PuzzleSnapshotHolder>();
@@ -51,14 +51,6 @@ static class Others
         GameObject.DestroyImmediate(ui);
     }
 
-    [MenuItem("Tools/Others/Set Snapshot Env")]
-    static void SetSnapshotEnv()
-    {
-        var go = new GameObject("PuzzleSnapshot");
-        var snapshot = go.AddComponent<PuzzleSnapshot>();
-        snapshot.Init("Animal005");
-    }
-
     [MenuItem("Tools/Others/Generate Initial Snapshots")]
     static void GenerateInitialSnapshots()
     {
@@ -75,8 +67,91 @@ static class Others
         AssetDatabase.Refresh();
     }
 
+    [MenuItem("Tools/Others/Rename Assets")]
+    static void RenameAssets()
+    {
+        try
+        {
+            string artPath = Application.dataPath + '/' + Paths.AssetArtworksNoPrefix;
+            string[] dirs = Directory.GetDirectories(artPath);
+            for (int i = 0; i < dirs.Length; ++i)
+            {
+                string dir = dirs[i];
+                string dirname = Path.GetFileName(dir);
+
+                EditorUtility.DisplayProgressBar("Rename Art Assets", "(Meshes folder)" + dirname, (float)i / dirs.Length);
+                AssetDatabase.RenameAsset(
+                    string.Format("{0}/{1}/Meshes", Paths.AssetArtworks, dirname),
+                    "meshes");
+
+                EditorUtility.DisplayProgressBar("Rename Art Assets", "(Wireframe mesh)" + dirname, (float)i / dirs.Length);
+                AssetDatabase.RenameAsset(
+                    string.Format("{0}/{1}/meshes/{1}Wireframe.prefab", Paths.AssetArtworks, dirname),
+                    string.Format("{0}_wireframe.prefab", dirname.ToLower()));
+
+                EditorUtility.DisplayProgressBar("Rename Art Assets", "(Snapshot)" + dirname, (float)i / dirs.Length);
+                AssetDatabase.RenameAsset(
+                    string.Format("{0}/{1}/Snapshot.png", Paths.AssetArtworks, dirname),
+                    "snapshot.png");
+
+                EditorUtility.DisplayProgressBar("Rename Art Assets", dirname, (float)i / dirs.Length);
+                AssetDatabase.RenameAsset(
+                    string.Format("{0}/{1}", Paths.AssetArtworks, dirname),
+                    dirname.ToLower());
+
+            }
+
+            string prefabPath = Application.dataPath + '/' + Paths.AssetResArtworksNoPrefix;
+            dirs = Directory.GetDirectories(prefabPath);
+            for (int i = 0; i < dirs.Length; ++i)
+            {
+                string dir = dirs[i];
+                string dirname = Path.GetFileName(dir);
+
+                EditorUtility.DisplayProgressBar("Rename Prefab Assets", dirname, (float)i / dirs.Length);
+                AssetDatabase.RenameAsset(
+                    string.Format("{0}/{1}/{1}.prefab", Paths.AssetResArtworks, dirname),
+                    string.Format("{0}.prefab", dirname.ToLower()));
+
+                AssetDatabase.RenameAsset(
+                    string.Format("{0}/{1}/{1}Snapshot.prefab", Paths.AssetResArtworks, dirname),
+                    string.Format("{0}_snapshot.prefab", dirname.ToLower()));
+
+                AssetDatabase.RenameAsset(
+                    string.Format("{0}/{1}/{1}Wireframe.prefab", Paths.AssetResArtworks, dirname),
+                    string.Format("{0}_wireframe.prefab", dirname.ToLower()));
+
+                AssetDatabase.RenameAsset(
+                    string.Format("{0}/{1}", Paths.AssetResArtworks, dirname),
+                    dirname.ToLower());
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
+        finally
+        {
+            EditorUtility.ClearProgressBar();
+        }
+    }
+
+    static void Check(string error)
+    {
+        if (!string.IsNullOrEmpty(error))
+            Debug.LogError(error);
+    }
+
 
     /*
+    [MenuItem("Tools/Others/Set Snapshot Env")]
+    static void SetSnapshotEnv()
+    {
+        var go = new GameObject("PuzzleSnapshot");
+        var snapshot = go.AddComponent<PuzzleSnapshot>();
+        snapshot.Init("Animal005");
+    }
+
     [MenuItem("Tools/Others/UseSharedMat")]
     static void UseSharedMat()
     {

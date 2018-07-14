@@ -74,19 +74,19 @@ class WireframeCreator
         }
 
         var wireframeObject = new GameObject(
-            graph.name + "Wireframe",
+            graph.name + "_wireframe",
             typeof(MeshFilter),
             typeof(MeshRenderer),
             typeof(PuzzleWireframe));
         wireframeObject.layer = Layers.Debris;
 
         var mesh = new Mesh();
-        mesh.name = graph.name + "Wireframe";
+        mesh.name = graph.name + "_wireframe";
         mesh.vertices = verts.ToArray();
         mesh.triangles = tris.ToArray();
         mesh.colors = Enumerable.Repeat(Color.black, verts.Count).ToArray();
         MeshUtility.Optimize(mesh);
-        string savePath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, graph.name, mesh.name);
+        string savePath = string.Format("{0}/{1}/meshes/{2}.prefab", Paths.AssetArtworks, graph.name, mesh.name);
         AssetDatabase.CreateAsset(mesh, savePath);
 
         var meshFilter = wireframeObject.GetComponent<MeshFilter>();
@@ -110,7 +110,7 @@ class WireframeCreator
         for (int g = 0; g < guids.Length; ++g)
         {
             string path = AssetDatabase.GUIDToAssetPath(guids[g]);
-            if (path.Contains("Wireframe") || path.Contains("Snapshot"))
+            if (-1 != path.IndexOf('_'))
                 continue;
 
             EditorUtility.DisplayProgressBar("Update Wireframe", path, (float)g / guids.Length);

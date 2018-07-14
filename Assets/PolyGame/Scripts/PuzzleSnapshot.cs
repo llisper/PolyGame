@@ -59,7 +59,7 @@ public class PuzzleSnapshot : MonoBehaviour
             renderer.sharedMaterial = originMat;
     }
 
-    public const string FileName = "Snapshot.png";
+    public const string FileName = "snapshot.png";
 
     public void Take(string path = null, bool destroy = true)
     {

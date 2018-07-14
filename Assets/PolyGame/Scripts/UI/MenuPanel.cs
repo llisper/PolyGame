@@ -44,7 +44,7 @@ public class MenuPanel : Panel
             else
             {
                 var prefab = (GameObject)Resources.Load(string.Format(
-                    "{0}/{1}/{1}{2}",
+                    "{0}/{1}/{1}_{2}",
                     Paths.Artworks,
                     text,
                     Path.GetFileNameWithoutExtension(PuzzleSnapshot.FileName)));

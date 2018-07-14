@@ -156,7 +156,7 @@ public partial class Puzzle : MonoBehaviour
 
     void LoadWireframe()
     {
-        var prefab = Resources.Load(string.Format("{0}/{1}/{1}Wireframe", Paths.Artworks, puzzleName));
+        var prefab = Resources.Load(string.Format("{0}/{1}/{1}_wireframe", Paths.Artworks, puzzleName));
         var go = (GameObject)Instantiate(prefab, transform);
         go.transform.position = new Vector3(0f, 0f, Config.Instance.zorder.wireframe);
         go.name = prefab.name;

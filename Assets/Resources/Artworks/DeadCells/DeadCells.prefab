@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 4083054147489580}
   - component: {fileID: 114656887471245642}
   m_Layer: 0
-  m_Name: DeadCells
+  m_Name: deadcells
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
