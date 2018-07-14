@@ -10,7 +10,7 @@
     SubShader 
     { 
         Pass {
-            Tags { "Queue" = "Transparent" }
+            Tags { "Queue" = "Transparent-200" }
             Blend SrcAlpha OneMinusSrcAlpha
             ZWrite Off
             
