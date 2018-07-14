@@ -14,10 +14,9 @@ class WireframeCreator
         public EdgeIndex(Edge e, List<int> i) { edge = e; index = i; }
     }
 
-    public static void Create(PolyGraph graph, float? width = null, Color? color = null)
+    public static void Create(PolyGraph graph, float? width = null)
     {
         float w = width.HasValue ? width.Value : Config.Instance.wireframe.width;
-        Color c = color.HasValue ? color.Value : Utils.ColorFromString(Config.Instance.wireframe.color);
         if (width <= 0f)
             throw new Exception("Width must greater than 0!");
 
@@ -85,7 +84,7 @@ class WireframeCreator
         mesh.name = graph.name + "Wireframe";
         mesh.vertices = verts.ToArray();
         mesh.triangles = tris.ToArray();
-        mesh.colors = Enumerable.Repeat(c, verts.Count).ToArray();
+        mesh.colors = Enumerable.Repeat(Color.black, verts.Count).ToArray();
         MeshUtility.Optimize(mesh);
         string savePath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, graph.name, mesh.name);
         AssetDatabase.CreateAsset(mesh, savePath);
@@ -111,7 +110,7 @@ class WireframeCreator
         for (int g = 0; g < guids.Length; ++g)
         {
             string path = AssetDatabase.GUIDToAssetPath(guids[g]);
-            if (path.Contains("Wireframe"))
+            if (path.Contains("Wireframe") || path.Contains("Snapshot"))
                 continue;
 
             EditorUtility.DisplayProgressBar("Update Wireframe", path, (float)g / guids.Length);
@@ -124,6 +123,11 @@ class WireframeCreator
                 Create(graph);
                 PrefabUtility.ReplacePrefab(go, prefab, ReplacePrefabOptions.ConnectToPrefab);
                 GameObject.DestroyImmediate(go);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(path);
+                Debug.LogException(e);
             }
             finally
             {

@@ -5,12 +5,15 @@ public class PuzzleWireframe : MonoBehaviour
 {
     Mesh mesh;
     Color[] colors;
+    Color wireframeColor;
 
     void Awake()
     {
         Renderer = GetComponent<MeshRenderer>();
         mesh = GetComponent<MeshFilter>().sharedMesh;
         colors = mesh.colors;
+        wireframeColor = Utils.ColorFromString(Config.Instance.wireframe.color);
+        ResetColors();
     }
 
     void OnDestroy()
@@ -29,7 +32,7 @@ public class PuzzleWireframe : MonoBehaviour
     public void ResetColors()
     {
         for (int i = 0; i < colors.Length; ++i)
-            colors[i] = Utils.ColorFromString(Config.Instance.wireframe.color);
+            colors[i] = wireframeColor;
         mesh.colors = colors;   
     }
 
