@@ -161,6 +161,7 @@ public partial class Puzzle : MonoBehaviour
         go.transform.position = new Vector3(0f, 0f, Config.Instance.zorder.wireframe);
         go.name = prefab.name;
         wireframeObject = go.GetComponent<PuzzleWireframe>();
+        wireframeObject.Renderer.sharedMaterial.renderQueue = Config.Instance.renderQueue.wireframe;
     }
 
     void LoadBackgroundQuad()
@@ -327,6 +328,7 @@ public partial class Puzzle : MonoBehaviour
 
             var bounds = playgroundBounds;
             var b = targetRenderer.bounds;
+            b.center = new Vector3(b.center.x, b.center.y, 0f);
             if (!bounds.Contains(b.min) || !bounds.Contains(b.max))
             {
                 Vector3 center = b.center;
@@ -336,7 +338,7 @@ public partial class Puzzle : MonoBehaviour
                 center.x = Mathf.Clamp(b.center.x, bounds.min.x + b.extents.x, bounds.max.x - b.extents.x);
                 center.y = Mathf.Clamp(b.center.y, bounds.min.y + b.extents.y, bounds.max.y - b.extents.y);
                 Vector3 pos = center - offset;
-                pos.z = transform.position.z;
+                pos.z = target.position.z;
 
                 OutofBoundDebris obd = new OutofBoundDebris();
                 obd.target = target;
@@ -361,6 +363,13 @@ public partial class Puzzle : MonoBehaviour
         isMovingDebris = false;
     }
 
+    #region debug
+    [ContextMenu("Debug Switch Wireframe")]
+    void DebugSwitchWireframe()
+    {
+        ShowWireframe(objectAlpha == 1f);
+    }
+
     void OnDrawGizmos()
     {
         var bounds = playgroundBounds;
@@ -370,4 +379,5 @@ public partial class Puzzle : MonoBehaviour
         Gizmos.DrawLine(bounds.max, bounds.max - new Vector3(0f, bounds.size.y, 0f));
         Gizmos.DrawLine(bounds.max - new Vector3(0f, bounds.size.y, 0f), bounds.min);
     }
+    #endregion debug
 }

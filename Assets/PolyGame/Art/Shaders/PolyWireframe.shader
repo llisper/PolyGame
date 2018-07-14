@@ -9,9 +9,9 @@
     SubShader 
     { 
         Pass {
-            Tags { "Queue" = "Transparent-100" }
+            Tags { "Queue" = "Transparent" }
             Blend SrcAlpha OneMinusSrcAlpha
-            ZWrite Off
+            ZWrite On 
             
             CGPROGRAM
             #pragma vertex vert

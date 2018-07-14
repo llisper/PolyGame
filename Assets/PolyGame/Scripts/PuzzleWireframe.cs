@@ -73,4 +73,18 @@ public class PuzzleWireframe : MonoBehaviour
             }
         }
     }
+
+    #region debug
+    public Color frameColor;
+
+    [ContextMenu("Apply Debug Color")]
+    void ApplyDebugColor()
+    {
+        if (null != colors)
+        {
+            for (int i = 0; i < colors.Length; ++i)
+                colors[i] = frameColor;
+        }
+    }
+    #endregion debug
 }

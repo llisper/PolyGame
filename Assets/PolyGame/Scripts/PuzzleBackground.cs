@@ -24,6 +24,7 @@ public class PuzzleBackground
         }
         mat.SetColor("_Color", BackgroundColor(graph));
         mat.SetVector("_Bounds", new Vector4(bounds.extents.x, bounds.extents.y));
+        mat.renderQueue = Config.Instance.renderQueue.background;
 
         return go;
     }

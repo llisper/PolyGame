@@ -13,6 +13,14 @@ public class Config : IConfig<Config>
     }
 
     [Serializable]
+    public class RenderQueue
+    {
+        public int debris = 2000;
+        public int wireframe = 1500;
+        public int background = 1000;
+    }
+
+    [Serializable]
     public class Puzzle
     {
         public float scrambleRadius = 150f;
@@ -41,6 +49,7 @@ public class Config : IConfig<Config>
     }
 
     public ZOrder zorder = new ZOrder();
+    public RenderQueue renderQueue = new RenderQueue();
     public Puzzle puzzle = new Puzzle();
     public Camera camera = new Camera();
     public Wireframe wireframe = new Wireframe();

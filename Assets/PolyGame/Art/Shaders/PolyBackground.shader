@@ -10,9 +10,9 @@
     SubShader 
     { 
         Pass {
-            Tags { "Queue" = "Transparent-200" }
-            Blend SrcAlpha OneMinusSrcAlpha
-            ZWrite Off
+            Tags { "Queue" = "Background" }
+            Blend Off
+            ZWrite On
             
             CGPROGRAM
             #pragma vertex vert
@@ -79,7 +79,7 @@
                 #else
                 float a = ellipseAlpha(i);
                 #endif
-				return float4(_Color, a);
+				return float4(lerp(float3(1, 1, 1), _Color, a), 1);
             }
             ENDCG
         }
