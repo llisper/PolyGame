@@ -89,10 +89,17 @@ static class Others
                     string.Format("{0}/{1}/meshes/{1}Wireframe.prefab", Paths.AssetArtworks, dirname),
                     string.Format("{0}_wireframe.prefab", dirname.ToLower()));
 
-                EditorUtility.DisplayProgressBar("Rename Art Assets", "(Snapshot)" + dirname, (float)i / dirs.Length);
-                AssetDatabase.RenameAsset(
-                    string.Format("{0}/{1}/Snapshot.png", Paths.AssetArtworks, dirname),
-                    "snapshot.png");
+                foreach (string filePath in Directory.GetFiles(dir))
+                {
+                    if (filePath.EndsWith(".meta"))
+                        continue;
+
+                    EditorUtility.DisplayProgressBar("Rename Art Assets", "(Files)" + filePath, (float)i / dirs.Length);
+                    string file = Path.GetFileName(filePath);
+                    AssetDatabase.RenameAsset(
+                        string.Format("{0}/{1}/{2}", Paths.AssetArtworks, dirname, file),
+                        file.ToLower());
+                }
 
                 EditorUtility.DisplayProgressBar("Rename Art Assets", dirname, (float)i / dirs.Length);
                 AssetDatabase.RenameAsset(
