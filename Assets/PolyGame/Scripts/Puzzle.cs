@@ -161,7 +161,6 @@ public partial class Puzzle : MonoBehaviour
         go.transform.position = new Vector3(0f, 0f, Config.Instance.zorder.wireframe);
         go.name = prefab.name;
         wireframeObject = go.GetComponent<PuzzleWireframe>();
-        wireframeObject.Renderer.sharedMaterial.renderQueue = Config.Instance.renderQueue.wireframe;
     }
 
     void LoadBackgroundQuad()
