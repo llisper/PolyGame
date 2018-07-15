@@ -3,6 +3,8 @@ using UnityEditor;
 using System;
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 [InitializeOnLoad]
 static class ConfigEditor
@@ -31,27 +33,61 @@ static class ConfigEditor
         Debug.Log("Done!");
     }
 
-    [MenuItem("Tools/Configs/Auto Fill Background Colors")]
-    static void AutoFillBackgroundColors()
+    [MenuItem("Tools/Configs/Auto Fill ArtCollection")]
+    static void AutoFillArtCollection()
     {
-        foreach (var g in ArtCollection.Instance.groups)
+        try
         {
-            foreach (var i in g.items)
+            Dictionary<string, ArtCollection.Group> groupMap = new Dictionary<string, ArtCollection.Group>();
+            foreach (var g in ArtCollection.Instance.groups)
+                groupMap[I18n.Get(g.name).ToLower()] = g;
+
+            string[] dirs = Directory.GetDirectories(Application.dataPath + '/' + Paths.AssetResArtworksNoPrefix);
+            for (int i = 0; i < dirs.Length; ++i)
             {
-                if (string.IsNullOrEmpty(i.bgColor))
+                string name = Path.GetFileName(dirs[i]);
+                string groupName = name;
+                var match = Regex.Match(name, @"(\D+)");
+                if (match.Success)
+                    groupName = match.Groups[1].Value;
+
+                EditorUtility.DisplayProgressBar("Auto Fill ArtCollection", name, (float)i / dirs.Length);
+
+                var group = ArtCollection.Instance.groups.Find(v => 0 == string.Compare(I18n.Get(v.name), groupName, true));
+                if (null == group)
+                    group = ArtCollection.Instance.groups.Find(v => I18n.Get(v.name) == "Default");
+
+                var item = group.items.Find(v => v.name == name);
+                if (null == item)
                 {
-                    var go = Resources.Load<GameObject>(string.Format("{0}/{1}/{1}", Paths.Artworks, i.name));
+                    item = new ArtCollection.Item();
+                    item.name = name;
+                    group.items.Add(item);
+                }
+
+                if (string.IsNullOrEmpty(item.bgColor))
+                {
+                    var go = Resources.Load<GameObject>(string.Format("{0}/{1}/{1}", Paths.Artworks, item.name));
                     var color = PuzzleBackground.AvarageColor(go.GetComponent<PolyGraph>());
-                    i.bgColor = Utils.ColorToString(color);
+                    item.bgColor = Utils.ColorToString(color);
                 }
             }
-        }
 
-        string path = string.Format("{0}/Resources/{1}/ArtCollection.json", Application.dataPath, Paths.Configs);
-        string json = JsonUtility.ToJson(ArtCollection.Instance, true); 
-        File.WriteAllText(path, json, Encoding.UTF8);
-        Debug.Log("Done!");
+            EditorUtility.DisplayProgressBar("Auto Fill ArtCollection", "Saving json", 1f);
+            string path = string.Format("{0}/Resources/{1}/ArtCollection.json", Application.dataPath, Paths.Configs);
+            string json = JsonUtility.ToJson(ArtCollection.Instance, true);
+            File.WriteAllText(path, json, Encoding.UTF8);
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
+        finally
+        {
+            EditorUtility.ClearProgressBar();
+        }
     }
+
 
     [MenuItem("Tools/Configs/Reload All")]
     static void ReloadAll()

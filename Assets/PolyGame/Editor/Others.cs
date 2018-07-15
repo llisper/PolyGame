@@ -36,21 +36,6 @@ static class Others
         }
     }
 
-    [MenuItem("Tools/Others/Update Puzzle List")]
-    static void UpdatePuzzleList()
-    {
-        var ui = (GameObject)GameObject.Instantiate(Resources.Load("UI/UI"));
-        var menu = (GameObject)GameObject.Instantiate(Resources.Load("UI/MenuPanel"), ui.transform.Find("Canvas/Base"));
-
-        string[] dirs = Directory.GetDirectories(Application.dataPath + '/' + Paths.AssetResArtworksNoPrefix);
-        menu.GetComponent<MenuPanel>().options = new List<string>(Array.ConvertAll(dirs, v => Path.GetFileName(v)));
-
-        string prefabPath = "Assets/Resources/UI/MenuPanel.prefab";
-        UnityEngine.Object prefab = PrefabUtility.CreatePrefab(prefabPath, menu);
-        PrefabUtility.ReplacePrefab(menu, prefab, ReplacePrefabOptions.ConnectToPrefab);
-        GameObject.DestroyImmediate(ui);
-    }
-
     [MenuItem("Tools/Others/Generate Initial Snapshots")]
     static void GenerateInitialSnapshots()
     {
@@ -67,6 +52,7 @@ static class Others
         AssetDatabase.Refresh();
     }
 
+    /*
     [MenuItem("Tools/Others/Rename Assets")]
     static void RenameAssets()
     {
@@ -135,6 +121,7 @@ static class Others
         }
         catch (Exception e)
         {
+    /*
             Debug.LogException(e);
         }
         finally
@@ -150,7 +137,6 @@ static class Others
     }
 
 
-    /*
     [MenuItem("Tools/Others/Set Snapshot Env")]
     static void SetSnapshotEnv()
     {

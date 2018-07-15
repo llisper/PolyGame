@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 public class MenuPanel : Panel
 {
-    public List<string> options;
     public Dropdown dropdown;
     public RawImage snapshot;
 
@@ -13,6 +12,10 @@ public class MenuPanel : Panel
 
     void Awake()
     {
+        List<string> options = new List<string>();
+        foreach (var g in ArtCollection.Instance.groups)
+            options.AddRange(g.items.ConvertAll(v => v.name));
+
         dropdown.AddOptions(options);
         LoadSnapshot();
     }

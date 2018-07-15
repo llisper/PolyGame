@@ -1,4 +1,3 @@
-using UnityEngine;
 using System;
 using System.Collections.Generic;
 
@@ -10,6 +9,7 @@ public class ArtCollection : IConfig<ArtCollection>
     {
         public string name;
         public string bgColor;
+        public int priority;
     }
 
     [Serializable]

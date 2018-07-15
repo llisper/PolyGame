@@ -59,6 +59,7 @@ public static class ConfigLoader
         }
         catch (Exception e)
         {
+            Debug.LogError("Failed to load " + type.Name);
             Debug.LogException(e);
         }
     }
