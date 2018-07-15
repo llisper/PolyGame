@@ -10,6 +10,7 @@ public class PuzzleGroupView : MonoBehaviour
     public Text category;
 
     List<PuzzleItem> puzzleItems;
+    PuzzleItem reloadItem;
 
     public void Init(ArtCollection.Group group)
     {
@@ -43,10 +44,13 @@ public class PuzzleGroupView : MonoBehaviour
         ev.onClicked += OnSeeAllClicked;
     }
 
-    void Start()
+    void OnEnable()
     {
-        ConfigLoader.LoadAll();
-        Init(ArtCollection.Instance.groups[0]);
+        if (null != reloadItem)
+        {
+            reloadItem.Load();
+            reloadItem = null;
+        }
     }
 
     void OnSeeAllClicked(GameObject go)
@@ -56,6 +60,7 @@ public class PuzzleGroupView : MonoBehaviour
 
     void OnItemClicked(GameObject go)
     {
-        Debug.Log("OnItemClicked: " + go);
+        reloadItem = go.GetComponent<PuzzleItem>();
+        Puzzle.Start(go.name);
     }
 }

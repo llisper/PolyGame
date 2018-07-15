@@ -37,25 +37,26 @@ public class UI : MonoBehaviour
         OpenPanel<FpsCounter>(UILayer.Overlay);
     }
 
-    public Panel OpenPanel<T>(UILayer layer = UILayer.Base) where T : Panel
+    public T OpenPanel<T>(UILayer layer = UILayer.Base) where T : Panel
     {
         Type type = typeof(T);
         Panel panel;
-        if (panels.TryGetValue(type, out panel))
-            return panel;
-
-        string path = "UI/" + type.Name;
-        var prefab = Resources.Load(path);
-        if (null == prefab)
+        if (!panels.TryGetValue(type, out panel))
         {
-            Debug.LogError("Failed to load UI: " + path);
-            return null;
-        }
+            string path = "UI/" + type.Name;
+            var prefab = Resources.Load(path);
+            if (null == prefab)
+            {
+                Debug.LogError("Failed to load UI: " + path);
+                return null;
+            }
 
-        var go = (GameObject)Instantiate(prefab, GetLayer(layer));
-        panel = go.GetComponent<Panel>();
-        panels.Add(type, panel);
-        return panel;
+            var go = (GameObject)Instantiate(prefab, GetLayer(layer));
+            panel = go.GetComponent<Panel>();
+            panels.Add(type, panel);
+        }
+        panel.gameObject.SetActive(true);
+        return (T)panel;
     }
 
     public void ClosePanel<T>() where T : Panel

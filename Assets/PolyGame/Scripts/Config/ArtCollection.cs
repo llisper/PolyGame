@@ -17,6 +17,7 @@ public class ArtCollection : IConfig<ArtCollection>
     {
         public string name;
         public string themeColor;
+        public int priority;
         public List<Item> items;
     }
 
@@ -26,9 +27,10 @@ public class ArtCollection : IConfig<ArtCollection>
     void AfterLoaded()
     {
         itemMap = new Dictionary<string, Item>();
+        groups.Sort((l, r) => r.priority - l.priority);
         foreach (var g in groups)
         {
-            g.items.Sort((l, r) => l.priority - r.priority);
+            g.items.Sort((l, r) => r.priority - l.priority);
             foreach (var i in g.items)
                 itemMap.Add(i.name, i);
         }

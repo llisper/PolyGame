@@ -3,6 +3,7 @@
         {
             "name": "0001",
             "themeColor": "000000",
+            "priority": 0,
             "items": [
                 {
                     "name": "animal005",
@@ -139,6 +140,7 @@
         {
             "name": "0002",
             "themeColor": "000000",
+            "priority": 0,
             "items": [
                 {
                     "name": "food002",
@@ -180,6 +182,7 @@
         {
             "name": "0003",
             "themeColor": "000000",
+            "priority": 0,
             "items": [
                 {
                     "name": "deadcells",
