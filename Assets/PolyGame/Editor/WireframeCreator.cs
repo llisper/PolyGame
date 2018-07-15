@@ -74,14 +74,14 @@ class WireframeCreator
         }
 
         var wireframeObject = new GameObject(
-            graph.name + "_wireframe",
+            graph.name + '_' + Paths.Wireframe,
             typeof(MeshFilter),
             typeof(MeshRenderer),
             typeof(PuzzleWireframe));
         wireframeObject.layer = Layers.Debris;
 
         var mesh = new Mesh();
-        mesh.name = graph.name + "_wireframe";
+        mesh.name = graph.name + '_' + Paths.Wireframe;
         mesh.vertices = verts.ToArray();
         mesh.triangles = tris.ToArray();
         mesh.colors = Enumerable.Repeat(Color.black, verts.Count).ToArray();

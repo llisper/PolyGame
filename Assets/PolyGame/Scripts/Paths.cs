@@ -11,6 +11,10 @@ public class Paths
     public const string PolyWireframeMat = "Assets/PolyGame/Art/Materials/PolyWireframe.mat";
     public const string PolyGraphMat = "Assets/PolyGame/Art/Materials/PolyGraph.mat";
 
+    public const string Snapshot = "snapshot";
+    public const string SnapshotFile = "snapshot.png";
+    public const string Wireframe = "wireframe";
+
     public static string Saves { get { return Application.persistentDataPath + "/Saves"; } }
 
     public static string ToAssetPath(string absPath)
@@ -18,18 +22,8 @@ public class Paths
         return absPath.Replace(Application.dataPath, "Assets");
     }
 
-    public static string SnapshotRes(string name)
-    {
-        return string.Format(
-            "{0}/{1}/{2}/{3}",
-            Application.dataPath,
-            Paths.AssetArtworksNoPrefix,
-            name,
-            PuzzleSnapshot.FileName);
-    }
-
     public static string SnapshotSave(string name)
     {
-        return string.Format("{0}/{1}/{2}", Saves, name, PuzzleSnapshot.FileName);
+        return string.Format("{0}/{1}/{2}", Saves, name, SnapshotFile);
     }
 }

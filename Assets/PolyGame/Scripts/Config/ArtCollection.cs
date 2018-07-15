@@ -28,6 +28,7 @@ public class ArtCollection : IConfig<ArtCollection>
         itemMap = new Dictionary<string, Item>();
         foreach (var g in groups)
         {
+            g.items.Sort((l, r) => l.priority - r.priority);
             foreach (var i in g.items)
                 itemMap.Add(i.name, i);
         }

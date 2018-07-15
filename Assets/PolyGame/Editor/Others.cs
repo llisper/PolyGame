@@ -7,8 +7,14 @@ static class Others
 {
     public static void SaveInitialSnapshot(PolyGraph graph)
     {
-        string path = Paths.SnapshotRes(graph.name);
-        string saveName = graph.name + '_' + Path.GetFileNameWithoutExtension(PuzzleSnapshot.FileName);
+        string path = string.Format(
+            "{0}/{1}/{2}/{3}",
+            Application.dataPath,
+            Paths.AssetArtworksNoPrefix,
+            graph.name,
+            Paths.SnapshotFile);
+
+        string saveName = graph.name + '_' + Paths.Snapshot;
 
         var go = new GameObject(saveName);
         var holder = go.AddComponent<PuzzleSnapshotHolder>();

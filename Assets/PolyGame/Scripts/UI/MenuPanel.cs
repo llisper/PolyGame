@@ -50,7 +50,7 @@ public class MenuPanel : Panel
                     "{0}/{1}/{1}_{2}",
                     Paths.Artworks,
                     text,
-                    Path.GetFileNameWithoutExtension(PuzzleSnapshot.FileName)));
+                    Paths.Snapshot));
 
                 if (null != prefab)
                 {
