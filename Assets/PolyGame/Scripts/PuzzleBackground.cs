@@ -2,12 +2,12 @@
 
 public class PuzzleBackground
 {
-    public static GameObject Create(PolyGraph graph, Bounds backgroundBounds)
+    public static GameObject Create(PolyGraph graph, Bounds bounds)
     {
         var prefab = Resources.Load<GameObject>(Prefabs.Background);
         var go = GameObject.Instantiate(prefab);
 
-        var bounds = backgroundBounds;
+        bounds = CalculateBounds(bounds);
         go.transform.localScale = new Vector3(bounds.size.x, bounds.size.y, 1f);
         go.transform.localPosition = new Vector3(bounds.center.x, bounds.center.y, Config.Instance.zorder.background);
 
@@ -28,15 +28,6 @@ public class PuzzleBackground
         return go;
     }
 
-    static Color BackgroundColor(PolyGraph graph)
-    {
-        ArtCollection.Item item;
-        if (ArtCollection.Instance.itemMap.TryGetValue(graph.name, out item))
-            return Utils.ColorFromString(item.bgColor);
-        else
-            return AvarageColor(graph);
-    }
-    
     public static Color AvarageColor(PolyGraph graph)
     {
         Vector4 c = Vector4.zero;
@@ -51,5 +42,20 @@ public class PuzzleBackground
         }
         c /= count;
         return c;
+    }
+
+    static Bounds CalculateBounds(Bounds bounds)
+    {
+        bounds.extents = bounds.extents * 2f - bounds.extents / Config.Instance.camera.minRangeScale;
+        return bounds;
+    }
+
+    static Color BackgroundColor(PolyGraph graph)
+    {
+        ArtCollection.Item item;
+        if (ArtCollection.Instance.itemMap.TryGetValue(graph.name, out item))
+            return Utils.ColorFromString(item.bgColor);
+        else
+            return AvarageColor(graph);
     }
 }
