@@ -2,7 +2,6 @@
 using UnityEngine;
 using System;
 using System.IO;
-using System.Collections.Generic;
 
 static class Others
 {

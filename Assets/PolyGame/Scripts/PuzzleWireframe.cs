@@ -18,7 +18,9 @@ public class PuzzleWireframe : MonoBehaviour
 
     void OnDestroy()
     {
-        ResetColors();
+        for (int i = 0; i < colors.Length; ++i)
+            colors[i] = Color.black;
+        mesh.colors = colors;   
     }
 
     public Renderer Renderer { get; private set; }
@@ -76,18 +78,4 @@ public class PuzzleWireframe : MonoBehaviour
             }
         }
     }
-
-    #region debug
-    public Color frameColor;
-
-    [ContextMenu("Apply Debug Color")]
-    void ApplyDebugColor()
-    {
-        if (null != colors)
-        {
-            for (int i = 0; i < colors.Length; ++i)
-                colors[i] = frameColor;
-        }
-    }
-    #endregion debug
 }
