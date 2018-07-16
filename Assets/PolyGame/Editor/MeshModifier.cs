@@ -241,12 +241,22 @@ class MeshModifier : EditorWindow
 
             if (GUILayout.Button("[J]oin Regions", GUILayout.Width(100f)) || keyPressed[KeyCode.J])
             {
-                var newRegion = RegionCombiner.Combine(info.editObj, meshPicker.renderers.ConvertAll(v => v.gameObject));
-                newRegion.GetComponent<MeshRenderer>().sharedMaterial = info.originalMat;
-                meshPicker.renderers.ForEach(v => v.gameObject.SetActive(false));
-                undoStack.Push(new JoinCommand(info, newRegion, meshPicker.renderers));
-                meshPicker.renderers.Clear();
-                MarkModified();
+                var newRegion = RegionCombiner.Combine(
+                    info.editObj.GetComponent<PolyGraph>(),
+                    meshPicker.renderers.ConvertAll(v => v.gameObject));
+
+                if (null != newRegion)
+                {
+                    newRegion.GetComponent<MeshRenderer>().sharedMaterial = info.originalMat;
+                    meshPicker.renderers.ForEach(v => v.gameObject.SetActive(false));
+                    undoStack.Push(new JoinCommand(info, newRegion, meshPicker.renderers));
+                    meshPicker.renderers.Clear();
+                    MarkModified();
+                }
+                else
+                {
+                    EditorUtility.DisplayDialog("Error", "Failed to join regions, check Console for error log", "Got it");
+                }
             }
         }
 

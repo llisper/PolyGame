@@ -8,35 +8,48 @@ class RegionResolver
     PolyGraph graph;
     Dictionary<Triangle, Region> tri2region = new Dictionary<Triangle, Region>();
 
+    public List<Triangle> triangles = new List<Triangle>();
+    public List<Region> regions = new List<Region>();
+
     public RegionResolver(PolyGraph graph)
     {
         this.graph = graph;
     }
 
-    public void Resolve()
+    public void Apply()
     {
-        graph.triangles.Clear();
-        graph.regions.Clear();
-        Collect();
-        CalculateTriangleAdjacents();
-        CalculateRegionAdjacents();
-        CalculateRegionBorderEdges();
+        graph.triangles = triangles;
+        graph.regions = regions;
+    }
+
+    public void Clear()
+    {
+        triangles.Clear();
+        regions.Clear();
     }
 
     public static void Resolve(PolyGraph graph)
     {
+        Transform[] xforms = new Transform[graph.transform.childCount];
+        for (int i = 0; i < graph.transform.childCount; ++i)
+            xforms[i] = graph.transform.GetChild(i);
+
         var resolver = new RegionResolver(graph);
-        resolver.Resolve();
+        resolver.Collect(xforms);
+        resolver.CalculateTriangleAdjacents();
+        resolver.CalculateRegionAdjacents();
+        resolver.CalculateRegionBorderEdges();
+        resolver.Apply();
     }
 
-    void Collect()
+    public void Collect(Transform[] xforms)
     {
-        for (int i = 0; i < graph.transform.childCount; ++i)
+        for (int i = 0; i < xforms.Length; ++i)
         {
-            var child = graph.transform.GetChild(i);
+            var child = xforms[i];
             var region = new Region();
             region.name = child.name;
-            graph.regions.Add(region);
+            regions.Add(region);
 
             var mesh = child.GetComponent<MeshFilter>().sharedMesh;
             int[] tris = mesh.triangles;
@@ -48,7 +61,7 @@ class RegionResolver
                 Vector2 p2 = vertices[tris[j + 2]];
                 var triangle = new Triangle()
                 {
-                    region = graph.regions.Count - 1,
+                    region = regions.Count - 1,
                     vertices = new Vector2Int[]
                     {
                         new Vector2Int((int)p0.x, (int)p0.y),
@@ -57,21 +70,21 @@ class RegionResolver
                     },
                     hashes = new long[] { graph.PointHash(p0), graph.PointHash(p1), graph.PointHash(p2) }
                 };
-                graph.triangles.Add(triangle);
-                region.triangles.Add(graph.triangles.Count - 1);
+                triangles.Add(triangle);
+                region.triangles.Add(triangles.Count - 1);
                 tri2region.Add(triangle, region);
             }
         }
     }
 
-    void CalculateTriangleAdjacents()
+    public void CalculateTriangleAdjacents()
     {
-        for (int i = 0; i < graph.triangles.Count; ++i)
+        for (int i = 0; i < triangles.Count; ++i)
         {
-            var triA = graph.triangles[i];
-            for (int j = i + 1; j < graph.triangles.Count && triA.adjacents.Count < 3; ++j)
+            var triA = triangles[i];
+            for (int j = i + 1; j < triangles.Count && triA.adjacents.Count < 3; ++j)
             {
-                var triB = graph.triangles[j];
+                var triB = triangles[j];
                 if (triB.adjacents.Count >= 3)
                     continue;
 
@@ -84,14 +97,14 @@ class RegionResolver
         }
     }
 
-    void CalculateRegionAdjacents()
+    public void CalculateRegionAdjacents()
     {
-        for (int i = 0; i < graph.regions.Count; ++i)
+        for (int i = 0; i < regions.Count; ++i)
         {
-            var regionA = graph.regions[i];
-            for (int j = i + 1; j < graph.regions.Count; ++j)
+            var regionA = regions[i];
+            for (int j = i + 1; j < regions.Count; ++j)
             {
-                var regionB = graph.regions[j];
+                var regionB = regions[j];
                 if (IsRegionAdjacent(regionA, regionB))
                 {
                     regionA.adjacents.Add(j);
@@ -107,22 +120,22 @@ class RegionResolver
         {
             foreach (int tb in b.triangles)
             {
-                if (graph.triangles[ta].adjacents.Contains(tb))
+                if (triangles[ta].adjacents.Contains(tb))
                     return true;
             }
         }
         return false;
     }
 
-    void CalculateRegionBorderEdges()
+    public void CalculateRegionBorderEdges()
     {
-        foreach (var region in graph.regions)
+        foreach (var region in regions)
         {
             List<Edge> edges = new List<Edge>();
             List<int> sharedCounts = new List<int>();
             for (int i = 0; i < region.triangles.Count; ++i)
             {
-                var tri = graph.triangles[region.triangles[i]];
+                var tri = triangles[region.triangles[i]];
                 CountEdge(tri.vertices[0], tri.vertices[1], edges, sharedCounts);
                 CountEdge(tri.vertices[1], tri.vertices[2], edges, sharedCounts);
                 CountEdge(tri.vertices[2], tri.vertices[0], edges, sharedCounts);

@@ -1,12 +1,17 @@
 using UnityEngine;
 using UnityEditor;
+using System.Linq;
+using System.Text;
 using System.Collections.Generic;
 
 static class RegionCombiner
 {
-    public static GameObject Combine(GameObject root, List<GameObject> gameObjects)
+    public static GameObject Combine(PolyGraph graph, List<GameObject> gameObjects)
     {
-        int index = NextIndex(root);
+        if (!ConnectedCheck(graph, gameObjects))
+            return null;
+
+        int index = NextIndex(graph.transform);
         CombineInstance[] combine = new CombineInstance[gameObjects.Count];
         for (int i = 0; i < combine.Length; ++i)
         {
@@ -23,7 +28,7 @@ static class RegionCombiner
         mesh.RecalculateBounds();
 
         MeshUtility.Optimize(mesh);
-        string savePath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, root.name, mesh.name);
+        string savePath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, graph.name, mesh.name);
         AssetDatabase.CreateAsset(mesh, savePath);
         AssetDatabase.SaveAssets();
 
@@ -35,19 +40,19 @@ static class RegionCombiner
         Utils.SetupMeshRenderer(go);
         go.tag = Tags.Debris;
         go.layer = Layers.Debris;
-        go.transform.parent = root.transform;
+        go.transform.parent = graph.transform;
         go.GetComponent<MeshFilter>().mesh = mesh;
         go.transform.localPosition = centroid;
         go.GetComponent<MeshCollider>().sharedMesh = mesh;
         return go;
     }
 
-    static int NextIndex(GameObject root)
+    static int NextIndex(Transform root)
     {
         int max = 0;
-        for (int i = 0; i < root.transform.childCount; ++i)
+        for (int i = 0; i < root.childCount; ++i)
         {
-            int index = int.Parse(root.transform.GetChild(i).name);
+            int index = int.Parse(root.GetChild(i).name);
             if (index > max)
                 max = index;
         }
@@ -63,5 +68,49 @@ static class RegionCombiner
         for (int i = 0; i < vertices.Length; ++i)
             vertices[i] -= centroid;
         return vertices;
+    }
+
+    static bool ConnectedCheck(PolyGraph graph, List<GameObject> gameObjects)
+    {
+        var xforms = gameObjects.ConvertAll(v => v.transform).ToArray();
+        var resolver = new RegionResolver(graph);
+        resolver.Collect(xforms);
+        resolver.CalculateTriangleAdjacents();
+        resolver.CalculateRegionAdjacents();
+
+        List<int> regionIndexs = Enumerable.Range(0, resolver.regions.Count).ToList();
+        List<List<string>> connectedRegions = new List<List<string>>();
+        while (regionIndexs.Count > 0)
+        {
+            List<string> connected = new List<string>();
+            Queue<int> queue = new Queue<int>();
+            queue.Enqueue(regionIndexs[0]);
+            while (queue.Count > 0)
+            {
+                int i = queue.Dequeue();
+                regionIndexs.Remove(i);
+                var region = resolver.regions[i];
+                connected.Add(region.name);
+                foreach (int adj in region.adjacents)
+                {
+                    if (regionIndexs.Contains(adj) && !queue.Contains(adj))
+                        queue.Enqueue(adj);
+                }
+            }
+            connectedRegions.Add(connected);
+        }
+
+        if (connectedRegions.Count > 1)
+        {
+            var log = new StringBuilder("Selected regions are not all connected, connected regions are:\n");
+            foreach (var names in connectedRegions)
+                log.AppendFormat("{{ {0} }}\n", string.Join(", ", names));
+            Debug.LogError(log);
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }
