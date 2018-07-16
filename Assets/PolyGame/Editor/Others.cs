@@ -57,41 +57,6 @@ static class Others
         AssetDatabase.Refresh();
     }
 
-    [MenuItem("Tools/Others/Break Disconnected Regions")]
-    static void BreakDisconnectedRegions()
-    {
-        string[] guids = AssetDatabase.FindAssets("t:GameObject", new string[] { Paths.AssetResArtworks });
-        for (int g = 0; g < guids.Length; ++g)
-        {
-            string path = AssetDatabase.GUIDToAssetPath(guids[g]);
-            if (-1 != path.IndexOf('_'))
-                continue;
-
-            EditorUtility.DisplayProgressBar("Break Disconnected Regions", path, (float)g / guids.Length);
-            try
-            {
-                var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-                var go = GameObject.Instantiate(prefab);
-                var graph = go.GetComponent<PolyGraph>();
-
-                
-                // PrefabUtility.ReplacePrefab(go, prefab, ReplacePrefabOptions.ConnectToPrefab);
-                GameObject.DestroyImmediate(go);
-                break;
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(path);
-                Debug.LogException(e);
-            }
-            finally
-            {
-                EditorUtility.ClearProgressBar();
-            }
-        }
-        AssetDatabase.SaveAssets();
-    }
-
     /*
     [MenuItem("Tools/Others/Rename Assets")]
     static void RenameAssets()
