@@ -175,6 +175,7 @@ public partial class Puzzle : MonoBehaviour
         objectMat = puzzleObject.GetComponentInChildren<MeshRenderer>().sharedMaterial;
         finishedMat = Instantiate(objectMat);
         finishedMat.name = objectMat.name + "Finished";
+        finishedMat.renderQueue = objectMat.renderQueue - 100;
         selectedMat = Instantiate(objectMat);
         selectedMat.name = objectMat.name + "Selected";
 
@@ -251,6 +252,9 @@ public partial class Puzzle : MonoBehaviour
                     continue;
                 }
 
+                var pos = child.localPosition;
+                pos.z = Config.Instance.zorder.debrisFinished;
+                child.localPosition = pos;
                 child.GetComponent<MeshRenderer>().sharedMaterial = finishedMat;
                 child.GetComponent<MeshCollider>().enabled = false;
             }
@@ -322,7 +326,7 @@ public partial class Puzzle : MonoBehaviour
                 targetRenderer.sharedMaterial = finishedMat;
                 targetCollider.enabled = false;
                 var finishPosition = (Vector3)di.position;
-                finishPosition.z = target.localPosition.z;
+                finishPosition.z = Config.Instance.zorder.debrisFinished;
                 StartCoroutine(FinishDebrisAnimation(target, finishPosition));
                 return;
             }

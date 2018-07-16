@@ -7,7 +7,8 @@ public class Config : IConfig<Config>
     [Serializable]
     public class ZOrder
     {
-        public float debrisStart = -0.1f;
+        public float debrisStart = -0.2f;
+        public float debrisFinished = -0.1f;
         public float wireframe = -0.01f;
         public float background = -0.001f;
     }

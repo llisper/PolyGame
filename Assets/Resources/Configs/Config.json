@@ -1,8 +1,9 @@
 {
     "zorder": {
-        "debrisStart": -0.10000000149011612,
-        "wireframe": -0.009999999776482582,
-        "background": -0.0010000000474974514
+        "debrisStart": -0.2,
+        "debrisFinished": -0.1,
+        "wireframe": -0.01,
+        "background": -0.001
     },
     "puzzle": {
         "scrambleRadius": 150.0,
