@@ -1,12 +1,17 @@
 using UnityEngine;
 using UnityEditor;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 class RegionBreaker
 {
-    static List<Triangle> triangles = new List<Triangle>();
-    static List<Region> regions = new List<Region>();
+    public class Triangle
+    {
+        public int[] vertices;
+        public long[] hashes;
+        public List<int> adjacents;
+    }
 
     [MenuItem("Tools/Break Disconnected Regions")]
     static void BreakDisconnectedRegions()
@@ -24,9 +29,9 @@ class RegionBreaker
                 var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
                 var go = GameObject.Instantiate(prefab);
                 var graph = go.GetComponent<PolyGraph>();
-                // PrefabUtility.ReplacePrefab(go, prefab, ReplacePrefabOptions.ConnectToPrefab);
+                if (Resolve(graph))
+                    PrefabUtility.ReplacePrefab(go, prefab, ReplacePrefabOptions.ConnectToPrefab);
                 GameObject.DestroyImmediate(go);
-                break;
             }
             catch (Exception e)
             {
@@ -41,39 +46,96 @@ class RegionBreaker
         AssetDatabase.SaveAssets();
     }
 
-    // static void Collect(Transform[] xforms)
-    // {
-    //     for (int i = 0; i < xforms.Length; ++i)
-    //     {
-    //         var child = xforms[i];
-    //         var region = new Region();
-    //         region.name = child.name;
-    //         regions.Add(region);
+    static bool Resolve(PolyGraph graph)
+    {
+        var xforms = new Transform[graph.transform.childCount];
+        for (int i = 0; i < xforms.Length; ++i)
+            xforms[i] = graph.transform.GetChild(i);
 
-    //         var mesh = child.GetComponent<MeshFilter>().sharedMesh;
-    //         int[] tris = mesh.triangles;
-    //         Vector3[] vertices = Array.ConvertAll(mesh.vertices, v => v + child.localPosition);
-    //         for (int j = 0; j < tris.Length; j += 3)
-    //         {
-    //             Vector2 p0 = vertices[tris[j]];
-    //             Vector2 p1 = vertices[tris[j + 1]];
-    //             Vector2 p2 = vertices[tris[j + 2]];
-    //             var triangle = new Triangle()
-    //             {
-    //                 region = regions.Count - 1,
-    //                 vertices = new Vector2Int[]
-    //                 {
-    //                     new Vector2Int((int)p0.x, (int)p0.y),
-    //                     new Vector2Int((int)p1.x, (int)p1.y),
-    //                     new Vector2Int((int)p2.x, (int)p2.y)
-    //                 },
-    //                 hashes = new long[] { graph.PointHash(p0), graph.PointHash(p1), graph.PointHash(p2) }
-    //             };
-    //             triangles.Add(triangle);
-    //             region.triangles.Add(triangles.Count - 1);
-    //             tri2region.Add(triangle, region);
-    //         }
-    //     }
-    // }
+        bool modified = false;
+        for (int i = 0; i < xforms.Length; ++i)
+            modified |= ResolveRegion(graph, xforms[i]);
+        return modified;
+    }
 
+    static bool ResolveRegion(PolyGraph graph, Transform xform)
+    {
+        List<Triangle> triangles = new List<Triangle>();
+        List<List<int>> regions = new List<List<int>>();
+
+        var mesh = xform.GetComponent<MeshFilter>().sharedMesh;
+        int[] tris = mesh.triangles;
+        Color[] colors = mesh.colors;
+        Vector3[] verts = Array.ConvertAll(mesh.vertices, v => v + xform.localPosition);
+
+        for (int i = 0; i < tris.Length; i += 3)
+        {
+            var triangle = new Triangle()
+            {
+                vertices = new int[] { tris[i], tris[i + 1], tris[i + 2] },
+                hashes = new long[] { graph.PointHash(verts[tris[i]]), graph.PointHash(verts[tris[i + 1]]), graph.PointHash(verts[tris[i + 2]]) },
+                adjacents = new List<int>()
+            };
+            triangles.Add(triangle);
+        }
+        CalculateTriangleAdjacents(triangles);
+
+
+        List<int> triIndex = Enumerable.Range(0, triangles.Count).ToList();
+        while (triIndex.Count > 0)
+        {
+            List<int> region = new List<int>();
+            Queue<int> queue = new Queue<int>();
+            queue.Enqueue(triIndex[0]);
+            while (queue.Count > 0)
+            {
+                int i = queue.Dequeue();
+                triIndex.Remove(i);
+                region.Add(i);
+
+                var triangle = triangles[i];
+                foreach (int adj in triangle.adjacents)
+                {
+                    if (triIndex.Contains(adj) && !queue.Contains(adj))
+                        queue.Enqueue(adj);
+                }
+            }
+            regions.Add(region);
+        }
+
+        if (regions.Count > 1)
+        {
+            // TODO:
+            // 1. create new mesh
+            // 2. create new gameobject
+            // 3. destroy xform
+
+            Debug.LogErrorFormat("{0}: region {1} needs to break", graph.name, xform.name);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    static void CalculateTriangleAdjacents(List<Triangle> triangles)
+    {
+        for (int i = 0; i < triangles.Count; ++i)
+        {
+            var triA = triangles[i];
+            for (int j = i + 1; j < triangles.Count && triA.adjacents.Count < 3; ++j)
+            {
+                var triB = triangles[j];
+                if (triB.adjacents.Count >= 3)
+                    continue;
+
+                if (triA.hashes.Intersect(triB.hashes).Count() == 2)
+                {
+                    triA.adjacents.Add(j);
+                    triB.adjacents.Add(i);
+                }
+            }
+        }
+    }
 }
