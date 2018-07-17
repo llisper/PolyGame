@@ -123,13 +123,13 @@ class RegionBreaker
             var mat = xform.GetComponent<MeshRenderer>().sharedMaterial;
             foreach (var region in regions)
             {
-                Debug.LogFormat("<color=green>{0}: create new region {1}</color>", graph.name, nextIndex + 1);
+                Debug.LogFormat("<color=green>{0}: create new region {1}</color>", graph.name, nextIndex);
                 NewRegion(region, triangles, graph, mat, verts, colors, nextIndex++);
             }
 
-            // GameObject.DestroyImmediate(xform.gameObject);
-            // string meshPath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, graph.name, mesh.name);
-            // AssetDatabase.DeleteAsset(meshPath);
+            GameObject.DestroyImmediate(xform.gameObject);
+            string meshPath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, graph.name, mesh.name);
+            AssetDatabase.DeleteAsset(meshPath);
             return true;
         }
         else
@@ -209,6 +209,6 @@ class RegionBreaker
         triObj.transform.localPosition = centroid;
         triObj.GetComponent<MeshFilter>().mesh = mesh;
         triObj.GetComponent<MeshRenderer>().sharedMaterial = mat;
-        //triObj.GetComponent<MeshCollider>().sharedMesh = mesh;
+        triObj.GetComponent<MeshCollider>().sharedMesh = mesh;
     }
 }
