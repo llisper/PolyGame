@@ -75,9 +75,8 @@ static class Others
                 mesh.vertices = verts;
                 mesh.triangles = tris;
                 mesh.colors = colors;
-                MeshUtility.Optimize(mesh);
-                AssetDatabase.CreateAsset(mesh, path);
-                AssetDatabase.SaveAssets();
+                //MeshUtility.Optimize(mesh);
+                //AssetDatabase.CreateAsset(mesh, path);
             }
         }
         catch (Exception e)
@@ -87,6 +86,7 @@ static class Others
         finally
         {
             EditorUtility.ClearProgressBar();
+            AssetDatabase.SaveAssets();
         }
     }
 

@@ -47,7 +47,7 @@ Mesh:
       dimension: 0
     - stream: 0
       offset: 12
-      format: 2
+      format: 0
       dimension: 4
     - stream: 0
       offset: 0
@@ -69,8 +69,8 @@ Mesh:
       offset: 0
       format: 0
       dimension: 0
-    m_DataSize: 96
-    _typelessdata: b0aacac0c0aa2ac000000000cecfd3ff00abaabea8aaba4100000000cecfd3ffa8aa3a4180aaaa3f00000000cecfd3ff585525c15855a5c100000000ced0cfffb0aacac0c0aa2ac000000000ced0cfffa8aa3a4180aaaa3f00000000ced0cfff
+    m_DataSize: 168
+    _typelessdata: b0aacac0c0aa2ac000000000cfce4e3fd0cf4f3fd4d3533f0000803f00abaabea8aaba4100000000cfce4e3fd0cf4f3fd4d3533f0000803fa8aa3a4180aaaa3f00000000cfce4e3fd0cf4f3fd4d3533f0000803f585525c15855a5c100000000cfce4e3fd1d0503fd0cf4f3f0000803fb0aacac0c0aa2ac000000000cfce4e3fd1d0503fd0cf4f3f0000803fa8aa3a4180aaaa3f00000000cfce4e3fd1d0503fd0cf4f3f0000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
