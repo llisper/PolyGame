@@ -26,9 +26,6 @@ class RegionBreaker
             EditorUtility.DisplayProgressBar("Break Disconnected Regions", path, (float)g / guids.Length);
             try
             {
-                if (!path.Contains("animal020"))
-                    continue;
-
                 var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
                 var go = GameObject.Instantiate(prefab);
                 go.name = prefab.name;
