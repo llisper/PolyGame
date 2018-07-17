@@ -28,6 +28,7 @@ class RegionBreaker
             {
                 var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
                 var go = GameObject.Instantiate(prefab);
+                go.name = prefab.name;
                 var graph = go.GetComponent<PolyGraph>();
                 if (Resolve(graph))
                     PrefabUtility.ReplacePrefab(go, prefab, ReplacePrefabOptions.ConnectToPrefab);
