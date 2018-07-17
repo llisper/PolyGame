@@ -33,7 +33,6 @@ class RegionBreaker
                 if (Resolve(graph))
                 {
                     PrefabUtility.ReplacePrefab(go, prefab, ReplacePrefabOptions.ConnectToPrefab);
-                    break;
                 }
                 GameObject.DestroyImmediate(go);
             }
@@ -117,11 +116,11 @@ class RegionBreaker
 
         if (regions.Count > 1)
         {
-            Debug.LogFormat("{0}: breaking region {1}", graph.name, xform.name);
+            Debug.LogFormat("<color=yellow>{0}: breaking region {1}</color>", graph.name, xform.name);
 
             foreach (var region in regions)
             {
-                Debug.LogFormat("{0}: create new region {1}", graph.name, nextIndex + 1);
+                Debug.LogFormat("<color=green>{0}: create new region {1}</color>", graph.name, nextIndex + 1);
                 NewRegion(region, triangles, graph, verts, colors, nextIndex++);
             }
 
