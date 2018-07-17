@@ -72,4 +72,12 @@ public class PolyGraph : MonoBehaviour
             ret += points[i];
         return ret / points.Length;
     }
+
+    public static Vector3 GetCentroid(params Vector3[] points)
+    {
+        Vector3 ret = Vector2.zero;
+        for (int i = 0; i < points.Length; ++i)
+            ret += points[i];
+        return ret / points.Length;
+    }
 }

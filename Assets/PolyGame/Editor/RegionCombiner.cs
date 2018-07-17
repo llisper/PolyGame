@@ -47,7 +47,7 @@ static class RegionCombiner
         return go;
     }
 
-    static int NextIndex(Transform root)
+    public static int NextIndex(Transform root)
     {
         int max = 0;
         for (int i = 0; i < root.childCount; ++i)

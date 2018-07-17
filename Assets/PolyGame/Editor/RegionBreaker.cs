@@ -48,17 +48,25 @@ class RegionBreaker
 
     static bool Resolve(PolyGraph graph)
     {
+        int nextIndex = 0;
         var xforms = new Transform[graph.transform.childCount];
         for (int i = 0; i < xforms.Length; ++i)
-            xforms[i] = graph.transform.GetChild(i);
+        {
+            var xform = graph.transform.GetChild(i);
+            xforms[i] = xform;
+            int index = int.Parse(xform.name);
+            if (index > nextIndex)
+                nextIndex = index;
+        }
+        ++nextIndex;
 
         bool modified = false;
         for (int i = 0; i < xforms.Length; ++i)
-            modified |= ResolveRegion(graph, xforms[i]);
+            modified |= ResolveRegion(graph, xforms[i], ref nextIndex);
         return modified;
     }
 
-    static bool ResolveRegion(PolyGraph graph, Transform xform)
+    static bool ResolveRegion(PolyGraph graph, Transform xform, ref int nextIndex)
     {
         List<Triangle> triangles = new List<Triangle>();
         List<List<int>> regions = new List<List<int>>();
@@ -105,12 +113,13 @@ class RegionBreaker
 
         if (regions.Count > 1)
         {
-            // TODO:
-            // 1. create new mesh
-            // 2. create new gameobject
-            // 3. destroy xform
+            Debug.LogFormat("{0}: breaking region {1}", graph.name, xform.name);
 
-            Debug.LogErrorFormat("{0}: region {1} needs to break", graph.name, xform.name);
+            foreach (var region in regions)
+                NewRegion(region, triangles, graph, verts, colors, nextIndex++);
+
+            GameObject.DestroyImmediate(xform);
+            GameObject.DestroyImmediate(mesh, true);
             return true;
         }
         else
@@ -137,5 +146,58 @@ class RegionBreaker
                 }
             }
         }
+    }
+    
+    static void NewRegion(
+        List<int> region,
+        List<Triangle> triangles,
+        PolyGraph graph,
+        Vector3[] verts,
+        Color[] colors,
+        int index)
+    {
+        GameObject triObj = new GameObject(
+            index.ToString(),
+            typeof(MeshFilter),
+            typeof(MeshRenderer),
+            typeof(MeshCollider));
+        Utils.SetupMeshRenderer(triObj);
+        triObj.tag = Tags.Debris;
+        triObj.layer = Layers.Debris;
+        triObj.transform.SetParent(graph.transform);
+
+        Vector3[] newVerts = new Vector3[triangles.Count * 3];
+        Color[] newColors = new Color[triangles.Count * 3];
+        for (int i = 0; i < triangles.Count; ++i)
+        {
+            for (int j = 0; j < 3; ++j)
+            {
+                int k = triangles[i].vertices[j];
+                newVerts[i + j] = verts[k];
+                newColors[i + j] = colors[k];
+            }
+        }
+        Vector3 centroid = PolyGraph.GetCentroid(newVerts);
+        int[] newTris = new int[newVerts.Length];
+        for (int i = 0; i < newVerts.Length; ++i)
+        {
+            newVerts[i] -= centroid;
+            newTris[i] = i;
+        }
+
+        var mesh = new Mesh();
+        mesh.name = "mesh_" + index;
+        mesh.vertices = newVerts;
+        mesh.triangles = newTris;
+        mesh.colors = newColors;
+
+        MeshUtility.Optimize(mesh);
+        string savePath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, graph.name, mesh.name);
+        AssetDatabase.CreateAsset(mesh, savePath);
+        AssetDatabase.SaveAssets();
+
+        triObj.GetComponent<MeshFilter>().mesh = mesh;
+        triObj.transform.localPosition = centroid;
+        triObj.GetComponent<MeshCollider>().sharedMesh = mesh;
     }
 }
