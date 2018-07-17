@@ -119,7 +119,7 @@ class RegionBreaker
             foreach (var region in regions)
                 NewRegion(region, triangles, graph, verts, colors, nextIndex++);
 
-            GameObject.DestroyImmediate(xform);
+            GameObject.DestroyImmediate(xform.gameObject);
             GameObject.DestroyImmediate(mesh, true);
             return true;
         }
