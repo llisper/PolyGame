@@ -31,7 +31,10 @@ class RegionBreaker
                 go.name = prefab.name;
                 var graph = go.GetComponent<PolyGraph>();
                 if (Resolve(graph))
+                {
                     PrefabUtility.ReplacePrefab(go, prefab, ReplacePrefabOptions.ConnectToPrefab);
+                    break;
+                }
                 GameObject.DestroyImmediate(go);
             }
             catch (Exception e)
@@ -117,10 +120,13 @@ class RegionBreaker
             Debug.LogFormat("{0}: breaking region {1}", graph.name, xform.name);
 
             foreach (var region in regions)
+            {
+                Debug.LogFormat("{0}: create new region {1}", graph.name, nextIndex + 1);
                 NewRegion(region, triangles, graph, verts, colors, nextIndex++);
+            }
 
             GameObject.DestroyImmediate(xform.gameObject);
-            GameObject.DestroyImmediate(mesh, true);
+            //GameObject.DestroyImmediate(mesh, true);
             return true;
         }
         else
@@ -157,16 +163,6 @@ class RegionBreaker
         Color[] colors,
         int index)
     {
-        GameObject triObj = new GameObject(
-            index.ToString(),
-            typeof(MeshFilter),
-            typeof(MeshRenderer),
-            typeof(MeshCollider));
-        Utils.SetupMeshRenderer(triObj);
-        triObj.tag = Tags.Debris;
-        triObj.layer = Layers.Debris;
-        triObj.transform.SetParent(graph.transform);
-
         Vector3[] newVerts = new Vector3[triangles.Count * 3];
         Color[] newColors = new Color[triangles.Count * 3];
         for (int i = 0; i < triangles.Count; ++i)
@@ -197,6 +193,15 @@ class RegionBreaker
         AssetDatabase.CreateAsset(mesh, savePath);
         AssetDatabase.SaveAssets();
 
+        GameObject triObj = new GameObject(
+            index.ToString(),
+            typeof(MeshFilter),
+            typeof(MeshRenderer),
+            typeof(MeshCollider));
+        Utils.SetupMeshRenderer(triObj);
+        triObj.tag = Tags.Debris;
+        triObj.layer = Layers.Debris;
+        triObj.transform.SetParent(graph.transform);
         triObj.GetComponent<MeshFilter>().mesh = mesh;
         triObj.transform.localPosition = centroid;
         triObj.GetComponent<MeshCollider>().sharedMesh = mesh;
