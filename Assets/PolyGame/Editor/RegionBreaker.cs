@@ -26,6 +26,9 @@ class RegionBreaker
             EditorUtility.DisplayProgressBar("Break Disconnected Regions", path, (float)g / guids.Length);
             try
             {
+                if (!path.Contains("animal020"))
+                    continue;
+
                 var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
                 var go = GameObject.Instantiate(prefab);
                 go.name = prefab.name;
@@ -117,15 +120,16 @@ class RegionBreaker
         if (regions.Count > 1)
         {
             Debug.LogFormat("<color=yellow>{0}: breaking region {1}</color>", graph.name, xform.name);
-
+            var mat = xform.GetComponent<MeshRenderer>().sharedMaterial;
             foreach (var region in regions)
             {
                 Debug.LogFormat("<color=green>{0}: create new region {1}</color>", graph.name, nextIndex + 1);
-                NewRegion(region, triangles, graph, verts, colors, nextIndex++);
+                NewRegion(region, triangles, graph, mat, verts, colors, nextIndex++);
             }
 
-            GameObject.DestroyImmediate(xform.gameObject);
-            //GameObject.DestroyImmediate(mesh, true);
+            // GameObject.DestroyImmediate(xform.gameObject);
+            // string meshPath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, graph.name, mesh.name);
+            // AssetDatabase.DeleteAsset(meshPath);
             return true;
         }
         else
@@ -158,19 +162,20 @@ class RegionBreaker
         List<int> region,
         List<Triangle> triangles,
         PolyGraph graph,
+        Material mat,
         Vector3[] verts,
         Color[] colors,
         int index)
     {
-        Vector3[] newVerts = new Vector3[triangles.Count * 3];
-        Color[] newColors = new Color[triangles.Count * 3];
-        for (int i = 0; i < triangles.Count; ++i)
+        Vector3[] newVerts = new Vector3[region.Count * 3];
+        Color[] newColors = new Color[region.Count * 3];
+        for (int i = 0; i < region.Count; ++i)
         {
             for (int j = 0; j < 3; ++j)
             {
-                int k = triangles[i].vertices[j];
-                newVerts[i + j] = verts[k];
-                newColors[i + j] = colors[k];
+                int k = triangles[region[i]].vertices[j];
+                newVerts[i * 3 + j] = verts[k];
+                newColors[i * 3 + j] = colors[k];
             }
         }
         Vector3 centroid = PolyGraph.GetCentroid(newVerts);
@@ -201,8 +206,9 @@ class RegionBreaker
         triObj.tag = Tags.Debris;
         triObj.layer = Layers.Debris;
         triObj.transform.SetParent(graph.transform);
-        triObj.GetComponent<MeshFilter>().mesh = mesh;
         triObj.transform.localPosition = centroid;
-        triObj.GetComponent<MeshCollider>().sharedMesh = mesh;
+        triObj.GetComponent<MeshFilter>().mesh = mesh;
+        triObj.GetComponent<MeshRenderer>().sharedMaterial = mat;
+        //triObj.GetComponent<MeshCollider>().sharedMesh = mesh;
     }
 }
