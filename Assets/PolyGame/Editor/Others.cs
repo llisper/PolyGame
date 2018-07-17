@@ -57,6 +57,39 @@ static class Others
         AssetDatabase.Refresh();
     }
 
+    [MenuItem("Tools/Others/Cleanup Vertex Layout")]
+    static void CleanupVertexLayout()
+    {
+        try
+        {
+            string[] guids = AssetDatabase.FindAssets("t:Mesh mesh_", new string[] { Paths.AssetArtworks });
+            for (int i = 0; i < guids.Length; ++i)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guids[i]);
+                EditorUtility.DisplayProgressBar("Cleanup Vertex Layout", path, (float)i / guids.Length);
+                Mesh mesh = AssetDatabase.LoadAssetAtPath<Mesh>(path);
+                var verts = mesh.vertices;
+                var tris = mesh.triangles;
+                var colors = mesh.colors;
+                mesh.Clear(false);
+                mesh.vertices = verts;
+                mesh.triangles = tris;
+                mesh.colors = colors;
+                MeshUtility.Optimize(mesh);
+                AssetDatabase.CreateAsset(mesh, path);
+                AssetDatabase.SaveAssets();
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
+        finally
+        {
+            EditorUtility.ClearProgressBar();
+        }
+    }
+
     /*
     [MenuItem("Tools/Others/Rename Assets")]
     static void RenameAssets()
