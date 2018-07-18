@@ -105,6 +105,7 @@ public class Game : MonoBehaviour
         initSequence.Add(AssetSystem.Init);
         initSequence.Add(ConfigLoader.Init);
         // initSequence.Add(HotfixSystem.Init);
+        initSequence.Add(UI.Init);
         initSequence.Add(GameScene.Init);
     }
 

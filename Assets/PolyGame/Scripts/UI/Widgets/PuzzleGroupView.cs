@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using ResourceModule;
 
 public class PuzzleGroupView : MonoBehaviour
 {
@@ -19,11 +20,11 @@ public class PuzzleGroupView : MonoBehaviour
         if (items.Count > itemsLimit)
             showCount = itemsLimit - 1;
 
-        var prefab = Resources.Load<GameObject>(Prefabs.PuzzleItem);
+        var prefab = PrefabLoader.Load(Prefabs.PuzzleItem);
         puzzleItems = new List<PuzzleItem>();
         for (int i = 0; i < showCount; ++i)
         {
-            var go = Instantiate(prefab, scrollRect.content.transform);
+            var go = prefab.Instantiate<GameObject>(scrollRect.content.transform);
             go.transform.SetSiblingIndex(i + 2);
             var ev = go.GetComponent<ItemEvents>();
             ev.onClicked += OnItemClicked;

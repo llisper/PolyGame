@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.IO;
 using System.Collections.Generic;
+using ResourceModule;
 
 public class MenuPanel : Panel
 {
@@ -46,7 +47,7 @@ public class MenuPanel : Panel
             }
             else
             {
-                var prefab = (GameObject)Resources.Load(string.Format(
+                var prefab = PrefabLoader.Load(string.Format(
                     "{0}/{1}/{1}_{2}",
                     Paths.Artworks,
                     text,
@@ -54,7 +55,8 @@ public class MenuPanel : Panel
 
                 if (null != prefab)
                 {
-                    snapshot.texture = prefab.GetComponent<PuzzleSnapshotHolder>().texture;
+                    var prefabObject = (GameObject)prefab.Object;
+                    snapshot.texture = prefabObject.GetComponent<PuzzleSnapshotHolder>().texture;
                     snapshot.enabled = true;
                 }
             }

@@ -128,6 +128,7 @@ public class Prefabs
     public const string PuzzleCamera = "Prefabs/PuzzleCamera";
     public const string Background = "Prefabs/Background";
 
+    public const string UI = "UI/UI";
     public const string PuzzleGroupView = "UI/Widgets/PuzzleGroupView";
     public const string PuzzleItem = "UI/Widgets/PuzzleItem";
 }

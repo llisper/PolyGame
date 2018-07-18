@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using ResourceModule;
 
 public class ArtCollectionPanel : Panel
 {
@@ -10,12 +11,12 @@ public class ArtCollectionPanel : Panel
 
     void Start()
     {
-        var prefab = Resources.Load<GameObject>(Prefabs.PuzzleGroupView);
+        var prefab = PrefabLoader.Load(Prefabs.PuzzleGroupView);
         var groups = ArtCollection.Instance.groups;
         groupViews = new List<PuzzleGroupView>();
         for (int i = 0; i < groups.Count; ++i)
         {
-            var go = Instantiate(prefab, transform);
+            var go = prefab.Instantiate<GameObject>(transform);
             go.transform.SetParent(scrollRect.content.transform);
             var view = go.GetComponent<PuzzleGroupView>();
             view.Init(groups[i]);

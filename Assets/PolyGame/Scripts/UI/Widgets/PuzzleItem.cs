@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using ResourceModule;
 
 public class PuzzleItem : MonoBehaviour
 {
@@ -41,14 +42,17 @@ public class PuzzleItem : MonoBehaviour
         }
         else
         {
-            var prefab = (GameObject)Resources.Load(string.Format(
+            var prefab = PrefabLoader.Load(string.Format(
                 "{0}/{1}/{1}_{2}",
                 Paths.Artworks,
                 graphName,
                 Paths.Snapshot));
 
             if (null != prefab)
-                rawImage.texture = prefab.GetComponent<PuzzleSnapshotHolder>().texture;
+            {
+                var prefabObject = (GameObject)prefab.Object;
+                rawImage.texture = prefabObject.GetComponent<PuzzleSnapshotHolder>().texture;
+            }
         }
     }
 }

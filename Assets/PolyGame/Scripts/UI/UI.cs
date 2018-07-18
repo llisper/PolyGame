@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
+using ResourceModule;
 
 public enum UILayer
 {
@@ -17,9 +19,10 @@ public class UI : MonoBehaviour
     Transform[] layers;
     Dictionary<Type, Panel> panels = new Dictionary<Type, Panel>();
 
-    public static void Init()
+    public static async Task Init()
     {
-        Instantiate(Resources.Load("UI/UI"));
+        var prefab = PrefabLoader.Load(Prefabs.UI);
+        prefab.Instantiate();
     }
 
     void Awake()
@@ -44,14 +47,14 @@ public class UI : MonoBehaviour
         if (!panels.TryGetValue(type, out panel))
         {
             string path = "UI/" + type.Name;
-            var prefab = Resources.Load(path);
+            var prefab = PrefabLoader.Load(path);
             if (null == prefab)
             {
                 Debug.LogError("Failed to load UI: " + path);
                 return null;
             }
 
-            var go = (GameObject)Instantiate(prefab, GetLayer(layer));
+            var go = prefab.Instantiate<GameObject>(GetLayer(layer));
             panel = go.GetComponent<Panel>();
             panels.Add(type, panel);
         }

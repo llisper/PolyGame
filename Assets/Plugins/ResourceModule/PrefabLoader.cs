@@ -15,6 +15,7 @@ namespace ResourceModule
         public PrefabResource(string path) : base(path) { }
 
         public string Name { get { return prefabObject.name; } }
+        public UnityEngine.Object Object { get { return prefabObject; } }
         public override bool RequireTick { get { return true; } }
 
         public void KeepReference()
