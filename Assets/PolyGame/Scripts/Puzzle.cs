@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using ResourceModule;
 
 public partial class Puzzle : MonoBehaviour
 {
     public static void Start(string puzzleName)
     {
-        GameScene.LoadScene<PuzzleScene>((c, n) => 
+        GameScene.LoadScene<PuzzleScene>(() => 
         {
             var go = new GameObject("Puzzle_" + puzzleName);
             var puzzle = go.AddComponent<Puzzle>();
             puzzle.Run(puzzleName);
-        });
+        }).WrapErrors();
     }
 
     public static Puzzle Current;
@@ -139,8 +140,8 @@ public partial class Puzzle : MonoBehaviour
 
     void LoadPuzzleObject()
     {
-        var prefab = Resources.Load(string.Format("{0}/{1}/{1}", Paths.Artworks, puzzleName));
-        var go = (GameObject)Instantiate(prefab, transform);
+        var prefab = PrefabLoader.Load(string.Format("{0}/{1}/{1}", Paths.Artworks, puzzleName));
+        var go = prefab.Instantiate<GameObject>(transform);
         go.name = puzzleName;
 
         for (int i = 0; i < go.transform.childCount; ++i)
@@ -156,10 +157,10 @@ public partial class Puzzle : MonoBehaviour
 
     void LoadWireframe()
     {
-        var prefab = Resources.Load(string.Format("{0}/{1}/{1}_{2}", Paths.Artworks, puzzleName, Paths.Wireframe));
-        var go = (GameObject)Instantiate(prefab, transform);
+        var prefab = PrefabLoader.Load(string.Format("{0}/{1}/{1}_{2}", Paths.Artworks, puzzleName, Paths.Wireframe));
+        var go = prefab.Instantiate<GameObject>(transform);
         go.transform.position = new Vector3(0f, 0f, Config.Instance.zorder.wireframe);
-        go.name = prefab.name;
+        go.name = prefab.Name;
         wireframeObject = go.GetComponent<PuzzleWireframe>();
     }
 
@@ -298,7 +299,7 @@ public partial class Puzzle : MonoBehaviour
 
         ShowWireframe(true);
         isMovingDebris = true;
-        Debug.Log("Pick " + objPicked);
+        GameLog.Log("Pick " + objPicked);
         return true;
     }
 

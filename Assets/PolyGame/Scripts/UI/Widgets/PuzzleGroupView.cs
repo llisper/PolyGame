@@ -55,7 +55,7 @@ public class PuzzleGroupView : MonoBehaviour
 
     void OnSeeAllClicked(GameObject go)
     {
-        Debug.Log("OnSeeAllClicked");
+        GameLog.Verbose("OnSeeAllClicked");
     }
 
     void OnItemClicked(GameObject go)

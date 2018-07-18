@@ -53,10 +53,8 @@ public class Game : MonoBehaviour
 
     void Start()
     {
-        ConfigLoader.LoadAll();
         Init();
-        UI.Init();
-        GameScene.Init();
+        // UI.Init();
     }
 
     void Update()
@@ -105,7 +103,9 @@ public class Game : MonoBehaviour
     {
         initSequence.Add(ResourceSystem.Init);
         initSequence.Add(AssetSystem.Init);
+        initSequence.Add(ConfigLoader.Init);
         // initSequence.Add(HotfixSystem.Init);
+        initSequence.Add(GameScene.Init);
     }
 
     async void Init()

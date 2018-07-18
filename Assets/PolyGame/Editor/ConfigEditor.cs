@@ -67,7 +67,7 @@ static class ConfigEditor
 
                 if (string.IsNullOrEmpty(item.bgColor))
                 {
-                    var go = Resources.Load<GameObject>(string.Format("{0}/{1}/{1}", Paths.Artworks, item.name));
+                    var go = AssetDatabase.LoadAssetAtPath<GameObject>(string.Format("{0}/{1}/{1}", Paths.AssetResArtworks, item.name));
                     var color = PuzzleBackground.AvarageColor(go.GetComponent<PolyGraph>());
                     item.bgColor = Utils.ColorToString(color);
                 }

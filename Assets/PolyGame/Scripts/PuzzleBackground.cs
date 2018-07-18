@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using ResourceModule;
 
 public class PuzzleBackground
 {
     public static GameObject Create(PolyGraph graph, Bounds bounds)
     {
-        var prefab = Resources.Load<GameObject>(Prefabs.Background);
-        var go = GameObject.Instantiate(prefab);
+        var prefab = PrefabLoader.Load(Prefabs.Background);
+        var go = prefab.Instantiate<GameObject>();
 
         bounds = CalculateBounds(bounds);
         go.transform.localScale = new Vector3(bounds.size.x, bounds.size.y, 1f);

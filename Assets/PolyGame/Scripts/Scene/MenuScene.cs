@@ -5,11 +5,11 @@ public class MenuScene : GameScene.IScene
 
 	public void Start()
     {
-        artCollectionPanel = UI.Instance.OpenPanel<ArtCollectionPanel>();
+        // artCollectionPanel = UI.Instance.OpenPanel<ArtCollectionPanel>();
 	}
 	
 	public void OnDestroy()
     {
-        artCollectionPanel.gameObject.SetActive(false);
+        // artCollectionPanel.gameObject.SetActive(false);
 	}
 }

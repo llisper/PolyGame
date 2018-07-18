@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Threading.Tasks;
 
 public class ScreenOverlay : Panel
 {
@@ -23,6 +24,16 @@ public class ScreenOverlay : Panel
     }
 
     public override bool Persistent { get { return true; } }
+
+    public static async Task AsyncFade(bool fadeIn)
+    {
+        if (null != Instance)
+        {
+            Instance.gameObject.SetActive(true);
+            Instance.Finish();
+            await Instance.Fading(fadeIn);
+        }
+    }
 
     public static Coroutine Fade(bool fadeIn)
     {

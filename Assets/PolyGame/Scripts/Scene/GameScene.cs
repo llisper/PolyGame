@@ -2,6 +2,8 @@
 using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
+using System.Threading.Tasks;
+using ResourceModule;
 
 public class GameScene
 {
@@ -11,63 +13,48 @@ public class GameScene
         void OnDestroy();
     }
 
-    public delegate void OnSceneLoaded(Scene current, Scene next);
+    public delegate void OnSceneLoaded();
     static OnSceneLoaded onSceneLoaded;
 
     static IScene current;
-    static bool sceneChangedFlag;
 
-    public static void Init()
+    public static async Task Init()
     {
-        SceneManager.activeSceneChanged += ActiveSceneChanged;
-        LoadScene<MenuScene>();
+        await LoadScene<MenuScene>();
     }
 
-    public static void LoadScene<T>(OnSceneLoaded onSceneLoaded = null) where T : IScene
+    public static async Task LoadScene<T>(OnSceneLoaded onSceneLoaded = null) where T : IScene
     {
         GameScene.onSceneLoaded = onSceneLoaded;
-        Game.Instance.StartCoroutine(Loading(typeof(T)));
+        await Loading(typeof(T));
     }
 
-    static IEnumerator Loading(Type sceneType)
+    static async Task Loading(Type sceneType)
     {
         string sceneName = sceneType.Name.Replace("Scene", "");
         if (string.IsNullOrEmpty(sceneName))
         {
             Debug.LogErrorFormat("Failed to load scene {0}({1})", sceneName, sceneType.Name);
             onSceneLoaded = null;
-            yield break;
+            return;
         }
 
-        yield return ScreenOverlay.Fade(false);
+        // await ScreenOverlay.AsyncFade(false);
 
         if (null != current)
             current.OnDestroy();
         current = null;
-        UI.Instance.ClosePanelsWhenSceneDestroy();
+        // UI.Instance.ClosePanelsWhenSceneDestroy();
 
-        sceneChangedFlag = false;
-        var asyncOp = SceneManager.LoadSceneAsync(sceneName);
-        while (asyncOp.isDone)
-            yield return null;
+        await SceneLoader.AsyncLoad(sceneName);
 
         current = (IScene)Activator.CreateInstance(sceneType);
         current.Start();
 
-        while (!sceneChangedFlag)
-            yield return null;
-
-        Resources.UnloadUnusedAssets();
-        GC.Collect();
-
-        yield return ScreenOverlay.Fade(true);
-    }
-
-    static void ActiveSceneChanged(Scene current, Scene next)
-    {
         if (null != onSceneLoaded)
-            onSceneLoaded(current, next);
+            onSceneLoaded();
         onSceneLoaded = null;
-        sceneChangedFlag = true;
+
+        // await ScreenOverlay.AsyncFade(true);
     }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.IO;
+using ResourceModule;
 
 [ExecuteInEditMode]
 public class PuzzleSnapshot : MonoBehaviour
@@ -22,7 +23,8 @@ public class PuzzleSnapshot : MonoBehaviour
         renderTexture.name = "PuzzleSnapshotRT";
         renderTexture.Create();
 
-        var camGo = (GameObject)Instantiate(Resources.Load(Prefabs.PuzzleCamera), transform, true);
+        var camPrefab = PrefabLoader.Load(Prefabs.PuzzleCamera);
+        var camGo = camPrefab.Instantiate<GameObject>(transform, true);
         ssCamera = camGo.GetComponent<Camera>();
         ssCamera.cullingMask = (1 << Layers.Snapshot);
         ssCamera.targetTexture = renderTexture;
@@ -40,8 +42,8 @@ public class PuzzleSnapshot : MonoBehaviour
     public void Init(string puzzleName, bool[] finished = null)
     {
         this.puzzleName = puzzleName;
-        var prefab = Resources.Load(string.Format("{0}/{1}/{1}", Paths.Artworks, puzzleName));
-        var go = (GameObject)Instantiate(prefab, transform);
+        var prefab = PrefabLoader.Load(string.Format("{0}/{1}/{1}", Paths.Artworks, puzzleName));
+        var go = prefab.Instantiate<GameObject>(transform);
         InternalInit(go.GetComponent<PolyGraph>(), finished);
     }
 
@@ -77,7 +79,7 @@ public class PuzzleSnapshot : MonoBehaviour
                 path = null != path ? path : Paths.SnapshotSave(puzzleName);
                 Directory.CreateDirectory(Path.GetDirectoryName(path));
                 File.WriteAllBytes(path, bytes);
-                Debug.Log("Save snapshot to " + path);
+                GameLog.Log("Save snapshot to " + path);
             }
             catch (Exception e)
             {

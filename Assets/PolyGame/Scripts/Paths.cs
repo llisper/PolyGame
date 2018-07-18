@@ -6,8 +6,8 @@ public class Paths
     public const string Configs = "Configs";
     public const string AssetArtworks = "Assets/PolyGame/Art/Artworks";
     public const string AssetArtworksNoPrefix = "PolyGame/Art/Artworks";
-    public const string AssetResArtworks = "Assets/Resources/Artworks";
-    public const string AssetResArtworksNoPrefix = "Resources/Artworks";
+    public const string AssetResArtworks = "Assets/Res/Artworks";
+    public const string AssetResArtworksNoPrefix = "Res/Artworks";
     public const string PolyWireframeMat = "Assets/PolyGame/Art/Materials/PolyWireframe.mat";
     public const string PolyGraphMat = "Assets/PolyGame/Art/Materials/PolyGraph.mat";
 

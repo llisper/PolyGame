@@ -2,6 +2,8 @@ using UnityEngine;
 using System;
 using System.Text;
 using System.Reflection;
+using System.Threading.Tasks;
+using ResourceModule;
 
 public abstract class IConfig<T> where T : IConfig<T>
 {
@@ -16,6 +18,11 @@ public static class ConfigLoader
         typeof(ArtCollection),
         typeof(I18n),
     };
+
+    public static async Task Init()
+    {
+        LoadAll();
+    }
 
     public static void LoadAll()
     {
@@ -66,32 +73,31 @@ public static class ConfigLoader
 
     static string LoadJson(Type type)
     {
-        byte[] bytes = null;
+        string json = null;
         if (type != typeof(I18n))
         {
-            string path = string.Format("{0}/{1}", Paths.Configs, type.Name);
-            var asset = Resources.Load<TextAsset>(path);
-            if (null != asset)
-                bytes = asset.bytes;
-            else
-                throw new Exception("Failed to load Config: " + type.Name);
+            string path = string.Format("{0}/{1}.json", Paths.Configs, type.Name);
+            json = FileLoader.LoadString(path);
         }
         else
         {
             var lang = Application.systemLanguage;
-            string path = string.Format("{0}/{1}/{2}", Paths.Configs, type.Name, lang);
-            var asset = Resources.Load<TextAsset>(path);
-            if (null == asset && lang != SystemLanguage.English)
+            string path = string.Format("{0}/{1}/{2}.json", Paths.Configs, type.Name, lang);
+            if (FileLoader.Exists(path))
+            {
+                json = FileLoader.LoadString(path);
+            }
+            else if (lang != SystemLanguage.English)
             {
                 lang = SystemLanguage.English;
                 path = string.Format("{0}/{1}/{2}", Paths.Configs, type.Name, lang);
-                asset = Resources.Load<TextAsset>(path);
+                if (FileLoader.Exists(path))
+                    json = FileLoader.LoadString(path);
             }
-            if (null != asset)
-                bytes = asset.bytes;
-            else
+
+            if (null == json)
                 throw new Exception(string.Format("Failed to load I18n: {0}, default(English) also failed", Application.systemLanguage));
         }
-        return Encoding.UTF8.GetString(Utils.RemoveBOM(bytes));
+        return json;
     }
 }

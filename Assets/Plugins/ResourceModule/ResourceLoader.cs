@@ -27,8 +27,15 @@ namespace ResourceModule
         {
             get
             {
-                return ResourceSystem.Instance.mode == ResourceSystem.Mode.Dev && 
-                       Application.isEditor;
+                if (Application.isPlaying)
+                {
+                    return ResourceSystem.Instance.mode == ResourceSystem.Mode.Dev && 
+                        Application.isEditor;
+                }
+                else
+                {
+                    return true;
+                }
             }
         }
 

@@ -14,6 +14,7 @@ namespace ResourceModule
 
         public PrefabResource(string path) : base(path) { }
 
+        public string Name { get { return prefabObject.name; } }
         public override bool RequireTick { get { return true; } }
 
         public void KeepReference()
