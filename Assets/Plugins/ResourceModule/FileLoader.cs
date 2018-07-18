@@ -14,8 +14,13 @@ namespace ResourceModule
             {
                 if (IsDev)
                 {
-                    path = Application.dataPath + "/Resources/" + path;
-                    return File.ReadAllBytes(path);
+                    #if UNITY_EDITOR
+                    path = string.Format("{0}/{1}", PathRouter.Res, path);
+                    var asset = UnityEditor.AssetDatabase.LoadAssetAtPath<TextAsset>(path);
+                    return null != asset ? asset.bytes : null;
+                    #else
+                    throw new ApplicationException("IsDev is not allowed unless in Editor");
+                    #endif
                 }
                 else
                 {
@@ -47,9 +52,18 @@ namespace ResourceModule
         public static bool Exists(string path)
         {
             if (IsDev)
-                return File.Exists(Application.dataPath + "/Resources/" + path);
+            {
+                #if UNITY_EDITOR
+                path = string.Format("{0}/{1}", PathRouter.Res, path);
+                return null != UnityEditor.AssetDatabase.LoadAssetAtPath<TextAsset>(path);
+                #else
+                throw new ApplicationException("IsDev is not allowed unless in Editor");
+                #endif
+            }
             else
+            {
                 return PathLocation.NotFound != PathRouter.Exists(path);
+            }
         }
 
         protected override Task AsyncRun()

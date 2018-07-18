@@ -129,12 +129,17 @@ namespace ResourceModule
                     {
                         if (IsDev)
                         {
-                            res.prefabObject = Resources.Load(path);
+                            #if UNITY_EDITOR
+                            string assetPath = string.Format("{0}/{1}.prefab", PathRouter.Res, path);
+                            res.prefabObject = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
                             if (null == res.prefabObject)
                             {
                                 throw new ApplicationException(string.Format(
-                                    "Resources.Load(\"{0}\") => null", path));
+                                    "UnityEditor.AssetDatabase.LoadAssetAtPath(\"{0}\") => null", assetPath));
                             }
+                            #else
+                            throw new ApplicationException("Load prefab in IsDev is not allowed unless in Editor");
+                            #endif
                         }
                         else
                         {
@@ -184,13 +189,18 @@ namespace ResourceModule
             {
                 if (IsDev)
                 {
-                    prefabResource.prefabObject = Resources.Load(Url);
+                    #if UNITY_EDITOR
+                    string assetPath = string.Format("{0}/{1}.prefab", PathRouter.Res, Url);
+                    prefabResource.prefabObject = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
                     if (null == prefabResource.prefabObject)
                     {
                         throw new ApplicationException(string.Format(
-                            "Resources.Load(\"{0}\") => null", Url));
+                            "UnityEditor.AssetDatabase.LoadAssetAtPath(\"{0}\") => null", assetPath));
                     }
                     Progress = 1f;
+                    #else
+                    throw new ApplicationException("IsDev is not allowed unless in Editor");
+                    #endif
                 }
                 else
                 {

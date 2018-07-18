@@ -22,6 +22,7 @@ namespace ResourceModule
         public const string Version = "Version.json";
         public const string FileManifest = "FileManifest.json";
         public const string Sandbox = "Sandbox";
+        public const string Res = "Assets/Res";
 
         public static string ProductPath = Application.dataPath + "/../Product/";
 
@@ -90,6 +91,12 @@ namespace ResourceModule
             ResLog.Log("SandboxPathWithProtocol: " + SandboxPathWithProtocol);
             ResLog.Log("StreamingPath: " + StreamingPath);
             ResLog.Log("StreamingPathWithProtocol: " + StreamingPathWithProtocol);
+        }
+
+        public static string NoPrefix(string path)
+        {
+            // remove "Assets/"
+            return path.Remove(0, 7);
         }
 
         public static string NormalizePath(string path)

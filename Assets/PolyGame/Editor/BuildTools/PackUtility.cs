@@ -8,7 +8,7 @@ public class PackUtility
 {
     static string _versionName = "0.1";
     static string _cdn = "http://10.1.38.218:8080/Product";
-    static string[] _copyFolders = new string[] { "Lua", "Config", "Table" };
+    static string[] _copyFolders = new string[] { "Configs" };
 
     public static void Setup(string versionName, string cdn)
     {
@@ -45,11 +45,11 @@ public class PackUtility
         EditorUtility.DisplayProgressBar(buildTarget.ToString(), "Copy To Product", 0f);
         CopyFilesToProduct(buildTarget);
 
-        EditorUtility.DisplayProgressBar(buildTarget.ToString(), "Generate FileManifest", 0f);
-        GenerateFileManifest.Generate(buildTarget);
+        // EditorUtility.DisplayProgressBar(buildTarget.ToString(), "Generate FileManifest", 0f);
+        // GenerateFileManifest.Generate(buildTarget);
 
-        EditorUtility.DisplayProgressBar(buildTarget.ToString(), "Generate Version", 0f);
-        GenerateVersion.Generate(_versionName, _cdn, buildTarget);
+        // EditorUtility.DisplayProgressBar(buildTarget.ToString(), "Generate Version", 0f);
+        // GenerateVersion.Generate(_versionName, _cdn, buildTarget);
 
         Debug.Log("Build resources for " + buildTarget);
     }
@@ -142,7 +142,7 @@ public class PackUtility
 
     static void CopyFilesToProduct(BuildTarget buildTarget)
     {
-        string srcRoot = Application.dataPath + "/Resources/";
+        string srcRoot = string.Format("{0}/{1}/", Application.dataPath, PathRouter.NoPrefix(PathRouter.Res));
         string destRoot = PathRouter.ProductPath + buildTarget + '/';
         foreach (string folder in _copyFolders)
         {
