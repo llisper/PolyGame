@@ -23,8 +23,7 @@ class AssetInfo
 
 public static class AssetBundleMaker
 {
-    public const string Prefabs = "Assets/Resources/Prefabs";
-    public const string WorldMap = "Assets/Resources/WorldMap/Prefabs";
+    public const string Prefabs = "Assets/Resources";
     public const string Scenes = "Assets/Scenes";
 
     static Dictionary<string, AssetInfo> _assetCollection = new Dictionary<string, AssetInfo>();
@@ -35,7 +34,7 @@ public static class AssetBundleMaker
         _assetCollection.Clear();
         string[] guids = AssetDatabase.FindAssets(
             "t:Object",
-            new string[] { Prefabs, WorldMap, Scenes });
+            new string[] { Prefabs, Scenes });
 
         guids = guids.Distinct().ToArray();
         foreach (string guid in guids)
@@ -146,7 +145,7 @@ public static class AssetBundleMaker
 
     static string AssetBundleName(string path)
     {
-        return path.Replace("Assets/Resources/", "").Replace("Assets/", "") + PathRouter.AssetBundleSuffix;
+        return path.Replace("Assets/", "") + PathRouter.AssetBundleSuffix;
     }
 
     public static void Build(BuildTarget buildTarget)
