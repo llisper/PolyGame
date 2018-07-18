@@ -36,6 +36,13 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+Product/
 
+# StreamingAssets
+Assets/StreamingAssets/
+Assets/StreamingAssets.meta
+
+# Others
+AssetInfo
 Assets/PolyGame/Art/Shaders/Materials.meta
 Assets/PolyGame/Art/Shaders/Meshes.meta
