@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#pragma warning disable 649
 namespace ResourceModule.Test
 {
     class LoadSceneTester : MonoBehaviour
@@ -78,3 +79,4 @@ namespace ResourceModule.Test
         }
     }
 }
+#pragma warning restore 649

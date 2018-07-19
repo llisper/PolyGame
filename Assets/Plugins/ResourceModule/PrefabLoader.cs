@@ -151,7 +151,11 @@ namespace ResourceModule
                         }
                         else
                         {
-                            string bundleName = path + ".prefab" + PathRouter.AssetBundleSuffix;
+                            string bundleName = string.Format(
+                                "{0}/{1}.prefab{2}",
+                                PathRouter.NoPrefix(PathRouter.Res),
+                                path,
+                                PathRouter.AssetBundleSuffix);
                             var assetBundleHandle = AssetBundleLoader.Load(bundleName);
 
                             res.prefabObject = assetBundleHandle.Bundle.LoadAsset(

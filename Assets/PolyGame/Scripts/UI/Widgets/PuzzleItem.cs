@@ -7,6 +7,7 @@ public class PuzzleItem : MonoBehaviour
 {
     RawImage rawImage;
     Texture2D tex2d;
+    PrefabResource snapshotPrefab;
     string graphName;
 
     void Awake()
@@ -18,6 +19,8 @@ public class PuzzleItem : MonoBehaviour
     {
         if (null != tex2d)
             GameObject.Destroy(tex2d);
+        if (null != snapshotPrefab)
+            snapshotPrefab.Release();
     }
 
     public void Init(string graphName)
@@ -42,15 +45,21 @@ public class PuzzleItem : MonoBehaviour
         }
         else
         {
-            var prefab = PrefabLoader.Load(string.Format(
-                "{0}/{1}/{1}_{2}",
-                Paths.Artworks,
-                graphName,
-                Paths.Snapshot));
-
-            if (null != prefab)
+            if (null == snapshotPrefab)
             {
-                var prefabObject = (GameObject)prefab.Object;
+                snapshotPrefab = PrefabLoader.Load(string.Format(
+                    "{0}/{1}/{1}_{2}",
+                    Paths.Artworks,
+                    graphName,
+                    Paths.Snapshot));
+
+                if (null != snapshotPrefab)
+                    snapshotPrefab.KeepReference();
+            }
+
+            if (null != snapshotPrefab)
+            {
+                var prefabObject = (GameObject)snapshotPrefab.Object;
                 rawImage.texture = prefabObject.GetComponent<PuzzleSnapshotHolder>().texture;
             }
         }

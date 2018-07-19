@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 
+#pragma warning disable 649
 namespace ResourceModule.Test
 {
     class LoadPrefabTester : MonoBehaviour
@@ -131,3 +132,4 @@ namespace ResourceModule.Test
         }
     }
 }
+#pragma warning restore 649
