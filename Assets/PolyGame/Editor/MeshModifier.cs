@@ -9,7 +9,7 @@ class MeshModifier : EditorWindow
 {
     public static MeshModifier Instance { get; private set; }
 
-    [MenuItem("Tools/Mesh Modifier")]
+    [MenuItem("[PolyGame]/Mesh Modifier")]
     public static void ShowWindow()
     {
         GetWindow<MeshModifier>().Show();

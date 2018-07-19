@@ -13,7 +13,7 @@ class RegionBreaker
         public List<int> adjacents;
     }
 
-    [MenuItem("Tools/Break Disconnected Regions")]
+    [MenuItem("[PolyGame]/Break Disconnected Regions")]
     static void BreakDisconnectedRegions()
     {
         string[] guids = AssetDatabase.FindAssets("t:GameObject", new string[] { Paths.AssetResArtworks });

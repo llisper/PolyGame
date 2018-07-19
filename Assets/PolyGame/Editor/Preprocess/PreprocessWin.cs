@@ -7,7 +7,7 @@ using System.Linq;
 
 class PreprocessWin : EditorWindow
 {
-    [MenuItem("Tools/Preprocess/Open")]
+    [MenuItem("[PolyGame]/Preprocess/Open")]
     public static void ShowWindow()
     {
         GetWindow<PreprocessWin>().Show();

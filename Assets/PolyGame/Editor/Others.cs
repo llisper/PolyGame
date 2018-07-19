@@ -31,7 +31,7 @@ static class Others
         GameObject.DestroyImmediate(go);
     }
 
-    [MenuItem("Tools/Others/Clear Saves")]
+    [MenuItem("[PolyGame]/Others/Clear Saves")]
     static void ClearSaves()
     {
         if (Directory.Exists(Paths.Saves))
@@ -41,7 +41,7 @@ static class Others
         }
     }
 
-    [MenuItem("Tools/Others/Generate Initial Snapshots")]
+    [MenuItem("[PolyGame]/Others/Generate Initial Snapshots")]
     static void GenerateInitialSnapshots()
     {
         string[] dirs = Directory.GetDirectories(Application.dataPath + '/' + Paths.AssetResArtworksNoPrefix);
@@ -57,7 +57,7 @@ static class Others
         AssetDatabase.Refresh();
     }
 
-    [MenuItem("Tools/Others/Cleanup Vertex Layout")]
+    [MenuItem("[PolyGame]/Others/Cleanup Vertex Layout")]
     static void CleanupVertexLayout()
     {
         try
@@ -91,7 +91,7 @@ static class Others
     }
 
     /*
-    [MenuItem("Tools/Others/Rename Assets")]
+    [MenuItem("[PolyGame]/Others/Rename Assets")]
     static void RenameAssets()
     {
         try
@@ -175,7 +175,7 @@ static class Others
     }
 
 
-    [MenuItem("Tools/Others/Set Snapshot Env")]
+    [MenuItem("[PolyGame]/Others/Set Snapshot Env")]
     static void SetSnapshotEnv()
     {
         var go = new GameObject("PuzzleSnapshot");
@@ -183,7 +183,7 @@ static class Others
         snapshot.Init("Animal005");
     }
 
-    [MenuItem("Tools/Others/UseSharedMat")]
+    [MenuItem("[PolyGame]/Others/UseSharedMat")]
     static void UseSharedMat()
     {
         var mat = AssetDatabase.LoadAssetAtPath<Material>(Paths.PolyGraphMat);
@@ -215,7 +215,7 @@ static class Others
         AssetDatabase.SaveAssets();
     }
 
-    [MenuItem("Tools/Others/RecalculateSize")]
+    [MenuItem("[PolyGame]/Others/RecalculateSize")]
     static void RecalucateSize()
     {
         string[] guids = AssetDatabase.FindAssets("t:GameObject", new string[] { Paths.AssetResArtworks });
@@ -268,7 +268,7 @@ static class Others
         AssetDatabase.SaveAssets();
     }
 
-    [MenuItem("Tools/Others/Update PolyGraph")]
+    [MenuItem("[PolyGame]/Others/Update PolyGraph")]
     static void UpdatePolyGraph()
     {
         string[] guids = AssetDatabase.FindAssets("t:GameObject", new string[] { Paths.AssetResArtworks });

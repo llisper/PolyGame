@@ -103,7 +103,7 @@ class WireframeCreator
         GameObject.DestroyImmediate(wireframeObject);
     }
 
-    [MenuItem("Tools/Others/Regenerate Wireframes")]
+    [MenuItem("[PolyGame]/Others/Regenerate Wireframes")]
     static void RegenerateWireframes()
     {
         string[] guids = AssetDatabase.FindAssets("t:GameObject", new string[] { Paths.AssetResArtworks });

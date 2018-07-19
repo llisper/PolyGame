@@ -14,7 +14,7 @@ static class ConfigEditor
         ConfigLoader.LoadAll();
     }
 
-    [MenuItem("Tools/Configs/Generate Default Configs")]
+    [MenuItem("[PolyGame]/Configs/Generate Default Configs")]
     static void GenerateDefaultConfigs()
     {
         string dir = string.Format("{0}/Resources/{1}/", Application.dataPath, Paths.Configs);
@@ -33,7 +33,7 @@ static class ConfigEditor
         Debug.Log("Done!");
     }
 
-    [MenuItem("Tools/Configs/Auto Fill ArtCollection")]
+    [MenuItem("[PolyGame]/Configs/Auto Fill ArtCollection")]
     static void AutoFillArtCollection()
     {
         try
@@ -89,7 +89,7 @@ static class ConfigEditor
     }
 
 
-    [MenuItem("Tools/Configs/Reload All")]
+    [MenuItem("[PolyGame]/Configs/Reload All")]
     static void ReloadAll()
     {
         ConfigLoader.LoadAll();
