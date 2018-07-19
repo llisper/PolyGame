@@ -22,7 +22,7 @@ def parse():
     parser.add_argument('-buildTarget', choices=['Android', 'iOS'], default='Android')
     parser.add_argument('-appIdentifier', action=CheckIdentifier, default='com.polygame.test')
     parser.add_argument('-version', action=CheckVersionName, default='0.1')
-    parser.add_argument('-cdn', default='http://10.1.38.218:8080/Product')
+    parser.add_argument('-cdn', default='http://localhost:8080/Product')
     parser.add_argument('-release', action='store_true', default=False, help='build release package')
     parser.add_argument('-buildFlags', nargs='*', choices=['None', 'Resource', 'Bundle'], default=['Resource', 'Bundle'])
     return parser.parse_args()

@@ -25,8 +25,6 @@ def clean(env):
     if os.path.exists(product_path):
         shutil.rmtree(product_path)
 
-def quote(name): return '"{0}"'.format(name)
-
 def generate_project(env, args):
     if not os.path.exists(build_path):
         os.makedirs(build_path)
@@ -43,7 +41,7 @@ def generate_project(env, args):
         '-executeMethod', 'BuildAPIs.BuildAndroid',
         args.appIdentifier,
         args.version,
-        quote(args.cdn),
+        args.name,
         '|'.join(args.buildFlags),
         str(not args.release).lower()
     ]

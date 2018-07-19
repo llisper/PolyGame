@@ -39,6 +39,8 @@ public class BuildAPIs
             PackUtility.BuildAndroidResources();
         }
 
+        PackUtility.GenerateAndroidStreamingAssets();
+
         if ((args.buildFlags & BuildFlags.Bundle) == BuildFlags.Bundle)
         {
             PkgBuilder.BuildAndroid(args.debug);
