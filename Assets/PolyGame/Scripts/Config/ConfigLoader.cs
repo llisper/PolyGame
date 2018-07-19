@@ -90,7 +90,7 @@ public static class ConfigLoader
             else if (lang != SystemLanguage.English)
             {
                 lang = SystemLanguage.English;
-                path = string.Format("{0}/{1}/{2}", Paths.Configs, type.Name, lang);
+                path = string.Format("{0}/{1}/{2}.json", Paths.Configs, type.Name, lang);
                 if (FileLoader.Exists(path))
                     json = FileLoader.LoadString(path);
             }

@@ -1,0 +1,13 @@
+NOTE(zhangliang):
+现在只做了android的打包, 并且只打debug包
+
+环境配置:
+
+设定unity编辑器路径
+UNITY_HOME 例如: C:\Program Files\Unity\Editor
+GRADLE_HOME 例如: E:\Android\Android Studio\gradle\gradle-4.1\bin
+
+需要设定adk, ndk, jdk路径到环境变量中
+ANDROID_SDK_HOME adk路径, 例如: E:/Android/SDK
+ANDROID_NDK_HOME ndk路径, 例如: E:/Android/NDK/android-ndk-r13b
+JAVA_SDK_HOME    jdk路径, 例如: E:/Java/jdk1.8.0_162

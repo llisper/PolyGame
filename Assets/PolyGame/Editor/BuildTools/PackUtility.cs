@@ -45,11 +45,11 @@ public class PackUtility
         EditorUtility.DisplayProgressBar(buildTarget.ToString(), "Copy To Product", 0f);
         CopyFilesToProduct(buildTarget);
 
-        // EditorUtility.DisplayProgressBar(buildTarget.ToString(), "Generate FileManifest", 0f);
-        // GenerateFileManifest.Generate(buildTarget);
+        EditorUtility.DisplayProgressBar(buildTarget.ToString(), "Generate FileManifest", 0f);
+        GenerateFileManifest.Generate(buildTarget);
 
-        // EditorUtility.DisplayProgressBar(buildTarget.ToString(), "Generate Version", 0f);
-        // GenerateVersion.Generate(_versionName, _cdn, buildTarget);
+        EditorUtility.DisplayProgressBar(buildTarget.ToString(), "Generate Version", 0f);
+        GenerateVersion.Generate(_versionName, _cdn, buildTarget);
 
         Debug.Log("Build resources for " + buildTarget);
     }
