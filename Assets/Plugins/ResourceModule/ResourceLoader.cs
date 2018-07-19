@@ -29,7 +29,7 @@ namespace ResourceModule
             {
                 if (Application.isPlaying)
                 {
-                    return ResourceSystem.Instance.mode == ResourceSystem.Mode.Dev && 
+                    return ResourceSystem.ResMode == ResourceSystem.Mode.Dev && 
                         Application.isEditor;
                 }
                 else

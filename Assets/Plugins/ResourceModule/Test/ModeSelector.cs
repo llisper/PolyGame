@@ -32,7 +32,7 @@ namespace ResourceModule.Test
         void SetMode()
         {
             string n = modeGroup.ActiveToggles().First().name;
-            ResourceSystem.Instance.mode = (ResourceSystem.Mode)Enum.Parse(typeof(ResourceSystem.Mode), n);
+            ResourceSystem.ResMode = (ResourceSystem.Mode)Enum.Parse(typeof(ResourceSystem.Mode), n);
             ResLog.Log("Current mode: " + n);
         }
 

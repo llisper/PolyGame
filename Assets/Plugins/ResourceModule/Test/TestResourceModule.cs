@@ -36,7 +36,7 @@ namespace ResourceModule.Test
         async void RunTests()
         {
             await ResourceSystem.Init();
-            ResourceSystem.Instance.mode = ResourceSystem.Mode.AssetBundle;
+            ResourceSystem.ResMode = ResourceSystem.Mode.AssetBundle;
             AssetSystem.Instance.disposeDelay = 2f;
             ResLog.Log("=== ResourceSystem Initialized ===");
 

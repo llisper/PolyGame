@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
-using ResourceModule.Debug;
+using System;
 using System.Threading.Tasks;
+using ResourceModule.Debug;
 
 namespace ResourceModule
 {
@@ -8,7 +9,6 @@ namespace ResourceModule
 
     public class ResourceSystem : Singleton<ResourceSystem>
     {
-        #region inspector
         public enum Mode
         {
             Dev,
@@ -16,16 +16,32 @@ namespace ResourceModule
         }
 
         public Mode mode = Mode.AssetBundle;
-        #endregion inspector
+
+        public static Mode ResMode
+        {
+            get 
+            {
+                #if UNITY_EDITOR
+                return (Mode)UnityEditor.EditorPrefs.GetInt("ResMode", (int)Mode.Dev);
+                #else
+                return Mode.AssetBundle;
+                #endif
+            }
+            set
+            {
+                #if UNITY_EDITOR
+                UnityEditor.EditorPrefs.SetInt("ResMode", (int)value);
+                #else
+                ResLog.LogError("Setting ResMode in release is forbidden!");
+                #endif
+            }
+        }
 
         protected override async Task AsyncInit()
         {
-            if (Application.isEditor)
-            {
-                mode = Mode.Dev;
-                ResourceModuleDebugger.Init();
-            }
-
+            #if UNITY_EDITOR
+            ResourceModuleDebugger.Init();
+            #endif
             PathRouter.Init();
         }
     }

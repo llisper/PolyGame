@@ -29,7 +29,7 @@ namespace ResourceModule.Hotfix
 
         protected override async Task AsyncInit()
         {
-            if (ResourceSystem.Instance.mode == ResourceSystem.Mode.Dev)
+            if (ResourceSystem.ResMode == ResourceSystem.Mode.Dev)
             {
                 HotfixLog.Log("Skip hotfix process in Dev mode");
                 return;
