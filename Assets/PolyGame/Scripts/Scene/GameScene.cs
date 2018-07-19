@@ -39,12 +39,12 @@ public class GameScene
             return;
         }
 
-        // await ScreenOverlay.AsyncFade(false);
+        await ScreenOverlay.AsyncFade(false);
 
         if (null != current)
             current.OnDestroy();
         current = null;
-        // UI.Instance.ClosePanelsWhenSceneDestroy();
+        UI.Instance.ClosePanelsWhenSceneDestroy();
 
         await SceneLoader.AsyncLoad(sceneName);
 
@@ -55,6 +55,6 @@ public class GameScene
             onSceneLoaded();
         onSceneLoaded = null;
 
-        // await ScreenOverlay.AsyncFade(true);
+        await ScreenOverlay.AsyncFade(true);
     }
 }

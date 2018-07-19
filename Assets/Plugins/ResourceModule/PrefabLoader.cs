@@ -78,15 +78,21 @@ namespace ResourceModule
         }
         public UnityEngine.Object Instantiate(Transform parent)
         {
-            return Instantiate(Vector3.zero, Quaternion.identity, parent);
+            AliveCheck();
+            var obj = UnityEngine.Object.Instantiate(prefabObject, parent);
+            return OnInstantiateFinish(obj);
         }
         public UnityEngine.Object Instantiate()
         {
-            return Instantiate(Vector3.zero, Quaternion.identity);
+            AliveCheck();
+            var obj = UnityEngine.Object.Instantiate(prefabObject);
+            return OnInstantiateFinish(obj);
         }
         public UnityEngine.Object Instantiate(Vector3 position, Quaternion rotation)
         {
-            return Instantiate(position, rotation, null);
+            AliveCheck();
+            var obj = UnityEngine.Object.Instantiate(prefabObject, position, rotation);
+            return OnInstantiateFinish(obj);
         }
         public UnityEngine.Object Instantiate(Transform parent, bool instantiateInWorldSpace)
         {
