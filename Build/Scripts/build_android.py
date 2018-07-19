@@ -16,7 +16,7 @@ def build(env, args):
     if args.clean:
         clean(env)
 
-    #generate_project(env, args)
+    generate_project(env, args)
     build_apk(env)
 
 def clean(env):

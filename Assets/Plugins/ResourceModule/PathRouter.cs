@@ -23,6 +23,7 @@ namespace ResourceModule
         public const string FileManifest = "FileManifest.json";
         public const string Sandbox = "Sandbox";
         public const string Res = "Assets/Res";
+        public const string StartScene = "Assets/Scenes/Start.unity";
 
         public static string ProductPath = Application.dataPath + "/../Product/";
 
@@ -144,6 +145,11 @@ namespace ResourceModule
 
             fullpath = null;
             return PathLocation.NotFound;
+        }
+
+        public static string BuildOutput(string buildTarget)
+        {
+            return Application.dataPath + "/../Build/Output/" + buildTarget;
         }
     }
 }

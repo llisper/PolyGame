@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using ResourceModule;
 
 public class PkgBuilder
 {
@@ -13,25 +14,21 @@ public class PkgBuilder
     public static void BuildAndroid(bool debug)
     {
         BuildPlayerOptions options = new BuildPlayerOptions();
-        options.locationPathName = Application.dataPath + "/../Build/Android";
+        options.locationPathName = PathRouter.BuildOutput(BuildTarget.Android.ToString());
         options.options = BuildOptions.AcceptExternalModificationsToPlayer | BuildOptions.StrictMode;
         if (debug)
             options.options |= BuildOptions.Development | BuildOptions.AllowDebugging;
-        options.scenes = new string[] { "Assets/GameInit.unity" };
+        options.scenes = new string[] { PathRouter.StartScene };
         options.target = BuildTarget.Android;
 
         using (new HideCompileFlags())
         {
             Debug.Log("HideCompileFlags");
-            using (new EmptyResources())
-            {
-                Debug.Log("EmptyResources");
-                string error = BuildPipeline.BuildPlayer(options);
-                if (!string.IsNullOrEmpty(error))
-                    Debug.LogError(error);
-                else
-                    Debug.Log("BuildPipeline.BuildPlayer Successfully!");
-            }
+            string error = BuildPipeline.BuildPlayer(options);
+            if (!string.IsNullOrEmpty(error))
+                Debug.LogError(error);
+            else
+                Debug.Log("BuildPipeline.BuildPlayer Successfully!");
         }
     }
     #endregion android
@@ -46,23 +43,20 @@ public class PkgBuilder
     public static void BuildiOS(bool debug)
     {
         BuildPlayerOptions options = new BuildPlayerOptions();
-        options.locationPathName = Application.dataPath + "/../Build/iOS";
+        options.locationPathName = PathRouter.BuildOutput(BuildTarget.iOS.ToString());
         options.options = BuildOptions.AcceptExternalModificationsToPlayer | BuildOptions.StrictMode | BuildOptions.SymlinkLibraries;
         if (debug)
             options.options |= BuildOptions.Development | BuildOptions.AllowDebugging;
-        options.scenes = new string[] { "Assets/GameInit.unity" };
+        options.scenes = new string[] { PathRouter.StartScene };
         options.target = BuildTarget.iOS;
 
         using (new HideCompileFlags())
         {
-            using (new EmptyResources())
-            {
-                string error = BuildPipeline.BuildPlayer(options);
-                if (!string.IsNullOrEmpty(error))
-                    Debug.LogError(error);
-                else
-                    Debug.Log("BuildPipeline.BuildPlayer Successfully!");
-            }
+            string error = BuildPipeline.BuildPlayer(options);
+            if (!string.IsNullOrEmpty(error))
+                Debug.LogError(error);
+            else
+                Debug.Log("BuildPipeline.BuildPlayer Successfully!");
         }
     }
     #endregion ios

@@ -7,10 +7,10 @@ def init_env():
     os.chdir(script_dir)
 
     env = {}
-    env['project_path'] = script_dir + '/../../../game'
+    env['project_path'] = script_dir + '/../..'
     env['unity_path'] = env_var('UNITY_HOME')
     env['product_path'] = env['project_path'] + '/Product'
-    env['build_path'] = env['project_path'] + '/Build'
+    env['build_path'] = env['project_path'] + '/Build/Output'
 
     env['android_sdk_home'] = env_var('ANDROID_SDK_HOME')
     env['android_ndk_home'] = env_var('ANDROID_NDK_HOME')

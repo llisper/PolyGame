@@ -40,6 +40,8 @@ public static class AssetBundleMaker
         foreach (string guid in guids)
         {
             string path = AssetDatabase.GUIDToAssetPath(guid);
+            if (path == PathRouter.StartScene)
+                continue;
             string ext = Path.GetExtension(path).ToLower();
             if (ext == ".prefab" || ext == ".unity")
                 CreateAssetInfo(path, true);
