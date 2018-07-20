@@ -23,7 +23,7 @@ class AssetInfo
 
 public static class AssetBundleMaker
 {
-    public const string Prefabs = "Assets/Resources";
+    public const string Prefabs = "Assets/Res";
     public const string Scenes = "Assets/Scenes";
 
     static Dictionary<string, AssetInfo> _assetCollection = new Dictionary<string, AssetInfo>();
