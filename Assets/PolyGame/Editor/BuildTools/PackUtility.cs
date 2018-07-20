@@ -7,7 +7,7 @@ using ResourceModule;
 public class PackUtility
 {
     static string _versionName = "0.1";
-    static string _cdn = "http://10.1.38.218:8080/Product";
+    static string _cdn = "http://localhost:8080/Product";
     static string[] _copyFolders = new string[] { "Configs" };
 
     public static void Setup(string versionName, string cdn)
@@ -138,6 +138,7 @@ public class PackUtility
         string path = Application.persistentDataPath + '/' + PathRouter.Sandbox;
         if (Directory.Exists(path))
             Directory.Delete(path, true);
+        Debug.Log("Clear Sandbox: " + path);
     }
 
     static void CopyFilesToProduct(BuildTarget buildTarget)
