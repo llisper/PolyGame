@@ -16,8 +16,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 12
     localAABB:
-      m_Center: {x: -4.5, y: 2.6666565, z: 0}
-      m_Extent: {x: 18, y: 23, z: 0}
+      m_Center: {x: 7.5, y: -0.833313, z: 0}
+      m_Extent: {x: 15.5, y: 14, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -47,7 +47,7 @@ Mesh:
       dimension: 0
     - stream: 0
       offset: 12
-      format: 0
+      format: 2
       dimension: 4
     - stream: 0
       offset: 0
@@ -69,8 +69,8 @@ Mesh:
       offset: 0
       format: 0
       dimension: 0
-    m_DataSize: 336
-    _typelessdata: 00005841b0aaa2c100000000abaa2a3fb5b4343ed1d0503d0000803f000000bf4055b54000000000abaa2a3fb5b4343ed1d0503d0000803f0000584180aa2a4000000000abaa2a3fb5b4343ed1d0503d0000803f0000584180aa2a4000000000afae2e3f9d9c1c3e8988883d0000803f000000bf4055b54000000000afae2e3f9d9c1c3e8988883d0000803f000060405055cd4100000000afae2e3f9d9c1c3e8988883d0000803f00005841b0aaa2c100000000afae2e3fbdbc3c3ef1f0703d0000803f000084c1605535c100000000afae2e3fbdbc3c3ef1f0703d0000803f000000bf4055b54000000000afae2e3fbdbc3c3ef1f0703d0000803f000084c1605535c100000000b6b5353fedec6c3ea1a0a03d0000803f0000b4c1a0aa1a4100000000b6b5353fedec6c3ea1a0a03d0000803f000000bf4055b54000000000b6b5353fedec6c3ea1a0a03d0000803f
+    m_DataSize: 192
+    _typelessdata: 000000c180aa9ac000000000101324ff0000e0c0c0aa524100000000101324ff000080c0c0aa024100000000101324ff0000b84140556dc100000000514a44ff000000c180aa9ac000000000514a44ff00004041005535c000000000514a44ff000000c180aa9ac0000000004f565eff000000008055a540000000004f565eff00004041005535c0000000004f565eff000000c180aa9ac000000000252d42ff000080c0c0aa024100000000252d42ff000000008055a54000000000252d42ff
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -124,8 +124,8 @@ Mesh:
       m_BitSize: 0
     m_UVInfo: 0
   m_LocalAABB:
-    m_Center: {x: -4.5, y: 2.6666565, z: 0}
-    m_Extent: {x: 18, y: 23, z: 0}
+    m_Center: {x: 7.5, y: -0.833313, z: 0}
+    m_Extent: {x: 15.5, y: 14, z: 0}
   m_MeshUsageFlags: 0
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
