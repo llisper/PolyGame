@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 class SystemInspector : EditorWindow
 {
-    [MenuItem("[PolyGame]/System Inspector")]
+    [MenuItem("Window/System Inspector", false, 10000)]
     public static void Open()
     {
         var win = GetWindow<SystemInspector>();
@@ -26,13 +26,13 @@ class SystemInspector : EditorWindow
     {
         if (null == list)
         {
-            if (null == Game.Instance)
+            if (null == SystemManager.Instance)
                 return;
 
-            list = (IList)typeof(Game).InvokeMember(
+            list = (IList)typeof(SystemManager).InvokeMember(
                 "systems",
                 BindingFlags.Instance | BindingFlags.GetField | BindingFlags.NonPublic,
-                null, Game.Instance, null);
+                null, SystemManager.Instance, null);
         }
 
         foreach (var s in list)
