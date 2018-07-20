@@ -16,6 +16,7 @@ class PreprocessWin : EditorWindow
     string path;
     string[] dirs;
     string[] names;
+    string filter;
     Vector2 scrollPosition;
 
     void Awake()
@@ -65,6 +66,7 @@ class PreprocessWin : EditorWindow
         dirs = Directory.GetDirectories(path);
         names = Array.ConvertAll(dirs, v => Path.GetFileName(v));
 
+        EditorGUIUtility.labelWidth = 104;
         EditorGUILayout.LabelField("Root", Paths.AssetArtworks);
 
         EditorGUILayout.BeginHorizontal();
@@ -81,6 +83,9 @@ class PreprocessWin : EditorWindow
         }
         EditorGUILayout.EndHorizontal();
 
+        EditorGUILayout.BeginHorizontal();
+        filter = EditorGUILayout.TextField("Filter", filter);
+        EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.LabelField(new string('-', 100));
         scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
@@ -90,6 +95,12 @@ class PreprocessWin : EditorWindow
             string displayName = name;
             if (!HasImported(name))
                 displayName += "(not-imported)";
+
+            if (!string.IsNullOrEmpty(filter) &&
+                -1 == displayName.IndexOf(filter, StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
 
             EditorGUILayout.BeginHorizontal();
             GUILayout.Space(20);
