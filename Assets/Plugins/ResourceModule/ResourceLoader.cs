@@ -23,6 +23,7 @@ namespace ResourceModule
         public object ResultObject { get; protected set; }
         public bool HasError { get; protected set; }
 
+        public static bool IsPlaying { get { return !Application.isEditor && Application.isPlaying; } }
         public static bool IsDev
         {
             get
@@ -30,7 +31,7 @@ namespace ResourceModule
                 if (Application.isPlaying)
                 {
                     return ResourceSystem.ResMode == ResourceSystem.Mode.Dev && 
-                        Application.isEditor;
+                           Application.isEditor;
                 }
                 else
                 {
@@ -102,6 +103,12 @@ namespace ResourceModule
             ResultObject = result;
             HasError = hasError;
             timer.Stop();
+        }
+
+        protected static void IsPlayingCheck()
+        {
+            if (!IsPlaying)
+                throw new ApplicationException("Invocation requires in play mode!");
         }
     }
 }

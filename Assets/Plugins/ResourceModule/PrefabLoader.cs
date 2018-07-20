@@ -127,6 +127,9 @@ namespace ResourceModule
     {
         public static PrefabResource Load(string path)
         {
+            if (!IsPlaying)
+                return LoadInEditor(path);
+
             using (var timer = LoadTimer.Start<PrefabLoader>(path))
             {
                 var res = AssetSystem.Instance.FindAsset<PrefabResource>(path);
@@ -137,17 +140,7 @@ namespace ResourceModule
                     {
                         if (IsDev)
                         {
-                            #if UNITY_EDITOR
-                            string assetPath = string.Format("{0}/{1}.prefab", PathRouter.Res, path);
-                            res.prefabObject = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
-                            if (null == res.prefabObject)
-                            {
-                                throw new ApplicationException(string.Format(
-                                    "UnityEditor.AssetDatabase.LoadAssetAtPath(\"{0}\") => null", assetPath));
-                            }
-                            #else
-                            throw new ApplicationException("Load prefab in IsDev is not allowed unless in Editor");
-                            #endif
+                            res = LoadInEditor(path, res);
                         }
                         else
                         {
@@ -183,6 +176,7 @@ namespace ResourceModule
 
         public static async Task<PrefabResource> AsyncLoad(string path, OnProgress onProgress = null)
         {
+            IsPlayingCheck();
             var res = AssetSystem.Instance.FindAsset<PrefabResource>(path);
             if (null == res)
             {
@@ -201,18 +195,8 @@ namespace ResourceModule
             {
                 if (IsDev)
                 {
-                    #if UNITY_EDITOR
-                    string assetPath = string.Format("{0}/{1}.prefab", PathRouter.Res, Url);
-                    prefabResource.prefabObject = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
-                    if (null == prefabResource.prefabObject)
-                    {
-                        throw new ApplicationException(string.Format(
-                            "UnityEditor.AssetDatabase.LoadAssetAtPath(\"{0}\") => null", assetPath));
-                    }
+                    prefabResource = LoadInEditor(Url, prefabResource);
                     Progress = 1f;
-                    #else
-                    throw new ApplicationException("IsDev is not allowed unless in Editor");
-                    #endif
                 }
                 else
                 {
@@ -240,6 +224,24 @@ namespace ResourceModule
                 prefabResource.Dispose();
                 throw new ApplicationException("Error when loading Prefab:" + Url, e);
             }
+        }
+
+        static PrefabResource LoadInEditor(string path, PrefabResource res = null)
+        {
+            #if UNITY_EDITOR
+            string assetPath = string.Format("{0}/{1}.prefab", PathRouter.Res, path);
+            if (null == res)
+                res = new PrefabResource(path);
+            res.prefabObject = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(assetPath);
+            if (null == res.prefabObject)
+            {
+                throw new ApplicationException(string.Format(
+                    "UnityEditor.AssetDatabase.LoadAssetAtPath(\"{0}\") => null", assetPath));
+            }
+            #else
+            throw new ApplicationException("Invoke LoadInEditor in release game");
+            #endif
+            return res;
         }
     }
 }

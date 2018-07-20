@@ -52,7 +52,8 @@ namespace LunarConsoleEditorInternal
         static Autorun()
         {
             AndroidPlugin.SetEnabled(LunarConsoleConfig.consoleEnabled);
-            CleanLegacyFiles(); // automatically fix old installations
+            EditorApplication.delayCall += CleanLegacyFiles;
+            // CleanLegacyFiles(); // automatically fix old installations
 
             Updater.TryCheckForUpdates();
             LunarConsoleEditorAnalytics.TrackPluginVersionUpdate();

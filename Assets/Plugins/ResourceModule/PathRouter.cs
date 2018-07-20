@@ -12,6 +12,9 @@ namespace ResourceModule
         NotFound,
     }
 
+    #if UNITY_EDITOR
+    [UnityEditor.InitializeOnLoad]
+    #endif
     public class PathRouter
     {
         public const string AssetBundleSuffix = ".ab";
@@ -51,6 +54,15 @@ namespace ResourceModule
 
         public static string SandboxPath;
         public static string SandboxPathWithProtocol;
+
+
+        #if UNITY_EDITOR
+        static PathRouter()
+        {
+            Init();
+            
+        }
+        #endif
 
         public static void Init()
         {
