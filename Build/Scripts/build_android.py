@@ -14,15 +14,15 @@ def build(env, args):
     product_path = env['product_path'] + '/Android'
 
     if args.clean:
-        clean(env)
+        clean(env, args)
 
     generate_project(env, args)
     build_apk(env)
 
-def clean(env):
-    if os.path.exists(build_path):
+def clean(env, args):
+    if ('Bundle' in args.buildFlags) and os.path.exists(build_path):
         shutil.rmtree(build_path)
-    if os.path.exists(product_path):
+    if ('Resource' in args.buildFlags) and os.path.exists(product_path):
         shutil.rmtree(product_path)
 
 def generate_project(env, args):
@@ -41,7 +41,7 @@ def generate_project(env, args):
         '-executeMethod', 'BuildAPIs.BuildAndroid',
         args.appIdentifier,
         args.version,
-        args.name,
+        args.cdn,
         '|'.join(args.buildFlags),
         str(not args.release).lower()
     ]

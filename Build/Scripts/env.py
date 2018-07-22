@@ -14,7 +14,7 @@ def init_env():
 
     env['android_sdk_home'] = env_var('ANDROID_SDK_HOME')
     env['android_ndk_home'] = env_var('ANDROID_NDK_HOME')
-    env['java_sdk_home'] = env_var('JAVA_SDK_HOME')
+    env['java_sdk_home'] = env_var('JAVA_HOME')
     env['gradle_home'] = env_var('GRADLE_HOME')
 
     for k, v in env.iteritems():

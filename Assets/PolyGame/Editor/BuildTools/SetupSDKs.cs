@@ -5,13 +5,13 @@ using System.IO;
 /// <summary>
 /// ANDROID_SDK_HOME: path to android sdk, eg:E:/Android/SDK
 /// ANDROID_NDK_HOME: path to android ndk, eg:E:/Android/NDK/android-ndk-r13b
-/// JAVA_SDK_HOME: path to java sdk, eg:E:/Java/jdk1.8.0_162
+/// JAVA_HOME: path to java sdk, eg:E:/Java/jdk1.8.0_162
 /// </summary>
 class SetupSDKs
 {
     const string AndroidSdkHome = "ANDROID_SDK_HOME";
     const string AndroidNdkHome = "ANDROID_NDK_HOME";
-    const string JavaSdkHome = "JAVA_SDK_HOME";
+    const string JavaSdkHome = "JAVA_HOME";
 
     public static void Setup()
     {

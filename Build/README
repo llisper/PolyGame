@@ -10,4 +10,4 @@ GRADLE_HOME 例如: E:\Android\Android Studio\gradle\gradle-4.1\bin
 需要设定adk, ndk, jdk路径到环境变量中
 ANDROID_SDK_HOME adk路径, 例如: E:/Android/SDK
 ANDROID_NDK_HOME ndk路径, 例如: E:/Android/NDK/android-ndk-r13b
-JAVA_SDK_HOME    jdk路径, 例如: E:/Java/jdk1.8.0_162
+JAVA_HOME        jdk路径, 例如: E:/Java/jdk1.8.0_162
