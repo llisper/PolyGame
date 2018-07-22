@@ -34,7 +34,7 @@ public class GameScene
         string sceneName = sceneType.Name.Replace("Scene", "");
         if (string.IsNullOrEmpty(sceneName))
         {
-            Debug.LogErrorFormat("Failed to load scene {0}({1})", sceneName, sceneType.Name);
+            GameLog.LogErrorFormat("Failed to load scene {0}({1})", sceneName, sceneType.Name);
             onSceneLoaded = null;
             return;
         }

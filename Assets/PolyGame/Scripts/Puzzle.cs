@@ -249,7 +249,7 @@ public partial class Puzzle : MonoBehaviour
                 var child = puzzleObject.transform.GetChild(i);
                 if (null == child)
                 {
-                    Debug.LogErrorFormat("Missing child({0}) when applying progress", i);
+                    GameLog.LogErrorFormat("Missing child({0}) when applying progress", i);
                     continue;
                 }
 
@@ -299,7 +299,6 @@ public partial class Puzzle : MonoBehaviour
 
         ShowWireframe(true);
         isMovingDebris = true;
-        GameLog.Log("Pick " + objPicked);
         return true;
     }
 
@@ -315,7 +314,7 @@ public partial class Puzzle : MonoBehaviour
         DebrisInfo di;
         if (!debrisMap.TryGetValue(target.gameObject, out di))
         {
-            Debug.LogError(target + " is not found in debris map");
+            GameLog.LogError(target + " is not found in debris map");
         }
         else
         {

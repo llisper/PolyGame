@@ -1,9 +1,10 @@
 using UnityEngine;
 using System;
-using System.Text;
 using System.Reflection;
 using System.Threading.Tasks;
 using ResourceModule;
+
+public class ConfigLog : LogDefine<ConfigLog> { }
 
 public abstract class IConfig<T> where T : IConfig<T>
 {
@@ -35,7 +36,7 @@ public static class ConfigLoader
         Type type = Array.Find(types, v => v.Name == name);
         if (null == type)
         {
-            Debug.LogError("ConfigLoader.Load: type is not found, " + name);
+            ConfigLog.LogError("ConfigLoader.Load: type is not found, " + name);
             return;
         }
         Load(type);
@@ -66,8 +67,8 @@ public static class ConfigLoader
         }
         catch (Exception e)
         {
-            Debug.LogError("Failed to load " + type.Name);
-            Debug.LogException(e);
+            ConfigLog.LogError("Failed to load " + type.Name);
+            ConfigLog.LogException(e);
         }
     }
 

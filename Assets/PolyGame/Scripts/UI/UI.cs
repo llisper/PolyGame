@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using ResourceModule;
 
+public class UILog : LogDefine<UILog> { }
+
 public enum UILayer
 {
     Base,
@@ -50,7 +52,7 @@ public class UI : MonoBehaviour
             var prefab = PrefabLoader.Load(path);
             if (null == prefab)
             {
-                Debug.LogError("Failed to load UI: " + path);
+                UILog.LogError("Failed to load UI: " + path);
                 return null;
             }
 
@@ -103,7 +105,7 @@ public class UI : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Failed to GetLayer: " + layer);
+            UILog.LogError("Failed to GetLayer: " + layer);
             return Canvas.transform;
         }
     }

@@ -83,7 +83,7 @@ public class PuzzleSnapshot : MonoBehaviour
             }
             catch (Exception e)
             {
-                Debug.LogException(e);
+                GameLog.LogException(e);
             }
             finally
             {

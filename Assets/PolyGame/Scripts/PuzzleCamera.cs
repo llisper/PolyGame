@@ -99,13 +99,13 @@ public class PuzzleCamera : MonoBehaviour
 
     void OnCameraMove(Vector2 screenDelta)
     {
-        Vector3 delta = (Vector3)screenDelta * (main.orthographicSize / zoomRange.y) * cameraMoveSpeed * -1;
+        Vector3 delta = (Vector3)screenDelta * (main.orthographicSize / zoomRange.y) * CameraVars.dragSpeed.FloatValue * -1;
         MoveCamera(delta);
     }
 
     void OnCameraZoom(float pinchRatio)
     {
-        float newSize = main.orthographicSize + (pinchRatio - 1f) * zoomScale;
+        float newSize = main.orthographicSize + (pinchRatio - 1f) * CameraVars.zoomScale.FloatValue;
         main.orthographicSize = Mathf.Clamp(newSize, zoomRange.x, zoomRange.y);
         UpdateBounds();
     }

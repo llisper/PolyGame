@@ -19,7 +19,7 @@ public class I18n : IConfig<I18n>
     {
         if (null == Instance || null == Instance.query)
         {
-            Debug.LogError("I18n has not been initialized!");
+            ConfigLog.LogError("I18n has not been initialized!");
             return false;
         }
         return Instance.query.ContainsKey(key);
@@ -29,7 +29,7 @@ public class I18n : IConfig<I18n>
     {
         if (null == Instance || null == Instance.query)
         {
-            Debug.LogError("I18n has not been initialized!");
+            ConfigLog.LogError("I18n has not been initialized!");
             return ErrorValue;
         }
 

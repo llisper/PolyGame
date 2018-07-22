@@ -74,7 +74,7 @@ public class PuzzleWireframe : MonoBehaviour
                 if (index >= 0 && index < colors.Length)
                     colors[index] = color;
                 else
-                    Debug.LogError("Invalid color index: " + index);
+                    GameLog.LogError("Invalid color index: " + index);
             }
         }
     }

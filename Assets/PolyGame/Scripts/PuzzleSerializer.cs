@@ -40,8 +40,8 @@ public partial class Puzzle
         }
         catch (Exception e)
         {
-            Debug.LogErrorFormat("[{0}] Save progress failed", puzzleName);
-            Debug.LogException(e);
+            GameLog.LogErrorFormat("[{0}] Save progress failed", puzzleName);
+            GameLog.LogException(e);
         }
     }
 
@@ -67,8 +67,8 @@ public partial class Puzzle
         }
         catch (Exception e)
         {
-            Debug.LogErrorFormat("[{0}] Load progress failed", puzzleName);
-            Debug.LogException(e);
+            GameLog.LogErrorFormat("[{0}] Load progress failed", puzzleName);
+            GameLog.LogException(e);
         }
     }
 }
