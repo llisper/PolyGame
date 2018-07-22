@@ -7,8 +7,6 @@ public class PuzzleCamera : MonoBehaviour
 
     float sizeExtendScale { get { return Config.Instance.camera.sizeExtendScale; } }
     float minRangeScale { get { return Config.Instance.camera.minRangeScale; } }
-    float cameraMoveSpeed { get { return Config.Instance.camera.moveSpeed; } }
-    float zoomScale { get { return Config.Instance.camera.zoomScale; } }
     float followObjMoveDistance { get { return Config.Instance.camera.followObjMoveDistance; } }
 
     public Camera main;

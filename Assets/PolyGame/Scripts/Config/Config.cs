@@ -29,8 +29,6 @@ public class Config : IConfig<Config>
         public float distance = 1001f;
         public float sizeExtendScale = 1.5f;
         public float minRangeScale = 3f;
-        public float moveSpeed = 2f;
-        public float zoomScale = 125f;
         public float followObjMoveDistance = 5f;
     }
 

@@ -16,8 +16,6 @@
         "distance": 1001.0,
         "sizeExtendScale": 1.5,
         "minRangeScale": 3.0,
-        "moveSpeed": 2.0,
-        "zoomScale": 125.0,
         "followObjMoveDistance": 5.0
     },
     "wireframe": {
