@@ -40,6 +40,12 @@ namespace ResourceModule.Hotfix
             HotfixLog.Log("InitVersion");
             InitVersion();
 
+            if (version.Cdn.Contains("skip-update"))
+            {
+                HotfixLog.Log("Skip hotfix since this package is marked as 'skip-update'");
+                return;
+            }
+
             HotfixLog.Log("NewVersionCheck");
             var verCheckRet = await NewVersionCheck();
             HotfixLog.Log("NewVersionCheck result: " + verCheckRet);
