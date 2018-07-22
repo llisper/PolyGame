@@ -17,8 +17,10 @@
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag   
-            #pragma shader_feature _USE_VERT_COLOR
-            #pragma shader_feature _GREYSCALE
+            // #pragma shader_feature _USE_VERT_COLOR
+            // #pragma shader_feature _GREYSCALE
+            #pragma multi_compile __ _USE_VERT_COLOR
+            #pragma multi_compile __ _GREYSCALE
 
             #include "UnityCG.cginc"
 

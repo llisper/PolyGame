@@ -17,7 +17,8 @@
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag   
-            #pragma shader_feature _USE_CIRCLE_ALPHA
+            // #pragma shader_feature _USE_CIRCLE_ALPHA
+            #pragma multi_compile __ _USE_CIRCLE_ALPHA 
 
             #include "UnityCG.cginc"
 
