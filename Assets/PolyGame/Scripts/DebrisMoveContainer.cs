@@ -47,19 +47,6 @@ public class DebrisMoveContainer : MonoBehaviour
             var worldPos = PuzzleCamera.Main.ScreenToWorldPoint(screenPos);
             targetPosition = new Vector3(worldPos.x, worldPos.y, targetPosition.z);
         }
-
-        // targetPosition = target.transform.position;
-        // if (null != PuzzleTouch.Instance && 
-        //     null != PuzzleTouch.Instance.MainFinger &&
-        //     null != PuzzleCamera.Main)
-        // {
-        //     float offset = DMCVars.offsetInches;
-        //     Vector2 screenPos = PuzzleTouch.Instance.MainFinger.ScreenPosition + new Vector2(0f, offset);
-        //     Vector3 worldPos = PuzzleCamera.Main.ScreenToWorldPoint(screenPos);
-        //     if (worldPos.y > targetPosition.y)
-        //         targetPosition.y = worldPos.y;
-        // }
-
         targetPosition = transform.InverseTransformPoint(targetPosition);
     }
 
