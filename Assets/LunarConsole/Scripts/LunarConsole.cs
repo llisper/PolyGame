@@ -376,6 +376,10 @@ namespace LunarConsolePlugin
                             }
                         }
 
+                        typeof(CVar)
+                            .GetField("m_name", BindingFlags.Instance|BindingFlags.NonPublic)
+                            .SetValue(cvar, type.Name + '.' + cvar.Name);
+
                         m_registry.Register(cvar);
                     }
                 }

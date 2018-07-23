@@ -41,6 +41,33 @@ public class PuzzleTouch : MonoBehaviour
         Instance = null;
     }
 
+    GameObject debugObj;
+
+    void Update()
+    {
+        if (null == debugObj)
+        {
+            debugObj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            debugObj.name = "__TouchDebug";
+            debugObj.layer = Layers.Debris;
+            debugObj.transform.SetParent(transform);
+            debugObj.GetComponent<MeshRenderer>().material.color = Color.red;
+        }
+
+        if (null != mainFinger)
+        {
+            var worldPos = PuzzleCamera.Main.ScreenToWorldPoint(mainFinger.ScreenPosition);
+            worldPos.z = -Config.Instance.camera.distance + 100;
+            debugObj.transform.position = worldPos;
+            debugObj.transform.localScale = Vector3.one * TouchVars.raycastRadius;
+            debugObj.SetActive(true);
+        }
+        else
+        {
+            debugObj.SetActive(false);
+        }
+    }
+
     void OnGesture(List<LeanFinger> fingers)
     {
         if (AllFingersOff(fingers))
@@ -50,7 +77,6 @@ public class PuzzleTouch : MonoBehaviour
             mainFinger = null;
             if (null != objPicked)
             {
-                TouchLog.Log("All fingers off, release " + objPicked);
                 onObjReleased?.Invoke(objPicked);
                 objPicked = null;
             }
@@ -61,7 +87,6 @@ public class PuzzleTouch : MonoBehaviour
         {
             if (null != objPicked)
             {
-                TouchLog.Log("Main finger off, release " + objPicked);
                 onObjReleased?.Invoke(objPicked);
                 objPicked = null;
             }
@@ -72,15 +97,20 @@ public class PuzzleTouch : MonoBehaviour
         {
             if (fingers.Count > 1 || FingerMoved(mainFinger))
             {
-                TouchLog.Log("Main finger move or more than one finger touches, go to <Update>");
                 phase = Phase.Update;
             }
             else if ((holdTimer += Time.deltaTime) >= TouchVars.holdThreshold.FloatValue)
             {
-                TouchLog.Log("Exceed hold threshold, start picking");
                 var ray = PuzzleCamera.Main.ScreenPointToRay(mainFinger.ScreenPosition);
+                // int numOfHits = Physics.RaycastNonAlloc(ray, hits, Config.Instance.camera.distance, ~Layers.Debris);
+                int numOfHits = Physics.SphereCastNonAlloc(
+                    ray.origin,
+                    TouchVars.raycastRadius,
+                    ray.direction,
+                    hits,
+                    Config.Instance.camera.distance,
+                    ~Layers.Debris);
 
-                int numOfHits = Physics.RaycastNonAlloc(ray, hits, Config.Instance.camera.distance, ~Layers.Debris);
                 if (numOfHits > 0)
                 {
                     Vector3 origin = ray.origin;
@@ -107,12 +137,11 @@ public class PuzzleTouch : MonoBehaviour
                         if (null != onObjPicked && onObjPicked(selected))
                         {
                             objPicked = selected;
-                            TouchLog.Log(objPicked + " picked");
+                            TouchLog.Log(objPicked + " Picked");
                         }
                     }
 
                 }
-                TouchLog.Log("Go to <Update>");
                 phase = Phase.Update;
             }
         }
