@@ -13,29 +13,26 @@ namespace ResourceModule.Hotfix
         {
             public string name;
             public string cdn;
-
-            public Config() { }
-            public Config(string name, string cdn)
-            {
-                this.name = name;
-                this.cdn = cdn;
-            }
+            public string branch;
+            public string rev;
         }
 
         public int Major { get; }
         public int Minor { get; }
-        public string Name { get; }
-        public string Cdn { get; }
+        public string Name { get { return config.name; } }
+        public string Cdn { get { return config.cdn; } }
+        public Config Conf { get { return config; } }
 
-        Version(string name, string cdn)
+        Config config;
+
+        Version(Config config)
         {
-            var match = Regex.Match(name, @"(\d+)\.(\d+)");
+            this.config = config;
+            var match = Regex.Match(config.name, @"(\d+)\.(\d+)");
             Major = int.Parse(match.Groups[1].Value);
             Minor = int.Parse(match.Groups[2].Value);
-            Name = name;
-            if (cdn[cdn.Length - 1] != '/')
-                cdn += '/';
-            Cdn = cdn;
+            if (config.cdn[config.cdn.Length - 1] != '/')
+                config.cdn += '/';
         }
 
         public static Version Create()
@@ -48,18 +45,18 @@ namespace ResourceModule.Hotfix
             data = FileLoader.RemoveBOM(data);
             string json = Encoding.UTF8.GetString(data);
             var config = JsonUtility.FromJson<Config>(json);
-            return new Version(config.name, config.cdn);
+            return new Version(config);
         }
 
-        public static Version Create(string name, string cdn)
+        public static Version Create(Config config)
         {
-            return new Version(name, cdn);
+            return new Version(config);
         }
 
         public void WriteToFile()
         {
             string path = PathRouter.SandboxPath + PathRouter.Version;
-            string text = JsonUtility.ToJson(new Config(ToString(), Cdn), true);
+            string text = JsonUtility.ToJson(config, true);
             File.WriteAllText(path, text, Encoding.UTF8);
         }
 

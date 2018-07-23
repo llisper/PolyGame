@@ -13,5 +13,14 @@ builders = {
 env = env.init_env()
 args = argparser.parse()
 print(args)
+
+branch = subprocess.check_output('git rev-parse --abbrev-ref HEAD'.split()).strip()
+args.branch = branch
+print('branch: ' + branch)
+rev = subprocess.check_output('git rev-parse HEAD'.split()).strip()
+args.rev = rev
+print('rev:    ' + rev)
+
 builders[args.buildTarget](env, args)
+
 

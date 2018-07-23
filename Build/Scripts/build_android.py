@@ -43,7 +43,9 @@ def generate_project(env, args):
         args.version,
         args.cdn,
         '|'.join(args.buildFlags),
-        str(not args.release).lower()
+        str(not args.release).lower(),
+        args.branch,
+        args.rev
     ]
 
     print("Generating Android Project")

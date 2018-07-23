@@ -3,17 +3,27 @@ using UnityEngine;
 using System;
 using System.IO;
 using ResourceModule;
+using R = ResourceModule.Hotfix;
 
 public class PackUtility
 {
-    static string _versionName = "0.1";
-    static string _cdn = "http://localhost:8080/Product";
+    static R.Version.Config vconf;
     static string[] _copyFolders = new string[] { "Configs" };
 
-    public static void Setup(string versionName, string cdn)
+    static PackUtility()
     {
-        _versionName = versionName;
-        _cdn = cdn;
+        vconf = new R.Version.Config()
+        {
+            name = "0.1",
+            cdn = "http://localhost:8080/Product",
+            branch = "unknown",
+            rev = "deadbeef"
+        };
+    }
+
+    public static void Setup(R.Version.Config vconf)
+    {
+        PackUtility.vconf = vconf;
     }
 
     #region build resources
@@ -49,7 +59,7 @@ public class PackUtility
         GenerateFileManifest.Generate(buildTarget);
 
         EditorUtility.DisplayProgressBar(buildTarget.ToString(), "Generate Version", 0f);
-        GenerateVersion.Generate(_versionName, _cdn, buildTarget);
+        GenerateVersion.Generate(vconf, buildTarget);
 
         Debug.Log("Build resources for " + buildTarget);
     }

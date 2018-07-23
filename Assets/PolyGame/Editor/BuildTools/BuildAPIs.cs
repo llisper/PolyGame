@@ -35,7 +35,7 @@ public class BuildAPIs
 
         if ((args.buildFlags & BuildFlags.Resource) == BuildFlags.Resource)
         {
-            PackUtility.Setup(args.version.Name, args.version.Cdn);
+            PackUtility.Setup(args.version.Conf);
             PackUtility.BuildAndroidResources();
         }
 
@@ -57,8 +57,8 @@ public class BuildAPIs
             throw new Exception("Parse args failed, unable to find " + buildAndroidMethod);
 
         ++i;
-        if (args.Length - i < 5)
-            throw new Exception("Invalid args format, correct args format is: appIdentifier version(major.minor) cdnUrl buildFlags isDebug");
+        if (args.Length - i < 7)
+            throw new Exception("Invalid args format, correct args format is: appIdentifier version(major.minor) cdnUrl buildFlags isDebug branch rev");
 
         var log = new StringBuilder("Commandline Args:\n");
         for (int j = i; j < args.Length; ++j)
@@ -68,15 +68,19 @@ public class BuildAPIs
         Args ret = new Args();
         ret.identifier = args[i++];
 
-        string versionName = args[i++];
-        string cdn = args[i++];
-        ret.version = R.Version.Create(versionName, cdn);
+        var vconf = new R.Version.Config();
+        vconf.name = args[i++];
+        vconf.cdn = args[i++];
 
         ret.buildFlags = BuildFlags.None;
         foreach (string f in args[i++].Split('|'))
             ret.buildFlags |= (BuildFlags)Enum.Parse(typeof(BuildFlags), f);
 
-        ret.debug = bool.Parse(args[i]);
+        ret.debug = bool.Parse(args[i++]);
+        vconf.branch = args[i++];
+        vconf.rev = args[i++];
+
+        ret.version = R.Version.Create(vconf);
 
         return ret;
     }

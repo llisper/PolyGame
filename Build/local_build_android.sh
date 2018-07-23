@@ -30,7 +30,12 @@ sleep 1
 git reset --hard HEAD
 git clean -fd
 
-cd $root
-echo "COPY PACKAGE..."
-sleep 1
-cp Output/Android/PolyGame/build/outputs/apk/*.apk Output/Android
+if [[ $status -eq 0 ]]
+then
+    cd $root
+    echo "COPY PACKAGE..."
+    sleep 1
+    pwd
+    ls Output/Android/PolyGame/build/outputs/apk
+    cp Output/Android/PolyGame/build/outputs/apk/*.apk Output/Android
+fi
