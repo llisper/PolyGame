@@ -28,7 +28,7 @@ public class BuildAPIs
     public static void BuildAndroid()
     {
         SetupSDKs.Setup();
-        Args args = ParseArgs();
+        Args args = ParseArgs(buildAndroidMethod);
 
         PlayerSettings.applicationIdentifier = args.identifier;
         PlayerSettings.bundleVersion = args.version.Name;
@@ -53,7 +53,7 @@ public class BuildAPIs
     public static void BuildiOS()
     {
         SetupSDKs.Setup();
-        Args args = ParseArgs();
+        Args args = ParseArgs(buildiOSMethod);
 
         PlayerSettings.applicationIdentifier = args.identifier;
         PlayerSettings.bundleVersion = args.version.Name;
@@ -75,12 +75,12 @@ public class BuildAPIs
         Debug.Log(buildiOSMethod + " Done!");
     }
 
-    static Args ParseArgs()
+    static Args ParseArgs(string argStart)
     {
         string[] args = Environment.GetCommandLineArgs();
-        int i = Array.IndexOf(args, buildAndroidMethod);
+        int i = Array.IndexOf(args, argStart);
         if (i < 0)
-            throw new Exception("Parse args failed, unable to find " + buildAndroidMethod);
+            throw new Exception("Parse args failed, unable to find " + argStart);
 
         ++i;
         if (args.Length - i < 7)

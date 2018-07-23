@@ -54,5 +54,5 @@ def generate_project(env, args):
     p.wait()
     retcode = p.returncode
     if retcode != 0:
-        raise RuntimeError("Generate Android Project FAILED, retcode: " + str(retcode))
+        raise RuntimeError("Generate iOS Project FAILED, retcode: " + str(retcode))
     print("iOS Project Generated")
