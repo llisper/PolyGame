@@ -41,32 +41,32 @@ public class PuzzleTouch : MonoBehaviour
         Instance = null;
     }
 
-    GameObject debugObj;
+    // GameObject debugObj;
 
-    void Update()
-    {
-        if (null == debugObj)
-        {
-            debugObj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            debugObj.name = "__TouchDebug";
-            debugObj.layer = Layers.Debris;
-            debugObj.transform.SetParent(transform);
-            debugObj.GetComponent<MeshRenderer>().material.color = Color.red;
-        }
+    // void Update()
+    // {
+    //     if (null == debugObj)
+    //     {
+    //         debugObj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+    //         debugObj.name = "__TouchDebug";
+    //         debugObj.layer = Layers.Debris;
+    //         debugObj.transform.SetParent(transform);
+    //         debugObj.GetComponent<MeshRenderer>().material.color = Color.red;
+    //     }
 
-        if (null != mainFinger)
-        {
-            var worldPos = PuzzleCamera.Main.ScreenToWorldPoint(mainFinger.ScreenPosition);
-            worldPos.z = -Config.Instance.camera.distance + 100;
-            debugObj.transform.position = worldPos;
-            debugObj.transform.localScale = Vector3.one * TouchVars.raycastRadius;
-            debugObj.SetActive(true);
-        }
-        else
-        {
-            debugObj.SetActive(false);
-        }
-    }
+    //     if (null != mainFinger)
+    //     {
+    //         var worldPos = PuzzleCamera.Main.ScreenToWorldPoint(mainFinger.ScreenPosition);
+    //         worldPos.z = -Config.Instance.camera.distance + 100;
+    //         debugObj.transform.position = worldPos;
+    //         debugObj.transform.localScale = Vector3.one * TouchVars.raycastRadius;
+    //         debugObj.SetActive(true);
+    //     }
+    //     else
+    //     {
+    //         debugObj.SetActive(false);
+    //     }
+    // }
 
     void OnGesture(List<LeanFinger> fingers)
     {
@@ -102,7 +102,6 @@ public class PuzzleTouch : MonoBehaviour
             else if ((holdTimer += Time.deltaTime) >= TouchVars.holdThreshold.FloatValue)
             {
                 var ray = PuzzleCamera.Main.ScreenPointToRay(mainFinger.ScreenPosition);
-                // int numOfHits = Physics.RaycastNonAlloc(ray, hits, Config.Instance.camera.distance, ~Layers.Debris);
                 int numOfHits = Physics.SphereCastNonAlloc(
                     ray.origin,
                     TouchVars.raycastRadius,
