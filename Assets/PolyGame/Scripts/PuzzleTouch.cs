@@ -19,6 +19,7 @@ public class PuzzleTouch : MonoBehaviour
     float holdTimer;
     Transform objPicked;
     LeanFinger mainFinger;
+    RaycastHit[] hits = new RaycastHit[100];
 
     public static Func<Transform, bool> onObjPicked;
     public static Action<Transform, Vector2> onObjMove;
@@ -78,16 +79,38 @@ public class PuzzleTouch : MonoBehaviour
             {
                 TouchLog.Log("Exceed hold threshold, start picking");
                 var ray = PuzzleCamera.Main.ScreenPointToRay(mainFinger.ScreenPosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, Config.Instance.camera.distance, ~Layers.Debris))
+
+                int numOfHits = Physics.RaycastNonAlloc(ray, hits, Config.Instance.camera.distance, ~Layers.Debris);
+                if (numOfHits > 0)
                 {
-                    var xform = hit.transform;
-                    TouchLog.Log("Picking " + xform);
-                    if (null != onObjPicked && onObjPicked(xform))
+                    Vector3 origin = ray.origin;
+                    origin.z = PuzzleCamera.Main.transform.position.z;
+                    Transform selected = null;
+                    float distance = float.MaxValue;
+                    for (int i = 0; i < numOfHits; ++i)
                     {
-                        objPicked = xform;
-                        TouchLog.Log(objPicked + " picked");
+                        var xform  = hits[i].transform;
+                        if (null == selected)
+                        {
+                            float newDistance = Vector3.Distance(xform.position, origin);
+                            if (newDistance < distance)
+                            {
+                                selected = xform;
+                                distance = newDistance;
+                            }
+                        }
                     }
+
+                    if (null != selected)
+                    {
+                        TouchLog.Log("Picking " + selected);
+                        if (null != onObjPicked && onObjPicked(selected))
+                        {
+                            objPicked = selected;
+                            TouchLog.Log(objPicked + " picked");
+                        }
+                    }
+
                 }
                 TouchLog.Log("Go to <Update>");
                 phase = Phase.Update;
