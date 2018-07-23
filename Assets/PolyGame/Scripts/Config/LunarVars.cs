@@ -20,6 +20,6 @@ public static class DMCVars
     public static readonly CVar maxScale = new CVar("maxScale", 1.5f);
     public static readonly CVar scalingSpeed = new CVar("scalingSpeed", 7f);
     public static readonly CVar screenYOffset = new CVar("screenYOffset", 20f);
-    public static readonly CVar offsetInches = new CVar("offsetInches", 1f);
+    // public static readonly CVar offsetInches = new CVar("offsetInches", 1f);
     public static readonly CVar moveSpeed = new CVar("moveSpeed", 7f);
 }
