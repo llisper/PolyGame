@@ -3,11 +3,12 @@ import sys
 import env
 import argparser
 import build_android
+import build_ios
 import subprocess
 
 builders = {
     'Android' : build_android.build,
-    'iOS' : None,
+    'iOS' : build_ios.build,
 }
 
 env = env.init_env()

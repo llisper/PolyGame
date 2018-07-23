@@ -23,6 +23,7 @@ public class BuildAPIs
     }
 
     const string buildAndroidMethod = "BuildAPIs.BuildAndroid";
+    const string buildiOSMethod = "BuildAPIs.BuildiOS";
 
     public static void BuildAndroid()
     {
@@ -48,6 +49,31 @@ public class BuildAPIs
 
         Debug.Log(buildAndroidMethod + " Done!");
     } 
+
+    public static void BuildiOS()
+    {
+        SetupSDKs.Setup();
+        Args args = ParseArgs();
+
+        PlayerSettings.applicationIdentifier = args.identifier;
+        PlayerSettings.bundleVersion = args.version.Name;
+        PlayerSettings.Android.bundleVersionCode = args.version.Major;
+
+        if ((args.buildFlags & BuildFlags.Resource) == BuildFlags.Resource)
+        {
+            PackUtility.Setup(args.version.Conf);
+            PackUtility.BuildiOSResources();
+        }
+
+        PackUtility.GenerateiOSStreamingAssets();
+
+        if ((args.buildFlags & BuildFlags.Bundle) == BuildFlags.Bundle)
+        {
+            PkgBuilder.BuildiOS(args.debug);
+        }
+
+        Debug.Log(buildiOSMethod + " Done!");
+    }
 
     static Args ParseArgs()
     {
