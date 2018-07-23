@@ -83,6 +83,24 @@ public class Utils
         Vector2 orthoSize = new Vector2(aspect * orthographicSize, orthographicSize);
         return new Bounds(pos, orthoSize * 2);
     }
+
+    public static float Dpi
+    {
+        get
+        {
+            #if UNITY_ANDROID
+            AndroidJavaClass activityClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+            AndroidJavaObject activity = activityClass.GetStatic<AndroidJavaObject>("currentActivity");
+
+            AndroidJavaObject metrics = new AndroidJavaObject("android.util.DisplayMetrics");
+            activity.Call<AndroidJavaObject>("getWindowManager").Call<AndroidJavaObject>("getDefaultDisplay").Call("getMetrics", metrics);
+
+            return (metrics.Get<float>("xdpi") + metrics.Get<float>("ydpi")) * 0.5f;
+            #else
+            return Screen.dpi;
+            #endif
+        }
+    }
 }
 
 public class TimeCount : IDisposable

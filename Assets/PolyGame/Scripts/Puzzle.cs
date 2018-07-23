@@ -117,7 +117,7 @@ public partial class Puzzle : MonoBehaviour
                 if (Vector3.Distance(pos, obd.inboundPos) < 0.1f)
                 {
                     pos = obd.inboundPos;
-                    obd.target.GetComponent<MeshCollider>().enabled = true;
+                    obd.target.GetComponent<Collider>().enabled = true;
                     outOfBounds.RemoveAt(i);
                 }
                 obd.target.position = pos;
@@ -257,7 +257,7 @@ public partial class Puzzle : MonoBehaviour
                 pos.z = Config.Instance.zorder.debrisFinished;
                 child.localPosition = pos;
                 child.GetComponent<MeshRenderer>().sharedMaterial = finishedMat;
-                child.GetComponent<MeshCollider>().enabled = false;
+                child.GetComponent<Collider>().enabled = false;
             }
         }
     }
@@ -306,7 +306,7 @@ public partial class Puzzle : MonoBehaviour
     {
         var target = debrisMoveContainer.Target;
         var targetRenderer = target.GetComponent<MeshRenderer>();
-        var targetCollider = target.GetComponent<MeshCollider>();
+        var targetCollider = target.GetComponent<Collider>();
 
         targetRenderer.sharedMaterial = objectMat;
         debrisMoveContainer.Target = null;
