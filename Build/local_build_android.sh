@@ -1,7 +1,6 @@
 #!/bin/sh
 
-root=`dirname $0`
-cd $root
+root="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 changes=`git status -s`
 if [[ ! -z "${changes// }" ]] 
 then
@@ -35,7 +34,5 @@ then
     cd $root
     echo "COPY PACKAGE..."
     sleep 1
-    pwd
-    ls Output/Android/PolyGame/build/outputs/apk
     cp Output/Android/PolyGame/build/outputs/apk/*.apk Output/Android
 fi
