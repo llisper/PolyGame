@@ -57,6 +57,42 @@ static class Others
         AssetDatabase.Refresh();
     }
 
+    [MenuItem("[PolyGame]/Others/Change Collider")]
+    static void ChangeCollider()
+    {
+        try
+        {
+            string[] guids = AssetDatabase.FindAssets("t:GameObject", new string[] { Paths.AssetResArtworks });
+            for (int i = 0; i < guids.Length; ++i)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guids[i]);
+                if (path.IndexOf('_') >= 0)
+                    continue;
+
+                EditorUtility.DisplayProgressBar("Change Collider", path, (float)i / guids.Length);
+                var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+                var go = GameObject.Instantiate(prefab);
+                for (int j = 0; j < go.transform.childCount; ++j)
+                {
+                    var child = go.transform.GetChild(j);
+                    GameObject.DestroyImmediate(child.GetComponent<MeshCollider>());
+                    child.gameObject.AddComponent<BoxCollider>();
+                }
+                PrefabUtility.ReplacePrefab(go, prefab, ReplacePrefabOptions.ConnectToPrefab);
+                GameObject.DestroyImmediate(go);
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
+        finally
+        {
+            EditorUtility.ClearProgressBar();
+            AssetDatabase.SaveAssets();
+        }
+    }
+
     [MenuItem("[PolyGame]/Others/Cleanup Vertex Layout")]
     static void CleanupVertexLayout()
     {
@@ -75,8 +111,6 @@ static class Others
                 mesh.vertices = verts;
                 mesh.triangles = tris;
                 mesh.colors = colors;
-                //MeshUtility.Optimize(mesh);
-                //AssetDatabase.CreateAsset(mesh, path);
             }
         }
         catch (Exception e)
