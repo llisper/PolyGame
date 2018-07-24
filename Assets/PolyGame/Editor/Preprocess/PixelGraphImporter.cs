@@ -102,7 +102,7 @@ public class PixelGraphImporter : Preprocess.Importer
         Meshes = new Mesh[triangles.Count];
         for (int i = 0; i < triangles.Count; ++i)
         {
-            GameObject triObj = new GameObject(i.ToString(), typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider));
+            GameObject triObj = new GameObject(i.ToString(), typeof(MeshFilter), typeof(MeshRenderer));
             Utils.SetupMeshRenderer(triObj);
             triObj.tag = Tags.Debris;
             triObj.layer = Layers.Debris;
@@ -126,7 +126,7 @@ public class PixelGraphImporter : Preprocess.Importer
 
             triObj.GetComponent<MeshFilter>().mesh = mesh;
             triObj.transform.localPosition = centroid;
-            triObj.GetComponent<MeshCollider>().sharedMesh = mesh;
+            triObj.AddComponent<BoxCollider>();
             Meshes[i] = mesh;
         }
     }

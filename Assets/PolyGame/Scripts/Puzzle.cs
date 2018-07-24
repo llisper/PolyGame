@@ -123,6 +123,8 @@ public partial class Puzzle : MonoBehaviour
                 obd.target.position = pos;
             }
         }
+
+        UpdaetProgress();
     }
 
     void Run(string puzzleName)
@@ -323,6 +325,7 @@ public partial class Puzzle : MonoBehaviour
             if (Vector2.Distance(target.localPosition, di.position) <= fitThreshold)
             {
                 finished[di.index] = true;
+                needToSave = true;
                 targetRenderer.sharedMaterial = finishedMat;
                 targetCollider.enabled = false;
                 var finishPosition = (Vector3)di.position;

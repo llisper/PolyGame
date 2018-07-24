@@ -10,7 +10,8 @@
         "moveSpeed": 30.0,
         "fadeSpeed": 15.0,
         "fitThreshold": 50.0,
-        "finishDebrisMoveSpeed": 10.0
+        "finishDebrisMoveSpeed": 10.0,
+        "saveInterval": 2.0
     },
     "camera": {
         "distance": 1001.0,

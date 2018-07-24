@@ -21,6 +21,7 @@ public class Config : IConfig<Config>
         public float fadeSpeed = 15f;
         public float fitThreshold = 50f;
         public float finishDebrisMoveSpeed = 10f;
+        public float saveInterval = 2f;
     }
 
     [Serializable]

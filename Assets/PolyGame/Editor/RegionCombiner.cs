@@ -35,15 +35,14 @@ static class RegionCombiner
         var go = new GameObject(
             index.ToString(),
             typeof(MeshFilter),
-            typeof(MeshRenderer), 
-            typeof(MeshCollider));
+            typeof(MeshRenderer));
         Utils.SetupMeshRenderer(go);
         go.tag = Tags.Debris;
         go.layer = Layers.Debris;
         go.transform.parent = graph.transform;
         go.GetComponent<MeshFilter>().mesh = mesh;
         go.transform.localPosition = centroid;
-        go.GetComponent<MeshCollider>().sharedMesh = mesh;
+        go.AddComponent<BoxCollider>();
         return go;
     }
 

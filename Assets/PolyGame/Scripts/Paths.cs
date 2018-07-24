@@ -16,6 +16,7 @@ public class Paths
     public const string Wireframe = "wireframe";
 
     public static string Saves { get { return Application.persistentDataPath + "/Saves"; } }
+    public static string SnapshotMark { get { return Saves + "/SnapshotMark"; } }
 
     public static string ToAssetPath(string absPath)
     {
