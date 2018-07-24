@@ -5,7 +5,7 @@ public static class TouchVars
 {
     public static readonly CVar holdThreshold = new CVar("holdThreshold", 0.125f);
     public static readonly CVar holdMoveThreshold = new CVar("holdMoveThreshold", 50f);
-    public static readonly CVar raycastRadius = new CVar("raycastRadius", 50f);
+    public static readonly CVar raycastRadius = new CVar("raycastRadius", 25f);
 }
 
 [CVarContainer]

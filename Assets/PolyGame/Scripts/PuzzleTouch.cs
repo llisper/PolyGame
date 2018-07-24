@@ -59,7 +59,7 @@ public class PuzzleTouch : MonoBehaviour
     //         var worldPos = PuzzleCamera.Main.ScreenToWorldPoint(mainFinger.ScreenPosition);
     //         worldPos.z = -Config.Instance.camera.distance + 100;
     //         debugObj.transform.position = worldPos;
-    //         debugObj.transform.localScale = Vector3.one * TouchVars.raycastRadius;
+    //         debugObj.transform.localScale = Vector3.one * TouchVars.raycastRadius * 2;
     //         debugObj.SetActive(true);
     //     }
     //     else
@@ -103,9 +103,8 @@ public class PuzzleTouch : MonoBehaviour
             {
                 var ray = PuzzleCamera.Main.ScreenPointToRay(mainFinger.ScreenPosition);
                 int numOfHits = Physics.SphereCastNonAlloc(
-                    ray.origin,
+                    ray,
                     TouchVars.raycastRadius,
-                    ray.direction,
                     hits,
                     Config.Instance.camera.distance,
                     ~Layers.Debris);
