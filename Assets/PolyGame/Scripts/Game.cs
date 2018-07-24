@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using DG.Tweening;
 using ResourceModule;
 using ResourceModule.Hotfix;
 
@@ -28,6 +29,11 @@ public class Game : MonoBehaviour
     {
         try
         {
+            DOTween.Init();
+
+            var loadingUI = GameObject.FindObjectOfType<LoadingUI>();
+            await loadingUI.Init();
+
             await SystemManager.Init(
                 ResourceSystem.Init,
                 AssetSystem.Init,
@@ -35,6 +41,8 @@ public class Game : MonoBehaviour
                 HotfixSystem.Init,
                 UI.Init,
                 GameScene.Init);
+
+            await loadingUI.Finish();
         }
         catch (Exception e)
         {

@@ -11,7 +11,8 @@ static class ConfigEditor
 {
     static ConfigEditor()
     {
-        ConfigLoader.LoadAll();
+        if (!Application.isPlaying)
+            ConfigLoader.LoadAll();
     }
 
     [MenuItem("[PolyGame]/Configs/Generate Default Configs")]
