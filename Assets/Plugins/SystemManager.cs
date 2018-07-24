@@ -32,11 +32,13 @@ public class SystemManager : MonoBehaviour
         }
     }
 
+    public delegate void InitCallback(int level, string name, float progress);
+
     public static SystemManager Instance;
 
     List<System> systems = new List<System>();
 
-    public static async Task Init(params Func<Task>[] initTasks)
+    public static async Task Init(InitCallback initCallback, params Func<Task>[] initTasks)
     {
         if (null != Instance)
             throw new ApplicationException("SystemManager already exsited, can't run Init more than once!");
@@ -48,9 +50,12 @@ public class SystemManager : MonoBehaviour
         for (int i = 0; i < initTasks.Length; ++i)
         {
             var func = initTasks[i];
-            SystemInitLog.Log(GetName(func));
+            string sysName = GetName(func);
+            initCallback(0, sysName, (float)i / initTasks.Length);
+            SystemInitLog.Log(sysName);
             await func();
             Instance.AddSystem(func);
+            initCallback(0, sysName, (float)(i + 1) / initTasks.Length);
         }
         SystemInitLog.Log("----------Initialize Finished----------");
     }

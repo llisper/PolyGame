@@ -30,11 +30,13 @@ public class Game : MonoBehaviour
         try
         {
             DOTween.Init();
+            GameEvent.Init();
 
             var loadingUI = GameObject.FindObjectOfType<LoadingUI>();
             await loadingUI.Init();
 
             await SystemManager.Init(
+                InitCallback,
                 ResourceSystem.Init,
                 AssetSystem.Init,
                 ConfigLoader.Init,
@@ -48,5 +50,10 @@ public class Game : MonoBehaviour
         {
             GameLog.LogException(e);
         }
+    }
+
+    void InitCallback(int level, string name, float progress)
+    {
+        GameEvent.Instance.Fire(GameEvent.UpdateProgress, level, name, progress);
     }
 }

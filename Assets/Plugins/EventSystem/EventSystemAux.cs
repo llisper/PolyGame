@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public partial class EvSystem
+public partial class EvSystem<T> where T : EvSystem<T>, new()
 {
     static EvSystem()
     {

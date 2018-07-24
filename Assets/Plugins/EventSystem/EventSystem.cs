@@ -4,10 +4,17 @@ using System.Collections.Generic;
 
 public sealed class EventLog : LogDefine<EventLog> { }
 
-public partial class EvSystem
+public partial class EvSystem<T> where T : EvSystem<T>, new()
 {
     public const int LogicEventStartAt = 1000;
     public delegate void EventHandler(int e, object[] p);
+
+    public static T Instance;
+
+    public static void Init()
+    {
+        Instance = new T();
+    }
 
     public EvSystem()
     {

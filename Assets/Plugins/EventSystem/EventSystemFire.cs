@@ -1,4 +1,4 @@
-﻿public partial class EvSystem
+﻿public partial class EvSystem<T> where T : EvSystem<T>, new()
 {
     #region generated
     const int paramLength = 10;
