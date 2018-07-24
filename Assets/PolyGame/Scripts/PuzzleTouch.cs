@@ -120,7 +120,7 @@ public class PuzzleTouch : MonoBehaviour
                         var xform  = hits[i].transform;
                         if (null == selected)
                         {
-                            float newDistance = Vector3.Distance(xform.position, origin);
+                            float newDistance = Vector2.Distance(xform.position, origin);
                             if (newDistance < distance)
                             {
                                 selected = xform;
