@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using ResourceModule;
@@ -63,6 +64,7 @@ public partial class Puzzle : MonoBehaviour
     public PolyGraph PuzzleObject { get { return puzzleObject; } }
     public Bounds PlaygroundBounds { get { return playgroundBounds; } }
     public bool[] FinishedFlags { get { return finished; } }
+    public bool Finished { get { return Array.TrueForAll(finished, v => v); } }
 
     void Awake()
     {
@@ -236,7 +238,7 @@ public partial class Puzzle : MonoBehaviour
                 startPos.x = Mathf.Clamp(startPos.x, min.x, max.x);
                 startPos.y = Mathf.Clamp(startPos.y, min.y, max.y);
                 float r = Mathf.Max(0, Mathf.Min(radius - ext.x, radius - ext.y));
-                child.position = startPos + (Vector3)(Random.insideUnitCircle * r);
+                child.position = startPos + (Vector3)(UnityEngine.Random.insideUnitCircle * r);
             }
         }
     }
