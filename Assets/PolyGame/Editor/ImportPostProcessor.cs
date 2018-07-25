@@ -22,7 +22,7 @@ class ImportPostProcessor : AssetPostprocessor
     {
         foreach (string path in importedAssets)
         {
-            if (path.StartsWith(Paths.AssetArtworks))
+            if (path.StartsWith(Paths.AssetArtworks) && path.Length != Paths.AssetArtworks.Length)
             {
                 string filename = Path.GetFileName(path);
                 if (Regex.IsMatch(filename, @"[A-Z]"))
