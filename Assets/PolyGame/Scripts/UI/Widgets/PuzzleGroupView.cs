@@ -7,7 +7,7 @@ public class PuzzleGroupView : MonoBehaviour
 {
     public int itemLimitHalf = 5;
     public ScrollRect scrollRect;
-    public GameObject seeAll;
+    public Image all;
     public Text category;
 
     List<PuzzleItem> puzzleItems;
@@ -28,23 +28,31 @@ public class PuzzleGroupView : MonoBehaviour
         for (int i = 0; i < showCount; ++i)
         {
             var go = prefab.Instantiate<GameObject>(scrollRect.content.transform);
-            go.transform.SetSiblingIndex(i + 2);
+            go.transform.SetSiblingIndex(i);
             var ev = go.GetComponent<ItemEvents>();
             ev.onClicked += OnItemClicked;
 
             var item = go.GetComponent<PuzzleItem>();
-            item.Init(items[i].name, SelectMaterial(i, showCount, items.Count));
+            item.Init(items[i].name, SelectMaterial(i, items.Count));
             puzzleItems.Add(item);
 
         }
 
+        if (showCount < items.Count)
+        {
+            all.material = SelectMaterial(showCount, items.Count);
+            all.gameObject.SetActive(true);
+        }
+        else
+        {
+            all.gameObject.SetActive(false);
+        }
         category.text = I18n.Get(group.name);
-        seeAll.SetActive(showCount < items.Count);
     }
 
     void Awake()
     {
-        var ev = seeAll.GetComponent<ItemEvents>();
+        var ev = all.GetComponent<ItemEvents>();
         ev.onClicked += OnSeeAllClicked;
     }
 
@@ -68,26 +76,17 @@ public class PuzzleGroupView : MonoBehaviour
         Puzzle.Start(go.name);
     }
 
-    Material SelectMaterial(int i, int showCount, int itemCount)
+    Material SelectMaterial(int i, int itemCount)
     {
-        if (i == 0)
-            return maskMats[0];
-        if (i == 1)
-            return maskMats[3];
+        int half = itemLimitHalf;
+        int step = Mathf.Min(1, i / half) * 3;
+        i = i % half;
 
-        if (i % 2 == 0)
-        {
-            if (i == (itemLimitHalf - 1) * 2)
-                return maskMats[2];
-            else
-                return maskMats[1];
-        }
+        if (i == 0)
+            return maskMats[0 + step];
+        else if (i < half - 1)
+            return maskMats[1 + step];
         else
-        {
-            if (i == showCount - 1 && showCount == itemCount)
-                return maskMats[5];
-            else
-                return maskMats[4];
-        }
+            return maskMats[2 + step];
     }
 }
