@@ -23,10 +23,11 @@ public class PuzzleItem : MonoBehaviour
             snapshotPrefab.Release();
     }
 
-    public void Init(string graphName)
+    public void Init(string graphName, Material maskMat)
     {
         this.graphName = graphName;
         name = graphName;
+        rawImage.material = maskMat;
         Load();
     }
 

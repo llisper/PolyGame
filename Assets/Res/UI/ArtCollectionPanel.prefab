@@ -209,6 +209,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollRect: {fileID: 114005730751855356}
+  masks:
+  - {fileID: 2800000, guid: cb4fda51ce33846079125f73159d6196, type: 3}
+  - {fileID: 2800000, guid: dd296156356b540ea8b4f5d1f6a2e0ad, type: 3}
+  - {fileID: 2800000, guid: 74deec0f793604b86839726c83a2ab9b, type: 3}
+  - {fileID: 2800000, guid: e4ae3a634e5f8425f8738e7219b1af9d, type: 3}
+  - {fileID: 2800000, guid: 476703ef7cb4547a99e72a53a1e8f40e, type: 3}
+  - {fileID: 2800000, guid: 84c8db8a89cdc41abafdf56850885df0, type: 3}
 --- !u!114 &114801821203507110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -346,7 +353,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 916.6667}
+  m_AnchoredPosition: {x: 0, y: 921.7873}
   m_SizeDelta: {x: -750, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224589656566873100

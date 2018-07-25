@@ -5,20 +5,23 @@ using ResourceModule;
 
 public class PuzzleGroupView : MonoBehaviour
 {
-    public int itemsLimit = 10;
+    public int itemLimitHalf = 5;
     public ScrollRect scrollRect;
     public GameObject seeAll;
     public Text category;
 
     List<PuzzleItem> puzzleItems;
     PuzzleItem reloadItem;
+    Material[] maskMats;
 
-    public void Init(ArtCollection.Group group)
+    public void Init(ArtCollection.Group group, Material[] maskMats)
     {
+        this.maskMats = maskMats;
         var items = group.items;
         int showCount = items.Count;
-        if (items.Count > itemsLimit)
-            showCount = itemsLimit - 1;
+        int itemLimit = itemLimitHalf * 2;
+        if (items.Count > itemLimit)
+            showCount = itemLimit - 1;
 
         var prefab = PrefabLoader.Load(Prefabs.PuzzleItem);
         puzzleItems = new List<PuzzleItem>();
@@ -30,7 +33,7 @@ public class PuzzleGroupView : MonoBehaviour
             ev.onClicked += OnItemClicked;
 
             var item = go.GetComponent<PuzzleItem>();
-            item.Init(items[i].name);
+            item.Init(items[i].name, SelectMaterial(i, showCount, items.Count));
             puzzleItems.Add(item);
 
         }
@@ -63,5 +66,28 @@ public class PuzzleGroupView : MonoBehaviour
     {
         reloadItem = go.GetComponent<PuzzleItem>();
         Puzzle.Start(go.name);
+    }
+
+    Material SelectMaterial(int i, int showCount, int itemCount)
+    {
+        if (i == 0)
+            return maskMats[0];
+        if (i == 1)
+            return maskMats[3];
+
+        if (i % 2 == 0)
+        {
+            if (i == (itemLimitHalf - 1) * 2)
+                return maskMats[2];
+            else
+                return maskMats[1];
+        }
+        else
+        {
+            if (i == showCount - 1 && showCount == itemCount)
+                return maskMats[5];
+            else
+                return maskMats[4];
+        }
     }
 }
