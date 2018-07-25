@@ -21,7 +21,6 @@ public partial class Puzzle : MonoBehaviour
     float scrambleRadius { get { return Config.Instance.puzzle.scrambleRadius; } }
     float moveSpeed { get { return Config.Instance.puzzle.moveSpeed; } }
     float fadeSpeed { get { return Config.Instance.puzzle.fadeSpeed; } }
-    float fitThreshold { get { return Config.Instance.puzzle.fitThreshold; } }
     float finishDebrisMoveSpeed { get { return Config.Instance.puzzle.finishDebrisMoveSpeed; } }
     
     string puzzleName;
@@ -324,7 +323,7 @@ public partial class Puzzle : MonoBehaviour
         {
             wireframeObject.ResetColors();
 
-            if (Vector2.Distance(target.localPosition, di.position) <= fitThreshold)
+            if (Vector2.Distance(target.localPosition, di.position) <= PuzzleVars.fitThreshold)
             {
                 finished[di.index] = true;
                 needToSave = true;

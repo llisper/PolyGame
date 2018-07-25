@@ -32,3 +32,10 @@ public static class DMCVars
     // 被选中碎片的移动速度
     public static readonly CVar moveSpeed = new CVar("moveSpeed", 30f);
 }
+
+[CVarContainer]
+public static class PuzzleVars
+{
+    // 释放碎片的时候，吸附的距离阈值
+    public static readonly CVar fitThreshold  = new CVar("fitThreshold", 50f);
+}
