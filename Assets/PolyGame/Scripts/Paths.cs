@@ -10,6 +10,7 @@ public class Paths
     public const string AssetResArtworksNoPrefix = "Res/Artworks";
     public const string PolyWireframeMat = "Assets/PolyGame/Art/Materials/PolyWireframe.mat";
     public const string PolyGraphMat = "Assets/PolyGame/Art/Materials/PolyGraph.mat";
+    public const string Masks = "Assets/PolyGame/Art/Masks";
 
     public const string Snapshot = "snapshot";
     public const string SnapshotFile = "snapshot.png";

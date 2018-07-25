@@ -8,11 +8,14 @@ class ImportPostProcessor : AssetPostprocessor
     void OnPreprocessTexture()
     {
         var importer = (TextureImporter)assetImporter;
-        importer.textureType = TextureImporterType.Default;
-        importer.alphaSource = TextureImporterAlphaSource.FromInput;
-        importer.isReadable = true;
-        importer.mipmapEnabled = false;
-        importer.filterMode = FilterMode.Trilinear;
+        if (importer.assetPath.StartsWith(Paths.AssetArtworks))
+        {
+            importer.textureType = TextureImporterType.Default;
+            importer.alphaSource = TextureImporterAlphaSource.FromInput;
+            importer.isReadable = true;
+            importer.mipmapEnabled = false;
+            importer.filterMode = FilterMode.Trilinear;
+        }
     }
 
     static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
