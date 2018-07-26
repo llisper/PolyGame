@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Threading.Tasks;
+using DG.Tweening;
 
 public class ScreenOverlay : Panel
 {
-    public float fadeSpeed = 15f;
+    public float defaultDuration = 0.5f;
+    public Ease defaultEase = Ease.OutSine;
 
     static ScreenOverlay Instance;
 
     CanvasGroup canvasGroup;
     float toAlpha;
-    Coroutine fadingRoutine;
+    bool isTweening;
 
     void Awake()
     {
@@ -25,52 +27,32 @@ public class ScreenOverlay : Panel
 
     public override bool Persistent { get { return true; } }
 
-    public static async Task AsyncFade(bool fadeIn)
+    public static async Task AsyncFade(bool fadeIn, float? duration = null, Ease? easeType = null)
     {
         if (null != Instance)
         {
+            if (Instance.isTweening)
+                await Awaiters.Until(() => !Instance.isTweening);
+
             Instance.gameObject.SetActive(true);
-            Instance.Finish();
-            await Instance.Fading(fadeIn);
+            await Instance.Fading(
+                fadeIn,
+                duration.HasValue ? duration.Value : Instance.defaultDuration,
+                easeType.HasValue ? easeType.Value : Instance.defaultEase);
         }
     }
 
-    public static Coroutine Fade(bool fadeIn)
+    IEnumerator Fading(bool fadeIn, float duration, Ease easeType)
     {
-        if (null != Instance)
-        {
-            Instance.gameObject.SetActive(true);
-            Instance.Finish();
-            Instance.fadingRoutine = Instance.StartCoroutine(Instance.Fading(fadeIn));
-            return Instance.fadingRoutine;
-        }
-        return null;
-    }
-
-    IEnumerator Fading(bool fadeIn)
-    {
+        isTweening = true;
         toAlpha = fadeIn ? 0f : 1f;
-        float alpha = canvasGroup.alpha;
-        while (Mathf.Abs(toAlpha - alpha) > 0.001f)
-        {
-            alpha = Mathf.Lerp(alpha, toAlpha, Time.deltaTime * fadeSpeed);
-            canvasGroup.alpha = alpha;
-            yield return null;
-        }
-        canvasGroup.alpha = toAlpha;
-        fadingRoutine = null;
+        yield return canvasGroup
+            .DOFade(toAlpha, duration)
+            .SetEase(easeType)
+            .WaitForCompletion();
 
         if (toAlpha == 0f)
             gameObject.SetActive(false);
-    }
-
-    void Finish()
-    {
-        if (null != fadingRoutine)
-        {
-            StopCoroutine(fadingRoutine);
-            canvasGroup.alpha = toAlpha;
-            fadingRoutine = null;
-        }
+        isTweening = false;
     }
 }
