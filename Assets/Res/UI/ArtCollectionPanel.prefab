@@ -208,6 +208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d848815cbed7e45a56daace381fedb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  background: {fileID: 114898341494077426}
+  colorDuration: 3
   scrollRect: {fileID: 114005730751855356}
   masks:
   - {fileID: 2800000, guid: cb4fda51ce33846079125f73159d6196, type: 3}
@@ -353,7 +355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 921.7873}
+  m_AnchoredPosition: {x: 0, y: 842.3645}
   m_SizeDelta: {x: -750, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224589656566873100
