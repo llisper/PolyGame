@@ -4,6 +4,7 @@
     {
         _MainTex ("Texture", 2D) = "white" {}
         _Color ("Color", Color) = (1, 1, 1, 1)
+        _Highlight ("Highlight", Color) = (0, 0, 0, 0)
         _ZWrite ("ZWrite", Float) = 0.0
     }
 
@@ -24,6 +25,7 @@
 
             sampler2D _MainTex;
             float4 _Color;
+            float4 _Highlight;
 
             struct vdata 
             {
@@ -60,9 +62,9 @@
             float4 frag (fdata i) : SV_TARGET 
             {
                 #if defined (_USE_VERT_COLOR)
-                float4 c = float4(i.color * _Color.rgb, _Color.a);
+                float4 c = float4(i.color * _Color.rgb + _Highlight.rgb, _Color.a);
                 #else
-                float4 c = float4(tex2D(_MainTex, i.uv).rgb * _Color.rgb, _Color.a);
+                float4 c = float4(tex2D(_MainTex, i.uv).rgb * _Color.rgb + _Highlight.rgb, _Color.a);
                 #endif
     
                 #if defined (_GREYSCALE)

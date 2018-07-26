@@ -23,11 +23,6 @@ public partial class Puzzle : MonoBehaviour
             AllFinishedAnimation();
     }
 
-    // TODO: when all finished
-    // 1. splash screen
-    // 2. pull camera to start position and distance
-    // 3. shine through debris in the order it's been finished
-    // 4. show congratulation title
     public float flashDuration = 2f;
     public Ease flashEase = Ease.OutCubic;
     public float cameraDuration = 3f;
@@ -37,6 +32,8 @@ public partial class Puzzle : MonoBehaviour
         ScreenOverlay.AsyncFade(true, flashDuration, flashEase).WrapErrors();
         DOTween.Sequence()
                .Append(ResetCamera())
+               .AppendCallback(() => finishedMat.SetColor("_Highlight", Color.white))
+               .Append(finishedMat.DOColor(Color.black, "_Highlight", 1f).SetEase(Ease.OutSine))
                .AppendCallback(() => GameEvent.Instance.Fire(GameEvent.PuzzleFinished));
     }
 
