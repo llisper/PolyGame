@@ -440,7 +440,7 @@ namespace LunarConsolePlugin
                                 var cvar = m_registry.FindVariable(name);
                                 if (cvar == null)
                                 {
-                                    Log.w("Ignoring variable '%s'", name);
+                                    Log.w("Ignoring variable '{0}'", name);
                                     continue;
                                 }
 

@@ -11,7 +11,6 @@ public class ScreenOverlay : Panel
     static ScreenOverlay Instance;
 
     CanvasGroup canvasGroup;
-    float toAlpha;
     bool isTweening;
 
     void Awake()
@@ -45,7 +44,10 @@ public class ScreenOverlay : Panel
     IEnumerator Fading(bool fadeIn, float duration, Ease easeType)
     {
         isTweening = true;
-        toAlpha = fadeIn ? 0f : 1f;
+        float startAlpha = fadeIn ? 1f : 0f;
+        float toAlpha = fadeIn ? 0f : 1f;
+
+        canvasGroup.alpha = startAlpha;
         yield return canvasGroup
             .DOFade(toAlpha, duration)
             .SetEase(easeType)

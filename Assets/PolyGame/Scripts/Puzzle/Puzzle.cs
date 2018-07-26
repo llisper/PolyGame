@@ -25,6 +25,7 @@ public partial class Puzzle : MonoBehaviour
     
     string puzzleName;
     bool[] finished;
+    int finishCount;
     bool isMovingDebris;
 
     class DebrisInfo
@@ -63,7 +64,7 @@ public partial class Puzzle : MonoBehaviour
     public PolyGraph PuzzleObject { get { return puzzleObject; } }
     public Bounds PlaygroundBounds { get { return playgroundBounds; } }
     public bool[] FinishedFlags { get { return finished; } }
-    public bool Finished { get { return Array.TrueForAll(finished, v => v); } }
+    public bool Finished { get { return finishCount >= finished.Length; } }
 
     void Awake()
     {
@@ -133,6 +134,7 @@ public partial class Puzzle : MonoBehaviour
         this.puzzleName = puzzleName;
         LoadPuzzleObject();
         LoadWireframe();
+        LoadProgress();
         InitMaterials();
         ApplyProgress();
         PuzzleCamera.Instance.Init(puzzleObject.size);
@@ -203,17 +205,16 @@ public partial class Puzzle : MonoBehaviour
         if (show)
         {
             objectAlpha = 0f;
-            finishedAlpha = 1f;
             wireframeAlpha = 1f;
             objectMat.SetFloat(propZWrite, 0f);
         }
         else
         {
             objectAlpha = 1f;
-            finishedAlpha = 0.25f;
             wireframeAlpha = 0f;
             objectMat.SetFloat(propZWrite, 1f);
         }
+        finishedAlpha = (Finished || show) ? 1f : 0.25f;
     }
 
     Vector3 ArrangeDepth(int i, Vector3 pos)
@@ -244,7 +245,6 @@ public partial class Puzzle : MonoBehaviour
 
     void ApplyProgress()
     {
-        LoadProgress();
         for (int i = 0; i < finished.Length; ++i)
         {
             if (finished[i])
@@ -326,6 +326,7 @@ public partial class Puzzle : MonoBehaviour
             if (Vector2.Distance(target.localPosition, di.position) <= PuzzleVars.fitThreshold)
             {
                 finished[di.index] = true;
+                ++finishCount;
                 needToSave = true;
                 targetRenderer.sharedMaterial = finishedMat;
                 targetCollider.enabled = false;
@@ -360,18 +361,6 @@ public partial class Puzzle : MonoBehaviour
         isMovingDebris = false;
     }
 
-    IEnumerator FinishDebrisAnimation(Transform xform, Vector3 position)
-    {
-        while (Vector3.Distance(xform.localPosition, position) > 0.1f)
-        {
-            xform.localPosition = Vector3.Lerp(xform.localPosition, position, Time.deltaTime * finishDebrisMoveSpeed);
-            yield return null;
-        }
-        xform.localPosition = position;
-        ShowWireframe(false);
-        isMovingDebris = false;
-    }
-
     #region debug
     [ContextMenu("Debug Switch Wireframe")]
     void DebugSwitchWireframe()
@@ -387,6 +376,20 @@ public partial class Puzzle : MonoBehaviour
         Gizmos.DrawLine(bounds.min + new Vector3(0f, bounds.size.y, 0f), bounds.max);
         Gizmos.DrawLine(bounds.max, bounds.max - new Vector3(0f, bounds.size.y, 0f));
         Gizmos.DrawLine(bounds.max - new Vector3(0f, bounds.size.y, 0f), bounds.min);
+    }
+
+    [ContextMenu("Leave One Unfinished")]
+    void LeaveOneUnfinished()
+    {
+        if (null != finished)
+        {
+            int i = Array.IndexOf(finished, false);
+            if (i >= 0)
+            {
+                for (int j = i + 1; j < finished.Length; ++j)
+                    finished[j] = true;
+            }
+        }
     }
     #endregion debug
 }

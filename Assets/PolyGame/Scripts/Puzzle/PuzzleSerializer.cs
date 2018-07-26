@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.IO;
 using System.Text;
+using System.Linq;
 using System.Collections;
 
 public partial class Puzzle
@@ -105,6 +106,7 @@ public partial class Puzzle
                 if (null != p)
                     Array.Copy(p.finishedFlags, finished, finished.Length);
             }
+            finishCount = finished.Count(v => v);
         }
         catch (Exception e)
         {

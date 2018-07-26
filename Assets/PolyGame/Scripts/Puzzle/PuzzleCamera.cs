@@ -13,6 +13,9 @@ public class PuzzleCamera : MonoBehaviour
     Bounds bounds;
     Vector2 zoomRange;
 
+    public Vector3 InitialPosition { get; private set; }
+    public float InitialOrthoSize { get; private set; }
+
     void Awake()
     {
         Instance = this;
@@ -35,6 +38,9 @@ public class PuzzleCamera : MonoBehaviour
 
         zoomRange = new Vector2(main.orthographicSize / minRangeScale, main.orthographicSize);
         PuzzleTouch.onObjMove += OnObjMove;
+
+        InitialPosition = main.transform.position;
+        InitialOrthoSize = main.orthographicSize;
     }
 
     public static void SetupCamera(Camera camera, Vector2 graphSize, float extendScale = 1f)
