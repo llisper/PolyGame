@@ -26,6 +26,7 @@ public partial class Puzzle : MonoBehaviour
     string puzzleName;
     bool[] finished;
     int finishCount;
+    List<int> history;
     bool isMovingDebris;
 
     class DebrisInfo
@@ -327,6 +328,7 @@ public partial class Puzzle : MonoBehaviour
             {
                 finished[di.index] = true;
                 ++finishCount;
+                history.Add(di.index);
                 needToSave = true;
                 targetRenderer.sharedMaterial = finishedMat;
                 targetCollider.enabled = false;
@@ -387,7 +389,13 @@ public partial class Puzzle : MonoBehaviour
             if (i >= 0)
             {
                 for (int j = i + 1; j < finished.Length; ++j)
-                    finished[j] = true;
+                {
+                    if (!finished[j])
+                    {
+                        finished[j] = true;
+                        history.Add(j);
+                    }
+                }
             }
         }
     }

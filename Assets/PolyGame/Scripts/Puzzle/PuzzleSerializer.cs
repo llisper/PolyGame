@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 
 public partial class Puzzle
 {
@@ -16,6 +17,7 @@ public partial class Puzzle
     class Progress
     {
         public string finished;
+        public int[] history;
 
         public bool[] finishedFlags
         {
@@ -51,6 +53,7 @@ public partial class Puzzle
 
             Progress p = new Progress();
             p.finishedFlags = finished;
+            p.history = history.ToArray();
             File.WriteAllText(
                 folder + Filename,
                 JsonUtility.ToJson(p, true), 
@@ -98,6 +101,7 @@ public partial class Puzzle
         try
         {
             finished = new bool[puzzleObject.transform.childCount];
+            history = new List<int>();
             string path = ProgressFolder(puzzleName) + Filename;
             if (File.Exists(path))
             {
@@ -105,6 +109,7 @@ public partial class Puzzle
                 Progress p = JsonUtility.FromJson<Progress>(json);
                 if (null != p)
                     Array.Copy(p.finishedFlags, finished, finished.Length);
+                history.AddRange(p.history);
             }
             finishCount = finished.Count(v => v);
         }

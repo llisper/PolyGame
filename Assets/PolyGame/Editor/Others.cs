@@ -35,10 +35,8 @@ static class Others
     static void ClearSaves()
     {
         if (Directory.Exists(Paths.Saves))
-        {
             Directory.Delete(Paths.Saves, true);
-            Debug.Log("Clear Saves");
-        }
+        Debug.Log("Clear Saves: " + Paths.Saves);
     }
 
     [MenuItem("[PolyGame]/Others/Generate Initial Snapshots")]
