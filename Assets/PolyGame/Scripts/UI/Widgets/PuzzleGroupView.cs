@@ -12,11 +12,9 @@ public class PuzzleGroupView : MonoBehaviour
 
     List<PuzzleItem> puzzleItems;
     PuzzleItem reloadItem;
-    Material[] maskMats;
 
-    public void Init(ArtCollection.Group group, Material[] maskMats)
+    public void Init(ArtCollection.Group group)
     {
-        this.maskMats = maskMats;
         var items = group.items;
         int showCount = items.Count;
         int itemLimit = itemLimitHalf * 2;
@@ -82,11 +80,12 @@ public class PuzzleGroupView : MonoBehaviour
         int step = Mathf.Min(1, i / half) * 3;
         i = i % half;
 
+        var mats = SnapshotMasks.Instance.materials;
         if (i == 0)
-            return maskMats[0 + step];
+            return mats[0 + step];
         else if (i < half - 1)
-            return maskMats[1 + step];
+            return mats[1 + step];
         else
-            return maskMats[2 + step];
+            return mats[2 + step];
     }
 }

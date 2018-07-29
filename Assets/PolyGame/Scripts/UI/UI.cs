@@ -8,7 +8,9 @@ public class UILog : LogDefine<UILog> { }
 
 public enum UILayer
 {
+    Background,
     Base,
+    Menu,
     Overlay,
     Count,
 }
@@ -62,6 +64,13 @@ public class UI : MonoBehaviour
         }
         panel.gameObject.SetActive(true);
         return (T)panel;
+    }
+
+    public T GetPanel<T>() where T : Panel
+    {
+        Panel panel;
+        panels.TryGetValue(typeof(T), out panel);
+        return panel as T;
     }
 
     public void ClosePanel<T>() where T : Panel

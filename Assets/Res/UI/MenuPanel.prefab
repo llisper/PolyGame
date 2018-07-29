@@ -261,7 +261,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114039270284581586}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114636543517255008}
+        m_MethodName: OnMyWorksClicked
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 114085008694150028}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114191475357538046
@@ -348,7 +359,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114191475357538046}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114636543517255008}
+        m_MethodName: OnGalleryClicked
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 114365348832591924}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114420643552683696

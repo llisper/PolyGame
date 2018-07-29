@@ -1,20 +1,17 @@
 ﻿
 public class MenuScene : GameScene.IScene
 {
-    BackgroundPanel background;
-    ArtCollectionPanel artCollectionPanel;
+    MenuPanel menuPanel;
 
 	public void Start()
     {
-        background = UI.Instance.OpenPanel<BackgroundPanel>();	
-        artCollectionPanel = UI.Instance.OpenPanel<ArtCollectionPanel>();
-        UI.Instance.OpenPanel<MenuPanel>();	
+        UI.Instance.OpenPanel<BackgroundPanel>(UILayer.Background);	
+        menuPanel = UI.Instance.OpenPanel<MenuPanel>(UILayer.Menu);	
         Puzzle.RetakeExpiredSnapshot();
 	}
 	
 	public void OnDestroy()
     {
-        background.gameObject.SetActive(false);
-        artCollectionPanel.gameObject.SetActive(false);
+        menuPanel.gameObject.SetActive(false);
 	}
 }
