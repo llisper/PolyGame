@@ -9,12 +9,18 @@ public static class Preprocess
     {
         string Name { get; }
         Mesh[] Meshes { get; }
+        Material Material { get; }
         GameObject GameObject { get; }
 
-        void Import();
+        void Import(ImporterArgs args);
     }
 
-    public static void Process(string name)
+    public class ImporterArgs
+    {
+        public bool useVertColor = false;
+    }
+
+    public static void Process(string name, ImporterArgs args)
     {
         Debug.LogFormat("--- Preprocess {0} Start ---", name);
         using (TimeCount.Start("Total"))
@@ -24,7 +30,7 @@ public static class Preprocess
             using (var importer = CreateImporter(name))
             {
                 Debug.Log(importer.GetType().Name);
-                importer.Import();
+                importer.Import(args);
                 var graph = importer.GameObject.GetComponent<PolyGraph>();
                 ProcessAfterImport(graph);
                 Save(importer);
@@ -61,6 +67,7 @@ public static class Preprocess
     static void Clear(string name)
     {
         string parent = string.Format("{0}/{1}/", Paths.AssetArtworks, name);
+        DeleteFolder(parent + "materials");
         DeleteFolder(parent + "meshes");
         DeleteFolder(Paths.AssetResArtworks + '/' + name);
         AssetDatabase.Refresh();
@@ -88,6 +95,17 @@ public static class Preprocess
                 MeshUtility.Optimize(mesh);
                 string meshPath = string.Format("{0}/{1}/meshes/{2}.prefab", Paths.AssetArtworks, importer.Name, mesh.name);
                 AssetDatabase.CreateAsset(mesh, meshPath);
+            }
+        }
+
+        if (null != importer.Material)
+        {
+            using (TimeCount.Start("Saving material"))
+            {
+                string parent = string.Format("{0}/{1}", Paths.AssetArtworks, importer.Name);
+                AssetDatabase.CreateFolder(parent, "materials");
+                string matPath = string.Format("{0}/{1}/materials/{2}.mat", Paths.AssetArtworks, importer.Name, importer.Material.name);
+                AssetDatabase.CreateAsset(importer.Material, matPath);
             }
         }
 

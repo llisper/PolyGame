@@ -12,12 +12,14 @@ public class PixelGraphImporter : Preprocess.Importer
 
     public string Name { get { return graph.name; } }
     public Mesh[] Meshes { get; private set; }
+    public Material Material { get; private set; }
     public GameObject GameObject { get { return mainObj; } }
 
     PolyGraph graph;
     GameObject mainObj;
     List<Vector2[]> triangles;
     List<Vector2> points = new List<Vector2>();
+    bool useVertColor;
 
     public PixelGraphImporter(string name)
     {
@@ -25,8 +27,9 @@ public class PixelGraphImporter : Preprocess.Importer
         graph = mainObj.AddComponent<PolyGraph>();
     }
 
-    public void Import()
+    public void Import(Preprocess.ImporterArgs args)
     {
+        useVertColor = args.useVertColor;
         TimeCount.Measure(ReadConfig);
         TimeCount.Measure(GenerateTriangles);
         TimeCount.Measure(GenerateMesh);
@@ -92,12 +95,18 @@ public class PixelGraphImporter : Preprocess.Importer
         triangles = resolver.Triangles;
     }
 
+    // TODO: add option, use vertex color or sample texture
+
     void GenerateMesh()
     {
-        string path = string.Format("{0}/{1}/{1}.png", Paths.AssetArtworks, graph.name);
-        Texture2D texture = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
-        if (null == texture)
-            throw new Exception("Failed to load texture " + path);
+        Texture2D texture = null;
+        if (useVertColor)
+        {
+            string path = string.Format("{0}/{1}/{1}.png", Paths.AssetArtworks, graph.name);
+            texture = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
+            if (null == texture)
+                throw new Exception("Failed to load texture " + path);
+        }
 
         Meshes = new Mesh[triangles.Count];
         for (int i = 0; i < triangles.Count; ++i)
@@ -119,10 +128,23 @@ public class PixelGraphImporter : Preprocess.Importer
             mesh.vertices = Array.ConvertAll(vertices, v => (Vector3)v);
             mesh.triangles = new int[] { 0, 1, 2 };
 
-            Color fillColor = texture.GetPixelBilinear(
-                centroid.x / graph.size.x,
-                centroid.y / graph.size.y);
-            mesh.colors = new Color[] { fillColor, fillColor, fillColor };
+            if (useVertColor)
+            {
+                Color fillColor = texture.GetPixelBilinear(
+                    centroid.x / graph.size.x,
+                    centroid.y / graph.size.y);
+                mesh.colors = new Color[] { fillColor, fillColor, fillColor };
+            }
+            else
+            {
+                Vector2[] uv = new Vector2[3];
+                for (int j = 0; j < mesh.vertices.Length; ++j)
+                {
+                    uv[j].x = points[j].x / graph.size.x;
+                    uv[j].y = points[j].y / graph.size.y;
+                }
+                mesh.uv = uv;
+            }
 
             triObj.GetComponent<MeshFilter>().mesh = mesh;
             triObj.transform.localPosition = centroid;
@@ -133,7 +155,23 @@ public class PixelGraphImporter : Preprocess.Importer
 
     void GenerateMaterial()
     {
-        var mat = AssetDatabase.LoadAssetAtPath<Material>(Paths.PolyGraphMat);
+        Material mat = null;
+        if (useVertColor)
+        {
+            mat = AssetDatabase.LoadAssetAtPath<Material>(Paths.PolyGraphMat);
+        }
+        else
+        {
+            mat = new Material(Shader.Find("PolyGame/PolyS"));
+            mat.name = graph.name;
+            string path = string.Format("{0}/{1}/{1}.png", Paths.AssetArtworks, graph.name);
+            Texture texture = AssetDatabase.LoadAssetAtPath<Texture>(path);
+            if (null == texture)
+                throw new Exception("Failed to load texture " + path);
+            mat.SetTexture("_MainTex", texture);
+            Material = mat;
+        }
+
         foreach (var renderer in mainObj.GetComponentsInChildren<MeshRenderer>())
             renderer.sharedMaterial = mat;
     }

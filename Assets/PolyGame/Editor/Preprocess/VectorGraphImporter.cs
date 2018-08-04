@@ -54,6 +54,7 @@ public class VectorGraphImporter : Preprocess.Importer
 
     public string Name { get { return graph.name; } }
     public Mesh[] Meshes { get; private set; }
+    public Material Material { get { return null; } }
     public GameObject GameObject { get { return mainObj; } }
 
     PolyGraph graph;
@@ -67,7 +68,7 @@ public class VectorGraphImporter : Preprocess.Importer
         graph = mainObj.AddComponent<PolyGraph>();
     }
 
-    public void Import()
+    public void Import(Preprocess.ImporterArgs args)
     {
         TimeCount.Measure(ParseSvg);
         TimeCount.Measure(GenerateMesh);
