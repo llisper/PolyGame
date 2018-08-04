@@ -77,6 +77,7 @@ class RegionBreaker
         var mesh = xform.GetComponent<MeshFilter>().sharedMesh;
         int[] tris = mesh.triangles;
         Color[] colors = mesh.colors;
+        Vector2[] uv = mesh.uv;
         Vector3[] verts = Array.ConvertAll(mesh.vertices, v => v + xform.localPosition);
 
         for (int i = 0; i < tris.Length; i += 3)
@@ -121,7 +122,7 @@ class RegionBreaker
             foreach (var region in regions)
             {
                 Debug.LogFormat("<color=green>{0}: create new region {1}</color>", graph.name, nextIndex);
-                NewRegion(region, triangles, graph, mat, verts, colors, nextIndex++);
+                NewRegion(region, triangles, graph, mat, verts, colors, uv, nextIndex++);
             }
 
             GameObject.DestroyImmediate(xform.gameObject);
@@ -162,6 +163,7 @@ class RegionBreaker
         Material mat,
         Vector3[] verts,
         Color[] colors,
+        Vector2[] uv,
         int index)
     {
         Vector3[] newVerts = new Vector3[region.Count * 3];
@@ -188,6 +190,7 @@ class RegionBreaker
         mesh.vertices = newVerts;
         mesh.triangles = newTris;
         mesh.colors = newColors;
+        mesh.uv = uv;
 
         MeshUtility.Optimize(mesh);
         string savePath = string.Format("{0}/{1}/Meshes/{2}.prefab", Paths.AssetArtworks, graph.name, mesh.name);

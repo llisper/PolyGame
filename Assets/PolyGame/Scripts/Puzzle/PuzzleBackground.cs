@@ -33,13 +33,37 @@ public class PuzzleBackground
     {
         Vector4 c = Vector4.zero;
         int count = 0;
-        foreach (var meshFilter in graph.GetComponentsInChildren<MeshFilter>())
+        for (int i = 0; i < graph.transform.childCount; ++i)
         {
-            Mesh mesh = meshFilter.sharedMesh;
+            var child = graph.transform.GetChild(i);
+            var mesh = child.GetComponent<MeshFilter>().sharedMesh;
+            var material = child.GetComponent<MeshRenderer>().sharedMaterial;
             int[] tris = mesh.triangles;
-            Color[] colors = mesh.colors;
-            for (int i = 0; i < tris.Length; i += 3, ++count)
-                c += (Vector4)colors[tris[i]];
+
+            if (material.IsKeywordEnabled(ShaderFeatures._USE_VERT_COLOR))
+            {
+                Color[] colors = mesh.colors;
+                for (int j = 0; j < tris.Length; j += 3, ++count)
+                    c += (Vector4)colors[tris[j]];
+            }
+            else
+            {
+                Vector3[] verts = mesh.vertices;
+                var texture = (Texture2D)material.mainTexture;
+                for (int j = 0; j < tris.Length; j += 3, ++count)
+                {
+                    Vector2[] points = new Vector2[]
+                    {
+                        child.localPosition + verts[tris[j]],
+                        child.localPosition + verts[tris[j + 1]],
+                        child.localPosition + verts[tris[j + 2]]
+                    };
+                    Vector2 centroid = PolyGraph.GetCentroid(points);
+                    c += (Vector4)texture.GetPixelBilinear(
+                        centroid.x / graph.size.x,
+                        centroid.y / graph.size.y);
+                }
+            }
         }
         c /= count;
         return c;

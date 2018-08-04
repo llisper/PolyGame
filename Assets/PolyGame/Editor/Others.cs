@@ -105,10 +105,12 @@ static class Others
                 var verts = mesh.vertices;
                 var tris = mesh.triangles;
                 var colors = mesh.colors;
+                var uv = mesh.uv;
                 mesh.Clear(false);
                 mesh.vertices = verts;
                 mesh.triangles = tris;
                 mesh.colors = colors;
+                mesh.uv = uv;
             }
         }
         catch (Exception e)
