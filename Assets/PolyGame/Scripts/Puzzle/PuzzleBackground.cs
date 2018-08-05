@@ -10,7 +10,6 @@ public class PuzzleBackground
         go.layer = takingInitialSnapshot ? Layers.Snapshot : Layers.Debris;
 
         bounds = CalculateBounds(bounds);
-        go.transform.localScale = new Vector3(bounds.size.x, bounds.size.y, 1f);
         go.transform.localPosition = new Vector3(bounds.center.x, bounds.center.y, Config.Instance.zorder.background);
 
         var renderer = go.GetComponent<MeshRenderer>();
@@ -27,11 +26,22 @@ public class PuzzleBackground
 
         if (null != graph.background)
         {
+            float boundsAspect = bounds.size.x / bounds.size.y;
+            float aspect = (float)graph.background.width / graph.background.height;
+            if (aspect >= boundsAspect)
+            {
+                go.transform.localScale = new Vector3(aspect * bounds.size.y, bounds.size.y, 1f);
+            }
+            else
+            {
+                go.transform.localScale = new Vector3(bounds.size.x, bounds.size.x / aspect, 1f);
+            }
             mat.EnableKeyword(ShaderFeatures._TEXTURE_BG);
             mat.SetTexture("_MainTex", graph.background);
         }
         else
         {
+            go.transform.localScale = new Vector3(bounds.size.x, bounds.size.y, 1f);
             if (takingInitialSnapshot)
                 mat.EnableKeyword(ShaderFeatures._USE_CIRCLE_ALPHA);
             mat.SetColor("_Color", BackgroundColor(graph));
