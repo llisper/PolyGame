@@ -26,6 +26,7 @@
             float _Alpha;
 			float3 _Color;
 			float4 _Bounds;
+            sampler2D _MainTex;
 
             struct vdata 
             {
@@ -46,6 +47,7 @@
 				#endif
             };
 
+			#if ! defined (_TEXTURE_BG)
             float circleAlpha(fdata i)
             {
                 float r = max(_Bounds.x, _Bounds.y);
@@ -71,6 +73,7 @@
                 float2 vv = lerp(v2, v1, saturate(sign(dot(v, v1)) + 1.0));
                 return min(1.0, sqrt(dot(v, v) / dot(vv, vv))) * _Alpha;
             }
+			#endif
 
             fdata vert (vdata v) 
             {
