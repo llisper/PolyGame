@@ -32,6 +32,7 @@ public static class Preprocess
                 Debug.Log(importer.GetType().Name);
                 importer.Import(args);
                 var graph = importer.GameObject.GetComponent<PolyGraph>();
+                SetBackgroundTexture(graph);
                 ProcessAfterImport(graph);
                 Save(importer);
             }
@@ -52,6 +53,15 @@ public static class Preprocess
             return new VectorGraphImporter(name);
         else
             throw new Exception("No appropriate importer for " + path);
+    }
+
+    static void SetBackgroundTexture(PolyGraph graph)
+    {
+        string bgTexPath = string.Format(
+            "{0}/{1}/{1}_background.png",
+            Paths.AssetArtworks,
+            graph.name);
+        graph.background = AssetDatabase.LoadAssetAtPath<Texture2D>(bgTexPath);
     }
 
     static void ProcessAfterImport(PolyGraph graph)

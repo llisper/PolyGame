@@ -141,11 +141,6 @@ public class PuzzleSnapshot : MonoBehaviour
         var bounds = Utils.CalculateBounds(pos, ssCamera.aspect, ssCamera.orthographicSize);
         backgroundObject = PuzzleBackground.Create(graph, bounds, true);
         backgroundObject.transform.SetParent(transform, true);
-        //var renderer = backgroundObject.GetComponent<MeshRenderer>();
-        //var mat = Application.isPlaying ? renderer.material : renderer.sharedMaterial;
-        //mat.EnableKeyword(ShaderFeatures._USE_CIRCLE_ALPHA);
-        //if (!Application.isPlaying)
-        //    mat.SetColor("_Color", new Color32(140, 140, 140, 255));
     }
 
     void Clear()
