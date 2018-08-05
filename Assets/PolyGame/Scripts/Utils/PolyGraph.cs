@@ -50,6 +50,7 @@ public class Region
 public class PolyGraph : MonoBehaviour
 {
     public Vector2Int size;
+    public Texture2D background;
     public List<Triangle> triangles = new List<Triangle>();
     public List<Region> regions = new List<Region>();
 

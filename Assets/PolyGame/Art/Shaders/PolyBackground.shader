@@ -2,6 +2,7 @@
 {
     Properties 
     {
+        _MainTex ("Texture", 2D) = "white" {}
         _Alpha ("Alpha", Float) = 1.0
 		_Color ("_Color", Color) = (1, 1, 1, 1)
 		_Bounds ("_Bounds", Vector) = (0, 0, 0, 0)
@@ -17,7 +18,8 @@
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag   
-            #pragma multi_compile __ _USE_CIRCLE_ALPHA 
+            #pragma multi_compile __ _USE_CIRCLE_ALPHA _TEXTURE_BG
+			#pragma multi_compile __ _GREYSCALE
 
             #include "UnityCG.cginc"
 
@@ -28,13 +30,20 @@
             struct vdata 
             {
                 float4 position : POSITION;
+                #if defined (_TEXTURE_BG)
+                float2 uv : TEXCOORD0;
+				#endif
             };
 
             struct fdata 
             {
                 float4 position : SV_POSITION;
+                #if defined (_TEXTURE_BG)
+                float2 uv : TEXCOORD0;
+				#else
 				float2 worldPos : TEXCOORD0;
 				float2 worldOrigin : TEXCOORD1;
+				#endif
             };
 
             float circleAlpha(fdata i)
@@ -67,19 +76,35 @@
             {
                 fdata i;
                 i.position = UnityObjectToClipPos(v.position);
-				i.worldPos = mul(unity_ObjectToWorld, v.position).xy;
-                i.worldOrigin = mul(unity_ObjectToWorld, float4(0, 0, 0, 1)).xy;
+                #if defined (_TEXTURE_BG)
+					i.uv = v.uv;
+				#else
+					i.worldPos = mul(unity_ObjectToWorld, v.position).xy;
+					i.worldOrigin = mul(unity_ObjectToWorld, float4(0, 0, 0, 1)).xy;
+				#endif
                 return i;
             }
 
             float4 frag (fdata i) : SV_TARGET 
             {
-                #if defined (_USE_CIRCLE_ALPHA)
-                float a = circleAlpha(i);
-                #else
-                float a = ellipseAlpha(i);
+				float4 final;
+                #if defined (_TEXTURE_BG)
+					final = float4(tex2D(_MainTex, i.uv).rgb, 1);
+
+				#else
+					#if defined (_USE_CIRCLE_ALPHA)
+					float a = circleAlpha(i);
+					#else
+					float a = ellipseAlpha(i);
+					#endif
+					final = float4(lerp(float3(1, 1, 1), _Color, a), 1);
+				#endif
+
+                #if defined (_GREYSCALE)
+					final.rgb = dot(final.rgb, float3(0.3, 0.59, 0.11));
                 #endif
-				return float4(lerp(float3(1, 1, 1), _Color, a), 1);
+
+				return final;
             }
             ENDCG
         }

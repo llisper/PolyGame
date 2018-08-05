@@ -139,6 +139,7 @@ public class ShaderFeatures
     public const string _USE_VERT_COLOR = "_USE_VERT_COLOR";
     public const string _GREYSCALE = "_GREYSCALE";
     public const string _USE_CIRCLE_ALPHA = "_USE_CIRCLE_ALPHA";
+    public const string _TEXTURE_BG = "_TEXTURE_BG";
 }
 
 public class Prefabs

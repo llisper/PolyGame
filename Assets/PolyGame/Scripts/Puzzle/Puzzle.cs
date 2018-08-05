@@ -173,7 +173,6 @@ public partial class Puzzle : MonoBehaviour
     void LoadBackgroundQuad()
     {
         var go = PuzzleBackground.Create(puzzleObject, playgroundBounds);
-        go.layer = Layers.Debris;
         go.transform.SetParent(transform, true);
     }
 

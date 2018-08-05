@@ -3,10 +3,11 @@ using ResourceModule;
 
 public class PuzzleBackground
 {
-    public static GameObject Create(PolyGraph graph, Bounds bounds)
+    public static GameObject Create(PolyGraph graph, Bounds bounds, bool takingInitialSnapshot = false)
     {
         var prefab = PrefabLoader.Load(Prefabs.Background);
         var go = prefab.Instantiate<GameObject>();
+        go.layer = takingInitialSnapshot ? Layers.Snapshot : Layers.Debris;
 
         bounds = CalculateBounds(bounds);
         go.transform.localScale = new Vector3(bounds.size.x, bounds.size.y, 1f);
@@ -23,8 +24,22 @@ public class PuzzleBackground
             mat = GameObject.Instantiate(renderer.sharedMaterial);
             renderer.sharedMaterial = mat;
         }
-        mat.SetColor("_Color", BackgroundColor(graph));
-        mat.SetVector("_Bounds", new Vector4(bounds.extents.x, bounds.extents.y));
+
+        if (null != graph.background)
+        {
+            mat.EnableKeyword(ShaderFeatures._TEXTURE_BG);
+            mat.SetTexture("_MainTex", graph.background);
+        }
+        else
+        {
+            if (takingInitialSnapshot)
+                mat.EnableKeyword(ShaderFeatures._USE_CIRCLE_ALPHA);
+            mat.SetColor("_Color", BackgroundColor(graph));
+            mat.SetVector("_Bounds", new Vector4(bounds.extents.x, bounds.extents.y));
+        }
+
+        if (takingInitialSnapshot)
+            mat.EnableKeyword(ShaderFeatures._GREYSCALE);
 
         return go;
     }
