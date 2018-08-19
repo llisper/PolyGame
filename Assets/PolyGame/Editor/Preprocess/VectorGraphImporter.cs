@@ -72,7 +72,16 @@ public class VectorGraphImporter : Preprocess.Importer
             if (points.Length != 3)
                 throw new Exception("invalid points count: " + pointsVal);
 
-            triangles.Add(new Vector2[] { points[0], points[1], points[2] });
+            Vector3 p0 = points[0];
+            Vector3 p1 = points[1];
+            Vector3 p2 = points[2];
+            float cross = Vector3.Cross(p1 - p0, p2 - p0).z;
+            if (cross == 0f)
+                throw new Exception("Cross Product is zero, we got some degenerated triangles");
+            if (cross < 0f)
+                triangles.Add(new Vector2[] { p0, p1, p2 });
+            else
+                triangles.Add(new Vector2[] { p0, p2, p1 });
             colors.Add(fill);
         }
     }
