@@ -95,8 +95,6 @@ public class PixelGraphImporter : Preprocess.Importer
         triangles = resolver.Triangles;
     }
 
-    // TODO: add option, use vertex color or sample texture
-
     void GenerateMesh()
     {
         Texture2D texture = null;

@@ -6,25 +6,30 @@ using System.Collections.Generic;
 [Serializable]
 public class Edge
 {
-    public Vector2Int v0;
-    public Vector2Int v1;
+    public Vector2 v0;
+    public Vector2 v1;
     public List<int> wireframeTriangles;
 
-    public Edge(Vector2Int v0, Vector2Int v1)
+    long v0h;
+    long v1h;
+
+    public Edge(Vector2 v0, long v0h, Vector2 v1, long v1h)
     {
         this.v0 = v0;
+        this.v0h = v0h;
         this.v1 = v1;
+        this.v1h = v1h;
     }
 
     public bool EqualTo(Edge other)
     {
-        return EqualTo(other.v0, other.v1);
+        return EqualTo(other.v0h, other.v1h);
     }
 
-    public bool EqualTo(Vector2Int v0, Vector2Int v1)
+    public bool EqualTo(long v0h, long v1h)
     {
-        return (this.v0 == v0 && this.v1 == v1) ||
-               (this.v0 == v1 && this.v1 == v0);
+        return (this.v0h == v0h && this.v1h == v1h) ||
+               (this.v0h == v1h && this.v1h == v0h);
     }
 }
 
@@ -32,7 +37,7 @@ public class Edge
 public class Triangle
 {
     public int region;
-    public Vector2Int[] vertices = new Vector2Int[3];
+    public Vector2[] vertices = new Vector2[3];
     public long[] hashes = new long[3];
     public List<int> adjacents = new List<int>();
 }
@@ -54,11 +59,16 @@ public class PolyGraph : MonoBehaviour
     public List<Triangle> triangles = new List<Triangle>();
     public List<Region> regions = new List<Region>();
 
+    const float coordinatePrecision = 10f;
+
     public static long PointHash(Vector2 p, Vector2Int size)
     {
-        // NOTE: points are output by ImageTriangulator, and these coordinates are actually integers
-        // each coordinate represent a pixel coordinate i think.
-        return (long)p.y * size.x + (long)p.x;
+        // NOTE: coordinate floating point precision up to 0.1
+        double c = coordinatePrecision;
+        long x = (long)(p.x * c);
+        long y = (long)(p.y * c);
+        long w = (long)(size.x * c);
+        return y * w + x;
     }
 
     public long PointHash(Vector2 p)
