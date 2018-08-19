@@ -5,48 +5,7 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using SvgXml;
-
-/*
-    NOTE: use this website to genereate xml descriptor
-    http://xmltocsharp.azurewebsites.net/
-    image triangulator
-    https://snorpey.github.io/triangulation/
-*/
-
-namespace SvgXml
-{
-    [XmlRoot(ElementName = "polygon", Namespace = "http://www.w3.org/2000/svg")]
-    public class Polygon
-    {
-        [XmlAttribute(AttributeName = "points")]
-        public string Points { get; set; }
-        [XmlAttribute(AttributeName = "fill")]
-        public string Fill { get; set; }
-        [XmlAttribute(AttributeName = "stroke")]
-        public string Stroke { get; set; }
-        [XmlAttribute(AttributeName = "stroke-width")]
-        public string Strokewidth { get; set; }
-        [XmlAttribute(AttributeName = "stroke-linejoin")]
-        public string Strokelinejoin { get; set; }
-    }
-
-    [XmlRoot(ElementName = "svg", Namespace = "http://www.w3.org/2000/svg")]
-    public class Svg
-    {
-        [XmlElement(ElementName = "polygon", Namespace = "http://www.w3.org/2000/svg")]
-        public List<Polygon> Polygon { get; set; }
-        [XmlAttribute(AttributeName = "width")]
-        public string Width { get; set; }
-        [XmlAttribute(AttributeName = "height")]
-        public string Height { get; set; }
-        [XmlAttribute(AttributeName = "xmlns")]
-        public string Xmlns { get; set; }
-        [XmlAttribute(AttributeName = "version")]
-        public string Version { get; set; }
-    }
-
-}
+using System.Xml.Linq;
 
 public class VectorGraphImporter : Preprocess.Importer
 {
@@ -89,34 +48,47 @@ public class VectorGraphImporter : Preprocess.Importer
             Paths.AssetArtworksNoPrefix,
             graph.name);
 
-        Svg svg;
-        var serializer = new XmlSerializer(typeof(Svg));
-        using (var stream = new FileStream(path, FileMode.Open))
-            svg = (Svg)serializer.Deserialize(stream);
+        var document = XDocument.Load(path);
+        graph.size = new Vector2Int(
+            Number(document.Root.Attribute("width").Value),
+            Number(document.Root.Attribute("height").Value));
 
-        graph.size = new Vector2Int(int.Parse(svg.Width), int.Parse(svg.Height));
-        for (int i = 0; i < svg.Polygon.Count; ++i)
+        foreach (var ele in document.Root.Elements(document.Root.GetDefaultNamespace().GetName("polygon")))
         {
-            var polygon = svg.Polygon[i];
-            var match = Regex.Match(polygon.Points, @"(\d+),(\d+) (\d+),(\d+) (\d+),(\d+)");
-            if (!match.Success)
-                throw new Exception("Failed to parse svg points " + polygon.Points);
+            string styleVal = ele.Attribute("style").Value;
+            string pointsVal = ele.Attribute("points").Value;
 
-            Vector2 p0 = new Vector2(int.Parse(match.Groups[1].Value), graph.size.y - int.Parse(match.Groups[2].Value));
-            Vector2 p2 = new Vector2(int.Parse(match.Groups[3].Value), graph.size.y - int.Parse(match.Groups[4].Value));
-            Vector2 p1 = new Vector2(int.Parse(match.Groups[5].Value), graph.size.y - int.Parse(match.Groups[6].Value));
-            triangles.Add(new Vector2[] { p0, p1, p2 });
+            var styleMatch = Regex.Match(styleVal, @"opacity:([^;]+);fill:#([^;]+);");
+            if (!styleMatch.Success)
+                throw new Exception("invalid style: " + styleVal);
 
-            match = Regex.Match(polygon.Fill, @"rgb\((\d+), (\d+), (\d+)\)");
-            if (!match.Success)
-                throw new Exception("Failed to parse svg fill color " + polygon.Fill);
+            float alpha = float.Parse(styleMatch.Groups[1].Value);
+            Color fill = Utils.ColorFromString(styleMatch.Groups[2].Value);
+            fill.a = alpha;
 
-            Color color = new Color32(
-                byte.Parse(match.Groups[1].Value),
-                byte.Parse(match.Groups[2].Value),
-                byte.Parse(match.Groups[3].Value), 255);
-            colors.Add(color);
+            Vector2[] points = Array.ConvertAll(
+                pointsVal.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries),
+                v => Vector(v));
+            if (points.Length != 3)
+                throw new Exception("invalid points count: " + pointsVal);
+
+            triangles.Add(new Vector2[] { points[0], points[1], points[2] });
+            colors.Add(fill);
         }
+    }
+
+    int Number(string str)
+    {
+        var match = Regex.Match(str, @"(\d+)");
+        if (!match.Success)
+            throw new Exception(str + " is not a number");
+        return int.Parse(match.Groups[1].Value);
+    }
+
+    Vector2 Vector(string str)
+    {
+        string[] v = str.Split(',');
+        return new Vector2(float.Parse(v[0]), float.Parse(v[1]));
     }
 
     void GenerateMesh()
