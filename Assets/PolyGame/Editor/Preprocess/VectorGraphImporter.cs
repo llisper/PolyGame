@@ -88,7 +88,7 @@ public class VectorGraphImporter : Preprocess.Importer
     Vector2 Vector(string str)
     {
         string[] v = str.Split(',');
-        return new Vector2(float.Parse(v[0]), float.Parse(v[1]));
+        return new Vector2(float.Parse(v[0]), graph.size.y - float.Parse(v[1]));
     }
 
     void GenerateMesh()
