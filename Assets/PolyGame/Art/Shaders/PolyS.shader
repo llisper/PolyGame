@@ -41,7 +41,7 @@
             {
                 float4 position : SV_POSITION;
                 #if defined (_USE_VERT_COLOR)
-                float3 color : COLOR;
+                float4 color : COLOR;
                 #else
                 float2 uv : TEXCOORD0;
                 #endif
@@ -52,7 +52,7 @@
                 fdata i;
                 i.position = UnityObjectToClipPos(v.position);
                 #if defined (_USE_VERT_COLOR)
-                i.color = v.color.rgb;
+                i.color = v.color;
                 #else
                 i.uv = v.uv;
                 #endif
@@ -62,9 +62,10 @@
             float4 frag (fdata i) : SV_TARGET 
             {
                 #if defined (_USE_VERT_COLOR)
-                float4 c = float4(i.color * _Color.rgb + _Highlight.rgb, _Color.a);
+                float4 c = float4(i.color.rgb * _Color.rgb + _Highlight.rgb, i.color.a * _Color.a);
                 #else
-                float4 c = float4(tex2D(_MainTex, i.uv).rgb * _Color.rgb + _Highlight.rgb, _Color.a);
+				float4 texcol = tex2D(_MainTex, i.uv);
+                float4 c = float4(texcol.rgb * _Color.rgb + _Highlight.rgb, texcol.a * _Color.a);
                 #endif
     
                 #if defined (_GREYSCALE)
