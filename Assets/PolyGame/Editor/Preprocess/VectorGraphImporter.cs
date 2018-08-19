@@ -1,11 +1,9 @@
 using UnityEngine;
 using UnityEditor;
 using System;
-using System.IO;
-using System.Xml.Serialization;
+using System.Xml.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Xml.Linq;
 
 public class VectorGraphImporter : Preprocess.Importer
 {
