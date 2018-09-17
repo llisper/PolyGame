@@ -73,8 +73,8 @@ static class Others
                 for (int j = 0; j < go.transform.childCount; ++j)
                 {
                     var child = go.transform.GetChild(j);
-                    GameObject.DestroyImmediate(child.GetComponent<MeshCollider>());
-                    child.gameObject.AddComponent<BoxCollider>();
+                    GameObject.DestroyImmediate(child.GetComponent<BoxCollider>());
+                    child.gameObject.AddComponent<MeshCollider>().sharedMesh = child.GetComponent<MeshFilter>().sharedMesh;
                 }
                 PrefabUtility.ReplacePrefab(go, prefab, ReplacePrefabOptions.ConnectToPrefab);
                 GameObject.DestroyImmediate(go);
