@@ -200,7 +200,8 @@ class RegionBreaker
         GameObject triObj = new GameObject(
             index.ToString(),
             typeof(MeshFilter),
-            typeof(MeshRenderer));
+            typeof(MeshRenderer),
+            typeof(MeshCollider));
         Utils.SetupMeshRenderer(triObj);
         triObj.tag = Tags.Debris;
         triObj.layer = Layers.Debris;
@@ -208,6 +209,6 @@ class RegionBreaker
         triObj.transform.localPosition = centroid;
         triObj.GetComponent<MeshFilter>().mesh = mesh;
         triObj.GetComponent<MeshRenderer>().sharedMaterial = mat;
-        triObj.AddComponent<BoxCollider>();
+        triObj.GetComponent<MeshCollider>().sharedMesh = mesh;
     }
 }
