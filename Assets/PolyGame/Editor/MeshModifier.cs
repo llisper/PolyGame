@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 using System;
 using System.IO;
 using System.Linq;
@@ -67,6 +69,7 @@ class MeshModifier : EditorWindow
     int selected;
     string filter;
     string[] names;
+    Scene scene;
     List<string> filteredNames = new List<string>();
     Info info;
     bool unsavedModification;
@@ -83,10 +86,20 @@ class MeshModifier : EditorWindow
         labelStyle = new GUIStyle(EditorStyles.boldLabel);
     }
 
+    void OnEnable()
+    {
+        scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+    }
+
     void OnDestroy()
     {
         ClearCurrent();
         Instance = null;
+        if (null != scene)
+        {
+            EditorSceneManager.OpenScene("Assets/Scenes/Start.unity", OpenSceneMode.Single);
+            EditorSceneManager.CloseScene(scene, true);
+        }
     }
 
     void ClearCurrent()
