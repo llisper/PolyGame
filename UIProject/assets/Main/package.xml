@@ -213,6 +213,9 @@
     <image id="sw075t" name="avatar7.png" path="/images/User/"/>
     <component id="sw075u" name="ScreenFader.xml" path="/" exported="true"/>
     <image id="sw075v" name="fader.png" path="/images/" scale=""/>
+    <component id="x1cc5w" name="Background.xml" path="/" exported="true"/>
+    <component id="x1cc5x" name="MenuPanel.xml" path="/" exported="true"/>
+    <component id="x1cc5y" name="MenuButton.xml" path="/widgets/"/>
   </resources>
   <publish name="Main"/>
 </packageDescription>

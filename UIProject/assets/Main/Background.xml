@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="750,1334">
+  <displayList>
+    <image id="n1_x1cc" name="bg" src="sw070" fileName="images/Background/autumn-studio-407865.png" xy="375,0" pivot="0.5,0" anchor="true" size="2134,1334" aspect="true">
+      <relation target="" sidePair="height-height"/>
+    </image>
+  </displayList>
+</component>

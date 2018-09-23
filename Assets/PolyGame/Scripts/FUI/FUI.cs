@@ -63,6 +63,8 @@ namespace Experiments
 
         void RegisterPanels()
         {
+            RegisterPanel<Background>(FPackage.Main, UILayer.Background);
+            RegisterPanel<MenuPanel>(FPackage.Main, UILayer.Base);
             RegisterPanel<ScreenFader>(FPackage.Main, UILayer.Overlay);
         }
 

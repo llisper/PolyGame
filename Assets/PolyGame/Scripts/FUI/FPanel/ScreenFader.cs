@@ -1,22 +1,7 @@
-﻿using System;
-using FairyGUI;
+﻿using FairyGUI;
 
 namespace Experiments
 {
-    public class FPanelInfo
-    {
-        public Type type;
-        public UILayer layer;
-        public string package;
-
-        public FPanelInfo (Type type, string package, UILayer layer)
-        {
-            this.type = type;
-            this.layer = layer;
-            this.package = package;
-        }
-    }
-
     public class ScreenFader : FPanel
     {
         Controller controller;
