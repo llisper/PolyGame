@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 using System;
 using System.IO;
-using System.Reflection;
-using System.Threading.Tasks;
-using System.Collections.Generic;
 using DG.Tweening;
 using ResourceModule;
 using ResourceModule.Hotfix;
@@ -31,6 +28,7 @@ public class Game : MonoBehaviour
         {
             DOTween.Init();
             GameEvent.Init();
+            InitSaveDirectory();
 
             var loadingUI = GameObject.FindObjectOfType<LoadingUI>();
             await loadingUI.Init();
@@ -50,6 +48,11 @@ public class Game : MonoBehaviour
         {
             GameLog.LogException(e);
         }
+    }
+
+    void InitSaveDirectory()
+    {
+        Directory.CreateDirectory(Paths.Saves);
     }
 
     void InitCallback(int level, string name, float progress)

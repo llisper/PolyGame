@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="9239j664" jpegQuality="80" compressPNG="true">
+  <resources>
+    <image id="sw070" name="autumn-studio-407865.png" path="/images/Background/"/>
+    <image id="sw071" name="bg1.png" path="/images/Background/"/>
+    <image id="sw072" name="button_bg_b.png" path="/images/Buttons/Big/blue/"/>
+    <image id="sw073" name="button_bg_down_b.png" path="/images/Buttons/Big/blue/"/>
+    <image id="sw074" name="button_bg_hover_b.png" path="/images/Buttons/Big/blue/"/>
+    <image id="sw075" name="small_button_bg_b.png" path="/images/Buttons/Big/blue/"/>
+    <image id="sw076" name="small_button_bg_down_b.png" path="/images/Buttons/Big/blue/"/>
+    <image id="sw077" name="small_button_bg_hover_b.png" path="/images/Buttons/Big/blue/"/>
+    <image id="sw078" name="button_bg_inactive.png" path="/images/Buttons/Big/"/>
+    <image id="sw079" name="button_bg_down_e.png" path="/images/Buttons/Big/empty/"/>
+    <image id="sw07a" name="button_bg_e.png" path="/images/Buttons/Big/empty/"/>
+    <image id="sw07b" name="button_bg_hover_e.png" path="/images/Buttons/Big/empty/"/>
+    <image id="sw07c" name="small_button_bg_down_e.png" path="/images/Buttons/Big/empty/"/>
+    <image id="sw07d" name="small_button_bg_e.png" path="/images/Buttons/Big/empty/"/>
+    <image id="sw07e" name="small_button_bg_hover_e.png" path="/images/Buttons/Big/empty/"/>
+    <image id="sw07f" name="button_bg_down_g.png" path="/images/Buttons/Big/green/"/>
+    <image id="sw07g" name="button_bg_g.png" path="/images/Buttons/Big/green/"/>
+    <image id="sw07h" name="button_bg_hover_g.png" path="/images/Buttons/Big/green/"/>
+    <image id="sw07i" name="small_button_bg_down_g.png" path="/images/Buttons/Big/green/"/>
+    <image id="sw07j" name="small_button_bg_g.png" path="/images/Buttons/Big/green/"/>
+    <image id="sw07k" name="small_button_bg_hover_g.png" path="/images/Buttons/Big/green/"/>
+    <image id="sw07l" name="button_bg_down_o.png" path="/images/Buttons/Big/orange/"/>
+    <image id="sw07m" name="button_bg_hover_o.png" path="/images/Buttons/Big/orange/"/>
+    <image id="sw07n" name="button_bg_o.png" path="/images/Buttons/Big/orange/"/>
+    <image id="sw07o" name="small_button_bg_down_o.png" path="/images/Buttons/Big/orange/"/>
+    <image id="sw07p" name="small_button_bg_hover_o.png" path="/images/Buttons/Big/orange/"/>
+    <image id="sw07q" name="small_button_bg_o.png" path="/images/Buttons/Big/orange/"/>
+    <image id="sw07r" name="button_bg_down_p.png" path="/images/Buttons/Big/purple/"/>
+    <image id="sw07s" name="button_bg_hover_p.png" path="/images/Buttons/Big/purple/"/>
+    <image id="sw07t" name="button_bg_p.png" path="/images/Buttons/Big/purple/"/>
+    <image id="sw07u" name="small_button_bg_down_p.png" path="/images/Buttons/Big/purple/"/>
+    <image id="sw07v" name="small_button_bg_hover_p.png" path="/images/Buttons/Big/purple/"/>
+    <image id="sw07w" name="small_button_bg_p.png" path="/images/Buttons/Big/purple/"/>
+    <image id="sw07x" name="button_bg_down_r.png" path="/images/Buttons/Big/red/"/>
+    <image id="sw07y" name="button_bg_hover_r.png" path="/images/Buttons/Big/red/"/>
+    <image id="sw07z" name="button_bg_r.png" path="/images/Buttons/Big/red/"/>
+    <image id="sw0710" name="small_button_bg_down_r.png" path="/images/Buttons/Big/red/"/>
+    <image id="sw0711" name="small_button_bg_hover_r.png" path="/images/Buttons/Big/red/"/>
+    <image id="sw0712" name="small_button_bg_r.png" path="/images/Buttons/Big/red/"/>
+    <image id="sw0713" name="small_button_bg_inactive.png" path="/images/Buttons/Big/"/>
+    <image id="sw0714" name="ellipse_button.png" path="/images/Buttons/Round/"/>
+    <image id="sw0715" name="ellipse_button_down.png" path="/images/Buttons/Round/"/>
+    <image id="sw0716" name="ellipse_button_down_g.png" path="/images/Buttons/Round/"/>
+    <image id="sw0717" name="ellipse_button_down_p.png" path="/images/Buttons/Round/"/>
+    <image id="sw0718" name="ellipse_button_g.png" path="/images/Buttons/Round/"/>
+    <image id="sw0719" name="ellipse_button_hover.png" path="/images/Buttons/Round/"/>
+    <image id="sw071a" name="ellipse_button_hover_g.png" path="/images/Buttons/Round/"/>
+    <image id="sw071b" name="ellipse_button_hover_p.png" path="/images/Buttons/Round/"/>
+    <image id="sw071c" name="ellipse_button_inactive.png" path="/images/Buttons/Round/"/>
+    <image id="sw071d" name="ellipse_button_p.png" path="/images/Buttons/Round/"/>
+    <image id="sw071e" name="ellipse_small_button.png" path="/images/Buttons/Round/"/>
+    <image id="sw071f" name="ellipse_small_button_down.png" path="/images/Buttons/Round/"/>
+    <image id="sw071g" name="ellipse_small_button_hover.png" path="/images/Buttons/Round/"/>
+    <image id="sw071h" name="ellipse_small_button_inactive.png" path="/images/Buttons/Round/"/>
+    <image id="sw071i" name="check.png" path="/images/Check and toggle/"/>
+    <image id="sw071j" name="check_toggle_bg.png" path="/images/Check and toggle/"/>
+    <image id="sw071k" name="toggle.png" path="/images/Check and toggle/"/>
+    <image id="sw071l" name="air.png" path="/images/Icons/"/>
+    <image id="sw071m" name="arrow_down.png" path="/images/Icons/"/>
+    <image id="sw071n" name="arrow_left.png" path="/images/Icons/"/>
+    <image id="sw071o" name="arrow_right.png" path="/images/Icons/"/>
+    <image id="sw071p" name="arrow_up.png" path="/images/Icons/"/>
+    <image id="sw071q" name="basket.png" path="/images/Icons/"/>
+    <image id="sw071r" name="bin.png" path="/images/Icons/"/>
+    <image id="sw071s" name="check.png" path="/images/Icons/"/>
+    <image id="sw071t" name="coins.png" path="/images/Icons/"/>
+    <image id="sw071u" name="cup.png" path="/images/Icons/"/>
+    <image id="sw071v" name="dots..png" path="/images/Icons/"/>
+    <image id="sw071w" name="drop.png" path="/images/Icons/"/>
+    <image id="sw071x" name="exclamation_mark.png" path="/images/Icons/"/>
+    <image id="sw071y" name="flame.png" path="/images/Icons/"/>
+    <image id="sw071z" name="flash.png" path="/images/Icons/"/>
+    <image id="sw0720" name="gem.png" path="/images/Icons/"/>
+    <image id="sw0721" name="heart.png" path="/images/Icons/"/>
+    <image id="sw0722" name="home.png" path="/images/Icons/"/>
+    <image id="sw0723" name="i.png" path="/images/Icons/"/>
+    <image id="sw0724" name="leaf.png" path="/images/Icons/"/>
+    <image id="sw0725" name="lock.png" path="/images/Icons/"/>
+    <image id="sw0726" name="menu.png" path="/images/Icons/"/>
+    <image id="sw0727" name="play.png" path="/images/Icons/"/>
+    <image id="sw0728" name="question_mark.png" path="/images/Icons/"/>
+    <image id="sw0729" name="repeat.png" path="/images/Icons/"/>
+    <image id="sw072a" name="settings.png" path="/images/Icons/"/>
+    <image id="sw072b" name="shield.png" path="/images/Icons/"/>
+    <image id="sw072c" name="snow.png" path="/images/Icons/"/>
+    <image id="sw072d" name="speaker_high.png" path="/images/Icons/"/>
+    <image id="sw072e" name="speaker_low.png" path="/images/Icons/"/>
+    <image id="sw072f" name="speaker_mute.png" path="/images/Icons/"/>
+    <image id="sw072g" name="star.png" path="/images/Icons/"/>
+    <image id="sw072h" name="stats.png" path="/images/Icons/"/>
+    <image id="sw072i" name="strength.png" path="/images/Icons/"/>
+    <image id="sw072j" name="user.png" path="/images/Icons/"/>
+    <image id="sw072k" name="x.png" path="/images/Icons/"/>
+    <image id="sw072l" name="amulet.png" path="/images/Items/"/>
+    <image id="sw072m" name="armor.png" path="/images/Items/"/>
+    <image id="sw072n" name="ax.png" path="/images/Items/"/>
+    <image id="sw072o" name="ax_double.png" path="/images/Items/"/>
+    <image id="sw072p" name="backpack.png" path="/images/Items/"/>
+    <image id="sw072q" name="bones.png" path="/images/Items/"/>
+    <image id="sw072r" name="boots.png" path="/images/Items/"/>
+    <image id="sw072s" name="bow.png" path="/images/Items/"/>
+    <image id="sw072t" name="candy.png" path="/images/Items/"/>
+    <image id="sw072u" name="clock.png" path="/images/Items/"/>
+    <image id="sw072v" name="crown.png" path="/images/Items/"/>
+    <image id="sw072w" name="dynamite.png" path="/images/Items/"/>
+    <image id="sw072x" name="envelope.png" path="/images/Items/"/>
+    <image id="sw072y" name="envelope_coins.png" path="/images/Items/"/>
+    <image id="sw072z" name="envelope_gem.png" path="/images/Items/"/>
+    <image id="sw0730" name="envelope_heart.png" path="/images/Items/"/>
+    <image id="sw0731" name="envelope_open.png" path="/images/Items/"/>
+    <image id="sw0732" name="envelope_star.png" path="/images/Items/"/>
+    <image id="sw0733" name="envelope_surprise.png" path="/images/Items/"/>
+    <image id="sw0734" name="flag.png" path="/images/Items/"/>
+    <image id="sw0735" name="gloves.png" path="/images/Items/"/>
+    <image id="sw0736" name="hammer.png" path="/images/Items/"/>
+    <image id="sw0737" name="helmet.png" path="/images/Items/"/>
+    <image id="sw0738" name="key.png" path="/images/Items/"/>
+    <image id="sw0739" name="magnet.png" path="/images/Items/"/>
+    <image id="sw073a" name="pill.png" path="/images/Items/"/>
+    <image id="sw073b" name="potion.png" path="/images/Items/"/>
+    <image id="sw073c" name="potion2.png" path="/images/Items/"/>
+    <image id="sw073d" name="potion3.png" path="/images/Items/"/>
+    <image id="sw073e" name="potion4.png" path="/images/Items/"/>
+    <image id="sw073f" name="potion5.png" path="/images/Items/"/>
+    <image id="sw073g" name="potion6.png" path="/images/Items/"/>
+    <image id="sw073h" name="quiver.png" path="/images/Items/"/>
+    <image id="sw073i" name="ring.png" path="/images/Items/"/>
+    <image id="sw073j" name="scroll.png" path="/images/Items/"/>
+    <image id="sw073k" name="shield air.png" path="/images/Items/"/>
+    <image id="sw073l" name="shield drop.png" path="/images/Items/"/>
+    <image id="sw073m" name="shield fire.png" path="/images/Items/"/>
+    <image id="sw073n" name="shield flash.png" path="/images/Items/"/>
+    <image id="sw073o" name="shield leaf.png" path="/images/Items/"/>
+    <image id="sw073p" name="shield snow.png" path="/images/Items/"/>
+    <image id="sw073q" name="shield.png" path="/images/Items/"/>
+    <image id="sw073r" name="skull.png" path="/images/Items/"/>
+    <image id="sw073s" name="slingshot.png" path="/images/Items/"/>
+    <image id="sw073t" name="sword.png" path="/images/Items/"/>
+    <image id="sw073u" name="wand.png" path="/images/Items/"/>
+    <image id="sw073v" name="level_star_big.png" path="/images/Level stars/"/>
+    <image id="sw073w" name="level_star_big_empty.png" path="/images/Level stars/"/>
+    <image id="sw073x" name="level_star_big_empty2.png" path="/images/Level stars/"/>
+    <image id="sw073y" name="level_star_big_left.png" path="/images/Level stars/"/>
+    <image id="sw073z" name="level_star_big_right.png" path="/images/Level stars/"/>
+    <image id="sw0740" name="level_star_big_right_empty2.png" path="/images/Level stars/"/>
+    <image id="sw0741" name="level_star_small.png" path="/images/Level stars/"/>
+    <image id="sw0742" name="level_star_small_empty.png" path="/images/Level stars/"/>
+    <image id="sw0743" name="star_left_empty.png" path="/images/Level stars/"/>
+    <image id="sw0744" name="life_bubble.png" path="/images/Life and mana bubbles/"/>
+    <image id="sw0745" name="life_bubble_bg.png" path="/images/Life and mana bubbles/"/>
+    <image id="sw0746" name="mana_bubble.png" path="/images/Life and mana bubbles/"/>
+    <image id="sw0747" name="mana_bubble_bg.png" path="/images/Life and mana bubbles/"/>
+    <image id="sw0748" name="loading_bar.png" path="/images/Loading, life, mana, xp/"/>
+    <image id="sw0749" name="loading_fill.png" path="/images/Loading, life, mana, xp/"/>
+    <image id="sw074a" name="state_bar.png" path="/images/Loading, life, mana, xp/"/>
+    <image id="sw074b" name="state_bar_fill_life.png" path="/images/Loading, life, mana, xp/"/>
+    <image id="sw074c" name="state_bar_fill_mana.png" path="/images/Loading, life, mana, xp/"/>
+    <image id="sw074d" name="state_bar_fill_thin_xp.png" path="/images/Loading, life, mana, xp/"/>
+    <image id="sw074e" name="state_bar_fill_xp.png" path="/images/Loading, life, mana, xp/"/>
+    <image id="sw074f" name="state_bar_thin.png" path="/images/Loading, life, mana, xp/"/>
+    <image id="sw074g" name="action_bar_slot.png" path="/images/Panels/"/>
+    <image id="sw074h" name="explaining_cloud_horizontal.png" path="/images/Panels/"/>
+    <image id="sw074i" name="explaining_cloud_vertical.png" path="/images/Panels/"/>
+    <image id="sw074j" name="input_field.png" path="/images/Panels/"/>
+    <image id="sw074k" name="input_field_02.png" path="/images/Panels/"/>
+    <image id="sw074l" name="level_completed_bg.png" path="/images/Panels/"/>
+    <image id="sw074m" name="level_completed_bg_down.png" path="/images/Panels/"/>
+    <image id="sw074n" name="level_completed_bg_hover.png" path="/images/Panels/"/>
+    <image id="sw074o" name="level_current_bg.png" path="/images/Panels/"/>
+    <image id="sw074p" name="level_current_down_bg.png" path="/images/Panels/"/>
+    <image id="sw074q" name="level_current_hover_bg.png" path="/images/Panels/"/>
+    <image id="sw074r" name="message_cloud_left.png" path="/images/Panels/"/>
+    <image id="sw074s" name="message_cloud_right.png" path="/images/Panels/"/>
+    <image id="sw074t" name="round_badge.png" path="/images/Panels/"/>
+    <image id="sw074u" name="round_badge_darker.png" path="/images/Panels/"/>
+    <image id="sw074v" name="separator.png" path="/images/Panels/"/>
+    <image id="sw074w" name="universal_slot.png" path="/images/Panels/"/>
+    <image id="sw074x" name="universal_slot2.png" path="/images/Panels/"/>
+    <image id="sw074y" name="universal_slot_down.png" path="/images/Panels/"/>
+    <image id="sw074z" name="universal_slot_hover.png" path="/images/Panels/"/>
+    <image id="sw0750" name="window.png" path="/images/Panels/"/>
+    <image id="sw0751" name="scroll_bar_horizontal.png" path="/images/Scroll/"/>
+    <image id="sw0752" name="scroll_bar_vertical.png" path="/images/Scroll/"/>
+    <image id="sw0753" name="scroll_handle_horizontal.png" path="/images/Scroll/"/>
+    <image id="sw0754" name="scroll_handle_vertical.png" path="/images/Scroll/"/>
+    <image id="sw0755" name="slider_bar.png" path="/images/Slider/"/>
+    <image id="sw0756" name="slider_handle.png" path="/images/Slider/"/>
+    <image id="sw0757" name="slider_handle_down.png" path="/images/Slider/"/>
+    <image id="sw0758" name="slider_handle_hover.png" path="/images/Slider/"/>
+    <image id="sw0759" name="slider_handle_inactive.png" path="/images/Slider/"/>
+    <image id="sw075a" name="level_star_big.png" path="/images/Stars/"/>
+    <image id="sw075b" name="level_star_big_empty.png" path="/images/Stars/"/>
+    <image id="sw075c" name="level_star_big_empty2.png" path="/images/Stars/"/>
+    <image id="sw075d" name="level_star_big_left.png" path="/images/Stars/"/>
+    <image id="sw075e" name="level_star_big_right.png" path="/images/Stars/"/>
+    <image id="sw075f" name="level_star_big_right_empty2.png" path="/images/Stars/"/>
+    <image id="sw075g" name="level_star_small.png" path="/images/Stars/"/>
+    <image id="sw075h" name="level_star_small_empty.png" path="/images/Stars/"/>
+    <image id="sw075i" name="quest_star.png" path="/images/Stars/"/>
+    <image id="sw075j" name="quest_star_empty.png" path="/images/Stars/"/>
+    <image id="sw075k" name="star_left_empty.png" path="/images/Stars/"/>
+    <image id="sw075l" name="switch_off.png" path="/images/Switch/"/>
+    <image id="sw075m" name="switch_on.png" path="/images/Switch/"/>
+    <image id="sw075n" name="avatar.png" path="/images/User/"/>
+    <image id="sw075o" name="avatar2.png" path="/images/User/"/>
+    <image id="sw075p" name="avatar3.png" path="/images/User/"/>
+    <image id="sw075q" name="avatar4.png" path="/images/User/"/>
+    <image id="sw075r" name="avatar5.png" path="/images/User/"/>
+    <image id="sw075s" name="avatar6.png" path="/images/User/"/>
+    <image id="sw075t" name="avatar7.png" path="/images/User/"/>
+    <component id="sw075u" name="ScreenFader.xml" path="/" exported="true"/>
+    <image id="sw075v" name="fader.png" path="/images/" scale=""/>
+  </resources>
+  <publish name="Main"/>
+</packageDescription>
