@@ -45,3 +45,6 @@ Assets/StreamingAssets.meta
 AssetInfo
 Assets/PolyGame/Art/Shaders/Materials.meta
 Assets/PolyGame/Art/Shaders/Meshes.meta
+
+# FairyGUI
+UIProject/.objs
