@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Lean.Touch;
 using DG.Tweening;
+using Experiments;
 
 public partial class Puzzle : MonoBehaviour
 {
@@ -29,7 +30,8 @@ public partial class Puzzle : MonoBehaviour
 
     void AllFinishedAnimation()
     {
-        ScreenOverlay.AsyncFade(true, flashDuration, flashEase).WrapErrors();
+        ScreenFader.Instance.Fade(true, true);
+        ScreenFader.Instance.Fade(false);
         DOTween.Sequence()
                .Append(ResetCamera())
                .AppendCallback(() => finishedMat.SetColor("_Highlight", Color.white))

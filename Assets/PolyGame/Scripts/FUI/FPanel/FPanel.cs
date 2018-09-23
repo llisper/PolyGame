@@ -21,7 +21,7 @@ namespace Experiments
     {
         protected GComponent component;
 
-        public GComponent GComponent { get { return component;  } }
+        public GComponent View { get { return component;  } }
 
         public void Init(GComponent component)
         {
@@ -29,6 +29,13 @@ namespace Experiments
             OnInit();
         }
 
+        public void Dispose()
+        {
+            OnDispose();
+            component.Dispose();
+        }
+
         protected virtual void OnInit() { }
+        protected virtual void OnDispose() { }
     }
 }

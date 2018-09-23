@@ -1,17 +1,20 @@
-﻿
+﻿using Experiments;
+
 public class MenuScene : GameScene.IScene
 {
-    MenuPanel menuPanel;
+    Background background;
+    Experiments.MenuPanel menuPanel;
 
 	public void Start()
     {
-        UI.Instance.OpenPanel<BackgroundPanel>(UILayer.Background);	
-        menuPanel = UI.Instance.OpenPanel<MenuPanel>(UILayer.Menu);	
+        background = FUI.Instance.OpenPanel<Background>();
+        menuPanel = FUI.Instance.OpenPanel<Experiments.MenuPanel>();
         Puzzle.RetakeExpiredSnapshot();
 	}
 	
 	public void OnDestroy()
     {
-        menuPanel.gameObject.SetActive(false);
+        background.View.visible = false;
+        menuPanel.View.visible = false;
 	}
 }

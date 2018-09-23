@@ -4,6 +4,7 @@ using System.IO;
 using DG.Tweening;
 using ResourceModule;
 using ResourceModule.Hotfix;
+using Experiments;
 
 class GameLog : LogDefine<GameLog> { }
 
@@ -39,7 +40,7 @@ public class Game : MonoBehaviour
                 AssetSystem.Init,
                 ConfigLoader.Init,
                 HotfixSystem.Init,
-                UI.Init,
+                FUI.Init,
                 GameScene.Init);
 
             await loadingUI.Finish();

@@ -95,7 +95,7 @@ class MeshModifier : EditorWindow
     {
         ClearCurrent();
         Instance = null;
-        if (null != scene)
+        if (scene.IsValid())
         {
             EditorSceneManager.OpenScene("Assets/Scenes/Start.unity", OpenSceneMode.Single);
             EditorSceneManager.CloseScene(scene, true);

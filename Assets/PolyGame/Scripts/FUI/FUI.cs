@@ -33,16 +33,18 @@ namespace Experiments
         public static async Task Init()
         {
             Instance = new FUI();
-            Instance.InitScaleFactor();
             Instance.InitLayers();
             Instance.InitExtensions();
             Instance.RegisterPanels();
             UIPackage.AddPackage("UI/Main");
         }
 
-        void InitScaleFactor()
+        FUI()
         {
             GRoot.inst.SetContentScaleFactor(designResolution.x, designResolution.y);
+            var stageCamera = GameObject.Find(StageCamera.Name);
+            if (null != stageCamera)
+                GameObject.DontDestroyOnLoad(stageCamera);
         }
 
         void InitLayers()
@@ -65,6 +67,7 @@ namespace Experiments
         {
             RegisterPanel<Background>(FPackage.Main, UILayer.Background);
             RegisterPanel<MenuPanel>(FPackage.Main, UILayer.Base);
+            RegisterPanel<PuzzlePanel>(FPackage.Main, UILayer.Base);
             RegisterPanel<ScreenFader>(FPackage.Main, UILayer.Overlay);
         }
 
@@ -93,7 +96,7 @@ namespace Experiments
                 panel.Init(component);
                 panels.Add(type, panel);
             }
-            panel.GComponent.visible = true;
+            panel.View.visible = true;
             return panel;
         }
 
@@ -121,12 +124,12 @@ namespace Experiments
             {
                 if (destroy)
                 {
-                    panel.GComponent.Dispose();
+                    panel.Dispose();
                     panels.Remove(type);
                 }
                 else
                 {
-                    panel.GComponent.visible = false;
+                    panel.View.visible = false;
                 }
             }
         }
