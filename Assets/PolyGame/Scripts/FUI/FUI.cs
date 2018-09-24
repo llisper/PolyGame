@@ -61,13 +61,16 @@ namespace Experiments
 
         void InitExtensions()
         {
+            UIObjectFactory.SetPackageItemExtension("ui://Main/PuzzleItem", typeof(PuzzleItem));
+            UIObjectFactory.SetPackageItemExtension("ui://Main/PuzzleGroupView", typeof(PuzzleGroupView));
         }
 
         void RegisterPanels()
         {
             RegisterPanel<Background>(FPackage.Main, UILayer.Background);
-            RegisterPanel<MenuPanel>(FPackage.Main, UILayer.Base);
             RegisterPanel<PuzzlePanel>(FPackage.Main, UILayer.Base);
+            RegisterPanel<PuzzleGroupViewPanel>(FPackage.Main, UILayer.Base);
+            RegisterPanel<MenuPanel>(FPackage.Main, UILayer.Menu);
             RegisterPanel<ScreenFader>(FPackage.Main, UILayer.Overlay);
         }
 

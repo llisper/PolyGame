@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="750,1334">
-  <controller name="fading" pages="0,in,1,out" selected="0"/>
+  <controller name="fading" pages="0,in,1,out" selected="1"/>
   <displayList>
-    <image id="n0_sw07" name="bg" src="sw075v" fileName="images/fader.png" xy="375,667" pivot="0.5,0.5" anchor="true" size="770,1354" alpha="0">
-      <gearLook controller="fading" pages="1" values="1,0,0,1" default="0,0,0,1" tween="true" ease="Cubic.Out"/>
+    <graph id="n1_qvgi" name="bg" xy="375,667" pivot="0.5,0.5" anchor="true" size="770,1354" type="rect">
+      <gearLook controller="fading" pages="0" values="0,0,0,1" default="1,0,0,1" tween="true"/>
       <relation target="" sidePair="width-width,height-height"/>
-    </image>
+    </graph>
   </displayList>
 </component>

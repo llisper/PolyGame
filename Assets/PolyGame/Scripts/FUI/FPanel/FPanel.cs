@@ -29,6 +29,11 @@ namespace Experiments
             OnInit();
         }
 
+        public void Close(bool destroy = false)
+        {
+            FUI.Instance.ClosePanel(GetType(), destroy);
+        }
+
         public void Dispose()
         {
             OnDispose();
