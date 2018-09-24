@@ -7,9 +7,6 @@
     <image id="n4_qvgi" name="sep" src="sw0751" fileName="images/Scroll/scroll_bar_horizontal.png" xy="0,39" size="730,4">
       <relation target="n0_qvgi" sidePair="top-top"/>
     </image>
-    <list id="n0_qvgi" name="scrollview" xy="0,573" pivot="0,1" anchor="true" size="730,522" layout="flow_vt" overflow="scroll" scroll="horizontal" scrollBarFlags="512" scrollBar="hidden" lineGap="10" colGap="10" lineItemCount="2" defaultItem="ui://9239j664qvgi63">
-      <item/>
-      <item/>
-    </list>
+    <list id="n0_qvgi" name="scrollview" xy="0,51" pivot="0,1" size="730,522" layout="flow_vt" overflow="scroll" scroll="horizontal" scrollBarFlags="512" scrollBar="hidden" lineGap="10" colGap="10" lineItemCount="2" defaultItem="ui://9239j664qvgi63" autoClearItems="true"/>
   </displayList>
 </component>

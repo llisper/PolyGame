@@ -6,7 +6,7 @@
       <gearDisplay controller="showAll" pages="0"/>
     </loader>
     <graph id="n3_qvgi" name="bg" xy="0,0" size="256,256" group="n4_qvgi" type="rect" fillColor="#ff3366ff"/>
-    <text id="n5_qvgi" name="text" xy="128,128" pivot="0.5,0.5" anchor="true" size="175,47" group="n4_qvgi" fontSize="35" text="Show All"/>
+    <text id="n5_qvgi" name="text" xy="128,128" pivot="0.5,0.5" anchor="true" size="173,47" group="n4_qvgi" fontSize="35" text="Show All"/>
     <group id="n4_qvgi" name="showAll" xy="0,0" size="303,256" advanced="true">
       <gearDisplay controller="showAll" pages="1"/>
     </group>
