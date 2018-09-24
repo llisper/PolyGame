@@ -25,7 +25,6 @@ namespace Experiments
 
         public void Init(ArtCollection.Group group)
         {
-
             var items = group.items;
             int showCount = items.Count;
             int itemLimit = itemLimitHalf * 2;

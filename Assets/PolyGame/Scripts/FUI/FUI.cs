@@ -69,7 +69,7 @@ namespace Experiments
         {
             RegisterPanel<Background>(FPackage.Main, UILayer.Background);
             RegisterPanel<PuzzlePanel>(FPackage.Main, UILayer.Base);
-            RegisterPanel<PuzzleGroupViewPanel>(FPackage.Main, UILayer.Base);
+            RegisterPanel<ArtCollectionPanel>(FPackage.Main, UILayer.Base);
             RegisterPanel<MenuPanel>(FPackage.Main, UILayer.Menu);
             RegisterPanel<ScreenFader>(FPackage.Main, UILayer.Overlay);
         }

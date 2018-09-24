@@ -220,7 +220,7 @@
     <component id="x1cc61" name="RoundButton.xml" path="/widgets/"/>
     <component id="qvgi62" name="PuzzleGroupView.xml" path="/widgets/"/>
     <component id="qvgi63" name="PuzzleItem.xml" path="/widgets/"/>
-    <component id="qvgi64" name="PuzzleGroupViewPanel.xml" path="/" exported="true"/>
+    <component id="qvgi64" name="ArtCollectionPanel.xml" path="/" exported="true"/>
   </resources>
   <publish name="Main"/>
 </packageDescription>

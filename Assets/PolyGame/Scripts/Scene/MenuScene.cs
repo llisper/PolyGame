@@ -4,13 +4,13 @@ public class MenuScene : GameScene.IScene
 {
     Background background;
     Experiments.MenuPanel menuPanel;
-    PuzzleGroupViewPanel puzzleGroupViewPanel;
+    Experiments.ArtCollectionPanel artCollectionPanel;
 
 	public void Start()
     {
         background = FUI.Instance.OpenPanel<Background>();
         menuPanel = FUI.Instance.OpenPanel<Experiments.MenuPanel>();
-        puzzleGroupViewPanel = FUI.Instance.OpenPanel<PuzzleGroupViewPanel>();
+        artCollectionPanel = FUI.Instance.OpenPanel<Experiments.ArtCollectionPanel>();
         Puzzle.RetakeExpiredSnapshot();
 	}
 	
@@ -18,6 +18,6 @@ public class MenuScene : GameScene.IScene
     {
         background.Close();
         menuPanel.Close();
-        puzzleGroupViewPanel.Close();
+        artCollectionPanel.Close();
 	}
 }

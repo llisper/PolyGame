@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="750,1334">
+  <displayList>
+    <list id="n1_qvgi" name="scrollview" xy="0,0" size="750,1177" overflow="scroll" scrollBar="hidden" lineGap="20" defaultItem="ui://9239j664qvgi62"/>
+  </displayList>
+</component>
