@@ -1,4 +1,5 @@
-﻿using FairyGUI;
+﻿using UnityEngine;
+using FairyGUI;
 using FairyGUI.Utils;
 
 namespace Experiments
@@ -35,14 +36,50 @@ namespace Experiments
             {
                 var item = scrollview.AddItemFromPool() as PuzzleItem;
                 item.Init(items[i].name);
+                item.SetMask(SelectMask(i, items.Count));
             }
 
             if (showCount < items.Count)
             {
                 var item = scrollview.AddItemFromPool() as PuzzleItem;
                 item.InitAsShowAll();
+                item.SetMask(SelectMask(showCount, items.Count));
             }
             title.text = I18n.Get(group.name);
+        }
+
+        int SelectMask(int i, int itemCount)
+        {
+            if (i % 2 == 0)
+            {
+                if (i == 0)
+                    return 0;
+                else if (i == itemCount - 1)
+                    return 2;
+                else 
+                    return 1;
+            }
+            else 
+            {
+                if (i == 1)
+                    return 3;
+                else if (i == itemCount - 1)
+                    return 5;
+                else
+                    return 4;
+            }
+
+            // int half = itemLimitHalf;
+            // int step = Mathf.Min(1, i / half) * 3;
+            // i = i % half;
+
+            // var mats = SnapshotMasks.Instance.materials;
+            // if (i == 0)
+            //     return 0 + step;
+            // else if (i < half - 1)
+            //     return 1 + step;
+            // else
+            //     return 2 + step;
         }
     }
 }

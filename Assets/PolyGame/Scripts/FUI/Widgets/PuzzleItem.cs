@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.IO;
+using System.Collections.Generic;
 using FairyGUI;
 using FairyGUI.Utils;
 using ResourceModule;
@@ -10,6 +11,7 @@ namespace Experiments
     {
         Controller showAllCtrl;
         GLoader loader;
+        List<GImage> masks = new List<GImage>();
 
         Texture2D tex2d;
         PrefabResource snapshotPrefab;
@@ -21,6 +23,7 @@ namespace Experiments
 
             showAllCtrl = GetController("showAll");
             loader = GetChild("snapshot") as GLoader;
+            InitMasks();
         }
 
         public override void Dispose()
@@ -76,6 +79,29 @@ namespace Experiments
                     loader.texture = new NTexture(prefabObject.GetComponent<PuzzleSnapshotHolder>().texture);
                 }
             }
+        }
+
+        public void SetMask(int index)
+        {
+            for (int i = 0; i < masks.Count; ++i)
+            {
+                var image = masks[i];
+                if (i == index)
+                {
+                    image.visible = true;
+                    mask = image.displayObject;
+                }
+                else
+                {
+                    image.visible = false;
+                }
+            }
+        }
+
+        void InitMasks()
+        {
+            for (int i = 0; i < 6; ++i)
+                masks.Add(GetChild("mask" + i) as GImage);
         }
 
         void ReleaseRes()
