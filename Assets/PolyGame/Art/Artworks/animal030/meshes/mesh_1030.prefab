@@ -16,8 +16,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 12
     localAABB:
-      m_Center: {x: -0.6666565, y: 0.41667175, z: 0}
-      m_Extent: {x: 6, y: 11, z: 0}
+      m_Center: {x: -4.3333435, y: 1.25, z: 0}
+      m_Extent: {x: 14, y: 14, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -47,7 +47,7 @@ Mesh:
       dimension: 0
     - stream: 0
       offset: 12
-      format: 0
+      format: 2
       dimension: 4
     - stream: 0
       offset: 0
@@ -69,8 +69,8 @@ Mesh:
       offset: 0
       format: 0
       dimension: 0
-    m_DataSize: 336
-    _typelessdata: 4055d5c0505529c100000000b9b8b83e8180003fc9c8483f0000803f0055d5bf405565c000000000b9b8b83e8180003fc9c8483f0000803f00abaa3fa0aa92c000000000b9b8b83e8180003fc9c8483f0000803f00abaa3fa0aa92c0000000008180003fa1a0203fb8b7373f0000803f0055d5bf405565c0000000008180003fa1a0203fb8b7373f0000803f80551540c0aa5a40000000008180003fa1a0203fb8b7373f0000803f0055d5bf405565c000000000bdbcbc3e8c8b0b3fcfce4e3f0000803f0055d5bf60558d4000000000bdbcbc3e8c8b0b3fcfce4e3f0000803f80551540c0aa5a4000000000bdbcbc3e8c8b0b3fcfce4e3f0000803f80551540c0aa5a4000000000bdbcbc3edddcdc3ebab9393f0000803f0055d5bf60558d4000000000bdbcbc3edddcdc3ebab9393f0000803fc0aaaa40b0aa364100000000bdbcbc3edddcdc3ebab9393f0000803f
+    m_DataSize: 192
+    _typelessdata: c0aa8ac00000e0bf000000007e416dffb0aa92c100007441000000007e416dffc0aaaac000000441000000007e416dffc0aa8ac00000e0bf000000007e2e73ffc0aaaac000000441000000007e2e73ff4055b5400000803e000000007e2e73ff4055f54000004cc100000000642f5bffc0aa8ac00000e0bf00000000642f5bff4055b5400000803e00000000642f5bff4055f54000004cc1000000007a3065ff4055b5400000803e000000007a3065ffa0aa1a410000e0bf000000007a3065ff
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -124,8 +124,8 @@ Mesh:
       m_BitSize: 0
     m_UVInfo: 0
   m_LocalAABB:
-    m_Center: {x: -0.6666565, y: 0.41667175, z: 0}
-    m_Extent: {x: 6, y: 11, z: 0}
+    m_Center: {x: -4.3333435, y: 1.25, z: 0}
+    m_Extent: {x: 14, y: 14, z: 0}
   m_MeshUsageFlags: 0
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 

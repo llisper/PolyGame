@@ -10,14 +10,14 @@ Mesh:
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
-    indexCount: 9
+    indexCount: 6
     topology: 0
     baseVertex: 0
     firstVertex: 0
-    vertexCount: 9
+    vertexCount: 6
     localAABB:
-      m_Center: {x: 0.555542, y: -1.6111145, z: 0}
-      m_Extent: {x: 13, y: 17.5, z: 0}
+      m_Center: {x: 1, y: -0.3333435, z: 0}
+      m_Extent: {x: 10.5, y: 9, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -31,11 +31,11 @@ Mesh:
   m_KeepVertices: 1
   m_KeepIndices: 1
   m_IndexFormat: 0
-  m_IndexBuffer: 000001000200030004000500060007000800
+  m_IndexBuffer: 000001000200030004000500
   m_Skin: []
   m_VertexData:
     m_CurrentChannels: 5
-    m_VertexCount: 9
+    m_VertexCount: 6
     m_Channels:
     - stream: 0
       offset: 0
@@ -47,7 +47,7 @@ Mesh:
       dimension: 0
     - stream: 0
       offset: 12
-      format: 0
+      format: 2
       dimension: 4
     - stream: 0
       offset: 0
@@ -69,8 +69,8 @@ Mesh:
       offset: 0
       format: 0
       dimension: 0
-    m_DataSize: 252
-    _typelessdata: 001cc73f408ec3c0000000009897173fe5e4643e8e8d0d3f0000803f0039cec0801c07c0000000009897173fe5e4643e8e8d0d3f0000803f008e6340e0387e41000000009897173fe5e4643e8e8d0d3f0000803f001cc73f408ec3c0000000009594143ff1f0703e9392123f0000803f008e6340e0387e41000000009594143ff1f0703e9392123f0000803f80e35841e0381e41000000009594143ff1f0703e9392123f0000803f801c47c190e398c1000000009998183fe5e4643e8c8b0b3f0000803f0039cec0801c07c0000000009998183fe5e4643e8c8b0b3f0000803f001cc73f408ec3c0000000009998183fe5e4643e8c8b0b3f0000803f
+    m_DataSize: 96
+    _typelessdata: 000018c1605515c1000000006fa2e4ff000060c080aa2a40000000006fa2e4ff00002040805515c0000000006fa2e4ff00002040805515c0000000003b6ecaff000060c080aa2a40000000003b6ecaff00003841a0aa0a41000000003b6ecaff
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -124,8 +124,8 @@ Mesh:
       m_BitSize: 0
     m_UVInfo: 0
   m_LocalAABB:
-    m_Center: {x: 0.555542, y: -1.6111145, z: 0}
-    m_Extent: {x: 13, y: 17.5, z: 0}
+    m_Center: {x: 1, y: -0.3333435, z: 0}
+    m_Extent: {x: 10.5, y: 9, z: 0}
   m_MeshUsageFlags: 0
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 

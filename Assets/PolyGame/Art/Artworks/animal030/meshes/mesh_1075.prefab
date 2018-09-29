@@ -16,8 +16,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 12
     localAABB:
-      m_Center: {x: 1.0833282, y: 0.66667175, z: 0}
-      m_Extent: {x: 7.5, y: 8.5, z: 0}
+      m_Center: {x: 1.0833435, y: 0.25, z: 0}
+      m_Extent: {x: 13.5, y: 17, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -47,7 +47,7 @@ Mesh:
       dimension: 0
     - stream: 0
       offset: 12
-      format: 0
+      format: 2
       dimension: 4
     - stream: 0
       offset: 0
@@ -69,8 +69,8 @@ Mesh:
       offset: 0
       format: 0
       dimension: 0
-    m_DataSize: 336
-    _typelessdata: 50550941a0aafac000000000f9f8f83d9998983eaaa9293f0000803f8055b5bfa0aadac000000000f9f8f83d9998983eaaa9293f0000803f5055094100ac2a3e00000000f9f8f83d9998983eaaa9293f0000803f8055b5bfa0aadac000000000f1f0f03dabaaaa3eb1b0303f0000803f6055adc000ac2a3e00000000f1f0f03dabaaaa3eb1b0303f0000803f5055094100ac2a3e00000000f1f0f03dabaaaa3eb1b0303f0000803f6055adc000ac2a3e000000008584043e8f8e8e3ea9a8283f0000803f60558dc0b0aa1241000000008584043e8f8e8e3ea9a8283f0000803f5055094100ac2a3e000000008584043e8f8e8e3ea9a8283f0000803f6055adc000ac2a3e000000009998183eb1b0b03eafae2e3f0000803f6055cdc0c0aa0a40000000009998183eb1b0b03eafae2e3f0000803f60558dc0b0aa1241000000009998183eb1b0b03eafae2e3f0000803f
+    m_DataSize: 192
+    _typelessdata: 605509410000803e00000000724073ff805525400000144100000000724073ff6055694100008a4100000000724073ff0055b5bf0000b8c0000000007c4668ff8055254000001441000000007c4668ff605509410000803e000000007c4668ffa0aa36c10000b8c000000000544765ff805525400000144100000000544765ff0055b5bf0000b8c000000000544765ffa0aa46c1000086c1000000007d7a8dffa0aa36c10000b8c0000000007d7a8dff0055b5bf0000b8c0000000007d7a8dff
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -124,8 +124,8 @@ Mesh:
       m_BitSize: 0
     m_UVInfo: 0
   m_LocalAABB:
-    m_Center: {x: 1.0833282, y: 0.66667175, z: 0}
-    m_Extent: {x: 7.5, y: 8.5, z: 0}
+    m_Center: {x: 1.0833435, y: 0.25, z: 0}
+    m_Extent: {x: 13.5, y: 17, z: 0}
   m_MeshUsageFlags: 0
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
