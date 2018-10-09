@@ -73,7 +73,7 @@ class MeshModifier : EditorWindow
     List<string> filteredNames = new List<string>();
     Info info;
     bool unsavedModification;
-    GUIStyle labelStyle;
+    //GUIStyle labelStyle;
     Stack<Command> undoStack = new Stack<Command>();
 
     public bool IsEditing { get { return null != info; } }
@@ -83,7 +83,7 @@ class MeshModifier : EditorWindow
         Instance = this;
         string[] dirs = Directory.GetDirectories(Application.dataPath + '/' + Paths.AssetResArtworksNoPrefix);
         names = Array.ConvertAll(dirs, v => Path.GetFileName(v));
-        labelStyle = new GUIStyle(EditorStyles.boldLabel);
+        // labelStyle = new GUIStyle(EditorStyles.boldLabel);
     }
 
     void OnEnable()
@@ -186,8 +186,9 @@ class MeshModifier : EditorWindow
         EditorGUILayout.LabelField("triangles", info.triangles.ToString());
         EditorGUILayout.LabelField("regions", info.regions.ToString());
         EditorGUILayout.LabelField("selected regions", info.meshPicker.renderers.Count.ToString());
-        labelStyle.normal.textColor = unsavedModification ? Color.yellow : Color.green;
-        EditorGUILayout.LabelField(unsavedModification ? "modified" : "clear", labelStyle);
+        //labelStyle.normal.textColor = unsavedModification ? Color.yellow : Color.green;
+        //EditorGUILayout.LabelField(unsavedModification ? "modified" : "clear", labelStyle);
+        EditorGUILayout.LabelField(unsavedModification ? "modified" : "clear");
     }
 
     static KeyCode[] keys = new KeyCode[] { KeyCode.S, KeyCode.C, KeyCode.D, KeyCode.J, KeyCode.U };
