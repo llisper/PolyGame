@@ -11,71 +11,6 @@
                     "priority": 0
                 },
                 {
-                    "name": "animal006",
-                    "bgColor": "a8927f",
-                    "priority": 0
-                },
-                {
-                    "name": "animal007",
-                    "bgColor": "449dad",
-                    "priority": 0
-                },
-                {
-                    "name": "animal004",
-                    "bgColor": "be9271",
-                    "priority": 0
-                },
-                {
-                    "name": "animal008",
-                    "bgColor": "8e6f95",
-                    "priority": 0
-                },
-                {
-                    "name": "animal009",
-                    "bgColor": "736e79",
-                    "priority": 0
-                },
-                {
-                    "name": "animal010",
-                    "bgColor": "d48f6f",
-                    "priority": 0
-                },
-                {
-                    "name": "animal011",
-                    "bgColor": "bfb5a7",
-                    "priority": 0
-                },
-                {
-                    "name": "animal013",
-                    "bgColor": "b59271",
-                    "priority": 0
-                },
-                {
-                    "name": "animal014",
-                    "bgColor": "b1aa91",
-                    "priority": 0
-                },
-                {
-                    "name": "animal015",
-                    "bgColor": "8e6f5f",
-                    "priority": 0
-                },
-                {
-                    "name": "animal016",
-                    "bgColor": "91847c",
-                    "priority": 0
-                },
-                {
-                    "name": "animal017",
-                    "bgColor": "beaea9",
-                    "priority": 0
-                },
-                {
-                    "name": "animal018",
-                    "bgColor": "9c9eb1",
-                    "priority": 0
-                },
-                {
                     "name": "animal019",
                     "bgColor": "918a8c",
                     "priority": 0
@@ -131,8 +66,108 @@
                     "priority": 0
                 },
                 {
+                    "name": "animal018",
+                    "bgColor": "9c9eb1",
+                    "priority": 0
+                },
+                {
+                    "name": "animal006",
+                    "bgColor": "a8927f",
+                    "priority": 0
+                },
+                {
+                    "name": "animal007",
+                    "bgColor": "449dad",
+                    "priority": 0
+                },
+                {
+                    "name": "animal004",
+                    "bgColor": "be9271",
+                    "priority": 0
+                },
+                {
+                    "name": "animal008",
+                    "bgColor": "8e6f95",
+                    "priority": 0
+                },
+                {
+                    "name": "animal009",
+                    "bgColor": "736e79",
+                    "priority": 0
+                },
+                {
+                    "name": "animal010",
+                    "bgColor": "d48f6f",
+                    "priority": 0
+                },
+                {
+                    "name": "animal017",
+                    "bgColor": "beaea9",
+                    "priority": 0
+                },
+                {
+                    "name": "animal016",
+                    "bgColor": "91847c",
+                    "priority": 0
+                },
+                {
+                    "name": "animal015",
+                    "bgColor": "8e6f5f",
+                    "priority": 0
+                },
+                {
+                    "name": "animal014",
+                    "bgColor": "b1aa91",
+                    "priority": 0
+                },
+                {
+                    "name": "animal013",
+                    "bgColor": "b59271",
+                    "priority": 0
+                },
+                {
+                    "name": "animal011",
+                    "bgColor": "bfb5a7",
+                    "priority": 0
+                },
+                {
                     "name": "animal030",
                     "bgColor": "9581a6",
+                    "priority": 0
+                },
+                {
+                    "name": "animal031",
+                    "bgColor": "867878fe",
+                    "priority": 0
+                },
+                {
+                    "name": "animal032",
+                    "bgColor": "6d5125",
+                    "priority": 0
+                },
+                {
+                    "name": "animal033",
+                    "bgColor": "7b8796",
+                    "priority": 0
+                },
+                {
+                    "name": "animal034",
+                    "bgColor": "8b4f20",
+                    "priority": 0
+                },
+                {
+                    "name": "animal035",
+                    "bgColor": "8e5f44",
+                    "priority": 0
+                },
+                {
+                    "name": "animal036",
+                    "bgColor": "515147",
+                    "priority": 0
+                },
+                {
+                    "name": "animal037",
+                    "bgColor": "6b6d88",
                     "priority": 0
                 }
             ]
@@ -176,6 +211,51 @@
                     "name": "food008",
                     "bgColor": "ac9170",
                     "priority": 0
+                },
+                {
+                    "name": "food009",
+                    "bgColor": "da985d",
+                    "priority": 0
+                },
+                {
+                    "name": "food010",
+                    "bgColor": "ad5b3b",
+                    "priority": 0
+                },
+                {
+                    "name": "food011",
+                    "bgColor": "ee9e16",
+                    "priority": 0
+                },
+                {
+                    "name": "food012",
+                    "bgColor": "be8f5c",
+                    "priority": 0
+                },
+                {
+                    "name": "food013",
+                    "bgColor": "dbbf7c",
+                    "priority": 0
+                },
+                {
+                    "name": "food014",
+                    "bgColor": "9fd37b",
+                    "priority": 0
+                },
+                {
+                    "name": "food016",
+                    "bgColor": "e28b3b",
+                    "priority": 0
+                },
+                {
+                    "name": "food017",
+                    "bgColor": "916952",
+                    "priority": 0
+                },
+                {
+                    "name": "food019",
+                    "bgColor": "c0bbb3",
+                    "priority": 0
                 }
             ]
         },
@@ -197,6 +277,56 @@
                 {
                     "name": "star001",
                     "bgColor": "93c6d9",
+                    "priority": 0
+                },
+                {
+                    "name": "flower002",
+                    "bgColor": "986047",
+                    "priority": 0
+                },
+                {
+                    "name": "pic001",
+                    "bgColor": "5d371a",
+                    "priority": 0
+                },
+                {
+                    "name": "pic002",
+                    "bgColor": "876546",
+                    "priority": 0
+                },
+                {
+                    "name": "pic003",
+                    "bgColor": "533f27",
+                    "priority": 0
+                },
+                {
+                    "name": "pic004",
+                    "bgColor": "81612a",
+                    "priority": 0
+                },
+                {
+                    "name": "pic005",
+                    "bgColor": "6e503dfe",
+                    "priority": 0
+                },
+                {
+                    "name": "pic006",
+                    "bgColor": "7b5a3f",
+                    "priority": 0
+                },
+                {
+                    "name": "pic007",
+                    "bgColor": "8e705a",
+                    "priority": 0
+                },
+                {
+                    "name": "pic008",
+                    "bgColor": "7b4933",
+                    "priority": 0
+                },
+                {
+                    "name": "test001",
+                    "bgColor": "1a3a44",
                     "priority": 0
                 }
             ]

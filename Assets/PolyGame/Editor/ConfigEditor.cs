@@ -68,14 +68,15 @@ static class ConfigEditor
 
                 if (string.IsNullOrEmpty(item.bgColor))
                 {
-                    var go = AssetDatabase.LoadAssetAtPath<GameObject>(string.Format("{0}/{1}/{1}", Paths.AssetResArtworks, item.name));
+                    var assetPath = string.Format("{0}/{1}/{1}.prefab", Paths.AssetResArtworks, item.name);
+                    var go = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
                     var color = PuzzleBackground.AvarageColor(go.GetComponent<PolyGraph>());
                     item.bgColor = Utils.ColorToString(color);
                 }
             }
 
             EditorUtility.DisplayProgressBar("Auto Fill ArtCollection", "Saving json", 1f);
-            string path = string.Format("{0}/Resources/{1}/ArtCollection.json", Application.dataPath, Paths.Configs);
+            string path = string.Format("{0}/Res/{1}/ArtCollection.json", Application.dataPath, Paths.Configs);
             string json = JsonUtility.ToJson(ArtCollection.Instance, true);
             File.WriteAllText(path, json, Encoding.UTF8);
         }
