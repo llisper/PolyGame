@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using FairyGUI;
 
-namespace Experiments
+namespace UI
 {
     public static class FPackage
     {

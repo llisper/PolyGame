@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using FairyGUI;
 
-namespace Experiments
+namespace UI
 {
     public class MyWorksPanel : FPanel
     {

@@ -1,7 +1,7 @@
 ﻿using FairyGUI;
 using System;
 
-namespace Experiments
+namespace UI
 {
     public class FPanelInfo
     {

@@ -4,7 +4,7 @@ using System.IO;
 using DG.Tweening;
 using ResourceModule;
 using ResourceModule.Hotfix;
-using Experiments;
+using UI;
 
 class GameLog : LogDefine<GameLog> { }
 

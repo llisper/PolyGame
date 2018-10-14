@@ -1,4 +1,4 @@
-﻿using Experiments;
+﻿using UI;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ public class MenuScene : GameScene.IScene
 {
     static bool firstTime = true;
     static Background background;
-    static Experiments.MenuPanel menuPanel;
+    static MenuPanel menuPanel;
     static List<FPanel> pages = new List<FPanel>();
     static int pageIndex;
 
@@ -18,10 +18,10 @@ public class MenuScene : GameScene.IScene
         if (firstTime)
         {
             background = FUI.Instance.OpenPanel<Background>();
-            menuPanel = FUI.Instance.OpenPanel<Experiments.MenuPanel>();
-            AddPage<Experiments.ArtCollectionPanel>();
+            menuPanel = FUI.Instance.OpenPanel<MenuPanel>();
+            AddPage<ArtCollectionPanel>();
             AddPage<ShowAllPanel>();
-            AddPage<Experiments.MyWorksPanel>();
+            AddPage<MyWorksPanel>();
             firstTime = false;
         }
         else

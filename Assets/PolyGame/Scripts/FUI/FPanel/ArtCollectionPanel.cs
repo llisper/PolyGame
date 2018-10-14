@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using FairyGUI;
 
-namespace Experiments
+namespace UI
 {
     public class ArtCollectionPanel : FPanel
     {

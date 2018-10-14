@@ -1,16 +1,16 @@
-﻿using Experiments;
+﻿using UI;
 
 public class PuzzleScene : GameScene.IScene
 {
 	public void Start()
     {
         // UI.Instance.OpenPanel<PuzzlePanel>();	
-        FUI.Instance.OpenPanel<Experiments.PuzzlePanel>();
+        FUI.Instance.OpenPanel<PuzzlePanel>();
 	}
 	
 	public void OnDestroy()
     {
-        FUI.Instance.ClosePanel<Experiments.PuzzlePanel>();
+        FUI.Instance.ClosePanel<PuzzlePanel>();
 		var puzzle = Puzzle.Current;		
 		if (null != puzzle)
 		{

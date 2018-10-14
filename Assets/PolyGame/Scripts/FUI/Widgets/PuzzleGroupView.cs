@@ -1,7 +1,7 @@
 ﻿using FairyGUI;
 using FairyGUI.Utils;
 
-namespace Experiments
+namespace UI
 {
     public class PuzzleGroupView : GComponent
     {

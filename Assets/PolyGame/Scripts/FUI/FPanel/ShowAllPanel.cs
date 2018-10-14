@@ -1,6 +1,6 @@
 ﻿using FairyGUI;
 
-namespace Experiments
+namespace UI
 {
     public class ShowAllPanel : FPanel
     {

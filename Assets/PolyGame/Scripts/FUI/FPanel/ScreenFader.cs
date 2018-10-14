@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using FairyGUI;
 
-namespace Experiments
+namespace UI
 {
     public class ScreenFader : FPanel
     {

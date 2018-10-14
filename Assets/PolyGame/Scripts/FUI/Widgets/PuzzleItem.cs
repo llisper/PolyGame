@@ -5,7 +5,7 @@ using FairyGUI;
 using FairyGUI.Utils;
 using ResourceModule;
 
-namespace Experiments
+namespace UI
 {
     public class PuzzleItem : GComponent
     {

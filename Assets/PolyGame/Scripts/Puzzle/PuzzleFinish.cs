@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using Lean.Touch;
 using DG.Tweening;
-using Experiments;
+using UI;
 
 public partial class Puzzle : MonoBehaviour
 {
