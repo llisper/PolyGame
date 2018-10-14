@@ -64,6 +64,9 @@ namespace UI
 
         public void Load()
         {
+            if (showAllCtrl.selectedIndex == 1)
+                return;
+
             string path = Paths.SnapshotSave(graphName);
             if (File.Exists(path))
             {
@@ -90,7 +93,11 @@ namespace UI
                 if (null != snapshotPrefab)
                 {
                     var prefabObject = (GameObject)snapshotPrefab.Object;
-                    loader.texture = new NTexture(prefabObject.GetComponent<PuzzleSnapshotHolder>().texture);
+                    var holder = prefabObject.GetComponent<PuzzleSnapshotHolder>();
+                    if (null != holder && null != holder.texture)
+                        loader.texture = new NTexture(holder.texture);
+                    else
+                        GameLog.LogError("PuzzleSnapshotHolder missing or texture missing: " + graphName);
                 }
             }
         }

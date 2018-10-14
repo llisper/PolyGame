@@ -265,11 +265,6 @@
             "priority": 0,
             "items": [
                 {
-                    "name": "deadcells",
-                    "bgColor": "8d7a8d",
-                    "priority": 0
-                },
-                {
                     "name": "flower001",
                     "bgColor": "b55d22",
                     "priority": 0
@@ -322,11 +317,6 @@
                 {
                     "name": "pic008",
                     "bgColor": "7b4933",
-                    "priority": 0
-                },
-                {
-                    "name": "test001",
-                    "bgColor": "1a3a44",
                     "priority": 0
                 }
             ]
