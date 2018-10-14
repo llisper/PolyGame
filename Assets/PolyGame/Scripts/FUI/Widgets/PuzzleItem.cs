@@ -16,6 +16,7 @@ namespace Experiments
         Texture2D tex2d;
         PrefabResource snapshotPrefab;
         string graphName;
+        ArtCollection.Group group;
 
         public override void ConstructFromXML(XML xml)
         {
@@ -28,8 +29,22 @@ namespace Experiments
 
         public override void Dispose()
         {
+            graphName = null;
+            group = null;
             ReleaseRes();
             base.Dispose();
+        }
+
+        public void Start()
+        {
+            if (showAllCtrl.selectedIndex == 1)
+            {
+                GameScene.Current<MenuScene>().ShowPage<ShowAllPanel>(p => {
+                    p.Init(group);
+                });
+            }
+            else
+                Puzzle.Start(graphName);
         }
 
         public void Init(string graphName)
@@ -40,8 +55,9 @@ namespace Experiments
             Load();
         }
 
-        public void InitAsShowAll()
+        public void InitAsShowAll(ArtCollection.Group group)
         {
+            this.group = group;
             showAllCtrl.selectedIndex = 1;
             ReleaseRes();
         }
@@ -53,11 +69,9 @@ namespace Experiments
             {
                 byte[] bytes = File.ReadAllBytes(path);
                 if (null == tex2d)
-                {
                     tex2d = new Texture2D(2, 2);
-                    loader.texture = new NTexture(tex2d);
-                }
                 tex2d.LoadImage(bytes);
+                loader.texture = new NTexture(tex2d);
             }
             else
             {
@@ -86,15 +100,17 @@ namespace Experiments
             for (int i = 0; i < masks.Count; ++i)
             {
                 var image = masks[i];
-                if (i == index)
-                {
-                    image.visible = true;
-                    mask = image.displayObject;
-                }
-                else
-                {
-                    image.visible = false;
-                }
+                // NOTE: mask choosing logic has bugs, disable it for now
+                image.visible = false;
+                //if (i == index)
+                //{
+                //    image.visible = true;
+                //    mask = image.displayObject;
+                //}
+                //else
+                //{
+                //    image.visible = false;
+                //}
             }
         }
 

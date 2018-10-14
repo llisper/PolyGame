@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using FairyGUI;
+﻿using FairyGUI;
 using FairyGUI.Utils;
 
 namespace Experiments
@@ -17,6 +16,7 @@ namespace Experiments
 
             title = GetChild("title") as GTextField;
             scrollview = GetChild("scrollview") as GList;
+            scrollview.onClickItem.Add(OnClickItem);
         }
 
         public override void Dispose()
@@ -42,7 +42,7 @@ namespace Experiments
             if (showCount < items.Count)
             {
                 var item = scrollview.AddItemFromPool() as PuzzleItem;
-                item.InitAsShowAll();
+                item.InitAsShowAll(group);
                 item.SetMask(SelectMask(showCount, items.Count));
             }
             title.text = I18n.Get(group.name);
@@ -80,6 +80,12 @@ namespace Experiments
             //     return 1 + step;
             // else
             //     return 2 + step;
+        }
+
+        void OnClickItem(EventContext eventContext)
+        {
+            var item = (PuzzleItem)eventContext.data;
+            item.Start();
         }
     }
 }

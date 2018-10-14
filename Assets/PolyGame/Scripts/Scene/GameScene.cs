@@ -27,6 +27,11 @@ public class GameScene
         await Loading(typeof(T));
     }
 
+    public static T Current<T>() where T : IScene
+    {
+        return (T)current;
+    }
+
     static async Task Loading(Type sceneType)
     {
         string sceneName = sceneType.Name.Replace("Scene", "");

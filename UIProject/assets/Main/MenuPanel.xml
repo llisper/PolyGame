@@ -10,7 +10,7 @@
       <relation target="" sidePair="left-center,right-center"/>
       <Button titleFontSize="20" icon="ui://9239j664sw073r"/>
     </component>
-    <component id="n5_x1cc" name="???" src="x1cc5y" fileName="widgets/MenuButton.xml" xy="375,1324" pivot="0.5,1" anchor="true" size="128,128">
+    <component id="n5_x1cc" name="???" src="x1cc5y" fileName="widgets/MenuButton.xml" xy="375,1324" pivot="0.5,1" anchor="true" size="128,128" visible="false">
       <relation target="" sidePair="top-bottom"/>
       <Button titleFontSize="20" icon="ui://9239j664sw072x"/>
     </component>
