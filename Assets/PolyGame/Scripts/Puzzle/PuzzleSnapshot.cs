@@ -118,7 +118,7 @@ public class PuzzleSnapshot : MonoBehaviour
             }
         }
         PuzzleCamera.SetupCamera(ssCamera, graph.size, Config.Instance.camera.sizeExtendScale);
-        InitBackground();
+        InitBackground(null == finished);
     }
 
     void InitMaterial(Material mat)
@@ -134,12 +134,13 @@ public class PuzzleSnapshot : MonoBehaviour
         }
     }
 
-    void InitBackground()
+    void InitBackground(bool takingInitialSnapshot)
     {
         Vector2 pos = graph.size;
         pos = pos / 2f;
         var bounds = Utils.CalculateBounds(pos, ssCamera.aspect, ssCamera.orthographicSize);
-        backgroundObject = PuzzleBackground.Create(graph, bounds, true);
+        backgroundObject = PuzzleBackground.Create(graph, bounds, takingInitialSnapshot, takingInitialSnapshot);
+        backgroundObject.layer = Layers.Snapshot;
         backgroundObject.transform.SetParent(transform, true);
     }
 

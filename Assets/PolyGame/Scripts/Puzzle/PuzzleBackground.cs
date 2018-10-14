@@ -3,11 +3,10 @@ using ResourceModule;
 
 public class PuzzleBackground
 {
-    public static GameObject Create(PolyGraph graph, Bounds bounds, bool takingInitialSnapshot = false)
+    public static GameObject Create(PolyGraph graph, Bounds bounds, bool circularShape = false, bool grey = false)
     {
         var prefab = PrefabLoader.Load(Prefabs.Background);
         var go = prefab.Instantiate<GameObject>();
-        go.layer = takingInitialSnapshot ? Layers.Snapshot : Layers.Debris;
 
         bounds = CalculateBounds(bounds);
         go.transform.localPosition = new Vector3(bounds.center.x, bounds.center.y, Config.Instance.zorder.background);
@@ -42,13 +41,13 @@ public class PuzzleBackground
         else
         {
             go.transform.localScale = new Vector3(bounds.size.x, bounds.size.y, 1f);
-            if (takingInitialSnapshot)
+            if (circularShape)
                 mat.EnableKeyword(ShaderFeatures._USE_CIRCLE_ALPHA);
             mat.SetColor("_Color", BackgroundColor(graph));
             mat.SetVector("_Bounds", new Vector4(bounds.extents.x, bounds.extents.y));
         }
 
-        if (takingInitialSnapshot)
+        if (grey)
             mat.EnableKeyword(ShaderFeatures._GREYSCALE);
 
         return go;
