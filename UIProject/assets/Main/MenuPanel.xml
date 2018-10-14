@@ -8,7 +8,7 @@
     <component id="n4_x1cc" name="gallery" src="x1cc5y" fileName="widgets/MenuButton.xml" xy="128,1324" pivot="0.5,1" anchor="true" size="128,128">
       <relation target="" sidePair="top-bottom"/>
       <relation target="" sidePair="left-center,right-center"/>
-      <Button titleFontSize="20" icon="ui://9239j664sw073r"/>
+      <Button title="Gallery"/>
     </component>
     <component id="n5_x1cc" name="???" src="x1cc5y" fileName="widgets/MenuButton.xml" xy="375,1324" pivot="0.5,1" anchor="true" size="128,128" visible="false">
       <relation target="" sidePair="top-bottom"/>
@@ -17,7 +17,7 @@
     <component id="n6_x1cc" name="collection" src="x1cc5y" fileName="widgets/MenuButton.xml" xy="622,1324" pivot="0.5,1" anchor="true" size="128,128">
       <relation target="" sidePair="top-bottom"/>
       <relation target="" sidePair="left-center,right-center"/>
-      <Button titleFontSize="20" icon="ui://9239j664sw072t"/>
+      <Button title="Collection"/>
     </component>
   </displayList>
 </component>
