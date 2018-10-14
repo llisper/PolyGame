@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="256,256">
+  <controller name="showAll" pages="0,,1," selected="0"/>
+  <displayList>
+    <loader id="n0_qvgi" name="snapshot" xy="0,0" size="256,256">
+      <gearDisplay controller="showAll" pages="0"/>
+    </loader>
+    <graph id="n3_qvgi" name="bg" xy="0,0" size="256,256" group="n4_qvgi" type="rect" fillColor="#ff3366ff"/>
+    <text id="n5_qvgi" name="text" xy="128,128" pivot="0.5,0.5" anchor="true" size="135,44" group="n4_qvgi" fontSize="35" text="Show All"/>
+    <group id="n4_qvgi" name="showAll" xy="0,0" size="303,256" advanced="true" collapsed="true">
+      <gearDisplay controller="showAll" pages="1"/>
+    </group>
+    <image id="n16_r06j" name="mask0" src="r06j65" fileName="images/Snapshot Masks/SnapshotMask0.png" xy="0,0" group="n22_r06j" visible="false"/>
+    <image id="n17_r06j" name="mask1" src="r06j66" fileName="images/Snapshot Masks/SnapshotMask1.png" xy="0,0" group="n22_r06j" visible="false"/>
+    <image id="n18_r06j" name="mask2" src="r06j67" fileName="images/Snapshot Masks/SnapshotMask2.png" xy="0,0" group="n22_r06j" visible="false"/>
+    <image id="n19_r06j" name="mask3" src="r06j68" fileName="images/Snapshot Masks/SnapshotMask3.png" xy="0,0" group="n22_r06j" visible="false"/>
+    <image id="n20_r06j" name="mask4" src="r06j69" fileName="images/Snapshot Masks/SnapshotMask4.png" xy="0,0" group="n22_r06j" visible="false"/>
+    <image id="n21_r06j" name="mask5" src="r06j6a" fileName="images/Snapshot Masks/SnapshotMask5.png" xy="0,0" group="n22_r06j" visible="false"/>
+    <group id="n22_r06j" name="masks" xy="0,0" size="256,256"/>
+  </displayList>
+</component>

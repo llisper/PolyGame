@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="750,573">
+  <displayList>
+    <text id="n3_qvgi" name="title" xy="10,0" size="93,41" fontSize="30" autoClearText="true" text="Title">
+      <relation target="n0_qvgi" sidePair="top-top"/>
+    </text>
+    <image id="n4_qvgi" name="sep" src="sw0751" fileName="images/Scroll/scroll_bar_horizontal.png" xy="10,39" size="730,4">
+      <relation target="n0_qvgi" sidePair="top-top"/>
+    </image>
+    <list id="n0_qvgi" name="scrollview" xy="10,51" pivot="0,1" size="730,522" layout="flow_vt" overflow="scroll" scroll="horizontal" scrollBarFlags="512" scrollBar="hidden" lineGap="10" colGap="10" lineItemCount="2" defaultItem="ui://9239j664qvgi63" autoClearItems="true"/>
+  </displayList>
+</component>

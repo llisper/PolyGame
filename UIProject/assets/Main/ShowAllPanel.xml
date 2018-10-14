@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="750,1334">
+  <displayList>
+    <list id="n0_ew9j" name="scrollview" xy="0,0" size="750,1177" layout="flow_hz" overflow="scroll" margin="120,0,0,0" lineGap="20" colGap="20" lineItemCount="2" defaultItem="ui://9239j664qvgi63" align="center" autoClearItems="true"/>
+    <component id="n1_ew9j" name="backBtn" src="x1cc61" fileName="widgets/RoundButton.xml" xy="20,40" scale="1.5,1.5">
+      <Button icon="ui://9239j664sw071n"/>
+    </component>
+    <text id="n2_x5p1" name="title" xy="375,49" pivot="0.5,0" anchor="true" size="96,39" fontSize="30" bold="true" autoClearText="true" text="Animal">
+      <relation target="" sidePair="center-center,top-top"/>
+    </text>
+  </displayList>
+</component>

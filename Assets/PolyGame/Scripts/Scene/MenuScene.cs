@@ -1,17 +1,75 @@
-﻿
+﻿using Experiments;
+using System;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+
 public class MenuScene : GameScene.IScene
 {
-    MenuPanel menuPanel;
+    static bool firstTime = true;
+    static Background background;
+    static Experiments.MenuPanel menuPanel;
+    static List<FPanel> pages = new List<FPanel>();
+    static int pageIndex;
+
+    bool switchingPage;
 
 	public void Start()
     {
-        UI.Instance.OpenPanel<BackgroundPanel>(UILayer.Background);	
-        menuPanel = UI.Instance.OpenPanel<MenuPanel>(UILayer.Menu);	
+        if (firstTime)
+        {
+            background = FUI.Instance.OpenPanel<Background>();
+            menuPanel = FUI.Instance.OpenPanel<Experiments.MenuPanel>();
+            AddPage<Experiments.ArtCollectionPanel>();
+            AddPage<ShowAllPanel>();
+            AddPage<Experiments.MyWorksPanel>();
+            firstTime = false;
+        }
+        else
+        {
+            background.Visible = true;
+            menuPanel.Visible = true;
+            pages[pageIndex].Visible = true;
+        }
         Puzzle.RetakeExpiredSnapshot();
 	}
 	
 	public void OnDestroy()
     {
-        menuPanel.gameObject.SetActive(false);
+        background.Close();
+        menuPanel.Close();
+        pages[pageIndex].Close();
 	}
+
+    public void ShowPage<T>(Action<T> onPageShow = null) where T : FPanel
+    {
+        if (!switchingPage)
+        {
+            int i = pages.FindIndex(v => v.GetType() == typeof(T));
+            if (i >= 0 && i != pageIndex)
+                SwitchingPage(i, onPageShow).WrapErrors();
+        }
+    }
+
+    void AddPage<T>() where T : FPanel
+    {
+        pages.Add(FUI.Instance.OpenPanel<T>());
+        if (pages.Count > 1)
+            pages[pages.Count - 1].Close();
+    }
+
+    async Task SwitchingPage(int to, Delegate onPageShow)
+    {
+        switchingPage = true;
+        await ScreenFader.AsyncFade(true);
+
+        pages[pageIndex].Close();
+        pages[to].Visible = true;
+        pageIndex = to;
+
+        if (null != onPageShow)
+            onPageShow.DynamicInvoke(pages[to]);
+
+        await ScreenFader.AsyncFade(false);
+        switchingPage = false;
+    }
 }

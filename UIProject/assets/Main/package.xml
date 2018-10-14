@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <packageDescription id="9239j664" jpegQuality="80" compressPNG="true">
   <resources>
-    <image id="sw070" name="autumn-studio-407865.png" path="/images/Background/"/>
+    <image id="sw070" name="autumn-studio-407865.png" path="/images/Background/" scale="" atlas="alone_npot"/>
     <image id="sw071" name="bg1.png" path="/images/Background/"/>
     <image id="sw072" name="button_bg_b.png" path="/images/Buttons/Big/blue/"/>
     <image id="sw073" name="button_bg_down_b.png" path="/images/Buttons/Big/blue/"/>
@@ -212,10 +212,24 @@
     <image id="sw075s" name="avatar6.png" path="/images/User/"/>
     <image id="sw075t" name="avatar7.png" path="/images/User/"/>
     <component id="sw075u" name="ScreenFader.xml" path="/" exported="true"/>
-    <image id="sw075v" name="fader.png" path="/images/" scale=""/>
+    <image id="sw075v" name="fader.png" path="/images/" scale="9grid" scale9grid="4,4,8,8" duplicatePadding="true"/>
     <component id="x1cc5w" name="Background.xml" path="/" exported="true"/>
     <component id="x1cc5x" name="MenuPanel.xml" path="/" exported="true"/>
     <component id="x1cc5y" name="MenuButton.xml" path="/widgets/"/>
+    <component id="x1cc60" name="PuzzlePanel.xml" path="/" exported="true"/>
+    <component id="x1cc61" name="RoundButton.xml" path="/widgets/"/>
+    <component id="qvgi62" name="PuzzleGroupView.xml" path="/widgets/"/>
+    <component id="qvgi63" name="PuzzleItem.xml" path="/widgets/"/>
+    <component id="qvgi64" name="ArtCollectionPanel.xml" path="/" exported="true"/>
+    <image id="r06j65" name="SnapshotMask0.png" path="/images/Snapshot Masks/"/>
+    <image id="r06j66" name="SnapshotMask1.png" path="/images/Snapshot Masks/"/>
+    <image id="r06j67" name="SnapshotMask2.png" path="/images/Snapshot Masks/"/>
+    <image id="r06j68" name="SnapshotMask3.png" path="/images/Snapshot Masks/"/>
+    <image id="r06j69" name="SnapshotMask4.png" path="/images/Snapshot Masks/"/>
+    <image id="r06j6a" name="SnapshotMask5.png" path="/images/Snapshot Masks/"/>
+    <component id="ew9j6b" name="ShowAllPanel.xml" path="/" exported="true"/>
+    <component id="ew9j6c" name="TestItem.xml" path="/widgets/"/>
+    <component id="x5p16d" name="MyWorksPanel.xml" path="/" exported="true"/>
   </resources>
   <publish name="Main"/>
 </packageDescription>

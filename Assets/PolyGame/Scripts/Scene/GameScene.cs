@@ -1,9 +1,7 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
-using System;
-using System.Collections;
+﻿using System;
 using System.Threading.Tasks;
 using ResourceModule;
+using Experiments;
 
 public class GameScene
 {
@@ -29,6 +27,11 @@ public class GameScene
         await Loading(typeof(T));
     }
 
+    public static T Current<T>() where T : IScene
+    {
+        return (T)current;
+    }
+
     static async Task Loading(Type sceneType)
     {
         string sceneName = sceneType.Name.Replace("Scene", "");
@@ -39,12 +42,12 @@ public class GameScene
             return;
         }
 
-        await ScreenOverlay.AsyncFade(false);
+        await ScreenFader.AsyncFade(true);
 
         if (null != current)
             current.OnDestroy();
         current = null;
-        UI.Instance.ClosePanelsWhenSceneDestroy();
+        // UI.Instance.ClosePanelsWhenSceneDestroy();
 
         await SceneLoader.AsyncLoad(sceneName);
 
@@ -55,6 +58,6 @@ public class GameScene
             onSceneLoaded();
         onSceneLoaded = null;
 
-        await ScreenOverlay.AsyncFade(true);
+        await ScreenFader.AsyncFade(false);
     }
 }

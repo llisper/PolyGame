@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="750,1334">
+  <displayList>
+    <list id="n0_ew9j" name="scrollview" xy="0,0" size="750,1177" layout="flow_hz" overflow="scroll" margin="20,0,0,0" lineGap="20" colGap="20" lineItemCount="2" defaultItem="ui://9239j664qvgi63" align="center" autoClearItems="true"/>
+  </displayList>
+</component>
