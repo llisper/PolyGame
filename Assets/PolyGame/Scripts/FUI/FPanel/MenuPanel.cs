@@ -7,12 +7,20 @@ namespace Experiments
         protected override void OnInit()
         {
             var btn = component.GetChild("gallery") as GButton;
-            btn.onClick.Add(TestStartPuzzle);
+            btn.onClick.Add(OnGalleryClick);
+
+            btn = component.GetChild("collection") as GButton;
+            btn.onClick.Add(OnMyWorksClick);
         }
 
-        void TestStartPuzzle(EventContext eventContext)
+        void OnGalleryClick(EventContext eventContext)
         {
-            Puzzle.Start("animal004");
+            GameScene.Current<MenuScene>().ShowPage<ArtCollectionPanel>();
+        }
+
+        void OnMyWorksClick(EventContext eventContext)
+        {
+            GameScene.Current<MenuScene>().ShowPage<MyWorksPanel>();
         }
     }
 }

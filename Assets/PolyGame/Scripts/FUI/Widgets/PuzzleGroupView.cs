@@ -9,6 +9,7 @@ namespace Experiments
 
         GTextField title;
         GList scrollview;
+        PuzzleItem reloadItem;
 
         public override void ConstructFromXML(XML xml)
         {
@@ -46,6 +47,15 @@ namespace Experiments
                 item.SetMask(SelectMask(showCount, items.Count));
             }
             title.text = I18n.Get(group.name);
+        }
+
+        public void ReloadItem()
+        {
+            if (null != reloadItem)
+            {
+                reloadItem.Load();
+                reloadItem = null;
+            }
         }
 
         int SelectMask(int i, int itemCount)
@@ -86,6 +96,7 @@ namespace Experiments
         {
             var item = (PuzzleItem)eventContext.data;
             item.Start();
+            reloadItem = item;
         }
     }
 }

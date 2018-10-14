@@ -21,13 +21,14 @@ public class MenuScene : GameScene.IScene
             menuPanel = FUI.Instance.OpenPanel<Experiments.MenuPanel>();
             AddPage<Experiments.ArtCollectionPanel>();
             AddPage<ShowAllPanel>();
+            AddPage<Experiments.MyWorksPanel>();
             firstTime = false;
         }
         else
         {
-            background.View.visible = true;
-            menuPanel.View.visible = true;
-            pages[pageIndex].View.visible = true;
+            background.Visible = true;
+            menuPanel.Visible = true;
+            pages[pageIndex].Visible = true;
         }
         Puzzle.RetakeExpiredSnapshot();
 	}
@@ -62,7 +63,7 @@ public class MenuScene : GameScene.IScene
         await ScreenFader.AsyncFade(true);
 
         pages[pageIndex].Close();
-        pages[to].View.visible = true;
+        pages[to].Visible = true;
         pageIndex = to;
 
         if (null != onPageShow)

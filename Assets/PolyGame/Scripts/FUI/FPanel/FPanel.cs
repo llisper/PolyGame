@@ -40,7 +40,25 @@ namespace Experiments
             component.Dispose();
         }
 
+        public bool Visible
+        {
+            get { return component.visible;  }
+            set
+            {
+                if (component.visible != value)
+                {
+                    component.visible = value;
+                    if (value)
+                        OnVisible();
+                    else
+                        OnInvisible();
+                }
+            }
+        }
+
         protected virtual void OnInit() { }
         protected virtual void OnDispose() { }
+        protected virtual void OnVisible() { }
+        protected virtual void OnInvisible() { }
     }
 }

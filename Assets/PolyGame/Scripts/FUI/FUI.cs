@@ -71,6 +71,7 @@ namespace Experiments
             RegisterPanel<PuzzlePanel>(FPackage.Main, UILayer.Base);
             RegisterPanel<ArtCollectionPanel>(FPackage.Main, UILayer.Base);
             RegisterPanel<ShowAllPanel>(FPackage.Main, UILayer.Base);
+            RegisterPanel<MyWorksPanel>(FPackage.Main, UILayer.Base);
             RegisterPanel<MenuPanel>(FPackage.Main, UILayer.Menu);
             RegisterPanel<ScreenFader>(FPackage.Main, UILayer.Overlay);
         }
@@ -100,7 +101,7 @@ namespace Experiments
                 panel.Init(component);
                 panels.Add(type, panel);
             }
-            panel.View.visible = true;
+            panel.Visible = true;
             return panel;
         }
 
@@ -133,7 +134,7 @@ namespace Experiments
                 }
                 else
                 {
-                    panel.View.visible = false;
+                    panel.Visible = false;
                 }
             }
         }
