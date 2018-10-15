@@ -4,8 +4,12 @@ namespace UI
 {
     public class PuzzlePanel : FPanel
     {
+        Transition finishTexts;
+
         protected override void OnInit()
         {
+            finishTexts = component.GetTransition("finishTexts");
+
             var backBtn = View.GetChild("backBtn") as GButton;
             backBtn.onClick.Add(OnBackClick);
 
@@ -17,6 +21,12 @@ namespace UI
             GameEvent.Instance.Unsubscribe(GameEvent.PuzzleFinished, OnPuzzleFinished);
         }
 
+        protected override void OnInvisible()
+        {
+            finishTexts.PlayReverse();
+            finishTexts.Stop(true, false);
+        }
+
         void OnBackClick(EventContext eventContext)
         {
             GameScene.LoadScene<MenuScene>().WrapErrors();
@@ -24,8 +34,7 @@ namespace UI
 
         void OnPuzzleFinished(int e, object[] p)
         {
-            var transition = component.GetTransition("finishTexts");
-            transition.Play();
+            finishTexts.Play();
         }
     }
 }
