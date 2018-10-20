@@ -18,11 +18,5 @@ namespace UI
                 groupViews.Add(groupView);
             }
         }
-
-        protected override void OnVisible()
-        {
-            for (int i = 0; i < groupViews.Count; ++i)
-                groupViews[i].ReloadItem();
-        }
     }
 }

@@ -8,7 +8,6 @@ namespace UI
     public class MyWorksPanel : FPanel
     {
         GList scrollview;
-        PuzzleItem reloadItem;
         HashSet<string> items = new HashSet<string>();
 
         protected override void OnInit()
@@ -17,17 +16,13 @@ namespace UI
             scrollview.onClickItem.Add(OnClickItem);
 
             UpdateItems();
+            GameEvent.Instance.Subscribe(GameEvent.ReloadItem, OnReloadItem);
         }
 
-        protected override void OnVisible()
+        protected override void OnDispose()
         {
-            UpdateItems();
-            if (null != reloadItem)
-            {
-                reloadItem.Load();
-                scrollview.SetChildIndex(reloadItem, 0);
-                reloadItem = null;
-            }
+            GameEvent.Instance.Unsubscribe(GameEvent.ReloadItem, OnReloadItem);
+            base.OnDispose();
         }
 
         bool UpdateItems()
@@ -55,7 +50,18 @@ namespace UI
         {
             var item = (PuzzleItem)eventContext.data;
             item.Start();
-            reloadItem = item;
+        }
+
+        void OnReloadItem(int e, object[] p)
+        {
+            UpdateItems();
+            string graphName = (string)p[0];
+            var item = (PuzzleItem)scrollview.GetChild(graphName);
+            if (null != item)
+            {
+                item.Load();
+                scrollview.SetChildIndex(item, 0);
+            }
         }
     }
 }

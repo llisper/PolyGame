@@ -16,6 +16,7 @@ public class PuzzleScene : GameScene.IScene
 		{
 			puzzle.SaveProgress();
             PuzzleSnapshotOneOff.Take(puzzle.PuzzleName, puzzle.FinishedFlags);
+            GameEvent.Instance.Fire(GameEvent.ReloadItem, puzzle.PuzzleName);
 		}
 	}
 }

@@ -39,12 +39,15 @@ namespace UI
         {
             if (showAllCtrl.selectedIndex == 1)
             {
-                GameScene.Current<MenuScene>().ShowPage<ShowAllPanel>(p => {
+                GameScene.Current<MenuScene>().ShowPage<ShowAllPanel>(p =>
+                {
                     p.Init(group);
                 });
             }
             else
+            {
                 Puzzle.Start(graphName);
+            }
         }
 
         public void Init(string graphName)
