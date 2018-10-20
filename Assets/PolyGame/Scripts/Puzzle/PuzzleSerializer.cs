@@ -11,7 +11,7 @@ public partial class Puzzle
     const string Filename = "Progress.json";
 
     float saveTimer;
-    bool needToSave;
+    public bool needToSave;
 
     [Serializable]
     class Progress
@@ -96,7 +96,7 @@ public partial class Puzzle
         }
     }
 
-    void LoadProgress()
+    public void LoadProgress()
     {
         try
         {

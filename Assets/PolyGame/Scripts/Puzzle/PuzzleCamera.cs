@@ -67,7 +67,7 @@ public class PuzzleCamera : MonoBehaviour
     {
         Vector3 newPos = main.transform.localPosition + delta;
         Vector2 orthoSize = new Vector2(main.aspect * main.orthographicSize, main.orthographicSize);
-        Bounds b = Puzzle.Current.PlaygroundBounds;
+        Bounds b = Puzzle.Current.playgroundBounds;
 
         Vector3 finalPos = main.transform.localPosition;
         if ((delta.x < 0 && newPos.x - orthoSize.x >= b.min.x) || (delta.x >= 0 && newPos.x + orthoSize.x <= b.max.x))
