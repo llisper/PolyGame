@@ -4,8 +4,6 @@ using UI;
 
 public class PuzzleFinishingState : PuzzleState
 {
-    float flashDuration = 2f;
-    Ease flashEase = Ease.OutCubic;
     float cameraDuration = 3f;
 
     public override void Start(params object[] p)

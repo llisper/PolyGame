@@ -60,7 +60,12 @@ public class PuzzleStateMachine
 
     public void Next<T>(params object[] p) where T : PuzzleState
     {
-        var next = states[typeof(T)];
+        Next(typeof(T), p);
+    }
+
+    public void Next(Type type, params object[] p)
+    {
+        var next = states[type];
         if (null != Current)
             Current.End();
         Current = next;
