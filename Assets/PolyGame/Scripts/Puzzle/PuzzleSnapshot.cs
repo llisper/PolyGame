@@ -127,6 +127,7 @@ public class PuzzleSnapshot : MonoBehaviour
         {
             originMat = Instantiate(mat);
             originMat.name = mat.name;
+            originMat.SetColor("_Color", Color.white);
 
             greyscaleMat = Instantiate(mat);
             greyscaleMat.name = mat.name + "Greyscale";
