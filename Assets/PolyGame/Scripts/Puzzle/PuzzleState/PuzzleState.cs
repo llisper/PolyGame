@@ -14,7 +14,7 @@ public abstract class PuzzleState
 
     protected void Next<T>(params object[] p) where T : PuzzleState
     {
-        stateMachine.Next<T>();
+        stateMachine.Next<T>(p);
     }
 
     public virtual void Start(params object[] p) { }
@@ -50,6 +50,7 @@ public class PuzzleStateMachine
     public void Start()
     {
         Current.Start();
+        GameEvent.Instance.Fire(GameEvent.PuzzleState, Current.GetType());
     }
 
     public void Update()
@@ -70,5 +71,6 @@ public class PuzzleStateMachine
             Current.End();
         Current = next;
         Current.Start(p);
+        GameEvent.Instance.Fire(GameEvent.PuzzleState, Current.GetType());
     }
 }

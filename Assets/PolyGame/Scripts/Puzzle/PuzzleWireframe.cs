@@ -40,25 +40,32 @@ public class PuzzleWireframe : MonoBehaviour
 
     const int showRegions = 14;
 
-    public void SetColor(Color color, PolyGraph graph, Region region)
+    public void SetColor(Color color, PolyGraph graph, Region region, bool thisRegionOnly = false)
     {
-        var queue = new Queue<Region>();
-        queue.Enqueue(region);
-        var visited = new HashSet<Region>();
-        visited.Add(region);
-        for (int i = 0; i < showRegions && queue.Count > 0; ++i)
+        if (!thisRegionOnly)
         {
-            var r = queue.Dequeue();
-            InternalSetColor(color, r.borderEdges);
-            for (int index = 0; index < r.adjacents.Count; ++index)
+            var queue = new Queue<Region>();
+            queue.Enqueue(region);
+            var visited = new HashSet<Region>();
+            visited.Add(region);
+            for (int i = 0; i < showRegions && queue.Count > 0; ++i)
             {
-                var adj = graph.regions[r.adjacents[index]];
-                if (!visited.Contains(adj))
+                var r = queue.Dequeue();
+                InternalSetColor(color, r.borderEdges);
+                for (int index = 0; index < r.adjacents.Count; ++index)
                 {
-                    queue.Enqueue(adj);
-                    visited.Add(adj);
+                    var adj = graph.regions[r.adjacents[index]];
+                    if (!visited.Contains(adj))
+                    {
+                        queue.Enqueue(adj);
+                        visited.Add(adj);
+                    }
                 }
             }
+        }
+        else
+        {
+            InternalSetColor(color, region.borderEdges);
         }
         mesh.colors = colors;
     }

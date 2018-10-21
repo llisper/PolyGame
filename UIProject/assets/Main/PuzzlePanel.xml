@@ -4,9 +4,10 @@
     <component id="n0_x1cc" name="backBtn" src="x1cc61" fileName="widgets/RoundButton.xml" xy="40,40" scale="1.5,1.5">
       <Button icon="ui://9239j664sw071n"/>
     </component>
-    <text id="n2_x1cc" name="t1" xy="374,40" pivot="0.5,0" anchor="true" size="385,54" group="n4_x1cc" alpha="0" fontSize="40" color="#333333" text="Congratulations!"/>
-    <text id="n3_x1cc" name="t2" xy="375,100" pivot="0.5,0" anchor="true" size="180,29" group="n4_x1cc" alpha="0" fontSize="20" color="#333333" text="You've made it"/>
-    <group id="n4_x1cc" name="finishTexts" xy="374,40" size="385,89"/>
+    <text id="n2_x1cc" name="t1" xy="374,40" pivot="0.5,0" anchor="true" size="270,50" group="n4_x1cc" alpha="0" fontSize="40" color="#333333" text="Congratulations!"/>
+    <text id="n3_x1cc" name="t2" xy="375,100" pivot="0.5,0" anchor="true" size="124,26" group="n4_x1cc" alpha="0" fontSize="20" color="#333333" text="You've made it"/>
+    <group id="n4_x1cc" name="finishTexts" xy="374,40" size="385,89" collapsed="true"/>
+    <component id="n5_itxx" name="hintBtn" src="itxx6e" fileName="widgets/HintButton.xml" xy="600,1184"/>
   </displayList>
   <transition name="finishTexts">
     <item time="0" type="Alpha" target="n2_x1cc" tween="true" startValue="0" endValue="1" duration="24"/>

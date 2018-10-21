@@ -62,6 +62,11 @@ public partial class Puzzle : MonoBehaviour
 
     public bool Finished { get { return finishCount >= finished.Length; } }
 
+    public bool InState<T>() where T : PuzzleState
+    {
+        return null != stateMachine && stateMachine.Current is T;
+    }
+
     void Awake()
     {
         Current = this;
@@ -134,6 +139,7 @@ public partial class Puzzle : MonoBehaviour
         stateMachine.Add<PuzzleNormalState>();
         stateMachine.Add<PuzzleSolvingState>();
         stateMachine.Add<PuzzleFinishingState>();
+        stateMachine.Add<PuzzleHintState>();
         stateMachine.Start();
     }
 

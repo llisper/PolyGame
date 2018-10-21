@@ -230,6 +230,7 @@
     <component id="ew9j6b" name="ShowAllPanel.xml" path="/" exported="true"/>
     <component id="ew9j6c" name="TestItem.xml" path="/widgets/"/>
     <component id="x5p16d" name="MyWorksPanel.xml" path="/" exported="true"/>
+    <component id="itxx6e" name="HintButton.xml" path="/widgets/"/>
   </resources>
   <publish name="Main"/>
 </packageDescription>

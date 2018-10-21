@@ -8,6 +8,13 @@ public class PuzzleNormalState : PuzzleState
         Data.wireframeAlpha = 0f;
         Data.objectMat.SetFloat(Data.propZWrite, 1f);
         Data.finishedAlpha = Data.Finished ? 1f : 0.25f;
+
+        GameEvent.Instance.Subscribe(GameEvent.UseHint, OnUseHint);
+    }
+
+    public override void End()
+    {
+        GameEvent.Instance.Unsubscribe(GameEvent.UseHint, OnUseHint);
     }
 
     public override bool OnObjPicked(Transform objPicked)
@@ -19,15 +26,19 @@ public class PuzzleNormalState : PuzzleState
         if (!Data.debrisMap.TryGetValue(objPicked.gameObject, out di) || Data.finished[di.index])
             return false;
 
-        Data.wireframeObject.SetColor(Color.black, Data.puzzleObject, Data.puzzleObject.regions[di.index]);
-
-        Vector3 screenPos = PuzzleTouch.Instance.MainFinger.ScreenPosition;
-        Data.debrisMoveContainer.transform.position = (Vector2)PuzzleCamera.Main.ScreenToWorldPoint(screenPos);
-        Data.debrisMoveContainer.Target = objPicked;
-        objPicked.GetComponent<MeshRenderer>().sharedMaterial = Data.selectedMat;
-
-        //ShowWireframe(true);
-        Next<PuzzleSolvingState>();
+        Next<PuzzleSolvingState>(objPicked, Data.puzzleObject.regions[di.index]);
         return true;
+    }
+
+    void OnUseHint(int e, object[] p)
+    {
+        for (int i = 0; i < Data.finished.Length; ++i)
+        {
+            if (!Data.finished[i])
+            {
+                Next<PuzzleHintState>(i);
+                break;
+            }
+        }
     }
 }

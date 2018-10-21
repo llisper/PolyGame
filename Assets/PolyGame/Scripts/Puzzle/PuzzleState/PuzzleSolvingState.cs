@@ -10,6 +10,16 @@ public class PuzzleSolvingState : PuzzleState
         Data.wireframeAlpha = 1f;
         Data.objectMat.SetFloat(Data.propZWrite, 0f);
         Data.finishedAlpha = 1f;
+
+        var objPicked = (Transform)p[0];
+
+        Vector3 screenPos = PuzzleTouch.Instance.MainFinger.ScreenPosition;
+        Data.debrisMoveContainer.transform.position = (Vector2)PuzzleCamera.Main.ScreenToWorldPoint(screenPos);
+        Data.debrisMoveContainer.Target = objPicked;
+        objPicked.GetComponent<MeshRenderer>().sharedMaterial = Data.selectedMat;
+
+        if (p.Length > 1)
+            Data.wireframeObject.SetColor(Color.black, Data.puzzleObject, (Region)p[1]);
     }
 
     public override void OnObjMove(Transform objPicked, Vector2 screenCurrent)

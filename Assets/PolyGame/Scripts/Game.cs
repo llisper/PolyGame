@@ -41,6 +41,7 @@ public class Game : MonoBehaviour
                 ConfigLoader.Init,
                 HotfixSystem.Init,
                 FUI.Init,
+                PuzzleHintSystem.Init,
                 GameScene.Init);
 
             await loadingUI.Finish();

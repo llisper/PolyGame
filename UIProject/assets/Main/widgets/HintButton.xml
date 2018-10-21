@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="80,80" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <displayList>
+    <image id="n0_itxx" name="n0" src="sw0714" fileName="images/Buttons/Round/ellipse_button.png" xy="0,0" size="80,80">
+      <gearDisplay controller="button" pages="0,2"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <image id="n1_itxx" name="n1" src="sw0715" fileName="images/Buttons/Round/ellipse_button_down.png" xy="0,0" size="80,80">
+      <gearDisplay controller="button" pages="1,3"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <text id="n2_itxx" name="title" xy="10,80" pivot="0.5,0" size="57,38" fontSize="30" color="#ffffff" align="center" vAlign="bottom" singleLine="true" text="Hint">
+      <relation target="" sidePair="width-width,height-height"/>
+    </text>
+    <loader id="n3_itxx" name="icon" xy="40,40" pivot="0.5,0.5" anchor="true" size="80,80" scale="2,2" url="ui://9239j664sw071x" align="center" vAlign="middle">
+      <relation target="" sidePair="width-width,height-height"/>
+    </loader>
+    <text id="n4_pi9o" name="count" xy="83,0" pivot="0.5,0.5" anchor="true" size="17,19" group="n6_pi9o" fontSize="12" color="#ffffff" text="10"/>
+    <image id="n5_pi9o" name="n5" src="sw071j" fileName="images/Check and toggle/check_toggle_bg.png" xy="70,-14" group="n6_pi9o"/>
+    <group id="n6_pi9o" name="n6" xy="70,-14" size="30,33"/>
+  </displayList>
+  <Button/>
+</component>
